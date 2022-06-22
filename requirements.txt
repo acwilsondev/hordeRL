@@ -2,7 +2,7 @@ altgraph==0.17.2
 cffi==1.15.0
 dice==3.1.2
 docopt==0.6.2
-numpy==1.21.4
+numpy==1.22.0
 pycparser==2.21
 PyInstaller==4.7
 pyparsing==3.0.6
