@@ -38,9 +38,9 @@ class EasyMenu(GuiElement):
             has_previous = page > 0
             key_event = self.show_and_get_input(panel, self.pages[page], has_next=has_next, has_previous=has_previous)
             key_sym = int(key_event.sym)
-            if (key_sym == tcod.event.K_RIGHT or key_sym == tcod.event.K_n) and has_next:
+            if (key_sym == tcod.event.KeySym.RIGHT or key_sym == tcod.event.K_n) and has_next:
                 page += 1
-            elif (key_sym == tcod.event.K_LEFT or key_sym == tcod.event.KeySym.p) and has_previous:
+            elif (key_sym == tcod.event.KeySym.LEFT or key_sym == tcod.event.KeySym.p) and has_previous:
                 page -= 1
             elif key_sym == tcod.event.KeySym.RETURN:
                 return

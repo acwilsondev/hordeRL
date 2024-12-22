@@ -42,16 +42,16 @@ class PlayerBrain(Brain):
 
 
 KEY_ACTION_MAP = {
-    tcod.event.K_e: Intention.NEXT_ABILITY,
-    tcod.event.K_q: Intention.PREVIOUS_ABILITY,
-    tcod.event.K_SPACE: Intention.USE_ABILITY,
-    tcod.event.K_h: Intention.SHOW_HELP,
+    tcod.event.KeySym.e: Intention.NEXT_ABILITY,
+    tcod.event.KeySym.q: Intention.PREVIOUS_ABILITY,
+    tcod.event.KeySym.SPACE: Intention.USE_ABILITY,
+    tcod.event.KeySym.h: Intention.SHOW_HELP,
 
-    tcod.event.K_UP: Intention.STEP_NORTH,
-    tcod.event.K_DOWN: Intention.STEP_SOUTH,
-    tcod.event.K_RIGHT: Intention.STEP_EAST,
-    tcod.event.K_LEFT: Intention.STEP_WEST,
-    tcod.event.KeySym.pERIOD: Intention.DALLY,
+    tcod.event.KeySym.UP: Intention.STEP_NORTH,
+    tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
+    tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
+    tcod.event.KeySym.LEFT: Intention.STEP_WEST,
+    tcod.event.KeySym.PERIOD: Intention.DALLY,
 
     tcod.event.KeySym.ESCAPE: Intention.BACK
 }

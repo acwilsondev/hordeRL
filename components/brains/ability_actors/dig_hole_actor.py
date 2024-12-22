@@ -102,10 +102,10 @@ def _get_diggables(scene, x, y) -> List[int]:
 
 
 KEY_ACTION_MAP = {
-    tcod.event.K_UP: Intention.STEP_NORTH,
-    tcod.event.K_DOWN: Intention.STEP_SOUTH,
-    tcod.event.K_RIGHT: Intention.STEP_EAST,
-    tcod.event.K_LEFT: Intention.STEP_WEST,
+    tcod.event.KeySym.UP: Intention.STEP_NORTH,
+    tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
+    tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
+    tcod.event.KeySym.LEFT: Intention.STEP_WEST,
     tcod.event.KeySym.ESCAPE: Intention.BACK
 }
 
