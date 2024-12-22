@@ -2,7 +2,7 @@ import logging
 import sys
 from typing import List
 
-import tcod
+from tcod import libtcodpy as tcd
 
 import settings
 from components.serialization.save_game import SaveGame
@@ -50,4 +50,4 @@ class GameSceneController:
             current_scene.before_update()
             current_scene.update()
             current_scene.render()
-            tcod.console_flush()
+            tcd.console_flush()
