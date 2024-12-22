@@ -40,9 +40,9 @@ class EasyMenu(GuiElement):
             key_sym = int(key_event.sym)
             if (key_sym == tcod.event.K_RIGHT or key_sym == tcod.event.K_n) and has_next:
                 page += 1
-            elif (key_sym == tcod.event.K_LEFT or key_sym == tcod.event.K_p) and has_previous:
+            elif (key_sym == tcod.event.K_LEFT or key_sym == tcod.event.KeySym.p) and has_previous:
                 page -= 1
-            elif key_sym == tcod.event.K_RETURN:
+            elif key_sym == tcod.event.KeySym.RETURN:
                 return
             elif self.on_escape and key_sym == tcod.event.KeySym.ESCAPE:
                 self.on_escape()

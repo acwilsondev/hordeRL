@@ -32,6 +32,6 @@ class FastForwardBrain(Brain, AttackStartListener):
 
 
 KEY_ACTION_MAP = {
-    tcod.event.K_PERIOD: Intention.DALLY,
+    tcod.event.KeySym.pERIOD: Intention.DALLY,
     tcod.event.KeySym.ESCAPE: Intention.BACK
 }

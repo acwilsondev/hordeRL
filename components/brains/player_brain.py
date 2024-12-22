@@ -51,7 +51,7 @@ KEY_ACTION_MAP = {
     tcod.event.K_DOWN: Intention.STEP_SOUTH,
     tcod.event.K_RIGHT: Intention.STEP_EAST,
     tcod.event.K_LEFT: Intention.STEP_WEST,
-    tcod.event.K_PERIOD: Intention.DALLY,
+    tcod.event.KeySym.pERIOD: Intention.DALLY,
 
     tcod.event.KeySym.ESCAPE: Intention.BACK
 }

@@ -37,10 +37,10 @@ class Menu(GuiElement):
                 page += 1
             elif (
                     key_sym is tcod.event.K_LEFT
-                    or key_sym is tcod.event.K_p
+                    or key_sym is tcod.event.KeySym.p
             ) and has_previous:
                 page -= 1
-            elif key_sym is tcod.event.K_RETURN:
+            elif key_sym is tcod.event.KeySym.RETURN:
                 return
             else:
                 index = key_sym - ord('a')
