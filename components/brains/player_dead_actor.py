@@ -41,5 +41,5 @@ KEY_ACTION_MAP = {
     tcod.event.K_e: Intention.NEXT_ABILITY,
     tcod.event.K_q: Intention.PREVIOUS_ABILITY,
     tcod.event.K_SPACE: Intention.USE_ABILITY,
-    tcod.event.K_ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK
 }

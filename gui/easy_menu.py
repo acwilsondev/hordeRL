@@ -44,7 +44,7 @@ class EasyMenu(GuiElement):
                 page -= 1
             elif key_sym == tcod.event.K_RETURN:
                 return
-            elif self.on_escape and key_sym == tcod.event.K_ESCAPE:
+            elif self.on_escape and key_sym == tcod.event.KeySym.ESCAPE:
                 self.on_escape()
                 return
             else:
