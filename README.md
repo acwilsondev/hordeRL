@@ -4,32 +4,33 @@ Oh No! It's THE HORDE is a classic fantasy roguelike with tower defense elements
 
 Protect your village by killing all of the hordelings.
 
-## Build Notes
+## Setup and Running the Game
 
-### Steps to Build On Windows 10
+### Steps to Set Up with Poetry
 
 1. Install Python 9. The build is not compatible with subsequent versions (as of this writing).
-2. Create a virtualenv in PowerShell
+2. Install Poetry by following the instructions at [https://python-poetry.org/docs/#installation](https://python-poetry.org/docs/#installation).
+3. Install the dependencies:
 
+    ```sh
+    poetry install
+    ```
 
-    & 'C:\Program Files\Python39\python.exe' -m venv horde-venv
+### Running the Game
 
-3. Activate the venv.
+To run the game, use the following command:
 
-    
-    ./horde-venv/Scripts/Activate.ps1
+```sh
+poetry run python ./hordeRL.py
+```
 
-4. Install the dependencies.
+## Gameplay
 
+### Controls
 
-    pip install -r $GAME_TOP_DIR/requirements.txt
+- Arrow keys: Move the player
+- Space: Attack
+- `q`: Quit the game
 
-5. Run the build.
+### Objective
 
-
-    make dist
-
-6. Optionally, push the build.
-
-
-    make push
