@@ -1,4 +1,5 @@
 import tcod.console
+from tcod import libtcodpy
 
 import settings
 
@@ -7,16 +8,16 @@ class Gui:
     """Represent the engine's GUI"""
 
     def __init__(self, width=0, height=0, title=''):
-        tcod.console_set_custom_font(
+        libtcodpy.console_set_custom_font(
             settings.FONT,
-            tcod.FONT_LAYOUT_CP437 | tcod.FONT_TYPE_GREYSCALE,
+            libtcodpy.FONT_LAYOUT_CP437 | libtcodpy.FONT_TYPE_GREYSCALE,
         )
-        self.root = tcod.console_init_root(
+        self.root = libtcodpy.console_init_root(
             width,
             height,
             title=title,
             order="F",
-            renderer=tcod.RENDERER_SDL2
+            renderer=libtcodpy.RENDERER_SDL2
         )
         self.gui_elements = set()
 

@@ -7,19 +7,18 @@ license = "MIT"
 package-mode = false 
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.11"
+python = ">=3.12.8"
 altgraph = "0.17.2"
 cffi = "1.15.0"
 dice = "3.1.2"
 docopt = "0.6.2"
-numpy = "1.21.4"
+numpy = ">1.21.4"
 pycparser = "2.21"
 pyparsing = "3.0.6"
 six = "1.16.0"
 setuptools = "59.4.0"
-PyYAML = "6.0"
+PyYAML = "6.0.2"
 tracery = "0.1.1"
-pygame = "2.0.0"
 tcod = { version = ">=11.18.0", source = "pypi" }
 
 [build-system]

@@ -110,12 +110,12 @@ class PlayWindow(GuiElement):
                 else:
                     symbol = ord(' ')
 
-                self.terrain_console.tiles[x, y] = (
+                self.terrain_console.rgba[x, y] = (
                     symbol,
                     (*grass_color, 255),
                     (*palettes.BACKGROUND, 255)
                 )
-                self.shadow_terrain_console.tiles[x, y] = (
+                self.shadow_terrain_console.rgba[x, y] = (
                     symbol,
                     (*memory_color, 255),
                     (*palettes.BACKGROUND, 255)
@@ -133,13 +133,13 @@ class PlayWindow(GuiElement):
         else:
             symbol = ord(' ')
 
-        self.terrain_console.tiles[x, y] = (
+        self.terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.WHITE, 255),
             (*palettes.BACKGROUND, 255)
         )
 
-        self.shadow_terrain_console.tiles[x, y] = (
+        self.shadow_terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.SHADOW, 255),
             (*palettes.BACKGROUND, 255)
@@ -159,13 +159,13 @@ class PlayWindow(GuiElement):
         else:
             symbol = ord(' ')
 
-        self.terrain_console.tiles[x, y] = (
+        self.terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.GRASS, 255),
             (*palettes.BACKGROUND, 255)
         )
 
-        self.shadow_terrain_console.tiles[x, y] = (
+        self.shadow_terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.SHADOW, 255),
             (*palettes.BACKGROUND, 255)

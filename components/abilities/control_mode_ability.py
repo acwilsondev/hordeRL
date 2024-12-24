@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-from collections import Callable
+from typing import Callable
 from dataclasses import dataclass
 
 from components.abilities.ability import Ability

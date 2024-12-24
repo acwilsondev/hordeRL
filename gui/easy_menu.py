@@ -3,6 +3,7 @@ import textwrap
 from typing import Callable, Optional
 
 import tcod
+from tcod import libtcodpy
 import tcod.event
 from tcod.event_constants import K_RETURN
 
@@ -38,7 +39,7 @@ class EasyMenu(GuiElement):
             has_previous = page > 0
             key_event = self.show_and_get_input(panel, self.pages[page], has_next=has_next, has_previous=has_previous)
             key_sym = int(key_event.sym)
-            if (key_sym == tcod.event.KeySym.RIGHT or key_sym == tcod.event.K_n) and has_next:
+            if (key_sym == tcod.event.KeySym.RIGHT or key_sym == tcod.event.KeySym.n) and has_next:
                 page += 1
             elif (key_sym == tcod.event.KeySym.LEFT or key_sym == tcod.event.KeySym.p) and has_previous:
                 page -= 1
@@ -103,7 +104,7 @@ class EasyMenu(GuiElement):
         y = settings.SCREEN_HEIGHT // 2 - height // 2
         window.blit(root, x, y, width=self.width, height=height)
 
-        tcod.console_flush()
+        libtcodpy.console_flush()
 
         key_event = core.wait_for_char()
         if self.return_only:
