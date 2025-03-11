@@ -30,22 +30,24 @@ crops_description = (
 )
 
 
-def make_crops(x, y, farmer, field_id, color=palettes.FIRE) -> Tuple[int, List[Component]]:
+def make_crops(
+    x, y, farmer, field_id, color=palettes.FIRE
+) -> Tuple[int, List[Component]]:
     """
     Creates a crop entity at the specified location.
-    
-    Crops are valuable agricultural resources that can be sold for gold at the end of 
-    the season if protected from hordelings. Each crop has 3 HP and belongs to the 
+
+    Crops are valuable agricultural resources that can be sold for gold at the end of
+    the season if protected from hordelings. Each crop has 3 HP and belongs to the
     peasant faction. Crops are edible entities that can be consumed by hordelings.
-    
+
     Parameters:
         x (int): The x-coordinate where the crop will be placed
         y (int): The y-coordinate where the crop will be placed
         farmer (int): The entity ID of the farmer who owns/tends this crop
         field_id (int): The ID of the field this crop belongs to
-        color (tuple, optional): RGB color tuple for the crop's appearance. 
+        color (tuple, optional): RGB color tuple for the crop's appearance.
                                 Default is palettes.FIRE
-    
+
     Returns:
         Tuple[int, List[Component]]: A tuple containing:
             - The entity ID of the created crop

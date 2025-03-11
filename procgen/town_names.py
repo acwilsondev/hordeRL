@@ -44,7 +44,7 @@ Contains patterns and word parts used to construct town names:
 def get_file_name():
     """
     Generate a file-system friendly town name.
-    
+
     Returns:
         str: A procedurally generated town name with spaces replaced by hyphens,
              suitable for use in filenames.
@@ -56,10 +56,10 @@ def get_file_name():
 def get_name():
     """
     Generate a random town name using tracery grammar rules.
-    
+
     Creates a procedural town name by combining prefixes and suffixes
     according to the patterns defined in the rules dictionary.
-    
+
     Returns:
         str: A procedurally generated town name.
     """

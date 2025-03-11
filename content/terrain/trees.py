@@ -27,14 +27,14 @@ wall_tree_description = (
 def make_wall_tree(x, y):
     """
     Creates a hardy tree entity that serves as an impassable boundary.
-    
+
     This tree is static, blocks movement and vision, and cannot be cut down.
     It's typically used for creating natural walls or boundaries in the game world.
-    
+
     Parameters:
         x (int): The x-coordinate where the tree will be placed
         y (int): The y-coordinate where the tree will be placed
-        
+
     Returns:
         tuple: A tuple containing (entity_id, component_list) where:
             - entity_id (int): The unique identifier for this tree entity
@@ -72,15 +72,15 @@ tree_description = (
 def make_tree(x, y):
     """
     Creates a standard tree entity that can be chopped down and sold.
-    
+
     Unlike wall trees, these trees can be harvested by the player for wood,
     which can then be sold for currency. They have health points, can be damaged,
     and leave behind a corpse when destroyed.
-    
+
     Parameters:
         x (int): The x-coordinate where the tree will be placed
         y (int): The y-coordinate where the tree will be placed
-        
+
     Returns:
         tuple: A tuple containing (entity_id, component_list) where:
             - entity_id (int): The unique identifier for this tree entity
