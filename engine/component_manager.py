@@ -11,16 +11,16 @@ from engine.types import (ComponentList, ComponentType, EntityDict,
 
 class ComponentManager(object):
     """Manage game entities and their components within the entity-component system.
-    
+
     The ComponentManager serves as the central repository for all game entities and their
     associated components. It provides methods for creating, retrieving, modifying and
     deleting entities and components. The class maintains several indexes to enable
     efficient access patterns:
-    
+
     1. Components by type - Access all components of a certain type
     2. Components by entity - Access all components belonging to a specific entity
     3. Components by ID - Direct access to individual components by their unique ID
-    
+
     The class also provides stashing functionality to temporarily remove entities or
     components from the active game state without destroying them, allowing them to be
     restored later.
@@ -28,7 +28,7 @@ class ComponentManager(object):
 
     def __init__(self):
         """Initialize a new ComponentManager with empty component collections.
-        
+
         Creates the following data structures:
         - components: Maps component types to lists of components
         - components_by_entity: Maps entity IDs to dictionaries of components by type
@@ -53,7 +53,7 @@ class ComponentManager(object):
     @property
     def entities(self) -> Set[int]:
         """Get a set of all entity IDs currently tracked by the component manager.
-        
+
         :return: A set containing the unique ID of each entity in the system
         :rtype: Set[int]
         """
@@ -61,10 +61,10 @@ class ComponentManager(object):
 
     def _add_component_to_indexes(self, component: T, component_type: Type[T]) -> None:
         """Add a component to ComponentManager's indexes.
-        
+
         Updates the internal indexes to include the given component under its entity
         and component type.
-        
+
         :param component: The component instance to add to the indexes
         :type component: T
         :param component_type: The type of the component
@@ -79,10 +79,10 @@ class ComponentManager(object):
     @log_debug(__name__)
     def clear(self) -> None:
         """Clear all active components and entities from the component manager.
-        
+
         Resets all component collections to their initial empty state.
         Note that this doesn't have any impact on persistence.
-        
+
         :return: None
         """
         self.components = defaultdict(list)
@@ -94,10 +94,10 @@ class ComponentManager(object):
     # data manipulation methods
     def add(self, component: Component, *components: Component) -> None:
         """Add one or more components to the ComponentManager.
-        
+
         Each component is added to all relevant indexes in the component manager,
         making it accessible through various query methods.
-        
+
         :param component: The first component to add
         :type component: Component
         :param components: Additional components to add
@@ -115,10 +115,10 @@ class ComponentManager(object):
         project: Callable[[T], U] = lambda x: x,
     ) -> List[U]:
         """Get all components of a given type, filtered and transformed as specified.
-        
+
         Retrieves components of the specified type, applies a filtering function,
         and then transforms each result with a projection function.
-        
+
         :param component_type: The component type to select
         :type component_type: T
         :param query: A boolean function to filter the components
@@ -132,10 +132,10 @@ class ComponentManager(object):
 
     def get_entity(self, entity: int) -> EntityDict:
         """Get a dictionary representing all components attached to an entity.
-        
+
         Returns a dictionary mapping component types to lists of component instances
         that belong to the specified entity.
-        
+
         :param entity: The ID of the entity to query
         :type entity: int
         :return: A dictionary mapping component types to lists of components
@@ -145,10 +145,10 @@ class ComponentManager(object):
 
     def get_all(self, component_type: Type[T], entity: int) -> List[T]:
         """Get all components of a given type for a given entity.
-        
+
         Retrieves all components of the specified type that are attached
         to the specified entity.
-        
+
         :param component_type: The type of components to retrieve
         :type component_type: Type[T]
         :param entity: The ID of the entity to query
@@ -161,10 +161,10 @@ class ComponentManager(object):
     # TODO consider whether we really want to support this.
     def get_one(self, component_type: Type[T], entity: int) -> Generic[T]:
         """Get a single component of a given type for a given entity.
-        
+
         Retrieves the first component of the specified type that is attached
         to the specified entity. If no such component exists, returns None.
-        
+
         :param component_type: The type of component to retrieve
         :type component_type: Type[T]
         :param entity: The ID of the entity to query
@@ -179,9 +179,9 @@ class ComponentManager(object):
 
     def get_component_by_id(self, cid: int) -> Component:
         """Get a specific component by its unique component ID.
-        
+
         Directly retrieves a component instance using its unique identifier.
-        
+
         :param cid: The unique ID of the component to retrieve
         :type cid: int
         :return: The component with the specified ID
@@ -192,12 +192,12 @@ class ComponentManager(object):
 
     def delete(self, entity: int) -> None:
         """Delete an entity and all its components from the component manager.
-        
+
         Removes all components attached to the specified entity and
         removes the entity itself from the component manager's indexes.
         Does not delete any references to the entity or its components
         that might exist elsewhere in the game.
-        
+
         :param entity: The ID of the entity to delete
         :type entity: int
         :return: None
@@ -219,10 +219,10 @@ class ComponentManager(object):
 
     def delete_all(self, entities: Iterable[int]) -> None:
         """Delete multiple entities and all their components.
-        
+
         Iterates through the provided collection of entity IDs and
         deletes each one along with its components.
-        
+
         :param entities: An iterable collection of entity IDs to delete
         :type entities: Iterable[int]
         :return: None
@@ -232,10 +232,10 @@ class ComponentManager(object):
 
     def _delete_entity_from_indexes(self, entity: int) -> None:
         """Remove an entity from all component manager indexes.
-        
+
         Removes the specified entity from the internal indexes without affecting
         the individual components themselves.
-        
+
         :param entity: The ID of the entity to remove from indexes
         :type entity: int
         :return: None
@@ -248,10 +248,10 @@ class ComponentManager(object):
 
     def delete_component(self, component: Component) -> None:
         """Delete a single component from the component manager.
-        
+
         Removes the component from all indexes in the component manager.
         Does not delete any references to the component that might exist elsewhere.
-        
+
         :param component: The component to delete
         :type component: Component
         :return: None
@@ -306,10 +306,10 @@ class ComponentManager(object):
 
     def stash_entity(self, eid: int):
         """Move an entire entity to the stash.
-        
+
         Temporarily removes an entity and all its components from the active game state
         and places them in the stash for later retrieval.
-        
+
         :param eid: The ID of the entity to stash
         :type eid: int
         :return: None
@@ -366,10 +366,10 @@ class ComponentManager(object):
     # private methods
     def _add(self, component: Component) -> None:
         """Add a component to the component manager.
-        
+
         Adds the component to all relevant indexes in the component manager,
         organizing it by type, entity, and component ID.
-        
+
         :param component: The component to add to the component manager
         :type component: Component
         :return: None
