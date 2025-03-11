@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-import settings
-from components.base_components.component import Component
-from components.base_components.events import Event
-from components.serialization.save_game import SaveGame
-from engine import GameScene
-from scenes.start_menu import get_start_menu
+from ... import settings
+from ...components.base_components.component import Component
+from ...components.base_components.events import Event
+from ...components.serialization.save_game import SaveGame
+from ...engine import GameScene
+from ...scenes.start_menu import get_start_menu
 
 
 @dataclass

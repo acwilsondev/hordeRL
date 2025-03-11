@@ -2,32 +2,32 @@ from typing import Tuple
 
 import numpy as np
 
-import settings
-from components.base_components.class_register import LoadClasses
-from components.events.start_game_events import StartGame
-from components.population import Population
-from components.serialization.load_game import LoadGame
-from components.sound.battle_music import BattleMusic
-from components.sound.start_music import StartMusic
-from components.world_beauty import WorldBeauty
-from components.world_building.set_worldbuilder_params import SelectBiome
-from content.physics_controller import make_physics_controller
-from content.tax_handler import make_tax_handler
-from content.utilities import make_calendar
-from engine import GameScene, core, palettes
-from engine.component_manager import ComponentManager
-from engine.constants import PLAYER_ID
-from engine.core import timed
-from engine.message import Message
-from gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
-from gui.help_tab import HelpTab
-from gui.labels import (AbilityLabel, CalendarLabel, GoldLabel,
+from .. import settings
+from ..components.base_components.class_register import LoadClasses
+from ..components.events.start_game_events import StartGame
+from ..components.population import Population
+from ..components.serialization.load_game import LoadGame
+from ..components.sound.battle_music import BattleMusic
+from ..components.sound.start_music import StartMusic
+from ..components.world_beauty import WorldBeauty
+from ..components.world_building.set_worldbuilder_params import SelectBiome
+from ..content.physics_controller import make_physics_controller
+from ..content.tax_handler import make_tax_handler
+from ..content.utilities import make_calendar
+from ..engine import GameScene, core, palettes
+from ..engine.component_manager import ComponentManager
+from ..engine.constants import PLAYER_ID
+from ..engine.core import timed
+from ..engine.message import Message
+from ..gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
+from ..gui.help_tab import HelpTab
+from ..gui.labels import (AbilityLabel, CalendarLabel, GoldLabel,
                         HordeStatusLabel, Label, SpeedLabel, VillageNameLabel)
-from gui.message_box import MessageBox
-from gui.play_window import PlayWindow
-from gui.popup_message import PopupMessage
-from gui.vertical_anchor import VerticalAnchor
-from systems import act, control_turns, move
+from ..gui.message_box import MessageBox
+from ..gui.play_window import PlayWindow
+from ..gui.popup_message import PopupMessage
+from ..gui.vertical_anchor import VerticalAnchor
+from ..systems import act, control_turns, move
 
 
 class DefendScene(GameScene):

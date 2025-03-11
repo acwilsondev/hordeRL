@@ -1,4 +1,4 @@
-from components.base_components.energy_actor import EnergyActor
+from ...components.base_components.energy_actor import EnergyActor
 
 intro = (
     "You have been tasked with protecting this village from the hordelings. "

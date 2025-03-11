@@ -1,8 +1,8 @@
 import unittest
 from dataclasses import dataclass
 
-from components.base_components.component import Component
-from engine.component_manager import ComponentManager
+from ...components.base_components.component import Component
+from ...engine.component_manager import ComponentManager
 
 
 class TestComponentManager(unittest.TestCase):

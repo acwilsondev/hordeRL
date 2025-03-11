@@ -1,10 +1,10 @@
 import os
 
-import settings
-from engine import GameScene, palettes
-from gui.easy_menu import EasyMenu
-from gui.labels import Label
-from scenes.defend_scene import DefendScene
+from .. import settings
+from ..engine import GameScene, palettes
+from ..gui.easy_menu import EasyMenu
+from ..gui.labels import Label
+from ..scenes.defend_scene import DefendScene
 
 
 class LoadMenuScene(GameScene):

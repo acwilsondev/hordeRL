@@ -1,7 +1,6 @@
 import logging
 
-import settings
-from engine.sound.sound_controller import SoundController
+from ...engine.sound.sound_controller import SoundController
 
 
 class DefaultSoundController(SoundController):

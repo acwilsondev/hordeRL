@@ -2,10 +2,10 @@ from collections import OrderedDict
 
 
 def get_start_menu():
-    from scenes.defend_scene import DefendScene
-    from scenes.load_game_scene import LoadMenuScene
-    from scenes.navigation_menu_scene import NavigationMenuScene
-    from scenes.quit_scene import QuitScene
+    from ..scenes.defend_scene import DefendScene
+    from ..scenes.load_game_scene import LoadMenuScene
+    from ..scenes.navigation_menu_scene import NavigationMenuScene
+    from ..scenes.quit_scene import QuitScene
 
     option_map = OrderedDict()
     option_map["New Game"] = DefendScene()

@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from components.base_components.component import Component
-from components.enums import Intention
+from ...components.base_components.component import Component
+from ...components.enums import Intention
 
 
 class Actor(Component, ABC):

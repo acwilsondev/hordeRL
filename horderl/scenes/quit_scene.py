@@ -1,6 +1,6 @@
 import sys
 
-from engine import GameScene
+from ..engine import GameScene
 
 
 class QuitScene(GameScene):

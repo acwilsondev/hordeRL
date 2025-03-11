@@ -1,10 +1,10 @@
 import sys
 from collections import OrderedDict
 
-import settings
-from engine import GameScene, palettes
-from gui.easy_menu import EasyMenu
-from gui.labels import Label
+from .. import settings
+from ..engine import GameScene, palettes
+from ..gui.easy_menu import EasyMenu
+from ..gui.labels import Label
 
 
 class NavigationMenuScene(GameScene):

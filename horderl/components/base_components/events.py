@@ -1,9 +1,9 @@
 from abc import abstractmethod
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
-from engine import GameScene
-from engine.core import log_debug
+from ...components.base_components.energy_actor import EnergyActor
+from ...engine import GameScene
+from ...engine.core import log_debug
 
 
 @dataclass
