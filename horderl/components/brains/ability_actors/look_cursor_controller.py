@@ -2,13 +2,13 @@ from dataclasses import dataclass
 
 import tcod
 
-import settings
-from components import Coordinates
-from components.base_components.energy_actor import EnergyActor
-from components.base_components.entity import Entity
-from components.brains.brain import Brain
-from components.enums import Intention
-from engine import constants, core
+from .... import settings
+from ... import Coordinates
+from ...base_components.energy_actor import EnergyActor
+from ...base_components.entity import Entity
+from ..brain import Brain
+from ...enums import Intention
+from ....engine import constants, core
 
 
 @dataclass

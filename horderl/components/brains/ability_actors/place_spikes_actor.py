@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 from typing import List, Tuple
 
-from components.base_components.component import Component
-from components.brains.ability_actors.place_thing_actor import PlaceThingActor
-from content.farmsteads.defensive_walls import make_fence
-from content.spike_trap import make_spike_trap
+from ...base_components.component import Component
+from .place_thing_actor import PlaceThingActor
+from ....content.spike_trap import make_spike_trap
 
 
 @dataclass

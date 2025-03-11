@@ -4,12 +4,12 @@ from typing import List, Tuple
 
 import tcod
 
-from components import Coordinates
-from components.base_components.component import Component
-from components.base_components.energy_actor import EnergyActor
-from components.brains.brain import Brain
-from components.enums import Intention
-from engine import constants, core
+from ... import Coordinates
+from ...base_components.component import Component
+from ...base_components.energy_actor import EnergyActor
+from ..brain import Brain
+from ...enums import Intention
+from ....engine import constants, core
 
 
 @dataclass

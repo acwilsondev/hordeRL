@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import List, Tuple
 
-from components.base_components.component import Component
-from components.brains.ability_actors.place_thing_actor import PlaceThingActor
-from content.terrain.saplings import make_sapling
+from ...base_components.component import Component
+from .place_thing_actor import PlaceThingActor
+from ....content.terrain.saplings import make_sapling
 
 
 @dataclass

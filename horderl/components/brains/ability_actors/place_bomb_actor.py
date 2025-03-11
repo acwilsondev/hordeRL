@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components.brains.ability_actors.place_thing_actor import PlaceThingActor
-from content.bomb import make_bomb
-from engine.types import Entity
+from .place_thing_actor import PlaceThingActor
+from ....content.bomb import make_bomb
+from ....engine.types import Entity
 
 
 @dataclass
