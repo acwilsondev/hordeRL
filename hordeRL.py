@@ -4,8 +4,8 @@ import argparse
 import cProfile
 import logging
 
-from engine.game_scene_controller import GameSceneController
-from scenes.start_menu import get_start_menu
+from horderl.engine.game_scene_controller import GameSceneController
+from horderl.scenes.start_menu import get_start_menu
 
 
 def main():
