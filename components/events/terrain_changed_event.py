@@ -4,9 +4,9 @@ from dataclasses import dataclass
 from components.base_components.component import Component
 from components.base_components.events import Event
 
+
 @dataclass
 class TerrainChangedEvent(Event):
-
     def listener_type(self):
         return TerrainChangedListener
 
@@ -15,7 +15,6 @@ class TerrainChangedEvent(Event):
 
 
 class TerrainChangedListener(Component, ABC):
-
     @abstractmethod
     def on_terrain_changed(self, scene):
         raise NotImplementedError()

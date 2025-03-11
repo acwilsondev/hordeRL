@@ -2,7 +2,7 @@ from abc import ABC
 from dataclasses import dataclass
 
 from components.base_components.actor import Actor
-from components.enums import Intention, ControlMode
+from components.enums import ControlMode, Intention
 from engine import core
 from engine.constants import PRIORITY_MEDIUM
 

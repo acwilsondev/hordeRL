@@ -19,9 +19,6 @@ def pickup_gold(scene, event):
         # player might be dead
         return
 
-    if (
-        coords.x == player_coords.x
-        and coords.y == player_coords.y
-    ):
+    if coords.x == player_coords.x and coords.y == player_coords.y:
         scene.cm.delete(event.entity)
         scene.gold += event.amount

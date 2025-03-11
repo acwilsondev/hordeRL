@@ -3,7 +3,6 @@ from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
 from components.brains.fast_forward_actor import FastForwardBrain
-
 from engine import palettes
 
 
@@ -17,4 +16,4 @@ class FastForwardAbility(ControlModeAbility):
         return FastForwardBrain
 
     def get_anim(self):
-        return '>', palettes.LIGHT_WATER
+        return ">", palettes.LIGHT_WATER

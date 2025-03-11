@@ -11,7 +11,7 @@ class LoadClasses(Event):
     def listener_type(self):
         return LoadClassListener
 
-    def notify(self, scene, listener: 'LoadClassListener'):
+    def notify(self, scene, listener: "LoadClassListener"):
         listener.on_load_class(scene)
 
     def _after_notify(self, scene: GameScene) -> None:

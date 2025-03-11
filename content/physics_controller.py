@@ -9,5 +9,5 @@ def make_physics_controller():
         entity_id,
         [
             FloodHolesSystem(entity=entity_id),
-        ]
+        ],
     )

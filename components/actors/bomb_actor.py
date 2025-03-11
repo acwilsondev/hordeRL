@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from components import Coordinates, Attributes
+from components import Attributes, Coordinates
 from components.actions.attack_action import AttackAction
 from components.base_components.energy_actor import EnergyActor
 from components.events.die_events import Die

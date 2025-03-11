@@ -1,8 +1,9 @@
-from typing import Callable
 from dataclasses import dataclass
+from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
-from components.brains.ability_actors.plant_sapling_actor import PlaceSaplingActor
+from components.brains.ability_actors.plant_sapling_actor import \
+    PlaceSaplingActor
 from engine import palettes
 
 
@@ -16,4 +17,4 @@ class PlantSaplingAbility(ControlModeAbility):
         return PlaceSaplingActor
 
     def get_anim(self):
-        return '+', palettes.FOILAGE_C
+        return "+", palettes.FOILAGE_C

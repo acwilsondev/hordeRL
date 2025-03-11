@@ -4,14 +4,14 @@ from typing import List
 import tcod
 
 from components import Coordinates
-from components.brains.brain import Brain
 from components.base_components.energy_actor import EnergyActor
-from components.events.die_events import Die
+from components.base_components.entity import Entity
+from components.brains.brain import Brain
 from components.enums import Intention
+from components.events.die_events import Die
 from components.sellable import Sellable
 from content.terrain.dirt import make_dirt
 from engine import core, palettes
-from components.base_components.entity import Entity
 from engine.types import EntityId
 
 
@@ -28,7 +28,7 @@ class SellThingActor(Brain):
                 Intention.STEP_NORTH,
                 Intention.STEP_EAST,
                 Intention.STEP_WEST,
-                Intention.STEP_SOUTH
+                Intention.STEP_SOUTH,
             }:
                 self._sell_thing(scene, intention)
             elif intention is Intention.BACK:
@@ -39,8 +39,8 @@ class SellThingActor(Brain):
         x = coords.x
         y = coords.y
         direction = STEP_VECTORS[direction]
-        hole_x = x+direction[0]
-        hole_y = y+direction[1]
+        hole_x = x + direction[0]
+        hole_y = y + direction[1]
         sellables = _get_sellables(scene, (hole_x, hole_y))
         if sellables:
             assert len(sellables) == 1, "found more than one sellable on a tile"
@@ -50,7 +50,10 @@ class SellThingActor(Brain):
             entity_component = scene.cm.get_one(Entity, entity=entity)
             if not entity_component:
                 self._log_warning(f"found a sellable without an entity: {entity}")
-            scene.message(f"You sold a {entity_component.name} for {sellable.value}c!", color=palettes.GOLD)
+            scene.message(
+                f"You sold a {entity_component.name} for {sellable.value}c!",
+                color=palettes.GOLD,
+            )
 
             scene.gold += sellable.value
             dirt = make_dirt(hole_x, hole_y)
@@ -65,7 +68,8 @@ def _get_sellables(scene, point) -> List[EntityId]:
     """Return a list of sellable EntityIds at this point."""
     sellables = set(scene.cm.get(Sellable, project=lambda s: s.entity))
     nearby = [
-        c.entity for c in scene.cm.get(Coordinates)
+        c.entity
+        for c in scene.cm.get(Coordinates)
         if c.distance_from_point(point[0], point[1]) == 0 and c.entity in sellables
     ]
     return nearby
@@ -76,7 +80,7 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
     tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
     tcod.event.KeySym.LEFT: Intention.STEP_WEST,
-    tcod.event.KeySym.ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK,
 }
 
 STEP_VECTORS = {
@@ -87,5 +91,5 @@ STEP_VECTORS = {
     Intention.STEP_NORTH_EAST: (1, -1),
     Intention.STEP_NORTH_WEST: (-1, -1),
     Intention.STEP_SOUTH_EAST: (1, 1),
-    Intention.STEP_SOUTH_WEST: (-1, 1)
+    Intention.STEP_SOUTH_WEST: (-1, 1),
 }

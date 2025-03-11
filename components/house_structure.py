@@ -21,7 +21,12 @@ class HouseStructure(Component):
 
     def get_all(self) -> List[EntityId]:
         return [
-            self.upper_left, self.upper_middle, self.upper_right,
-            self.middle_left, self.middle_right,
-            self.bottom_left, self.bottom_middle, self.bottom_right
+            self.upper_left,
+            self.upper_middle,
+            self.upper_right,
+            self.middle_left,
+            self.middle_right,
+            self.bottom_left,
+            self.bottom_middle,
+            self.bottom_right,
         ]

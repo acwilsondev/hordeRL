@@ -14,6 +14,7 @@ from engine import constants, core
 @dataclass
 class PainterBrain(Brain, ABC):
     """Provide a base class for debug object placing controllers."""
+
     energy_cost: int = EnergyActor.INSTANT
     cursor: int = constants.INVALID
 
@@ -26,7 +27,7 @@ class PainterBrain(Brain, ABC):
                 Intention.STEP_NORTH,
                 Intention.STEP_EAST,
                 Intention.STEP_WEST,
-                Intention.STEP_SOUTH
+                Intention.STEP_SOUTH,
             }:
                 self._move_cursor(scene, intention)
             if intention is Intention.USE_ABILITY:
@@ -60,7 +61,7 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
     tcod.event.KeySym.LEFT: Intention.STEP_WEST,
     tcod.event.KeySym.ESCAPE: Intention.BACK,
-    tcod.event.KeySym.SPACE: Intention.USE_ABILITY
+    tcod.event.KeySym.SPACE: Intention.USE_ABILITY,
 }
 
 STEP_VECTORS = {
@@ -71,5 +72,5 @@ STEP_VECTORS = {
     Intention.STEP_NORTH_EAST: (1, -1),
     Intention.STEP_NORTH_WEST: (-1, -1),
     Intention.STEP_SOUTH_EAST: (1, 1),
-    Intention.STEP_SOUTH_WEST: (-1, 1)
+    Intention.STEP_SOUTH_WEST: (-1, 1),
 }

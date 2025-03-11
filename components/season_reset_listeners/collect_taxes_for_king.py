@@ -1,13 +1,17 @@
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 
 
 class CollectTaxesForKing(SeasonResetListener):
     """Collect taxes from the player at the end of the year."""
+
     value: int = 25
 
     def on_season_reset(self, scene, season):
         if season != "Spring":
-            scene.warn(f'The king will collect {self.value}c from you at the end of the year.')
+            scene.warn(
+                f"The king will collect {self.value}c from you at the end of the year."
+            )
             return
 
         if scene.gold < self.value:

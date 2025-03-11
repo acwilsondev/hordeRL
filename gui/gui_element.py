@@ -8,11 +8,12 @@ from engine.core import get_id
 @dataclass
 class GuiElement:
     """Form the base behavior of a GuiElement."""
+
     x: int = 0
     y: int = 0
-    name: str = ''
+    name: str = ""
     id: int = field(default_factory=get_id)
-    single_shot: bool = False    # if true, the GUI won't store this element, but will render it immediately
+    single_shot: bool = False  # if true, the GUI won't store this element, but will render it immediately
 
     def on_load(self) -> None:
         """

@@ -1,5 +1,5 @@
-from typing import Callable 
 from dataclasses import dataclass
+from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
 from components.brains.ability_actors.place_fence_actor import PlaceFenceActor
@@ -16,4 +16,4 @@ class BuildFenceAbility(ControlModeAbility):
         return PlaceFenceActor
 
     def get_anim(self):
-        return 'o', palettes.WOOD
+        return "o", palettes.WOOD

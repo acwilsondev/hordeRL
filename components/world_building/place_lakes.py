@@ -5,7 +5,7 @@ import settings
 from components import Coordinates
 from components.events.build_world_events import BuildWorldListener
 from components.world_building.world_parameters import WorldParameters
-from content.terrain.water import make_water, make_swampy_water
+from content.terrain.water import make_swampy_water, make_water
 from engine import core
 from engine.utilities import get_3_by_3_box
 
@@ -41,14 +41,16 @@ class PlaceLakes(BuildWorldListener):
 
         while working_set and maximum > 0:
             working_x, working_y = working_set.pop(0)
-            add_water(scene, working_x, working_y, water_painter, world_settings.river_rapids)
+            add_water(
+                scene, working_x, working_y, water_painter, world_settings.river_rapids
+            )
             maximum -= 1
             working_set += [
                 (_x, _y)
                 for _x, _y in get_3_by_3_box(working_x, working_y)
                 if (
-                        random.random() <= world_settings.lake_proliferation
-                        and 0 < _x < settings.MAP_WIDTH
-                        and 0 < _y < settings.MAP_HEIGHT
+                    random.random() <= world_settings.lake_proliferation
+                    and 0 < _x < settings.MAP_WIDTH
+                    and 0 < _y < settings.MAP_HEIGHT
                 )
             ]

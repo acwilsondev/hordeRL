@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from components.enums import Intention
 from components.base_components.component import Component
+from components.enums import Intention
 
 
 class Actor(Component, ABC):
     """Provides control and other 'mind' information."""
+
     # action management
     intention: Intention = Intention.NONE
     intention_target: Optional[int] = None

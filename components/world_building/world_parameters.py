@@ -23,7 +23,7 @@ def get_seed():
 
 @dataclass
 class WorldParameters(Component):
-    biome: str = 'Plains'
+    biome: str = "Plains"
 
     lakes: int = DEFAULT_LAKES
     lake_proliferation: float = DEFAULT_LAKE_PROLIFERATION
@@ -45,7 +45,7 @@ class WorldParameters(Component):
     # how much cutting a tree angers the nature spirit
     tree_cut_anger: int = DEFAULT_TREE_CUT_ANGER
 
-    world_name: str = ''
+    world_name: str = ""
 
     world_seed: int = field(default_factory=get_seed)
 
@@ -59,52 +59,52 @@ def get_plains_params(entity):
 
 def get_forest_params(entity):
     return WorldParameters(
-        biome='Forest',
+        biome="Forest",
         entity=entity,
-        copse=DEFAULT_COPSE*20,
-        flower_fields=DEFAULT_FLOWERS//2,
-        flower_proliferation=DEFAULT_FLOWER_PROLIFERATION/2,
-        tree_cut_anger=DEFAULT_TREE_CUT_ANGER*2
+        copse=DEFAULT_COPSE * 20,
+        flower_fields=DEFAULT_FLOWERS // 2,
+        flower_proliferation=DEFAULT_FLOWER_PROLIFERATION / 2,
+        tree_cut_anger=DEFAULT_TREE_CUT_ANGER * 2,
     )
 
 
 def get_mountain_params(entity):
     return WorldParameters(
         entity=entity,
-        biome='Mountain',
-        copse=DEFAULT_COPSE//2,
-        copse_proliferation=DEFAULT_COPSE_PROLIFERATION/2,
-        rock_fields=DEFAULT_ROCKS*40,
-        rocks_proliferation=DEFAULT_ROCKS_PROLIFERATION*2,
+        biome="Mountain",
+        copse=DEFAULT_COPSE // 2,
+        copse_proliferation=DEFAULT_COPSE_PROLIFERATION / 2,
+        rock_fields=DEFAULT_ROCKS * 40,
+        rocks_proliferation=DEFAULT_ROCKS_PROLIFERATION * 2,
         lakes=0,
-        temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER-5,
-        river_rapids=DEFAULT_RIVER_RAPIDS//5
+        temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER - 5,
+        river_rapids=DEFAULT_RIVER_RAPIDS // 5,
     )
 
 
 def get_swamp_params(entity):
     return WorldParameters(
         entity=entity,
-        biome='Swamp',
-        copse=DEFAULT_COPSE*10,
-        copse_proliferation=DEFAULT_COPSE_PROLIFERATION/2,
-        lakes=DEFAULT_LAKES*100,
-        lake_proliferation=DEFAULT_LAKE_PROLIFERATION/2,
+        biome="Swamp",
+        copse=DEFAULT_COPSE * 10,
+        copse_proliferation=DEFAULT_COPSE_PROLIFERATION / 2,
+        lakes=DEFAULT_LAKES * 100,
+        lake_proliferation=DEFAULT_LAKE_PROLIFERATION / 2,
         rocks_proliferation=0,
         temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER + 5,
-        is_water_swampy=True
+        is_water_swampy=True,
     )
 
 
 def get_tundra_params(entity):
     return WorldParameters(
         entity=entity,
-        biome='Tundra',
+        biome="Tundra",
         copse=0,
-        rock_fields=DEFAULT_ROCKS*10,
-        rocks_proliferation=DEFAULT_ROCKS_PROLIFERATION*2,
-        lakes=DEFAULT_LAKES*100,
-        lake_proliferation=DEFAULT_LAKE_PROLIFERATION/2,
-        temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER-20,
-        is_water_swampy=True
+        rock_fields=DEFAULT_ROCKS * 10,
+        rocks_proliferation=DEFAULT_ROCKS_PROLIFERATION * 2,
+        lakes=DEFAULT_LAKES * 100,
+        lake_proliferation=DEFAULT_LAKE_PROLIFERATION / 2,
+        temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER - 20,
+        is_water_swampy=True,
     )

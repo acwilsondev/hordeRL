@@ -8,6 +8,7 @@ from components.base_components.events import Event
 @dataclass
 class AttackFinished(Event):
     """Emitted after an entity's attack has been processed."""
+
     def listener_type(self):
         return OnAttackFinishedListener
 

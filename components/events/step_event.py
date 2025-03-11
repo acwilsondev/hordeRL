@@ -11,6 +11,7 @@ from engine import GameScene, constants
 @dataclass
 class StepEvent(Event):
     """Emitted when the owning entity takes a step."""
+
     new_location: Tuple[int, int] = (-1, -1)
 
     def listener_type(self):
@@ -27,7 +28,9 @@ class StepEvent(Event):
         for enter_listener in enter_listeners:
             other_coords = scene.cm.get_one(Coordinates, entity=enter_listener.entity)
             if this_coords.is_at(other_coords):
-                scene.cm.add(EnterEvent(entity=self.entity, entered=enter_listener.entity))
+                scene.cm.add(
+                    EnterEvent(entity=self.entity, entered=enter_listener.entity)
+                )
 
 
 class StepListener(Component, ABC):
@@ -41,6 +44,7 @@ class StepListener(Component, ABC):
 @dataclass
 class EnterEvent(Event):
     """Emitted when the owning entity steps on another entity (if that entity cares)."""
+
     entered: int = constants.INVALID
 
     def listener_type(self):

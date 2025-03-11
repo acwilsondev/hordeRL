@@ -1,10 +1,11 @@
 import logging
-from dataclasses import dataclass
 import random
+from dataclasses import dataclass
 
 from components import Coordinates
 from components.brains.ability_actors.place_thing_actor import is_buildable
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from components.tags.tree_tag import TreeTag
 from components.weather.weather import Weather
 from content.terrain.saplings import make_sapling
@@ -14,6 +15,7 @@ from engine.utilities import get_3_by_3_box
 @dataclass
 class SpawnSaplingInSpring(SeasonResetListener):
     """Cause trees to spawn saplings."""
+
     # Attaches to the calendar- if attached to individual trees, will cause a circular dependency with saplings.
 
     def on_season_reset(self, scene, season):

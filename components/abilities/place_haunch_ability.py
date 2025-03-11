@@ -1,8 +1,9 @@
-from typing import Callable
 from dataclasses import dataclass
+from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
-from components.brains.ability_actors.place_haunch_actor import PlaceHaunchActor
+from components.brains.ability_actors.place_haunch_actor import \
+    PlaceHaunchActor
 from engine import palettes
 
 
@@ -16,4 +17,4 @@ class PlaceHaunchAbility(ControlModeAbility):
         return PlaceHaunchActor
 
     def get_anim(self):
-        return 'α', palettes.MEAT
+        return "α", palettes.MEAT

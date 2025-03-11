@@ -12,4 +12,3 @@ def run(scene):
             SaveGame().act(scene)
         scene.pop()
         scene.controller.push_scene(get_start_menu())
-

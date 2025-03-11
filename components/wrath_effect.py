@@ -1,8 +1,8 @@
 import logging
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
 from components.actors.hordeling_spawner import HordelingSpawner
+from components.base_components.energy_actor import EnergyActor
 from components.events.die_events import Die
 from components.tags.hordeling_tag import HordelingTag
 
@@ -10,6 +10,7 @@ from components.tags.hordeling_tag import HordelingTag
 @dataclass
 class WrathEffect(EnergyActor):
     """Hordelings will spawn at this object's location."""
+
     energy_cost: int = EnergyActor.INSTANT
 
     def act(self, scene):

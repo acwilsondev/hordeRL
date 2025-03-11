@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 
 from components.base_components.energy_actor import EnergyActor
-from engine import palettes, core
+from engine import core, palettes
 
 
 @dataclass
 class LoadGame(EnergyActor):
     energy_cost: int = EnergyActor.INSTANT
-    file_name: str = ''
+    file_name: str = ""
 
     def act(self, scene) -> None:
         scene.cm.delete_component(self)
@@ -22,6 +22,3 @@ class LoadGame(EnergyActor):
         end = core.time_ms()
         self._log_info(f"loaded {len(data)} objects in {end - start}ms")
         scene.message("Game loaded.", color=palettes.LIGHT_WATER)
-
-
-

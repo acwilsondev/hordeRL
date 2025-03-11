@@ -8,7 +8,7 @@ import settings
 from components.serialization.save_game import SaveGame
 from engine import GameScene
 from engine.component_manager import ComponentManager
-from engine.core import timed, log_debug
+from engine.core import log_debug, timed
 from engine.sound.default_sound_controller import DefaultSoundController
 from gui.gui import Gui
 
@@ -19,11 +19,13 @@ class GameSceneController:
     @log_debug(__name__)
     def __init__(self, title: str):
         self.title: str = title
-        self.gui: Gui = Gui(settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT, title=self.title)
+        self.gui: Gui = Gui(
+            settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT, title=self.title
+        )
         self.cm = ComponentManager()
         self.sound = DefaultSoundController()
         self._scene_stack: List[GameScene] = []
-        logging.getLogger(__name__).debug('GameSceneController instantiated')
+        logging.getLogger(__name__).debug("GameSceneController instantiated")
 
     @log_debug(__name__)
     def push_scene(self, scene: GameScene):

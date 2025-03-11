@@ -6,7 +6,7 @@ import tcod
 from tcod import console
 
 import settings
-from components import Coordinates, Appearance
+from components import Appearance, Coordinates
 from engine import palettes
 from engine.component_manager import ComponentManager
 from engine.core import timed
@@ -17,11 +17,13 @@ from settings import MAP_HEIGHT, MAP_WIDTH
 class PlayWindow(GuiElement):
     def __init__(
         self,
-        x: int, y: int,
-        width: int, height: int,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
         component_manager: ComponentManager,
         visibility_map: np.array,
-        memory_map: np.array
+        memory_map: np.array,
     ):
         """
         :param x: horizontal starting position of the PlayWindow
@@ -41,14 +43,14 @@ class PlayWindow(GuiElement):
         self.snowy = set()
 
         # store a console with the static terrain on it so that we don't have to regenerate it each frame
-        self.memory_console = tcod.console.Console(width, height, order='F')
+        self.memory_console = tcod.console.Console(width, height, order="F")
 
         # hold terrain view
-        self.terrain_console = tcod.console.Console(width, height, order='F')
-        self.shadow_terrain_console = tcod.console.Console(width, height, order='F')
+        self.terrain_console = tcod.console.Console(width, height, order="F")
+        self.shadow_terrain_console = tcod.console.Console(width, height, order="F")
 
-        self.black = tcod.console.Console(width, height, order='F')
-        self.console = tcod.console.Console(width, height, order='F')  # buffer console
+        self.black = tcod.console.Console(width, height, order="F")
+        self.console = tcod.console.Console(width, height, order="F")  # buffer console
 
     def on_load(self) -> None:
         self.regenerate_grass()
@@ -71,7 +73,7 @@ class PlayWindow(GuiElement):
                     hidden_tile = (
                         appearance_tile[0],
                         (*palettes.SHADOW, 255),
-                        (*palettes.BACKGROUND, 255)
+                        (*palettes.BACKGROUND, 255),
                     )
 
                     self.console.rgba[coord.x, coord.y] = appearance_tile
@@ -83,21 +85,25 @@ class PlayWindow(GuiElement):
                     hidden_tile = (
                         appearance_tile[0],
                         (*color, 255),
-                        (*palettes.BACKGROUND, 255)
+                        (*palettes.BACKGROUND, 255),
                     )
 
                     self.console.rgba[coord.x, coord.y] = appearance_tile
                     self.memory_console.rgba[coord.x, coord.y] = hidden_tile
                 else:
-                    raise ValueError(f"Unrecognized render mode {appearance.render_mode}")
+                    raise ValueError(
+                        f"Unrecognized render mode {appearance.render_mode}"
+                    )
 
         buffer = np.where(
-            self.visibility_map,
-            self.console.rgba,
-            self.memory_console.rgba
+            self.visibility_map, self.console.rgba, self.memory_console.rgba
         )
-        self.console = tcod.console.Console(self.width, self.height, order='F', buffer=buffer)
-        self.console.blit(panel, dest_x=self.x, dest_y=self.y, width=self.width, height=self.height)
+        self.console = tcod.console.Console(
+            self.width, self.height, order="F", buffer=buffer
+        )
+        self.console.blit(
+            panel, dest_x=self.x, dest_y=self.y, width=self.width, height=self.height
+        )
 
     def regenerate_grass(self):
         memory_color = palettes.SHADOW
@@ -106,43 +112,45 @@ class PlayWindow(GuiElement):
                 grass_color = palettes.GRASS
 
                 if random.random() < settings.GRASS_DENSITY:
-                    symbol = ord(random.choice(['.', ',', '"', '\'']))
+                    symbol = ord(random.choice([".", ",", '"', "'"]))
                 else:
-                    symbol = ord(' ')
+                    symbol = ord(" ")
 
                 self.terrain_console.rgba[x, y] = (
                     symbol,
                     (*grass_color, 255),
-                    (*palettes.BACKGROUND, 255)
+                    (*palettes.BACKGROUND, 255),
                 )
                 self.shadow_terrain_console.rgba[x, y] = (
                     symbol,
                     (*memory_color, 255),
-                    (*palettes.BACKGROUND, 255)
+                    (*palettes.BACKGROUND, 255),
                 )
 
     def add_snow(self):
-        all_tiles = set(product(range(1, settings.MAP_WIDTH-1), range(1, settings.MAP_HEIGHT-1)))
+        all_tiles = set(
+            product(range(1, settings.MAP_WIDTH - 1), range(1, settings.MAP_HEIGHT - 1))
+        )
         unsnowed = all_tiles - self.snowy
         if not unsnowed:
             return
         x, y = random.choice(list(unsnowed))
 
         if random.random() < settings.GRASS_DENSITY / 2:
-            symbol = ord(random.choice(['.', ',', '"', '\'']))
+            symbol = ord(random.choice([".", ",", '"', "'"]))
         else:
-            symbol = ord(' ')
+            symbol = ord(" ")
 
         self.terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.WHITE, 255),
-            (*palettes.BACKGROUND, 255)
+            (*palettes.BACKGROUND, 255),
         )
 
         self.shadow_terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.SHADOW, 255),
-            (*palettes.BACKGROUND, 255)
+            (*palettes.BACKGROUND, 255),
         )
         self.snowy.add((x, y))
 
@@ -155,21 +163,18 @@ class PlayWindow(GuiElement):
         self.snowy.remove((x, y))
 
         if random.random() < settings.GRASS_DENSITY:
-            symbol = ord(random.choice(['.', ',', '"', '\'']))
+            symbol = ord(random.choice([".", ",", '"', "'"]))
         else:
-            symbol = ord(' ')
+            symbol = ord(" ")
 
         self.terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.GRASS, 255),
-            (*palettes.BACKGROUND, 255)
+            (*palettes.BACKGROUND, 255),
         )
 
         self.shadow_terrain_console.rgba[x, y] = (
             symbol,
             (*palettes.SHADOW, 255),
-            (*palettes.BACKGROUND, 255)
+            (*palettes.BACKGROUND, 255),
         )
-
-
-

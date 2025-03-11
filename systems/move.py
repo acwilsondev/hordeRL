@@ -3,17 +3,19 @@ from typing import Tuple
 
 import settings
 from components import Senses
-from components.base_components.actor import Actor
 from components.attacks.attack import Attack
+from components.base_components.actor import Actor
 from components.brains.brain import Brain
 from components.coordinates import Coordinates
 from components.enums import Intention
+from components.events.dally_event import DallyEvent
+from components.events.step_event import StepEvent
 from components.faction import Faction
 from components.material import Material
 from components.movement.move import Move
-from components.states.move_cost_affectors import Hindered, DifficultTerrain, EasyTerrain, Haste
-from components.events.dally_event import DallyEvent
-from components.events.step_event import StepEvent
+from components.states.move_cost_affectors import (DifficultTerrain,
+                                                   EasyTerrain, Haste,
+                                                   Hindered)
 from engine import palettes
 from systems.utilities import get_blocking_object
 
@@ -76,9 +78,7 @@ def run(scene):
 
 def get_actors_with_step_intention(scene):
     return [
-        actor
-        for actor in scene.cm.get(Actor)
-        if actor.intention in STEP_INTENTIONS
+        actor for actor in scene.cm.get(Actor) if actor.intention in STEP_INTENTIONS
     ]
 
 
@@ -91,7 +91,7 @@ STEP_VECTORS = {
     Intention.STEP_NORTH_WEST: (-1, -1),
     Intention.STEP_SOUTH_EAST: (1, 1),
     Intention.STEP_SOUTH_WEST: (-1, 1),
-    Intention.DALLY: (0, 0)
+    Intention.DALLY: (0, 0),
 }
 
 STEP_INTENTIONS = list(STEP_VECTORS.keys())
@@ -127,9 +127,8 @@ def can_step(scene, entity, step_action) -> bool:
 
 
 def in_bounds(point):
-    return (
-        point[0] in range(settings.MAP_WIDTH)
-        and point[1] in range(settings.MAP_HEIGHT)
+    return point[0] in range(settings.MAP_WIDTH) and point[1] in range(
+        settings.MAP_HEIGHT
     )
 
 

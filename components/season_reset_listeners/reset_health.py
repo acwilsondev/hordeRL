@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from typing import List
 
 from components import Attributes
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 
 
 @dataclass

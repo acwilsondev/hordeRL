@@ -3,12 +3,12 @@ from dataclasses import dataclass
 import tcod
 
 from components.actions.attack_action import AttackAction
-from components.brains.brain import Brain
-from components.base_components.energy_actor import EnergyActor
 from components.animation_effects.blinker import AnimationBlinker
+from components.base_components.energy_actor import EnergyActor
+from components.brains.brain import Brain
 from components.enums import Intention
 from components.tags.hordeling_tag import HordelingTag
-from engine import core, constants
+from engine import constants, core
 from engine.utilities import is_visible
 
 
@@ -32,7 +32,7 @@ class RangedAttackActor(Brain):
                 Intention.STEP_NORTH,
                 Intention.STEP_EAST,
                 Intention.STEP_WEST,
-                Intention.STEP_SOUTH
+                Intention.STEP_SOUTH,
             }:
                 self._next_enemy(scene)
             elif intention is Intention.BACK:
@@ -80,5 +80,5 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
     tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
     tcod.event.KeySym.LEFT: Intention.STEP_WEST,
-    tcod.event.KeySym.ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK,
 }

@@ -32,4 +32,3 @@ class AbilityTracker(AttackStartListener):
         self.current_ability = (self.current_ability - 1) % len(abilities)
         ability = abilities[self.current_ability]
         self._log_debug(f"decrement {self.current_ability} - {ability.ability_title}")
-

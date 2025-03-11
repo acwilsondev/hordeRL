@@ -15,7 +15,6 @@ class TreeCutEvent(Event):
 
 
 class TreeCutListener(Component, ABC):
-
     @abstractmethod
     def on_tree_cut(self, scene):
         raise NotImplementedError()

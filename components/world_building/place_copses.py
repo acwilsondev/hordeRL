@@ -42,8 +42,8 @@ class PlaceTrees(BuildWorldListener):
                 (_x, _y)
                 for _x, _y in get_3_by_3_box(working_x, working_y)
                 if (
-                        random.random() <= world_settings.copse_proliferation
-                        and 0 < _x < settings.MAP_WIDTH - 1
-                        and 0 < _y < settings.MAP_HEIGHT - 1
+                    random.random() <= world_settings.copse_proliferation
+                    and 0 < _x < settings.MAP_WIDTH - 1
+                    and 0 < _y < settings.MAP_HEIGHT - 1
                 )
             ]

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
 from components.actors.hordeling_spawner import HordelingSpawner
+from components.base_components.energy_actor import EnergyActor
 from components.events.attack_started_events import AttackStarted
 from components.events.new_day_event import DayBegan
 from components.season_reset_listeners.reset_season import ResetSeason
@@ -38,15 +38,10 @@ class Calendar(EnergyActor):
     def get_timecode(self):
         season = self.get_season_string()
 
-        return f'{season} {self.day}d {self.year}y'
+        return f"{season} {self.day}d {self.year}y"
 
     def get_season_string(self):
-        return {
-            1: "Spring",
-            2: "Summer",
-            3: "Fall",
-            4: "Winter"
-        }[self.season]
+        return {1: "Spring", 2: "Summer", 3: "Fall", 4: "Winter"}[self.season]
 
     def act(self, scene):
         if self.day < 25:
@@ -65,9 +60,11 @@ class Calendar(EnergyActor):
 
     def _start_attack(self, scene):
         scene.popup_message("The Horde has arrived. Prepare to defend the village!")
-        spirits_wrath = scene.cm.get_one(WorldBeauty, entity=core.get_id("world")).spirits_wrath
+        spirits_wrath = scene.cm.get_one(
+            WorldBeauty, entity=core.get_id("world")
+        ).spirits_wrath
 
-        scene.cm.add(*hordeling_spawner(waves=self.round+spirits_wrath)[1])
+        scene.cm.add(*hordeling_spawner(waves=self.round + spirits_wrath)[1])
         scene.cm.add(AttackStarted(entity=scene.player))
         self.is_recharging = False
         self.status = "Under attack!"

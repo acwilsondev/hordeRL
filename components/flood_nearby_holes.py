@@ -2,12 +2,12 @@ from dataclasses import dataclass
 
 from components import Coordinates
 from components.base_components.energy_actor import EnergyActor
+from components.events.hole_dug_events import HoleDugListener
 from components.floodable import Floodable
 from components.flooder import Flooder
-from components.events.hole_dug_events import HoleDugListener
 from components.tags.water_tag import WaterTag
 from components.world_building.world_parameters import WorldParameters
-from content.terrain.water import make_water, make_swampy_water
+from content.terrain.water import make_swampy_water, make_water
 from engine import core
 
 
@@ -53,7 +53,10 @@ class FloodHolesSystem(EnergyActor, HoleDugListener):
 
             if nearby_flooders:
                 found = True
-                if any(scene.cm.get_one(WaterTag, entity=flooder.entity).is_dirty for flooder in nearby_flooders):
+                if any(
+                    scene.cm.get_one(WaterTag, entity=flooder.entity).is_dirty
+                    for flooder in nearby_flooders
+                ):
                     _fill_hole(scene, floodable.entity, make_swampy_water)
                 else:
                     _fill_hole(scene, floodable.entity, make_water)
@@ -63,6 +66,3 @@ class FloodHolesSystem(EnergyActor, HoleDugListener):
             self._log_debug("done filling available floodables")
 
         self.pass_turn(EnergyActor.HALF_HOUR)
-
-
-

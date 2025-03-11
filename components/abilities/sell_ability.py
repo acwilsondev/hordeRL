@@ -16,4 +16,4 @@ class SellAbility(ControlModeAbility):
         return SellThingActor
 
     def get_anim(self):
-        return '$', palettes.GOLD
+        return "$", palettes.GOLD

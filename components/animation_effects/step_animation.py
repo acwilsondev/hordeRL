@@ -9,6 +9,7 @@ from components.events.delete_event import Delete
 @dataclass
 class StepAnimation(TimedActor):
     """Flip the colors back and forth."""
+
     timer_delay: int = 90
     step: int = 0
     steps: List = field(default_factory=list)

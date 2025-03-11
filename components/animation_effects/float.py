@@ -9,9 +9,12 @@ from components.base_components.timed_actor import TimedActor
 @dataclass
 class AnimationFloat(TimedActor):
     """Randomly float up or right."""
+
     duration: int = 10
     timer_delay: int = 125
-    delete_on_complete: bool = True  # whether to delete the entity when the path is done
+    delete_on_complete: bool = (
+        True  # whether to delete the entity when the path is done
+    )
 
     def update_animation(self, scene):
         entity = self.entity

@@ -1,3 +1,4 @@
+from components.base_components.entity import Entity
 from components.events.build_world_events import BuildWorld
 from components.events.start_game_events import StartGame
 from components.world_building.add_player_step import AddPlayerStep
@@ -11,7 +12,6 @@ from components.world_building.place_roads import PlaceRoads
 from components.world_building.place_rocks import PlaceRocks
 from components.world_building.set_world_name import SetWorldName
 from engine import core
-from components.base_components.entity import Entity
 
 
 def make_world_build():
@@ -31,6 +31,6 @@ def make_world_build():
             PlaceFlowers(entity=entity_id),
             SetWorldName(entity=entity_id),
             DeleteWorldBuilder(entity=entity_id),
-            StartGame(entity=entity_id)
-        ]
+            StartGame(entity=entity_id),
+        ],
     )

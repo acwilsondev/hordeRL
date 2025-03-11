@@ -1,11 +1,11 @@
-from typing import Callable
 from dataclasses import dataclass
+from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
 from components.brains.ability_actors.place_fence_actor import PlaceFenceActor
-from components.brains.ability_actors.place_spikes_actor import PlaceSpikesActor
+from components.brains.ability_actors.place_spikes_actor import \
+    PlaceSpikesActor
 from engine import palettes
-
 
 
 @dataclass
@@ -18,4 +18,4 @@ class BuildSpikesAbility(ControlModeAbility):
         return PlaceSpikesActor
 
     def get_anim(self):
-        return '╨', palettes.STONE
+        return "╨", palettes.STONE

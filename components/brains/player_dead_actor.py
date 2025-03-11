@@ -4,8 +4,8 @@ import tcod
 
 from components import Coordinates
 from components.ability_tracker import AbilityTracker
-from components.enums import Intention
 from components.brains.brain import Brain
+from components.enums import Intention
 from content.states import confused_animation
 from engine import core
 
@@ -33,7 +33,9 @@ class PlayerDeadBrain(Brain):
                 ability.apply(scene, self.id)
             elif intention is None:
                 self._log_debug(f"found no useable intention")
-                scene.warn("You urge your lifeless corpse to action, without much success.")
+                scene.warn(
+                    "You urge your lifeless corpse to action, without much success."
+                )
                 return
 
 
@@ -41,5 +43,5 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.e: Intention.NEXT_ABILITY,
     tcod.event.KeySym.q: Intention.PREVIOUS_ABILITY,
     tcod.event.KeySym.SPACE: Intention.USE_ABILITY,
-    tcod.event.KeySym.ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK,
 }

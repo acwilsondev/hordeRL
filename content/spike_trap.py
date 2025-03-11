@@ -14,13 +14,18 @@ def make_spike_trap(x, y):
     return (
         entity_id,
         [
-            Entity(id=entity_id, entity=entity_id, name='spike trap'),
-            Appearance(entity=entity_id, symbol='╨', color=palettes.STONE, bg_color=palettes.BACKGROUND),
+            Entity(id=entity_id, entity=entity_id, name="spike trap"),
+            Appearance(
+                entity=entity_id,
+                symbol="╨",
+                color=palettes.STONE,
+                bg_color=palettes.BACKGROUND,
+            ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
             Material(entity=entity_id, blocks=False, blocks_sight=False),
             DifficultTerrain(entity=entity_id),
             Diggable(entity=entity_id),
             DrainOnEnter(entity=entity_id, damage=3),
-            DieOnAttackFinished(entity=entity_id)
-        ]
+            DieOnAttackFinished(entity=entity_id),
+        ],
     )

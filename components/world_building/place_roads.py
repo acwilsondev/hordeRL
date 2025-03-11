@@ -6,8 +6,8 @@ from components import Coordinates
 from components.events.build_world_events import BuildWorldListener
 from components.house_structure import HouseStructure
 from components.tags.town_center_flag import TownCenterFlag
-from content.terrain.roads import make_road, connect_point_to_road_network
-from engine.utilities import get_3_by_3_square, get_3_by_3_box
+from content.terrain.roads import connect_point_to_road_network, make_road
+from engine.utilities import get_3_by_3_box, get_3_by_3_square
 
 
 def get_town_center(house_coords, scene):
@@ -38,8 +38,12 @@ def add_town_center(house_coords, scene):
 class PlaceRoads(BuildWorldListener):
     def on_build_world(self, scene):
         self._log_info(f"placing roads in town")
-        houses: List[HouseStructure] = scene.cm.get(HouseStructure, project=lambda hs: hs.house_id)
-        house_coords: List[Coordinates] = [scene.cm.get_one(Coordinates, entity=house) for house in houses]
+        houses: List[HouseStructure] = scene.cm.get(
+            HouseStructure, project=lambda hs: hs.house_id
+        )
+        house_coords: List[Coordinates] = [
+            scene.cm.get_one(Coordinates, entity=house) for house in houses
+        ]
 
         add_town_center(house_coords, scene)
         connect_houses_to_road(house_coords, scene)
@@ -47,7 +51,7 @@ class PlaceRoads(BuildWorldListener):
 
     def draw_road_across_map(self, scene):
         self._log_info(f"placing highway")
-        start = (0, random.randint(2, settings.MAP_WIDTH-3))
+        start = (0, random.randint(2, settings.MAP_WIDTH - 3))
         connect_point_to_road_network(scene, start)
-        end = (settings.MAP_WIDTH-1, random.randint(2, settings.MAP_HEIGHT-3))
+        end = (settings.MAP_WIDTH - 1, random.randint(2, settings.MAP_HEIGHT - 3))
         connect_point_to_road_network(scene, end)

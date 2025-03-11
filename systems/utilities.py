@@ -14,10 +14,8 @@ def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:
             cm.get_one(Material, coord.entity)
             for coord in cm.get(Coordinates)
             if (coord.x == x and coord.y == y)
-        )
+        ),
     )
-
-
 
     blocking_material = next(materials_at_coords, None)
     return blocking_material.entity if blocking_material else None
@@ -41,7 +39,9 @@ def get_enemies(scene, entity):
     if not entity_faction:
         # entities without a faction cannot have enemies
         return []
-    return [f.entity for f in scene.cm.get(Faction) if f.faction != entity_faction.faction]
+    return [
+        f.entity for f in scene.cm.get(Faction) if f.faction != entity_faction.faction
+    ]
 
 
 def get_enemies_in_range(scene, entity, min_range=0, max_range=1000):

@@ -1,13 +1,14 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from components.base_components.events import Event
 from components.base_components.component import Component
+from components.base_components.events import Event
 
 
 @dataclass
 class DayBegan(Event):
     """Add this to an entity to have it delete itself after some time."""
+
     day: int = 0
 
     def listener_type(self):

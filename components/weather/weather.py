@@ -1,10 +1,11 @@
-from dataclasses import dataclass
 import random
+from dataclasses import dataclass
 
 from components.base_components.energy_actor import EnergyActor
 from components.events.new_day_event import DayBeganListener
 from components.events.start_game_events import GameStartListener
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from components.world_building.world_parameters import WorldParameters
 from engine import core
 
@@ -25,12 +26,7 @@ class Weather(DayBeganListener, GameStartListener, SeasonResetListener):
         self.set_seasonal_norm(scene, season)
 
     def set_seasonal_norm(self, scene, season):
-        seasonal_temps = {
-            "Spring": 20,
-            "Summer": 30,
-            "Fall": 10,
-            "Winter": -5
-        }
+        seasonal_temps = {"Spring": 20, "Summer": 30, "Fall": 10, "Winter": -5}
         self.seasonal_norm = seasonal_temps[season]
         world_params = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
         self.seasonal_norm += world_params.temperature_modifier

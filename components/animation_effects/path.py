@@ -9,7 +9,9 @@ from components.path_node import PathNode
 class AnimationPath(TimedActor):
     current_step: int = 0
     timer_delay: int = 30
-    delete_on_complete: bool = True  # whether to delete the entity when the path is done
+    delete_on_complete: bool = (
+        True  # whether to delete the entity when the path is done
+    )
 
     def act(self, scene):
         self.update_animation_path(scene)

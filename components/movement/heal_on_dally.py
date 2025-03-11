@@ -2,8 +2,9 @@ from dataclasses import dataclass
 
 from components import Attributes
 from components.events.attack_started_events import AttackStartListener
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
 from components.events.dally_event import DallyListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from engine import palettes
 
 
@@ -17,7 +18,7 @@ class HealOnDally(DallyListener, AttackStartListener, SeasonResetListener):
         if self.count == 0:
             attributes = scene.cm.get_one(Attributes, entity=self.entity)
             if attributes.hp < attributes.max_hp:
-                attributes.hp = min(attributes.hp+1, attributes.max_hp)
+                attributes.hp = min(attributes.hp + 1, attributes.max_hp)
                 scene.message("You rest and your wounds heal.", color=palettes.WHITE)
 
     def on_season_reset(self, scene, season):

@@ -1,5 +1,5 @@
-from typing import Callable
 from dataclasses import dataclass
+from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
 from components.brains.ability_actors.hire_knight_brain import HireKnightActor
@@ -16,4 +16,4 @@ class HireKnightAbility(ControlModeAbility):
         return HireKnightActor
 
     def get_anim(self):
-        return 'K', palettes.STONE
+        return "K", palettes.STONE

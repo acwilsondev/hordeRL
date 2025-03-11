@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 from random import choice
 
-from components import Attributes, Appearance
+from components import Appearance, Attributes
 from components.abilities.build_wall_ability import BuildWallAbility
 from components.death_listeners.npc_corpse import Corpse
 from components.house_structure import HouseStructure
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from engine import palettes
 
 
@@ -17,7 +18,7 @@ class UpgradeHouse(SeasonResetListener):
 
         house_structures = scene.cm.get(
             HouseStructure,
-            query=lambda hs: hs.upgrade_level != max_upgrade and not hs.is_destroyed
+            query=lambda hs: hs.upgrade_level != max_upgrade and not hs.is_destroyed,
         )
 
         if not house_structures:
@@ -31,7 +32,7 @@ class UpgradeHouse(SeasonResetListener):
         walls = house_structure.get_all()
         for wall in walls:
             attributes = scene.cm.get_one(Attributes, entity=wall)
-            attributes.hp = attributes.max_hp = (attributes.max_hp + 20)
+            attributes.hp = attributes.max_hp = attributes.max_hp + 20
 
             appearance = scene.cm.get_one(Appearance, entity=wall)
             appearance.color = upgrade
@@ -40,7 +41,3 @@ class UpgradeHouse(SeasonResetListener):
             corpse_def.color = upgrade
 
         house_structure.upgrade_level += 1
-
-
-
-

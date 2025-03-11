@@ -1,3 +1,3 @@
 from collections import namedtuple
 
-ColoredMessage = namedtuple('ColoredMessage', 'color message')
+ColoredMessage = namedtuple("ColoredMessage", "color message")

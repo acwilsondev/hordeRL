@@ -5,7 +5,8 @@ from components.actions.attack_action import AttackAction
 from components.attacks.attack import Attack
 from components.brains.brain import Brain
 from components.events.attack_started_events import AttackStartListener
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from components.tags.hordeling_tag import HordelingTag
 from content.attacks import stab
 from engine import constants
@@ -15,6 +16,7 @@ from engine.core import log_debug
 @dataclass
 class StationaryAttackActor(Brain, SeasonResetListener, AttackStartListener):
     """Stand in place and attack any enemy in range."""
+
     target: int = constants.INVALID
     cost_map = None
     root_x: int = constants.INVALID
@@ -36,8 +38,9 @@ class StationaryAttackActor(Brain, SeasonResetListener, AttackStartListener):
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         targets = scene.cm.get(
             Coordinates,
-            query=lambda c: scene.cm.get_one(HordelingTag, entity=c.entity) and c.distance_from(coords) <= 2,
-            project=lambda c: c.entity
+            query=lambda c: scene.cm.get_one(HordelingTag, entity=c.entity)
+            and c.distance_from(coords) <= 2,
+            project=lambda c: c.entity,
         )
         if not targets:
             self.pass_turn()
@@ -51,19 +54,9 @@ class StationaryAttackActor(Brain, SeasonResetListener, AttackStartListener):
         facing = coords.direction_towards(target)
         attack = scene.cm.get_one(Attack, entity=self.entity)
         scene.cm.add(
-            AttackAction(
-                entity=self.entity,
-                target=self.target,
-                damage=attack.damage
-            )
+            AttackAction(entity=self.entity, target=self.target, damage=attack.damage)
         )
-        scene.cm.add(
-            *stab(
-                self.entity,
-                coords.x + facing[0],
-                coords.y + facing[1]
-            )[1]
-        )
+        scene.cm.add(*stab(self.entity, coords.x + facing[0], coords.y + facing[1])[1])
         self.pass_turn()
 
     def is_target_in_range(self, scene) -> bool:

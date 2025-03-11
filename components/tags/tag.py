@@ -5,4 +5,4 @@ from components.base_components.component import Component
 
 @dataclass
 class Tag(Component):
-    value: str = ''
+    value: str = ""

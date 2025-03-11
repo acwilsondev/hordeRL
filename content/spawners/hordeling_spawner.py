@@ -11,8 +11,13 @@ def hordeling_spawner(x, y):
     return (
         entity_id,
         [
-            Entity(id=entity_id, entity=entity_id, name='hordeling spawner', description=description),
+            Entity(
+                id=entity_id,
+                entity=entity_id,
+                name="hordeling spawner",
+                description=description,
+            ),
             Coordinates(entity=entity_id, x=x, y=y),
-            HordelingSpawner(entity=entity_id)
-        ]
+            HordelingSpawner(entity=entity_id),
+        ],
     )

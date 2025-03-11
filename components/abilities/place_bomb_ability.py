@@ -1,5 +1,5 @@
-from typing import Callable
 from dataclasses import dataclass
+from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
 from components.brains.ability_actors.place_bomb_actor import PlaceBombActor
@@ -16,4 +16,4 @@ class PlaceBombAbility(ControlModeAbility):
         return PlaceBombActor
 
     def get_anim(self):
-        return 'δ', palettes.STONE
+        return "δ", palettes.STONE

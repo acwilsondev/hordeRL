@@ -2,8 +2,8 @@ import logging
 from dataclasses import dataclass
 
 from components import Coordinates
-from components.attacks.attack import Attack
 from components.actions.attack_action import AttackAction
+from components.attacks.attack import Attack
 from components.structure import Structure
 from content.attacks import stab
 
@@ -11,6 +11,7 @@ from content.attacks import stab
 @dataclass
 class SiegeAttack(Attack):
     """Deals heavy damage to structures."""
+
     damage: int = 1
 
     def apply_attack(self, scene, target):

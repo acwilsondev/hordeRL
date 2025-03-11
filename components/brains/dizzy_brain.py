@@ -41,7 +41,9 @@ class DizzyBrain(Brain):
             else:
                 coords = scene.cm.get_one(Coordinates, entity=self.entity)
                 scene.cm.add(*confused_animation(coords.x, coords.y)[1])
-                self._log_debug(f"deferred intention {intention} (usually for movement intentions)")
+                self._log_debug(
+                    f"deferred intention {intention} (usually for movement intentions)"
+                )
                 self._log_debug("taking a dizzy step")
                 continuing_actor = self.back_out(scene) if self.turns <= 1 else self
                 self.turns -= 1
@@ -52,7 +54,7 @@ STEPS = [
     Intention.STEP_NORTH,
     Intention.STEP_SOUTH,
     Intention.STEP_EAST,
-    Intention.STEP_WEST
+    Intention.STEP_WEST,
 ]
 
 KEY_ACTION_MAP = {
@@ -60,12 +62,10 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.q: Intention.PREVIOUS_ABILITY,
     tcod.event.KeySym.SPACE: Intention.USE_ABILITY,
     tcod.event.KeySym.h: Intention.SHOW_HELP,
-
     tcod.event.KeySym.UP: Intention.STEP_NORTH,
     tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
     tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
     tcod.event.KeySym.LEFT: Intention.STEP_WEST,
     tcod.event.KeySym.PERIOD: Intention.DALLY,
-
-    tcod.event.KeySym.ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK,
 }

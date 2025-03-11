@@ -3,8 +3,8 @@ from dataclasses import dataclass
 import tcod
 
 from components.ability_tracker import AbilityTracker
-from components.enums import Intention
 from components.brains.brain import Brain
+from components.enums import Intention
 from components.events.quit_game_events import QuitGame
 from components.events.show_help_dialogue import ShowHelpDialogue
 from engine import core
@@ -37,7 +37,9 @@ class PlayerBrain(Brain):
                 self._log_debug(f"found no useable intention")
                 return
             else:
-                self._log_debug(f"deferred intention {intention} (usually for movement intentions)")
+                self._log_debug(
+                    f"deferred intention {intention} (usually for movement intentions)"
+                )
                 self.intention = intention
 
 
@@ -46,12 +48,10 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.q: Intention.PREVIOUS_ABILITY,
     tcod.event.KeySym.SPACE: Intention.USE_ABILITY,
     tcod.event.KeySym.h: Intention.SHOW_HELP,
-
     tcod.event.KeySym.UP: Intention.STEP_NORTH,
     tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
     tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
     tcod.event.KeySym.LEFT: Intention.STEP_WEST,
     tcod.event.KeySym.PERIOD: Intention.DALLY,
-
-    tcod.event.KeySym.ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK,
 }

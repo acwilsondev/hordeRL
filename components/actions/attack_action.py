@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import List
 
-from components import Coordinates, Attributes
+from components import Attributes, Coordinates
 from components.attacks.attack_effects.attack_effect import AttackEffect
 from components.base_components.energy_actor import EnergyActor
+from components.base_components.entity import Entity
 from components.cry_for_help import CryForHelp
 from components.events.attack_events import AttackFinished
 from components.events.die_events import Die
@@ -11,12 +12,12 @@ from components.house_structure import HouseStructure
 from components.relationships.owner import Owner
 from content.states import help_animation
 from engine import constants
-from components.base_components.entity import Entity
 
 
 @dataclass
 class AttackAction(EnergyActor):
     """Instance of a live attack."""
+
     target: int = constants.INVALID
     damage: int = 0
 
@@ -24,12 +25,16 @@ class AttackAction(EnergyActor):
         this_entity = scene.cm.get_one(Entity, entity=self.entity)
         target_entity = scene.cm.get_one(Entity, entity=self.target)
 
-        scene.warn(f"{this_entity.name} dealt {self.damage} dmg to {target_entity.name}!")
+        scene.warn(
+            f"{this_entity.name} dealt {self.damage} dmg to {target_entity.name}!"
+        )
 
         self._log_info(f"dealing {self.damage} dmg to {self.target}")
         owner = scene.cm.get_one(Owner, entity=self.target)
         if owner:
-            structures = scene.cm.get(HouseStructure, query=lambda hs: hs.house_id == owner.owner)
+            structures = scene.cm.get(
+                HouseStructure, query=lambda hs: hs.house_id == owner.owner
+            )
             house_structure = structures[0] if structures else None
         else:
             house_structure = None
@@ -37,7 +42,9 @@ class AttackAction(EnergyActor):
         if house_structure:
             self._handle_house_damage(scene, house_structure, self.damage)
         else:
-            attack_effects: List[AttackEffect] = scene.cm.get_all(AttackEffect, entity=self.entity)
+            attack_effects: List[AttackEffect] = scene.cm.get_all(
+                AttackEffect, entity=self.entity
+            )
             for attack_effect in attack_effects:
                 attack_effect.apply(scene, self.entity, self.target)
             self._handle_entity_damage(scene, self.target, self.damage)

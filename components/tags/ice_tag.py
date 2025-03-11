@@ -6,6 +6,6 @@ from components.tags.tag import Tag
 
 @dataclass
 class IceTag(Tag):
-    value: str = 'ice'
+    value: str = "ice"
     frozen_components: List[int] = field(default_factory=list)
     is_dirty: bool = False

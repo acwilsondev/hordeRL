@@ -3,8 +3,10 @@ from dataclasses import dataclass
 from components import Coordinates
 from components.abilities.ability import Ability
 from components.animation_effects.blinker import AnimationBlinker
-from components.brains.ability_actors.ranged_attack_actor import RangedAttackActor
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.brains.ability_actors.ranged_attack_actor import \
+    RangedAttackActor
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from components.tags.hordeling_tag import HordelingTag
 from content.states import confused_animation
 from engine.utilities import is_visible
@@ -22,7 +24,9 @@ class ShootAbility(SeasonResetListener, Ability):
         self.count = self.max
 
     def use(self, scene, dispatcher):
-        hordelings = [e for e in scene.cm.get(HordelingTag) if is_visible(scene, e.entity)]
+        hordelings = [
+            e for e in scene.cm.get(HordelingTag) if is_visible(scene, e.entity)
+        ]
         if not hordelings:
             self._handle_confused(scene)
             return
@@ -34,7 +38,7 @@ class ShootAbility(SeasonResetListener, Ability):
             entity=self.entity,
             old_actor=dispatcher,
             target=target.entity,
-            shoot_ability=self.id
+            shoot_ability=self.id,
         )
         blinker = AnimationBlinker(entity=target.entity)
         scene.cm.stash_component(dispatcher)

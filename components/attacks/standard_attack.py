@@ -2,8 +2,8 @@ import logging
 from dataclasses import dataclass
 
 from components import Coordinates
-from components.attacks.attack import Attack
 from components.actions.attack_action import AttackAction
+from components.attacks.attack import Attack
 from content.attacks import stab
 
 

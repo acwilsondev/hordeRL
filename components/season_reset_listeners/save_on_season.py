@@ -2,7 +2,8 @@ from dataclasses import dataclass
 
 import settings
 from components.events.start_game_events import GameStartListener
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from components.serialization.save_game import SaveGame
 
 

@@ -8,6 +8,7 @@ from components.base_components.events import Event
 @dataclass
 class Delete(Event):
     """Add this to an entity to have it delete itself after some time."""
+
     next_update: int = 0
 
     def listener_type(self):

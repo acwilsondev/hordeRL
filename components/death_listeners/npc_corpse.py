@@ -1,15 +1,15 @@
 from dataclasses import dataclass
 
 from components import Coordinates
+from components.base_components.entity import Entity
 from components.events.die_events import DeathListener
 from content import corpses
 from engine import palettes
-from components.base_components.entity import Entity
 
 
 @dataclass
 class Corpse(DeathListener):
-    symbol: str = '%'
+    symbol: str = "%"
     color: tuple = palettes.BLOOD
     bg_color: tuple = palettes.BACKGROUND
 
@@ -27,6 +27,6 @@ class Corpse(DeathListener):
                 symbol=self.symbol,
                 x=coords.x,
                 y=coords.y,
-                color=self.color
+                color=self.color,
             )[1]
         )

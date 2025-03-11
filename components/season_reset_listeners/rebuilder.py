@@ -3,10 +3,11 @@ from dataclasses import dataclass
 from typing import List
 
 from components import Coordinates
+from components.house_structure import HouseStructure
 from components.relationships.farmed_by import FarmedBy
 from components.relationships.resident import Resident
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
-from components.house_structure import HouseStructure
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from components.tags.peasant_tag import PeasantTag
 from content.farmsteads.walls import make_wall
 
@@ -28,7 +29,9 @@ class Rebuilder(SeasonResetListener):
 
     def _get_living_residents(self, scene) -> List[PeasantTag]:
         resident: Resident = scene.cm.get_one(Resident, entity=self.entity)
-        peasants: List[PeasantTag] = scene.cm.get(PeasantTag, query=lambda pt: pt.entity == resident.resident)
+        peasants: List[PeasantTag] = scene.cm.get(
+            PeasantTag, query=lambda pt: pt.entity == resident.resident
+        )
         return peasants
 
     def _rebuild_house(self, scene):
@@ -36,14 +39,14 @@ class Rebuilder(SeasonResetListener):
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         x = coords.x
         y = coords.y
-        upper_left = make_wall(self.entity, x - 1, y - 1, piece='ul')
-        upper_middle = make_wall(self.entity, x, y - 1, piece='um')
-        upper_right = make_wall(self.entity, x + 1, y - 1, piece='ur')
-        middle_left = make_wall(self.entity, x - 1, y, piece='ml')
-        middle_right = make_wall(self.entity, x + 1, y, piece='mr')
-        bottom_left = make_wall(self.entity, x - 1, y + 1, piece='bl')
-        bottom_middle = make_wall(self.entity, x, y + 1, piece='bm')
-        bottom_right = make_wall(self.entity, x + 1, y + 1, piece='br')
+        upper_left = make_wall(self.entity, x - 1, y - 1, piece="ul")
+        upper_middle = make_wall(self.entity, x, y - 1, piece="um")
+        upper_right = make_wall(self.entity, x + 1, y - 1, piece="ur")
+        middle_left = make_wall(self.entity, x - 1, y, piece="ml")
+        middle_right = make_wall(self.entity, x + 1, y, piece="mr")
+        bottom_left = make_wall(self.entity, x - 1, y + 1, piece="bl")
+        bottom_middle = make_wall(self.entity, x, y + 1, piece="bm")
+        bottom_right = make_wall(self.entity, x + 1, y + 1, piece="br")
         house_structure.upper_left = upper_left[0]
         house_structure.upper_middle = upper_middle[0]
         house_structure.upper_right = upper_right[0]
@@ -53,9 +56,14 @@ class Rebuilder(SeasonResetListener):
         house_structure.bottom_middle = bottom_middle[0]
         house_structure.bottom_right = bottom_right[0]
         for wall in [
-            upper_left, upper_middle, upper_right,
-            middle_left, middle_right,
-            bottom_left, bottom_middle, bottom_right
+            upper_left,
+            upper_middle,
+            upper_right,
+            middle_left,
+            middle_right,
+            bottom_left,
+            bottom_middle,
+            bottom_right,
         ]:
             scene.cm.add(*wall[1])
 
@@ -65,7 +73,9 @@ class Rebuilder(SeasonResetListener):
         self._log_debug(f"deleting farms for house")
         resident_link: Resident = scene.cm.get_one(Resident, entity=self.entity)
         if not resident_link:
-            self._log_warning("House with no historical resident found, should not happen")
+            self._log_warning(
+                "House with no historical resident found, should not happen"
+            )
             return
         else:
             resident_id = resident_link.resident
@@ -73,7 +83,7 @@ class Rebuilder(SeasonResetListener):
         farms: List[int] = scene.cm.get(
             FarmedBy,
             query=lambda fb: fb.farmer == resident_id,
-            project=lambda fb: fb.entity
+            project=lambda fb: fb.entity,
         )
 
         for farm in farms:

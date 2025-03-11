@@ -3,13 +3,13 @@ from math import sqrt
 
 from components import Coordinates
 from components.abilities.ability import Ability
+from components.actions.attack_action import AttackAction
 from components.animation_effects.blinker import AnimationBlinker
+from components.base_components.energy_actor import EnergyActor
 from components.brains.brain import Brain
 from components.brains.dizzy_brain import DizzyBrain
-from engine import palettes
-from components.base_components.energy_actor import EnergyActor
-from components.actions.attack_action import AttackAction
 from content.attacks import thwack_animation, thwack_dizzy_animation
+from engine import palettes
 from systems.utilities import get_enemies_in_range
 
 
@@ -33,7 +33,10 @@ class ThwackAbility(Ability, EnergyActor):
 
             # convert the thwack action to an attack action each adjacent enemy
             thwackables = get_enemies_in_range(scene, self.entity, max_range=sqrt(2))
-            attacks = [AttackAction(entity=self.entity, target=t, damage=1) for t in thwackables]
+            attacks = [
+                AttackAction(entity=self.entity, target=t, damage=1)
+                for t in thwackables
+            ]
 
             for attack in attacks:
                 scene.cm.add(attack)
@@ -41,10 +44,18 @@ class ThwackAbility(Ability, EnergyActor):
             thwacker_coords = scene.cm.get_one(Coordinates, entity=self.entity)
 
             if self.count > 0:
-                scene.cm.add(*thwack_animation(self.entity, thwacker_coords.x, thwacker_coords.y)[1])
+                scene.cm.add(
+                    *thwack_animation(
+                        self.entity, thwacker_coords.x, thwacker_coords.y
+                    )[1]
+                )
             else:
                 scene.warn("You thwacked yourself dizzy!")
-                scene.cm.add(*thwack_dizzy_animation(self.entity, thwacker_coords.x, thwacker_coords.y)[1])
+                scene.cm.add(
+                    *thwack_dizzy_animation(
+                        self.entity, thwacker_coords.x, thwacker_coords.y
+                    )[1]
+                )
         brain = scene.cm.get_component_by_id(dispatcher)
         brain.pass_turn()
         self.pass_turn()
@@ -57,9 +68,7 @@ class ThwackAbility(Ability, EnergyActor):
         brain.swap(scene, DizzyBrain(entity=self.entity))
         scene.cm.add(
             AnimationBlinker(
-                entity=self.entity,
-                new_symbol='?',
-                new_color=palettes.LIGHT_WATER
+                entity=self.entity, new_symbol="?", new_color=palettes.LIGHT_WATER
             )
         )
 
@@ -68,4 +77,3 @@ class ThwackAbility(Ability, EnergyActor):
         self.count = min(self.max, self.count + 1)
         self.is_recharging = self.count < self.max
         self.pass_turn()
-

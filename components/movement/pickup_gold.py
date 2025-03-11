@@ -1,6 +1,6 @@
 from components import Coordinates
-from components.pickup_gold import GoldPickup
 from components.events.step_event import StepListener
+from components.pickup_gold import GoldPickup
 from engine import palettes
 
 
@@ -14,4 +14,4 @@ class PickupGoldOnStep(StepListener):
             if gold_coords.is_at_point(point):
                 scene.cm.delete(event.entity)
                 scene.gold += event.amount
-                scene.message(f'You found {event.amount} gold.', color=palettes.GOLD)
+                scene.message(f"You found {event.amount} gold.", color=palettes.GOLD)

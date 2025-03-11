@@ -2,18 +2,19 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from components import Coordinates
+from components.base_components.component import Component
 from components.enums import Intention
 from content.states import no_money_animation
 from engine import constants
-from components.base_components.component import Component
 
 
 @dataclass
 class Ability(Component, ABC):
     """Represent a Player ability."""
+
     unlock_cost: int = constants.INVALID
     use_cost: int = constants.INVALID
-    intention: Intention = ''
+    intention: Intention = ""
 
     @abstractmethod
     def use(self, scene, dispatcher):

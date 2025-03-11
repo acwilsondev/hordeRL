@@ -33,4 +33,3 @@ class Component(object):
 
     def __init_subclass__(cls, **kwargs):
         Component.subclasses[cls.__name__] = cls
-

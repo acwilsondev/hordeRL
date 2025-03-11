@@ -8,6 +8,7 @@ from engine.constants import PRIORITY_MEDIUM
 @dataclass
 class EnergyActor(Actor, ABC):
     """Provides control and other 'mind' information."""
+
     INSTANT = 0
     QUARTER_HOUR = 3
     HALF_HOUR = 6

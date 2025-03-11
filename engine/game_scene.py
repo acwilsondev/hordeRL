@@ -57,10 +57,10 @@ class GameScene:
     @final
     def load(
         self,
-        controller: 'GameSceneController',
+        controller: "GameSceneController",
         cm: ComponentManager,
         gui: Gui,
-        sound: SoundController
+        sound: SoundController,
     ):
         self.controller = controller
         self.cm = cm

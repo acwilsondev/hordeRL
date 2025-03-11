@@ -10,11 +10,7 @@ from gui.labels import Label
 class NavigationMenuScene(GameScene):
     """Show a menu with links to other scenes."""
 
-    def __init__(
-            self,
-            title: str,
-            option_scene_map: OrderedDict
-    ):
+    def __init__(self, title: str, option_scene_map: OrderedDict):
         super().__init__()
         self.options = option_scene_map
         center_x = (settings.SCREEN_WIDTH - len(title)) // 2
@@ -32,18 +28,22 @@ class NavigationMenuScene(GameScene):
         """Show the menu and wait for player selection."""
         self.add_gui_element(
             EasyMenu(
-                '',
-                {link[0]: self.get_push_scene(link[1]) for link in self.options.items()},
+                "",
+                {
+                    link[0]: self.get_push_scene(link[1])
+                    for link in self.options.items()
+                },
                 24,
                 hide_background=False,
-                on_escape=lambda: sys.exit(0)
+                on_escape=lambda: sys.exit(0),
             )
         )
 
     def get_push_scene(self, scene):
         def out_fn():
             self.controller.push_scene(scene)
+
         return out_fn
 
     def on_load(self):
-        self.sound.play('theme')
+        self.sound.play("theme")

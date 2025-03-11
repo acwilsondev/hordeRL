@@ -1,13 +1,14 @@
 from dataclasses import dataclass
 
 from components.base_components.events import Event
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 
 
 @dataclass
 class ResetSeason(Event):
     # Season we're entering
-    season: str = 'None'
+    season: str = "None"
 
     def listener_type(self):
         return SeasonResetListener

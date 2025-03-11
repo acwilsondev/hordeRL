@@ -10,6 +10,7 @@ from engine import constants
 @dataclass
 class TunnelToPoint(EnergyActor):
     """Instance of a live attack."""
+
     target: int = constants.INVALID
     point: Tuple[int, int] = (0, 0)
 

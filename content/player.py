@@ -1,5 +1,5 @@
 import settings
-from components import Appearance, Senses, Attributes, Coordinates
+from components import Appearance, Attributes, Coordinates, Senses
 from components.abilities.build_fence_ability import BuildFenceAbility
 from components.abilities.build_spikes_ability import BuildSpikesAbility
 from components.abilities.build_wall_ability import BuildWallAbility
@@ -17,21 +17,22 @@ from components.abilities.shoot_ability import ShootAbility
 from components.abilities.thwack_ability import ThwackAbility
 from components.ability_tracker import AbilityTracker
 from components.attacks.standard_attack import StandardAttack
-from components.death_listeners.player_corpse import PlayerCorpse
-from components.movement.update_senses_on_move import UpdateSenses
-from components.options import Options
+from components.base_components.entity import Entity
 from components.brains.player_brain import PlayerBrain
+from components.death_listeners.player_corpse import PlayerCorpse
 from components.faction import Faction
 from components.material import Material
-from components.movement.move import Move
-from components.season_reset_listeners.move_player_to_town_center import MovePlayerToTownCenter
-from components.season_reset_listeners.save_on_season import SaveOnSeasonReset
 from components.movement.drain_on_enter import DrainOnEnter
 from components.movement.heal_on_dally import HealOnDally
+from components.movement.move import Move
 from components.movement.pickup_gold import PickupGoldOnStep
+from components.movement.update_senses_on_move import UpdateSenses
+from components.options import Options
+from components.season_reset_listeners.move_player_to_town_center import \
+    MovePlayerToTownCenter
+from components.season_reset_listeners.save_on_season import SaveOnSeasonReset
 from components.target_value import PLAYER, TargetValue
 from engine import PLAYER_ID, palettes
-from components.base_components.entity import Entity
 
 
 def make_player(x, y):
@@ -42,7 +43,12 @@ def make_player(x, y):
         [
             Entity(id=entity_id, entity=entity_id, name=settings.CHARACTER_NAME),
             Coordinates(entity=entity_id, x=x, y=y),
-            Appearance(entity=entity_id, symbol='@', color=palettes.WHITE, bg_color=palettes.BACKGROUND),
+            Appearance(
+                entity=entity_id,
+                symbol="@",
+                color=palettes.WHITE,
+                bg_color=palettes.BACKGROUND,
+            ),
             PlayerCorpse(entity=entity_id),
             Senses(entity=entity_id, sight_radius=settings.TORCH_RADIUS),
             PlayerBrain(entity=entity_id),
@@ -75,6 +81,6 @@ def make_player(x, y):
             # Other
             SaveOnSeasonReset(entity=entity_id),
             PickupGoldOnStep(entity=entity_id),
-            HealOnDally(entity=entity_id)
-        ]
+            HealOnDally(entity=entity_id),
+        ],
     )

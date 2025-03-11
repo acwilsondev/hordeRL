@@ -35,17 +35,16 @@ class LoadMenuScene(GameScene):
         self.gui.add_element(
             EasyMenu(
                 "Load which?",
-                {
-                    world: self.get_world_loader(world) for world in files
-                },
+                {world: self.get_world_loader(world) for world in files},
                 settings.INVENTORY_WIDTH,
-                on_escape=self.pop()
+                on_escape=self.pop(),
             )
         )
 
     def get_world_loader(self, file_name):
         def out_fn():
             self.load_world(file_name)
+
         return out_fn
 
     def load_world(self, file_name):

@@ -5,11 +5,11 @@ from typing import List, Tuple
 import tcod
 
 from components import Coordinates
+from components.base_components.component import Component
 from components.base_components.energy_actor import EnergyActor
 from components.brains.brain import Brain
 from components.enums import Intention
 from engine import constants, core
-from components.base_components.component import Component
 
 
 @dataclass
@@ -26,7 +26,7 @@ class PlaceThingActor(Brain, ABC):
                 Intention.STEP_NORTH,
                 Intention.STEP_EAST,
                 Intention.STEP_WEST,
-                Intention.STEP_SOUTH
+                Intention.STEP_SOUTH,
             }:
                 self._place_thing(scene, intention)
             elif intention is Intention.BACK:
@@ -41,8 +41,8 @@ class PlaceThingActor(Brain, ABC):
         x = coords.x
         y = coords.y
         direction = STEP_VECTORS[direction]
-        thing_x = x+direction[0]
-        thing_y = y+direction[1]
+        thing_x = x + direction[0]
+        thing_y = y + direction[1]
         if is_buildable(scene, thing_x, thing_y):
             thing = self.make_thing(thing_x, thing_y)
             scene.cm.add(*thing[1])
@@ -56,7 +56,7 @@ class PlaceThingActor(Brain, ABC):
 def is_buildable(scene, x, y):
     target_coords = scene.cm.get(
         Coordinates,
-        query=lambda coords: coords.x == x and coords.y == y and not coords.buildable
+        query=lambda coords: coords.x == x and coords.y == y and not coords.buildable,
     )
     return not target_coords
 
@@ -66,7 +66,7 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
     tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
     tcod.event.KeySym.LEFT: Intention.STEP_WEST,
-    tcod.event.KeySym.ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK,
 }
 
 STEP_VECTORS = {
@@ -77,5 +77,5 @@ STEP_VECTORS = {
     Intention.STEP_NORTH_EAST: (1, -1),
     Intention.STEP_NORTH_WEST: (-1, -1),
     Intention.STEP_SOUTH_EAST: (1, 1),
-    Intention.STEP_SOUTH_WEST: (-1, 1)
+    Intention.STEP_SOUTH_WEST: (-1, 1),
 }

@@ -4,9 +4,9 @@ from dataclasses import dataclass
 from components.base_components.component import Component
 from components.base_components.events import Event
 
+
 @dataclass
 class DallyEvent(Event):
-
     def notify(self, scene, listener):
         listener.on_dally(scene)
 

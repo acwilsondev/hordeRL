@@ -1,4 +1,5 @@
-from components.pathfinding.target_evaluation.target_evaluator import TargetEvaluator
+from components.pathfinding.target_evaluation.target_evaluator import \
+    TargetEvaluator
 from components.target_value import TargetValue
 
 

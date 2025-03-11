@@ -6,5 +6,5 @@ from engine import palettes
 
 @dataclass
 class Message:
-    text: str = ''
+    text: str = ""
     color: Tuple[int, int, int] = palettes.MEAT

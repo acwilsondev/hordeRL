@@ -14,9 +14,9 @@ class FastForward(EnergyActor):
 
     @log_debug(__name__)
     def act(self, scene):
-        calendar = scene.cm.get_one(Calendar, entity=core.get_id('calendar'))
+        calendar = scene.cm.get_one(Calendar, entity=core.get_id("calendar"))
         if calendar:
             calendar.day = 30
             calendar.energy = 0
-            scene.cm.add(DayBegan(entity=core.get_id('calendar'), day=30))
+            scene.cm.add(DayBegan(entity=core.get_id("calendar"), day=30))
         scene.cm.delete_component(self)

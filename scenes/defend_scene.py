@@ -4,50 +4,59 @@ import numpy as np
 
 import settings
 from components.base_components.class_register import LoadClasses
-from components.population import Population
-from components.world_building.set_worldbuilder_params import SelectBiome
 from components.events.start_game_events import StartGame
+from components.population import Population
 from components.serialization.load_game import LoadGame
 from components.sound.battle_music import BattleMusic
 from components.sound.start_music import StartMusic
 from components.world_beauty import WorldBeauty
+from components.world_building.set_worldbuilder_params import SelectBiome
 from content.physics_controller import make_physics_controller
 from content.tax_handler import make_tax_handler
 from content.utilities import make_calendar
-from engine import GameScene, palettes, core
+from engine import GameScene, core, palettes
 from engine.component_manager import ComponentManager
 from engine.constants import PLAYER_ID
 from engine.core import timed
 from engine.message import Message
-from gui.bars import HealthBar, PeasantBar, HordelingBar, Thwackometer
+from gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
 from gui.help_tab import HelpTab
-from gui.labels import Label, GoldLabel, CalendarLabel, HordeStatusLabel, SpeedLabel, AbilityLabel, VillageNameLabel
+from gui.labels import (AbilityLabel, CalendarLabel, GoldLabel,
+                        HordeStatusLabel, Label, SpeedLabel, VillageNameLabel)
 from gui.message_box import MessageBox
 from gui.play_window import PlayWindow
 from gui.popup_message import PopupMessage
 from gui.vertical_anchor import VerticalAnchor
-from systems import act, move, control_turns
+from systems import act, control_turns, move
 
 
 class DefendScene(GameScene):
-    def __init__(self, from_file=''):
+    def __init__(self, from_file=""):
         super().__init__()
         self.player = PLAYER_ID
 
         # track tiles the player has seen
-        self.memory_map = np.zeros((settings.MAP_WIDTH, settings.MAP_HEIGHT), order='F', dtype=bool)
-        self.visibility_map = np.zeros((settings.MAP_WIDTH, settings.MAP_HEIGHT), order='F', dtype=bool)
+        self.memory_map = np.zeros(
+            (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=bool
+        )
+        self.visibility_map = np.zeros(
+            (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=bool
+        )
         self.messages = []
 
         # build out the gui
         self.play_window = PlayWindow(
-            25, 0, settings.MAP_WIDTH, settings.MAP_HEIGHT,
-            self.cm, self.visibility_map
-            , self.memory_map
+            25,
+            0,
+            settings.MAP_WIDTH,
+            settings.MAP_HEIGHT,
+            self.cm,
+            self.visibility_map,
+            self.memory_map,
         )
 
         anchor = VerticalAnchor(1, 1)
-        anchor.add_element(Label(1, 1, f'@ {settings.CHARACTER_NAME}_______________'))
+        anchor.add_element(Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________"))
         anchor.add_element(HealthBar(1, 0))
         anchor.add_element(Thwackometer(1, 0))
         anchor.add_element(SpeedLabel(1, 0))

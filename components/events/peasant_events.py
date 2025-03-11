@@ -8,6 +8,7 @@ from components.base_components.events import Event
 @dataclass
 class PeasantAddedListener(Component, ABC):
     """Respond to peasants moving in."""
+
     @abstractmethod
     def on_peasant_added(self, scene):
         raise NotImplementedError()
@@ -16,6 +17,7 @@ class PeasantAddedListener(Component, ABC):
 @dataclass
 class PeasantAdded(Event):
     """Signal that a new peasant has moved in."""
+
     def listener_type(self):
         return PeasantAddedListener
 
@@ -26,6 +28,7 @@ class PeasantAdded(Event):
 @dataclass
 class PeasantDiedListener(Component, ABC):
     """Respond to peasant death events."""
+
     @abstractmethod
     def on_peasant_died(self, scene):
         raise NotImplementedError()
@@ -34,6 +37,7 @@ class PeasantDiedListener(Component, ABC):
 @dataclass
 class PeasantDied(Event):
     """Signal that a peasant has died."""
+
     def listener_type(self):
         return PeasantDiedListener
 

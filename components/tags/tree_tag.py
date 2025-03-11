@@ -5,4 +5,4 @@ from components.tags.tag import Tag
 
 @dataclass
 class TreeTag(Tag):
-    value: str = 'tree'
+    value: str = "tree"

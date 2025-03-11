@@ -12,7 +12,9 @@ class MessageBox(GuiElement):
         self.value = value if value is not None else []
 
     def render(self, panel):
-        panel.print(self.x, self.y, 'Messages________________', bg=None, fg=palettes.WHITE)
+        panel.print(
+            self.x, self.y, "Messages________________", bg=None, fg=palettes.WHITE
+        )
         y = 1
         output = []
         for message in self.value:
@@ -25,7 +27,6 @@ class MessageBox(GuiElement):
                     del output[0]
                 output.append((line, color))
 
-        for (line, color) in output:
-            panel.print(self.x, self.y+y, line, bg=None, fg=color)
+        for line, color in output:
+            panel.print(self.x, self.y + y, line, bg=None, fg=color)
             y += 1
-

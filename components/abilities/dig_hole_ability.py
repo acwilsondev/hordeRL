@@ -16,4 +16,4 @@ class DigHoleAbility(ControlModeAbility):
         return DigHoleActor
 
     def get_anim(self):
-        return 'o', palettes.DIRT
+        return "o", palettes.DIRT

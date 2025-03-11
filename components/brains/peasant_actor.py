@@ -4,7 +4,7 @@ from enum import Enum
 
 import settings
 from components import Coordinates
-from components.actors import STEPS, VECTOR_STEP_MAP, STEP_VECTOR_MAP
+from components.actors import STEP_VECTOR_MAP, STEPS, VECTOR_STEP_MAP
 from components.base_components.energy_actor import EnergyActor
 from components.brains.brain import Brain
 from components.enums import Intention
@@ -15,10 +15,10 @@ from engine.core import log_debug
 @dataclass
 class PeasantActor(Brain):
     class State(str, Enum):
-        UNKNOWN = 'UNKNOWN'
-        FARMING = 'FARMING'
-        HIDING = 'HIDING'
-        WANDERING = 'WANDERING'
+        UNKNOWN = "UNKNOWN"
+        FARMING = "FARMING"
+        HIDING = "HIDING"
+        WANDERING = "WANDERING"
 
     state: State = State.UNKNOWN
     can_animate: bool = True
@@ -64,11 +64,11 @@ class PeasantActor(Brain):
             if step not in [Intention.NONE, Intention.DALLY]:
                 new_position = (
                     STEP_VECTOR_MAP[step][0] + coords.position[0],
-                    STEP_VECTOR_MAP[step][1] + coords.position[1]
+                    STEP_VECTOR_MAP[step][1] + coords.position[1],
                 )
                 if (
-                        0 <= new_position[0] < settings.MAP_WIDTH
-                        and 0 <= new_position[1] < settings.MAP_HEIGHT
+                    0 <= new_position[0] < settings.MAP_WIDTH
+                    and 0 <= new_position[1] < settings.MAP_HEIGHT
                 ):
                     step_cost = (step, cost_map[new_position[0], new_position[1]])
                     step_costs.append(step_cost)

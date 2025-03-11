@@ -1,10 +1,11 @@
 import random
 from dataclasses import dataclass
 
-from components.events.hole_dug_events import HoleDug
 from components.base_components.energy_actor import EnergyActor
 from components.events.attack_started_events import AttackStartListener
-from components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from components.events.hole_dug_events import HoleDug
+from components.season_reset_listeners.seasonal_actor import \
+    SeasonResetListener
 from components.tags.ice_tag import IceTag
 from components.tags.water_tag import WaterTag
 from components.weather.weather import Weather
@@ -62,4 +63,3 @@ class FreezeWater(EnergyActor, AttackStartListener, SeasonResetListener):
         for ice in to_thaw:
             thaw(scene, ice)
         scene.cm.add(HoleDug(entity=self.entity))
-

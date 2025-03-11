@@ -9,7 +9,7 @@ VECTOR_STEP_MAP = {
     (1, -1): Intention.STEP_NORTH_EAST,
     (-1, -1): Intention.STEP_NORTH_WEST,
     (1, 1): Intention.STEP_SOUTH_EAST,
-    (-1, 1): Intention.STEP_SOUTH_WEST
+    (-1, 1): Intention.STEP_SOUTH_WEST,
 }
 
 STEP_VECTOR_MAP = {VECTOR_STEP_MAP[k]: k for k in VECTOR_STEP_MAP}
@@ -19,5 +19,5 @@ STEPS = [
     Intention.STEP_NORTH,
     Intention.STEP_SOUTH,
     Intention.STEP_EAST,
-    Intention.STEP_WEST
+    Intention.STEP_WEST,
 ]

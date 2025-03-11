@@ -4,13 +4,15 @@ from dataclasses import dataclass
 
 import engine
 import settings
-from components import Coordinates, Attributes, Senses
+from components import Attributes, Coordinates, Senses
 from components.abilities.build_wall_ability import BuildWallAbility
 from components.base_components.energy_actor import EnergyActor
+from components.base_components.entity import Entity
 from components.brains.brain import Brain
-from components.brains.painters.create_gold_actor import PlaceGoldController
-from components.brains.painters.create_hordeling_actor import PlaceHordelingController
 from components.brains.default_active_actor import DefaultActiveActor
+from components.brains.painters.create_gold_actor import PlaceGoldController
+from components.brains.painters.create_hordeling_actor import \
+    PlaceHordelingController
 from components.events.die_events import Die
 from components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from components.serialization.load_game import LoadGame
@@ -19,7 +21,6 @@ from components.wrath_effect import WrathEffect
 from content.cursor import make_cursor
 from content.farmsteads.houses import place_farmstead
 from content.terrain.roads import connect_point_to_road_network
-from components.base_components.entity import Entity
 from gui.easy_menu import EasyMenu
 
 
@@ -43,7 +44,7 @@ class ShowDebug(EnergyActor):
                     "toggle ability": get_toggle_masonry(scene),
                     "toggle pathing": get_pathfinding_for(scene),
                     "spawn a home": get_spawn_home(scene),
-                    "quicksave": quick_save(scene)
+                    "quicksave": quick_save(scene),
                 },
                 settings.INVENTORY_WIDTH,
             )
@@ -59,7 +60,10 @@ def get_examine_game_objects(scene):
         scene.gui.add_element(
             EasyMenu(
                 "Examine which?",
-                {entity.get_readable_key(): get_examine_object(scene, entity.entity) for entity in entities},
+                {
+                    entity.get_readable_key(): get_examine_object(scene, entity.entity)
+                    for entity in entities
+                },
                 settings.INVENTORY_WIDTH,
             )
         )
@@ -71,7 +75,7 @@ def get_examine_object(scene, entity):
     def out_fn():
         entity_blob = scene.cm.get_entity(entity)
         entity_component = entity_blob[Entity][0]
-        print(f'Debug Show Item: {entity_component.name}')
+        print(f"Debug Show Item: {entity_component.name}")
 
         components = []
 
@@ -80,7 +84,7 @@ def get_examine_object(scene, entity):
                 if component not in components:
                     components.append(component)
         for component in components:
-            print(f'\t{component}')
+            print(f"\t{component}")
 
     return out_fn
 
@@ -101,12 +105,11 @@ def get_painter(scene, painter):
         scene.cm.add(*cursor[1])
         player_controller = scene.cm.get_one(Brain, entity=scene.player)
         new_controller = painter(
-            entity=scene.player,
-            old_actor=player_controller.id,
-            cursor=cursor[0]
+            entity=scene.player, old_actor=player_controller.id, cursor=cursor[0]
         )
         scene.cm.stash_component(player_controller.id)
         scene.cm.add(new_controller)
+
     return out_fn
 
 
@@ -117,12 +120,11 @@ def place_gold(scene):
         scene.cm.add(*cursor[1])
         player_controller = scene.cm.get_one(Brain, entity=scene.player)
         new_controller = PlaceGoldController(
-            entity=scene.player,
-            old_actor=player_controller.id,
-            cursor=cursor[0]
+            entity=scene.player, old_actor=player_controller.id, cursor=cursor[0]
         )
         scene.cm.stash_component(player_controller.id)
         scene.cm.add(new_controller)
+
     return out_fn
 
 
@@ -136,6 +138,7 @@ def get_rich(scene):
 def get_suicide(scene):
     def out_fn():
         scene.cm.add(Die(entity=scene.player))
+
     return out_fn
 
 
@@ -147,7 +150,12 @@ def get_teleport_to(scene):
         scene.gui.add_element(
             EasyMenu(
                 "Examine which?",
-                {entity.get_readable_key(): get_teleport_to_entity(scene, entity.entity) for entity in entities},
+                {
+                    entity.get_readable_key(): get_teleport_to_entity(
+                        scene, entity.entity
+                    )
+                    for entity in entities
+                },
                 settings.INVENTORY_WIDTH,
             )
         )
@@ -159,7 +167,9 @@ def get_teleport_to_entity(scene, entity):
     def out_fn():
         target_coords = scene.cm.get_one(Coordinates, entity=entity)
         if target_coords:
-            player_coords = scene.cm.get_one(Coordinates, entity=engine.constants.PLAYER_ID)
+            player_coords = scene.cm.get_one(
+                Coordinates, entity=engine.constants.PLAYER_ID
+            )
             player_coords.x = target_coords.x
             player_coords.y = target_coords.y
             senses = scene.cm.get_one(Senses, entity=engine.constants.PLAYER_ID)
@@ -180,7 +190,9 @@ def get_activate_ability(scene):
         ability_map = {}
 
         has_masonry = scene.cm.get_one(BuildWallAbility, entity=scene.player)
-        ability_map[f"Masonry ({'X' if has_masonry else ' '}"] = get_toggle_masonry(scene)
+        ability_map[f"Masonry ({'X' if has_masonry else ' '}"] = get_toggle_masonry(
+            scene
+        )
 
         scene.gui.add_element(
             EasyMenu(
@@ -214,7 +226,10 @@ def get_pathfinding_for(scene):
         scene.gui.add_element(
             EasyMenu(
                 "Toggle pathfinding for which?",
-                {entity.get_readable_key(): get_show_pathing(scene, entity.entity) for entity in entities},
+                {
+                    entity.get_readable_key(): get_show_pathing(scene, entity.entity)
+                    for entity in entities
+                },
                 settings.INVENTORY_WIDTH,
             )
         )
@@ -238,10 +253,12 @@ def get_spawn_home(scene):
         farmstead_id = place_farmstead(scene)
         farmstead_point = scene.cm.get_one(Coordinates, entity=farmstead_id).position
         connect_point_to_road_network(scene, farmstead_point, trim_start=2)
+
     return out_fn
 
 
 def quick_save(scene):
     def out_fn():
         scene.cm.add(SaveGame(entity=scene.player))
+
     return out_fn

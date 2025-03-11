@@ -2,12 +2,13 @@ import dataclasses
 import json
 import logging
 
-from engine import core
 from components.base_components.component import Component
+from engine import core
 
 
 class EnhancedJSONEncoder(json.JSONEncoder):
     """Provide a dataclass encoder."""
+
     def default(self, o):
         if dataclasses.is_dataclass(o):
             data = dataclasses.asdict(o)
@@ -20,16 +21,13 @@ def save(components, file, extra=None):
     if extra is None:
         extra = {}
     save_info = {
-        "info": {
-            "object_count": len(components["active_components"]),
-            "extra": extra
-        },
+        "info": {"object_count": len(components["active_components"]), "extra": extra},
         "named_ids": core.get_named_ids(),
-        "objects": components
+        "objects": components,
     }
 
     save_data = json.dumps(save_info, cls=EnhancedJSONEncoder)
-    with open(file, 'w+') as f:
+    with open(file, "w+") as f:
         f.write(save_data)
 
 
@@ -37,23 +35,29 @@ def load(file):
     # iterate through the modules in the current package
     loadable_classes = _gather_loadable_classes()
 
-    with open(file, 'r') as f:
+    with open(file, "r") as f:
         data = json.load(f)
 
     core.set_named_ids(data["named_ids"])
 
-    active_components = _load_from_data(data["objects"]["active_components"], loadable_classes)
+    active_components = _load_from_data(
+        data["objects"]["active_components"], loadable_classes
+    )
     expected_count = data["info"]["object_count"]
     real_count = len(active_components)
     if real_count != expected_count:
-        logging.warning(f"Mismatched objects on load expected {expected_count}, found {real_count}")
+        logging.warning(
+            f"Mismatched objects on load expected {expected_count}, found {real_count}"
+        )
 
-    stashed_components = _load_from_data(data["objects"]["stashed_components"], loadable_classes)
+    stashed_components = _load_from_data(
+        data["objects"]["stashed_components"], loadable_classes
+    )
 
     loaded_data = {
         "active_components": active_components,
         "stashed_components": stashed_components,
-        "stashed_entities": data["objects"]["stashed_entities"]
+        "stashed_entities": data["objects"]["stashed_entities"],
     }
     return loaded_data
 

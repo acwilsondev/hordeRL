@@ -7,4 +7,4 @@ from engine import constants
 @dataclass
 class Resident(Tag):
     resident: int = constants.INVALID
-    value: str = 'house'
+    value: str = "house"

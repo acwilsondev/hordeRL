@@ -6,7 +6,7 @@ from components.brains.dizzy_brain import DizzyBrain
 from components.population import Population
 from components.tags.hordeling_tag import HordelingTag
 from components.tags.peasant_tag import PeasantTag
-from engine import palettes, PLAYER_ID, core
+from engine import PLAYER_ID, core, palettes
 from gui.gui_element import GuiElement
 
 
@@ -17,7 +17,7 @@ class Bar(GuiElement):
     fg_color: tuple = palettes.WHITE
     mg_color: tuple = palettes.GABRIEL_2_1
     bg_color: tuple = palettes.BACKGROUND
-    symbol: str = '!'
+    symbol: str = "!"
 
     def render(self, panel):
         self._draw(panel, self.mg_color, self.max_value)
@@ -31,13 +31,13 @@ class Bar(GuiElement):
             height=1,
             ch=ord(self.symbol),
             fg=color,
-            bg=self.bg_color
+            bg=self.bg_color,
         )
 
 
 @dataclass
 class HealthBar(Bar):
-    symbol: str = '♥'
+    symbol: str = "♥"
     fg_color: tuple = palettes.FRESH_BLOOD
     mg_color: tuple = palettes.BLOOD
 
@@ -52,7 +52,7 @@ class HealthBar(Bar):
 
 @dataclass
 class PeasantBar(Bar):
-    symbol: str = 'p'
+    symbol: str = "p"
     fg_color: tuple = palettes.WHITE
     mg_color: tuple = palettes.GABRIEL_2_1
 
@@ -64,7 +64,7 @@ class PeasantBar(Bar):
 
 @dataclass
 class HordelingBar(Bar):
-    symbol: str = 'h'
+    symbol: str = "h"
     fg_color: tuple = palettes.HORDELING
     mg_color: tuple = palettes.BLOOD
 
@@ -76,7 +76,7 @@ class HordelingBar(Bar):
 
 @dataclass
 class Thwackometer(Bar):
-    symbol: str = '/'
+    symbol: str = "/"
 
     fg_color: tuple = palettes.STONE
     mg_color: tuple = palettes.MEAT
@@ -94,7 +94,7 @@ class Thwackometer(Bar):
         dizzy = scene.cm.get_one(DizzyBrain, entity=PLAYER_ID)
 
         if not dizzy:
-            self.symbol = '/'
+            self.symbol = "/"
             self.fg_color = self.thwack_fg
             self.mg_color = self.thwack_mg
 
@@ -102,7 +102,7 @@ class Thwackometer(Bar):
             self.max = thwack_ability.max if thwack_ability else self.max
             self.max_value = thwack_ability.max if thwack_ability else self.max
         else:
-            self.symbol = '?'
+            self.symbol = "?"
             self.fg_color = self.dizzy_fg
             self.mg_color = self.dizzy_mg
 

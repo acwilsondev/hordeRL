@@ -9,6 +9,7 @@ from engine.constants import PRIORITY_MEDIUM
 @dataclass
 class Coordinates(Component):
     """Provide location information."""
+
     x: int = None
     y: int = None
     priority: int = PRIORITY_MEDIUM
@@ -27,7 +28,7 @@ class Coordinates(Component):
 
         dx = to_x - from_x
         dy = to_y - from_y
-        distance = math.sqrt(dx ** 2 + dy ** 2)
+        distance = math.sqrt(dx**2 + dy**2)
 
         # normalize it to length 1 (preserving direction), then round it and
         # convert to integer so the movement is restricted to the map grid
@@ -38,7 +39,7 @@ class Coordinates(Component):
         else:
             return 0, 0
 
-    def distance_from(self, other: 'Coordinates') -> float:
+    def distance_from(self, other: "Coordinates") -> float:
         return self.distance_from_point(other.x, other.y)
 
     def distance_from_point(self, x: int, y: int) -> float:

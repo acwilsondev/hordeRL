@@ -15,7 +15,7 @@ def get_key_event():
 def wait_for_char():
     while True:
         for e in tcod.event.wait():
-            if e.type == 'KEYDOWN':
+            if e.type == "KEYDOWN":
                 if e.sym == tcod.event.KeySym.RETURN:
                     return e
                 return e
@@ -66,9 +66,11 @@ def timed(ms, module):
             t0 = time_ms()
             func(*args, **kwargs)
             t1 = time_ms()
-            if t1-t0 > ms:
-                logger.warning(f'call to {func} took {t1-t0}ms (>{ms}ms)')
+            if t1 - t0 > ms:
+                logger.warning(f"call to {func} took {t1-t0}ms (>{ms}ms)")
+
         return inner
+
     return outer
 
 
@@ -79,12 +81,14 @@ def log_debug(module):
 
             try:
                 start = time_ms()
-                logger.debug(f' {fn.__name__} => {args} - {kwargs}')
+                logger.debug(f" {fn.__name__} => {args} - {kwargs}")
                 result = fn(*args, **kwargs)
-                logger.debug(f' {fn.__name__} {time_ms() - start}ms <= {result}')
+                logger.debug(f" {fn.__name__} {time_ms() - start}ms <= {result}")
                 return result
             except Exception as ex:
                 logger.debug("Exception {0}".format(ex))
                 raise ex
+
         return decorated
+
     return outer

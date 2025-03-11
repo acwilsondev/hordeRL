@@ -5,15 +5,15 @@ import tcod
 
 import settings
 from components import Coordinates
-from components.brains.brain import Brain
 from components.base_components.energy_actor import EnergyActor
-from components.events.die_events import Die
-from components.enums import Intention
+from components.base_components.entity import Entity
+from components.brains.brain import Brain
 from components.diggable import Diggable
+from components.enums import Intention
+from components.events.die_events import Die
 from content.terrain.dirt import make_dirt
 from content.terrain.hole import make_hole
 from engine import core, palettes
-from components.base_components.entity import Entity
 
 
 @dataclass
@@ -29,7 +29,7 @@ class DigHoleActor(Brain):
                 Intention.STEP_NORTH,
                 Intention.STEP_EAST,
                 Intention.STEP_WEST,
-                Intention.STEP_SOUTH
+                Intention.STEP_SOUTH,
             }:
                 self._dig_hole(scene, intention)
             elif intention is Intention.BACK:
@@ -40,8 +40,8 @@ class DigHoleActor(Brain):
         x = coords.x
         y = coords.y
         direction = STEP_VECTORS[direction]
-        hole_x = x+direction[0]
-        hole_y = y+direction[1]
+        hole_x = x + direction[0]
+        hole_y = y + direction[1]
         if not _in_bounds(hole_x, hole_y):
             scene.message("You can't build outside of the town.", color=palettes.WHITE)
             self.back_out(scene)
@@ -87,7 +87,7 @@ def _in_bounds(x, y):
 def _is_empty(scene, x, y) -> bool:
     target_coords = scene.cm.get(
         Coordinates,
-        query=lambda coords: coords.x == x and coords.y == y and not coords.buildable
+        query=lambda coords: coords.x == x and coords.y == y and not coords.buildable,
     )
     return not target_coords
 
@@ -96,7 +96,9 @@ def _get_diggables(scene, x, y) -> List[int]:
     """Return True if there's something that can be removed by digging."""
     fillable_entities = scene.cm.get(
         Coordinates,
-        query=lambda coords: coords.x == x and coords.y == y and scene.cm.get_one(Diggable, entity=coords.entity)
+        query=lambda coords: coords.x == x
+        and coords.y == y
+        and scene.cm.get_one(Diggable, entity=coords.entity),
     )
     return [fe.entity for fe in sorted(fillable_entities, key=lambda fe: fe.priority)]
 
@@ -106,7 +108,7 @@ KEY_ACTION_MAP = {
     tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
     tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
     tcod.event.KeySym.LEFT: Intention.STEP_WEST,
-    tcod.event.KeySym.ESCAPE: Intention.BACK
+    tcod.event.KeySym.ESCAPE: Intention.BACK,
 }
 
 STEP_VECTORS = {
@@ -117,5 +119,5 @@ STEP_VECTORS = {
     Intention.STEP_NORTH_EAST: (1, -1),
     Intention.STEP_NORTH_WEST: (-1, -1),
     Intention.STEP_SOUTH_EAST: (1, 1),
-    Intention.STEP_SOUTH_WEST: (-1, 1)
+    Intention.STEP_SOUTH_WEST: (-1, 1),
 }

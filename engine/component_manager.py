@@ -1,18 +1,22 @@
 import logging
 from collections import defaultdict
-from typing import Set, Dict, List, Iterable, Generic, Type, Callable
+from typing import Callable, Dict, Generic, Iterable, List, Set, Type
 
-from engine import constants
 from components.base_components.component import Component
+from engine import constants
 from engine.core import log_debug
-from engine.types import EntityDictIndex, EntityDict, T, ComponentType, ComponentList, U
+from engine.types import (ComponentList, ComponentType, EntityDict,
+                          EntityDictIndex, T, U)
 
 
 class ComponentManager(object):
     """Provide an interface between the disk and game logic."""
+
     def __init__(self):
         self.components: Dict[ComponentType, ComponentList] = defaultdict(list)
-        self.components_by_entity: EntityDictIndex = defaultdict(lambda: defaultdict(list))
+        self.components_by_entity: EntityDictIndex = defaultdict(
+            lambda: defaultdict(list)
+        )
         self.components_by_id: Dict[int, Component] = {}
         self.component_types: List[ComponentType] = []
         self.stashed_components: Dict[int, Component] = {}
@@ -49,20 +53,17 @@ class ComponentManager(object):
             self._add(component)
 
     def get(
-            self,
-            component_type: T,
-            query: Callable[[T], bool] = lambda x: True,
-            project: Callable[[T], U] = lambda x: x
+        self,
+        component_type: T,
+        query: Callable[[T], bool] = lambda x: True,
+        project: Callable[[T], U] = lambda x: x,
     ) -> List[U]:
         """Get all base_components of a given type.
         @type component_type: the component type to select
         @param query: a boolean function to choose returned base_components
         @type project: a transformation applied to a selected base_components
         """
-        return [
-            project(x)
-            for x in self.components[component_type] if query(x)
-        ]
+        return [project(x) for x in self.components[component_type] if query(x)]
 
     def get_entity(self, entity: int) -> EntityDict:
         """Get a dictionary representing an Entity."""
@@ -91,7 +92,9 @@ class ComponentManager(object):
         Does not delete any references to the entity or its base_components.
         """
         if not isinstance(entity, int):
-            raise ValueError(f"Cannot delete entity {entity}. Did you mean delete_component?")
+            raise ValueError(
+                f"Cannot delete entity {entity}. Did you mean delete_component?"
+            )
 
         logging.debug(f"System::ComponentManager deleting entity {entity}")
         components = self.get_entity(entity)
@@ -131,8 +134,13 @@ class ComponentManager(object):
             for component_type in component_types:
                 if component in self.components[component_type]:
                     self.components[component_type].remove(component)
-                if component in self.components_by_entity[component.entity][component_type]:
-                    self.components_by_entity[component.entity][component_type].remove(component)
+                if (
+                    component
+                    in self.components_by_entity[component.entity][component_type]
+                ):
+                    self.components_by_entity[component.entity][component_type].remove(
+                        component
+                    )
             if component.id in self.components_by_id:
                 del self.components_by_id[component.id]
 
@@ -189,7 +197,9 @@ class ComponentManager(object):
 
     def drop_stashed_entity(self, eid):
         """Forget about a stashed entity."""
-        logging.debug(f"System::ComponentManager attempting to drop stashed entity {eid}")
+        logging.debug(
+            f"System::ComponentManager attempting to drop stashed entity {eid}"
+        )
         self.unstash_entity(eid)
         self.delete(eid)
         logging.debug(f"System::ComponentManager completed stash drop")
@@ -199,7 +209,7 @@ class ComponentManager(object):
         return {
             "active_components": self.components_by_id,
             "stashed_entities": self.stashed_entities,
-            "stashed_components": self.stashed_components
+            "stashed_components": self.stashed_components,
         }
 
     def from_data(self, loaded_data):
@@ -215,10 +225,11 @@ class ComponentManager(object):
     def _add(self, component: Component) -> None:
         """Add a component to the db."""
         entity = component.entity
-        assert entity != constants.INVALID, f"Invalid entity id! {component}. Did you forget to set the owning entity?"
+        assert (
+            entity != constants.INVALID
+        ), f"Invalid entity id! {component}. Did you forget to set the owning entity?"
         component_classes = type(component).mro()
         for component_class in component_classes:
             self.components_by_entity[entity][component_class].append(component)
             self.components[component_class].append(component)
         self.components_by_id[component.id] = component
-

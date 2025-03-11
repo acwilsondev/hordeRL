@@ -1,8 +1,9 @@
-from typing import Callable
 from dataclasses import dataclass
+from typing import Callable
 
 from components.abilities.control_mode_ability import ControlModeAbility
-from components.brains.ability_actors.place_stone_wall_actor import PlaceStoneWallActor
+from components.brains.ability_actors.place_stone_wall_actor import \
+    PlaceStoneWallActor
 from engine import palettes
 
 
@@ -16,4 +17,4 @@ class BuildWallAbility(ControlModeAbility):
         return PlaceStoneWallActor
 
     def get_anim(self):
-        return 'o', palettes.STONE
+        return "o", palettes.STONE

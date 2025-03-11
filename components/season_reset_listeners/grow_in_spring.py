@@ -1,5 +1,5 @@
-from dataclasses import dataclass, field
 import random
+from dataclasses import dataclass, field
 
 from components import Coordinates
 from components.events.new_day_event import DayBeganListener

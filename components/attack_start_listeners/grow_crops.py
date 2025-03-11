@@ -32,4 +32,6 @@ class GrowCrops(AttackStartListener):
         farmer = farmed_by.farmer
 
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
-        scene.cm.add(*make_crops(coords.x, coords.y, farmer, self.entity, self.crop_color)[1])
+        scene.cm.add(
+            *make_crops(coords.x, coords.y, farmer, self.entity, self.crop_color)[1]
+        )

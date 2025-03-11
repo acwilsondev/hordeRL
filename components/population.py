@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-from components.events.peasant_events import PeasantDiedListener, PeasantAddedListener
+from components.events.peasant_events import (PeasantAddedListener,
+                                              PeasantDiedListener)
 
 
 @dataclass
@@ -15,5 +16,7 @@ class Population(PeasantAddedListener, PeasantDiedListener):
         self._log_info("population decreased")
         self.population -= 1
         if self.population <= 0:
-            scene.popup_message("All of the peasants were killed! The king will have your head for this. Game Over.")
+            scene.popup_message(
+                "All of the peasants were killed! The king will have your head for this. Game Over."
+            )
             scene.pop()

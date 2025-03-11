@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
+from components.base_components.component import Component
 from components.base_components.events import Event
 from engine import constants
-from components.base_components.component import Component
 
 
 @dataclass
@@ -23,6 +23,7 @@ class Die(Event):
 
 class DeathListener(Component, ABC):
     """Called when the entity dies."""
+
     @abstractmethod
     def on_die(self, scene):
         raise NotImplementedError()
