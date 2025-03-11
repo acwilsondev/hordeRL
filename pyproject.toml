@@ -16,7 +16,7 @@ numpy = "1.21.4"
 pycparser = "2.21"
 pyparsing = "3.0.6"
 six = "1.16.0"
-setuptools = "59.4.0"
+setuptools = "70.0.0"
 PyYAML = "6.0.2"
 tracery = "0.1.1"
 tcod = { version = ">=11.18.0", source = "pypi" }
