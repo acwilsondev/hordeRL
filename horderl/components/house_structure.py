@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import List
 
-from components.base_components.component import Component
-from engine.types import EntityId
+from ..components.base_components.component import Component
+from ..engine.types import EntityId
 
 
 @dataclass

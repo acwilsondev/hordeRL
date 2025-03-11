@@ -1,11 +1,10 @@
-import logging
 from dataclasses import dataclass
 
-from components import Coordinates
-from components.actions.attack_action import AttackAction
-from components.attacks.attack import Attack
-from components.structure import Structure
-from content.attacks import stab
+from .. import Coordinates
+from ..actions.attack_action import AttackAction
+from ..attacks.attack import Attack
+from ..structure import Structure
+from ...content.attacks import stab
 
 
 @dataclass

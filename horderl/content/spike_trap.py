@@ -1,12 +1,12 @@
-from components import Appearance, Coordinates
-from components.base_components.entity import Entity
-from components.die_on_attack_finished import DieOnAttackFinished
-from components.diggable import Diggable
-from components.material import Material
-from components.movement.drain_on_enter import DrainOnEnter
-from components.states.move_cost_affectors import DifficultTerrain
-from engine import core, palettes
-from engine.constants import PRIORITY_LOWEST
+from ..components import Appearance, Coordinates
+from ..components.base_components.entity import Entity
+from ..components.die_on_attack_finished import DieOnAttackFinished
+from ..components.diggable import Diggable
+from ..components.material import Material
+from ..components.movement.drain_on_enter import DrainOnEnter
+from ..components.states.move_cost_affectors import DifficultTerrain
+from ..engine import core, palettes
+from ..engine.constants import PRIORITY_LOWEST
 
 
 def make_spike_trap(x, y):

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from components.events.build_world_events import BuildWorldListener
+from ...components.events.build_world_events import BuildWorldListener
 
 
 @dataclass

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components.events.die_events import DeathListener
-from components.house_structure import HouseStructure
-from engine import constants
+from ..events.die_events import DeathListener
+from ..house_structure.house_structure import HouseStructure
+from ...engine import constants
 
 
 @dataclass

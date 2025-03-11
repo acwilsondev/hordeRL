@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from components.events.die_events import DeathListener
-from components.events.terrain_changed_event import TerrainChangedEvent
+from ..events.die_events import DeathListener
+from ..events.terrain_changed_event import TerrainChangedEvent
 
 
 @dataclass

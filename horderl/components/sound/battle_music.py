@@ -1,4 +1,4 @@
-from components.events.attack_started_events import AttackStartListener
+from ..events.attack_started_events import AttackStartListener
 
 
 class BattleMusic(AttackStartListener):

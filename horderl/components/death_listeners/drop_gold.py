@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components import Coordinates
-from components.events.die_events import DeathListener
-from content.getables.gold import make_gold_nugget
+from .. import Coordinates
+from ..events.die_events import DeathListener
+from ...content.getables.gold import make_gold_nugget
 
 
 @dataclass

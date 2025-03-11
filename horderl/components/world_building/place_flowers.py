@@ -1,13 +1,13 @@
 import random
 from dataclasses import dataclass
 
-import settings
-from components import Coordinates
-from components.events.build_world_events import BuildWorldListener
-from components.world_building.world_parameters import WorldParameters
-from content.terrain.flower import make_flower
-from engine import core, palettes
-from engine.utilities import get_3_by_3_box
+from ... import settings
+from ...components import Coordinates
+from ...components.events.build_world_events import BuildWorldListener
+from ...components.world_building.world_parameters import WorldParameters
+from ...content.terrain.flower import make_flower
+from ...engine import core, palettes
+from ...engine.utilities import get_3_by_3_box
 
 
 def add_flower(scene, x: int, y: int, color) -> None:

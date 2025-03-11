@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-import settings
-from components.events.build_world_events import BuildWorldListener
-from content.terrain.trees import make_wall_tree
+from ... import settings
+from ...components.events.build_world_events import BuildWorldListener
+from ...content.terrain.trees import make_wall_tree
 
 
 def add_wall_tree(scene, x: int, y: int) -> None:

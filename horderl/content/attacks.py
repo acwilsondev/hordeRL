@@ -1,11 +1,11 @@
-from components import Appearance, Coordinates
-from components.animation_effects.path import AnimationPath
-from components.base_components.entity import Entity
-from components.events.delete_event import Delete
-from components.path_node import create_path
-from components.relationships.owner import Owner
-from engine import core, palettes
-from engine.constants import PRIORITY_HIGH
+from ..components import Appearance, Coordinates
+from ..components.animation_effects.path import AnimationPath
+from ..components.base_components.entity import Entity
+from ..components.events.delete_event import Delete
+from ..components.path_node import create_path
+from ..components.relationships.owner import Owner
+from ..engine import core, palettes
+from ..engine.constants import PRIORITY_HIGH
 
 
 def roundabout(owner, x, y):

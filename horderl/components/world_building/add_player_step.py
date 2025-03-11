@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-import settings
-from components.events.build_world_events import BuildWorldListener
-from content.player import make_player
+from ... import settings
+from ...components.events.build_world_events import BuildWorldListener
+from ...content.player import make_player
 
 
 @dataclass

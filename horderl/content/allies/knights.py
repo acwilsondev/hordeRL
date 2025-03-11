@@ -1,13 +1,13 @@
-from components import Appearance, Attributes, Coordinates
-from components.attacks.standard_attack import StandardAttack
-from components.base_components.entity import Entity
-from components.brains.stationary_attack_actor import StationaryAttackActor
-from components.death_listeners.npc_corpse import Corpse
-from components.faction import Faction
-from components.material import Material
-from components.pathfinder_cost import PathfinderCost
-from components.pathfinding.normal_cost_mapper import NormalCostMapper
-from components.pathfinding.target_evaluation.ally_target_evaluator import \
+from ..components import Appearance, Attributes, Coordinates
+from ..component.attacks.standard_attack import StandardAttack
+from ..component.base_components.entity import Entity
+from ..component.brains.stationary_attack_actor import StationaryAttackActor
+from ..component.death_listeners.npc_corpse import Corpse
+from ..component.faction import Faction
+from ..component.material import Material
+from ..component.pathfinder_cost import PathfinderCost
+from ..component.pathfinding.normal_cost_mapper import NormalCostMapper
+from ..component.pathfinding.target_evaluation.ally_target_evaluator import \
     AllyTargetEvaluator
 from components.sellable import Sellable
 from components.tax_value import TaxValue

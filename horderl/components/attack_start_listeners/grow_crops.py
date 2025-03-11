@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from typing import Tuple
 
-from components import Coordinates
-from components.actors.calendar_actor import Calendar
-from components.events.attack_started_events import AttackStartListener
-from components.relationships.farmed_by import FarmedBy
-from components.tags.crop_info import CropInfo
-from content.farmsteads.crops import make_crops
-from engine import core, palettes
+from .. import Coordinates
+from ..actors.calendar_actor import Calendar
+from ..events.attack_started_events import AttackStartListener
+from ..relationships.farmed_by import FarmedBy
+from ..tags.crop_info import CropInfo
+from ...content.farmsteads.crops import make_crops
+from ...engine import core, palettes
 
 
 @dataclass

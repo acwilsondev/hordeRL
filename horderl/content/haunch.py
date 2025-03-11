@@ -1,21 +1,19 @@
-from typing import List
-
-from components import Appearance, Attributes, Coordinates, target_value
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from components.faction import Faction
-from components.season_reset_listeners.die_on_season_reset import \
+from ..components import Appearance, Attributes, Coordinates, target_value
+from ..components.base_components.component import Component
+from ..components.base_components.entity import Entity
+from ..components.faction import Faction
+from ..components.season_reset_listeners.die_on_season_reset import \
     DieOnSeasonReset
-from components.target_value import TargetValue
-from engine import core, palettes
-from engine.constants import PRIORITY_LOW
+from ..components.target_value import TargetValue
+from ..engine import core, palettes
+from ..engine.constants import PRIORITY_LOW
 
 haunch_description = "A savory haunch. Hordelings find this highly desirable."
 
 
 def make_haunch(x, y):
     entity_id = core.get_id()
-    components: List[Component] = [
+    components: list[Component] = [
         Entity(
             id=entity_id,
             entity=entity_id,

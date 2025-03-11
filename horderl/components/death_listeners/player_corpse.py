@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-import content.corpses
-import content.player_corpse
+from content import content.corpses
+from content import content.player_corpse
 from components import Coordinates
 from components.events.die_events import DeathListener
 from content import corpses

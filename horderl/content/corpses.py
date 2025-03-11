@@ -1,12 +1,12 @@
 import random
 
-import settings
-from components import Appearance, Coordinates
-from components.base_components.entity import Entity
-from components.events.delete_event import Delete
-from components.tags.corpse_tag import CorpseTag
-from engine import core, palettes
-from engine.constants import PRIORITY_LOW
+from .. import settings
+from ..components import Appearance, Coordinates
+from ..components.base_components.entity import Entity
+from ..components.events.delete_event import Delete
+from ..components.tags.corpse_tag import CorpseTag
+from ..engine import core, palettes
+from ..engine.constants import PRIORITY_LOW
 
 
 def make_corpse(

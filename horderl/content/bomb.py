@@ -1,12 +1,11 @@
 from typing import List
 
-from components import Appearance, Coordinates
-from components.actors.bomb_actor import BombActor
-from components.animation_effects.step_animation import StepAnimation
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from engine import core, palettes
-from engine.constants import PRIORITY_LOW
+from ..components import Appearance, Coordinates
+from ..components.actors.bomb_actor import BombActor
+from ..components.base_components.component import Component
+from ..components.base_components.entity import Entity
+from ..engine import core, palettes
+from ..engine.constants import PRIORITY_LOW
 
 bomb_description = "An explosive bomb! Watch out!"
 

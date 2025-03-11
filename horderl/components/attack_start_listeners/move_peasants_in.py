@@ -1,12 +1,11 @@
-import logging
 from dataclasses import dataclass
 
-from components import Coordinates
-from components.brains.peasant_actor import PeasantActor
-from components.events.attack_started_events import AttackStartListener
-from components.house_structure import HouseStructure
-from components.relationships.residence import Residence
-from components.tags.peasant_tag import PeasantTag
+from .. import Coordinates
+from ..brains.peasant_actor import PeasantActor
+from ..events.attack_started_events import AttackStartListener
+from ..house_structure import HouseStructure
+from ..relationships.residence import Residence
+from ..tags.peasant_tag import PeasantTag
 
 
 @dataclass

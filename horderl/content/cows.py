@@ -1,14 +1,14 @@
 from typing import List
 
-from components import Appearance, Attributes, Coordinates, target_value
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from components.edible import Edible
-from components.faction import Faction
-from components.target_value import TargetValue
-from components.tax_value import TaxValue
-from engine import core, palettes
-from engine.constants import PRIORITY_MEDIUM
+from ..components import Appearance, Attributes, Coordinates, target_value
+from ..components.base_components.component import Component
+from ..components.base_components.entity import Entity
+from ..components.edible import Edible
+from ..components.faction import Faction
+from ..components.target_value import TargetValue
+from ..components.tax_value import TaxValue
+from ..engine import core, palettes
+from ..engine.constants import PRIORITY_MEDIUM
 
 cows_description = "A cow, happily feasting on grass."
 

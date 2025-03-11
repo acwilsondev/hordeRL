@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components import Coordinates
-from components.base_components.timed_actor import TimedActor
-from components.path_node import PathNode
+from .. import Coordinates
+from ..base_components.timed_actor import TimedActor
+from ..path_node import PathNode
 
 
 @dataclass

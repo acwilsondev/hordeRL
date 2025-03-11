@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from components.events.build_world_events import BuildWorldListener
-from content.farmsteads.houses import place_farmstead
+from ...components.events.build_world_events import BuildWorldListener
+from ...content.farmsteads.houses import place_farmstead
 
 
 @dataclass

@@ -1,38 +1,37 @@
-import settings
-from components import Appearance, Attributes, Coordinates, Senses
-from components.abilities.build_fence_ability import BuildFenceAbility
-from components.abilities.build_spikes_ability import BuildSpikesAbility
-from components.abilities.build_wall_ability import BuildWallAbility
-from components.abilities.debug_ability import DebugAbility
-from components.abilities.dig_hole_ability import DigHoleAbility
-from components.abilities.fast_forward_ability import FastForwardAbility
-from components.abilities.hire_knight_ability import HireKnightAbility
-from components.abilities.look_ability import LookAbility
-from components.abilities.place_bomb_ability import PlaceBombAbility
-from components.abilities.place_cow_ability import PlaceCowAbility
-from components.abilities.place_haunch_ability import PlaceHaunchAbility
-from components.abilities.plant_sapling_ability import PlantSaplingAbility
-from components.abilities.sell_ability import SellAbility
-from components.abilities.shoot_ability import ShootAbility
-from components.abilities.thwack_ability import ThwackAbility
-from components.ability_tracker import AbilityTracker
-from components.attacks.standard_attack import StandardAttack
-from components.base_components.entity import Entity
-from components.brains.player_brain import PlayerBrain
-from components.death_listeners.player_corpse import PlayerCorpse
-from components.faction import Faction
-from components.material import Material
-from components.movement.drain_on_enter import DrainOnEnter
-from components.movement.heal_on_dally import HealOnDally
-from components.movement.move import Move
-from components.movement.pickup_gold import PickupGoldOnStep
-from components.movement.update_senses_on_move import UpdateSenses
-from components.options import Options
-from components.season_reset_listeners.move_player_to_town_center import \
+from .. import settings
+from ..components import Appearance, Attributes, Coordinates, Senses
+from ..components.abilities.build_fence_ability import BuildFenceAbility
+from ..components.abilities.build_spikes_ability import BuildSpikesAbility
+from ..components.abilities.build_wall_ability import BuildWallAbility
+from ..components.abilities.debug_ability import DebugAbility
+from ..components.abilities.dig_hole_ability import DigHoleAbility
+from ..components.abilities.fast_forward_ability import FastForwardAbility
+from ..components.abilities.hire_knight_ability import HireKnightAbility
+from ..components.abilities.look_ability import LookAbility
+from ..components.abilities.place_bomb_ability import PlaceBombAbility
+from ..components.abilities.place_cow_ability import PlaceCowAbility
+from ..components.abilities.place_haunch_ability import PlaceHaunchAbility
+from ..components.abilities.plant_sapling_ability import PlantSaplingAbility
+from ..components.abilities.sell_ability import SellAbility
+from ..components.abilities.shoot_ability import ShootAbility
+from ..components.abilities.thwack_ability import ThwackAbility
+from ..components.ability_tracker import AbilityTracker
+from ..components.attacks.standard_attack import StandardAttack
+from ..components.base_components.entity import Entity
+from ..components.brains.player_brain import PlayerBrain
+from ..components.death_listeners.player_corpse import PlayerCorpse
+from ..components.faction import Faction
+from ..components.material import Material
+from ..components.movement.heal_on_dally import HealOnDally
+from ..components.movement.move import Move
+from ..components.movement.pickup_gold import PickupGoldOnStep
+from ..components.movement.update_senses_on_move import UpdateSenses
+from ..components.options import Options
+from ..components.season_reset_listeners.move_player_to_town_center import \
     MovePlayerToTownCenter
-from components.season_reset_listeners.save_on_season import SaveOnSeasonReset
-from components.target_value import PLAYER, TargetValue
-from engine import PLAYER_ID, palettes
+from ..components.season_reset_listeners.save_on_season import SaveOnSeasonReset
+from ..components.target_value import PLAYER, TargetValue
+from ..engine import PLAYER_ID, palettes
 
 
 def make_player(x, y):

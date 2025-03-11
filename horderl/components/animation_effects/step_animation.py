@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from components import Appearance
-from components.base_components.timed_actor import TimedActor
-from components.events.delete_event import Delete
+from .. import Appearance
+from ..base_components.timed_actor import TimedActor
+from ..events.delete_event import Delete
 
 
 @dataclass

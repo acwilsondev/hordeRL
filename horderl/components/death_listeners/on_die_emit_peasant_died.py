@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components.events.die_events import DeathListener
-from components.events.peasant_events import PeasantDied
-from engine import core
+from ..events.die_events import DeathListener
+from ..events.peasant_events import PeasantDied
+from ...engine import core
 
 
 @dataclass

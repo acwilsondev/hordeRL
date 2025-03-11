@@ -1,9 +1,8 @@
-import logging
 from dataclasses import dataclass
 
-from components.abilities.ability import Ability
-from components.abilities.null_ability import NullAbility
-from components.events.attack_started_events import AttackStartListener
+from ..components.abilities.ability import Ability
+from ..components.abilities.null_ability import NullAbility
+from ..components.events.attack_started_events import AttackStartListener
 
 
 @dataclass

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components.base_components.actor import Actor
-from components.events.delete_event import DeleteListener
-from components.relationships.owner import Owner
+from ..base_components.actor import Actor
+from ..events.delete_event import DeleteListener
+from ..relationships.owner import Owner
 
 
 @dataclass

@@ -1,13 +1,13 @@
 import random
 from typing import List
 
-import settings
-from components import Coordinates
-from components.events.build_world_events import BuildWorldListener
-from components.house_structure import HouseStructure
-from components.tags.town_center_flag import TownCenterFlag
-from content.terrain.roads import connect_point_to_road_network, make_road
-from engine.utilities import get_3_by_3_box, get_3_by_3_square
+from ... import settings
+from ...components import Coordinates
+from ...components.events.build_world_events import BuildWorldListener
+from ...components.house_structure import HouseStructure
+from ...components.tags.town_center_flag import TownCenterFlag
+from ...content.terrain.roads import connect_point_to_road_network, make_road
+from ...engine.utilities import get_3_by_3_box, get_3_by_3_square
 
 
 def get_town_center(house_coords, scene):

@@ -1,9 +1,9 @@
 import random
 from dataclasses import dataclass
 
-import settings
-from components import Coordinates
-from components.base_components.timed_actor import TimedActor
+from ... import settings
+from .. import Coordinates
+from ..base_components.timed_actor import TimedActor
 
 
 @dataclass

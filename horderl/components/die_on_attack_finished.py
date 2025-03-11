@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from components.events.attack_events import OnAttackFinishedListener
-from components.events.die_events import Die
+from ..components.events.attack_events import OnAttackFinishedListener
+from ..components.events.die_events import Die
 
 
 @dataclass

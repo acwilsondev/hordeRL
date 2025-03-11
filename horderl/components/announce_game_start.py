@@ -1,4 +1,4 @@
-from components.events.start_game_events import GameStartListener
+from ..components.events.start_game_events import GameStartListener
 
 
 class AnnounceGameStart(GameStartListener):

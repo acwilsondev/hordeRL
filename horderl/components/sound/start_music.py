@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from components.events.start_game_events import GameStartListener
-from components.season_reset_listeners.seasonal_actor import \
+from ..events.start_game_events import GameStartListener
+from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
 
 

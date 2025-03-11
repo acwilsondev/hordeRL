@@ -1,8 +1,8 @@
-from components import Appearance, Coordinates
-from components.animation_effects.float import AnimationFloat
-from components.base_components.entity import Entity
-from engine import core, palettes
-from engine.constants import PRIORITY_HIGH
+from ..components import Appearance, Coordinates
+from ..components.animation_effects.float import AnimationFloat
+from ..components.base_components.entity import Entity
+from ..engine import core, palettes
+from ..engine.constants import PRIORITY_HIGH
 
 
 def floaty_animation(x, y, symbol, color, name):

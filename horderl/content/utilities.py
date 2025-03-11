@@ -1,18 +1,18 @@
-from components.actors.calendar_actor import Calendar
-from components.announce_game_start import AnnounceGameStart
-from components.attack_start_listeners.move_peasants_in import MovePeasantsIn
-from components.base_components.entity import Entity
-from components.season_reset_listeners.add_farmstead import AddFarmstead
-from components.season_reset_listeners.die_in_winter import CropsDieInWinter
-from components.season_reset_listeners.move_peasants_out import MovePeasantsOut
-from components.season_reset_listeners.reset_health import ResetHealth
-from components.season_reset_listeners.spawn_sapling_in_spring import \
+from ..components.actors.calendar_actor import Calendar
+from ..components.announce_game_start import AnnounceGameStart
+from ..components.attack_start_listeners.move_peasants_in import MovePeasantsIn
+from ..components.base_components.entity import Entity
+from ..components.season_reset_listeners.add_farmstead import AddFarmstead
+from ..components.season_reset_listeners.die_in_winter import CropsDieInWinter
+from ..components.season_reset_listeners.move_peasants_out import MovePeasantsOut
+from ..components.season_reset_listeners.reset_health import ResetHealth
+from ..components.season_reset_listeners.spawn_sapling_in_spring import \
     SpawnSaplingInSpring
-from components.season_reset_listeners.upgrade_houses import UpgradeHouse
-from components.weather.freeze_water import FreezeWater
-from components.weather.snow_fall import SnowFall
-from components.weather.weather import Weather
-from engine import core
+from ..components.season_reset_listeners.upgrade_houses import UpgradeHouse
+from ..components.weather.freeze_water import FreezeWater
+from ..components.weather.snow_fall import SnowFall
+from ..components.weather.weather import Weather
+from ..engine import core
 
 
 def make_calendar():

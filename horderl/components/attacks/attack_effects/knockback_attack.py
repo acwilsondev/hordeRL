@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components import Coordinates
-from components.attacks.attack_effects.attack_effect import AttackEffect
-from content.states import knockback_animation
+from ... import Coordinates
+from ...attacks.attack_effects.attack_effect import AttackEffect
+from ....content.states import knockback_animation
 
 
 @dataclass

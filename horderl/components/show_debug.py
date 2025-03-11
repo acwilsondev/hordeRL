@@ -1,27 +1,25 @@
 import logging
-import os
 from dataclasses import dataclass
 
-import engine
-import settings
-from components import Attributes, Coordinates, Senses
-from components.abilities.build_wall_ability import BuildWallAbility
-from components.base_components.energy_actor import EnergyActor
-from components.base_components.entity import Entity
-from components.brains.brain import Brain
-from components.brains.default_active_actor import DefaultActiveActor
-from components.brains.painters.create_gold_actor import PlaceGoldController
-from components.brains.painters.create_hordeling_actor import \
+from .. import engine
+from .. import settings
+from ..components import Attributes, Coordinates, Senses
+from ..components.abilities.build_wall_ability import BuildWallAbility
+from ..components.base_components.energy_actor import EnergyActor
+from ..components.base_components.entity import Entity
+from ..components.brains.brain import Brain
+from ..components.brains.default_active_actor import DefaultActiveActor
+from ..components.brains.painters.create_gold_actor import PlaceGoldController
+from ..components.brains.painters.create_hordeling_actor import \
     PlaceHordelingController
-from components.events.die_events import Die
-from components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
-from components.serialization.load_game import LoadGame
-from components.serialization.save_game import SaveGame
-from components.wrath_effect import WrathEffect
-from content.cursor import make_cursor
-from content.farmsteads.houses import place_farmstead
-from content.terrain.roads import connect_point_to_road_network
-from gui.easy_menu import EasyMenu
+from ..components.events.die_events import Die
+from ..components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
+from ..components.serialization.save_game import SaveGame
+from ..components.wrath_effect import WrathEffect
+from ..content.cursor import make_cursor
+from ..content.farmsteads.houses import place_farmstead
+from ..content.terrain.roads import connect_point_to_road_network
+from ..gui.easy_menu import EasyMenu
 
 """
 This module provides debugging tools and a debug menu system for the game.

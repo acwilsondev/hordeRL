@@ -1,11 +1,10 @@
 from dataclasses import dataclass
 
-from components import Coordinates
-from components.season_reset_listeners.seasonal_actor import \
+from .. import Coordinates
+from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from content.farmsteads.houses import place_farmstead
-from content.terrain.roads import connect_point_to_road_network
-from engine import core
+from ...content.farmsteads.houses import place_farmstead
+from ...content.terrain.roads import connect_point_to_road_network
 
 
 @dataclass
