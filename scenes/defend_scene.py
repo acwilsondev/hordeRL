@@ -31,7 +31,31 @@ from systems import act, control_turns, move
 
 
 class DefendScene(GameScene):
+    """
+    Core gameplay scene responsible for managing the main game loop during village defense.
+    
+    This scene manages all aspects of village defense gameplay including:
+    - Combat and movement systems
+    - Player input handling and turn control
+    - GUI elements for gameplay feedback (health, resources, messages)
+    - World state tracking (visibility, memory maps)
+    - Message handling for player feedback
+    
+    The DefendScene integrates multiple game systems and serves as the central
+    coordinator for the main gameplay experience, connecting player actions
+    with game mechanics and visual representation.
+    """
     def __init__(self, from_file=""):
+        """
+        Initialize a new DefendScene with all required GUI elements and state tracking.
+        
+        Sets up the scene with the play window, status bars, labels, and message box.
+        Initializes tracking for game visibility and memory maps as well as the message log.
+        
+        Args:
+            from_file (str, optional): Path to a save file to load. If empty, starts a new game.
+                                      Defaults to "".
+        """
         super().__init__()
         self.player = PLAYER_ID
 
@@ -83,6 +107,20 @@ class DefendScene(GameScene):
         self.from_file = from_file
 
     def on_load(self):
+        """
+        Initialize the component manager and load all necessary game systems when the scene becomes active.
+        
+        This method is called when the scene is pushed to the scene stack and becomes active.
+        It sets up:
+        - Component Manager (CM) for entity-component management
+        - Game loading from file (if from_file is specified)
+        - World generation and biome selection (for new games)
+        - Core game systems (taxes, calendar, physics)
+        - Music controllers
+        - World beauty and population systems
+        
+        The method handles both new game creation and loading saved games.
+        """
         self.cm = ComponentManager()
         self.play_window.cm = self.cm
         self.cm.add(LoadClasses(entity=self.player))
@@ -101,19 +139,63 @@ class DefendScene(GameScene):
             self.cm.add(Population(entity=core.get_id("world")))
 
     def popup_message(self, message: str):
+        """
+        Display a prominent popup message to the player while also adding it to the message log.
+        
+        This method serves as a high-visibility notification system for important game events
+        that require the player's immediate attention.
+        
+        Args:
+            message (str): The text content to display in the popup and add to the message log.
+        """
         self.message(message)
         self.add_gui_element(PopupMessage(message))
 
     @timed(100, __name__)
     def update(self):
+        """
+        Main update method called each frame to progress the game state.
+        
+        This method is decorated with @timed, which logs performance metrics if
+        the method execution exceeds 100ms, helping identify performance bottlenecks.
+        
+        The update follows a specific sequence:
+        1. act.run - Process entity actions and abilities
+        2. move.run - Handle movement and physics
+        3. control_turns.run - Manage turn order and player input
+        
+        This structured approach ensures game systems are processed in the correct order,
+        maintaining game logic consistency.
+        """
         act.run(self)
         move.run(self)
         control_turns.run(self)
 
     def message(self, text: str, color: Tuple[int, int, int] = palettes.MEAT):
+        """
+        Add a message to the message log with specified text and color.
+        
+        The message log has a maximum capacity of 20 messages. When exceeded,
+        the oldest message is removed (FIFO behavior). Messages are displayed
+        in the MessageBox GUI element and provide important feedback to the player.
+        
+        Args:
+            text (str): The text content of the message.
+            color (Tuple[int, int, int], optional): RGB color tuple for the message.
+                                                    Defaults to palettes.MEAT.
+        """
         if len(self.messages) > 20:
             self.messages.pop(0)
         self.messages.append(Message(f" {text}", color=color))
 
     def warn(self, text: str):
+        """
+        Add a warning message to the message log in a distinctive warning color.
+        
+        This is a convenience method for sending warning notifications to the player
+        about dangerous situations or potential negative outcomes.
+        
+        Args:
+            text (str): The warning text to display.
+        """
         self.message(text, color=palettes.HORDELING)
