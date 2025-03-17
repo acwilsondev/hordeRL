@@ -24,7 +24,6 @@ tcod = { version = ">=11.18.0", source = "pypi" }
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 isort = "^5.12.0"
-flake8 = "^6.0.0"
 pytest = "^7.3.1"
 radon = "^6.0.1"
 docformatter = "^1.7.5"
@@ -37,7 +36,7 @@ build-backend = "poetry.core.masonry.api"
 horderl = "hordeRL:cli"
 
 [tool.black]
-line-length = 88
+line-length = 79
 target-version = ['py38']
 include = '\.pyi?$'
 skip-string-normalization = false
@@ -46,15 +45,15 @@ preview = true
 
 [tool.docformatter]
 recursive = true
-wrap-summaries = 88
-wrap-descriptions = 88
+wrap-summaries = 79
+wrap-descriptions = 79
 pre-summary-newline = true
 make-summary-multi-line = true
 blank = true
 
 [tool.isort]
 profile = "black"
-line_length = 88
+line_length = 79
 multi_line_output = 3
 include_trailing_comma = true
 force_grid_wrap = 0
@@ -64,9 +63,3 @@ combine_as_imports = true
 known_first_party = ["horderl"]
 src_paths = ["horderl"]
 
-[tool.flake8]
-max-line-length = 88
-extend-ignore = ["W505", "D100", "D101", "D102", "D103", "D104"]
-per-file-ignores = [
-    "__init__.py:F401"
-]
