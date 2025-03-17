@@ -24,18 +24,14 @@ class PlaceFlowers(BuildWorldListener):
 
     def on_build_world(self, scene):
         self._log_info(f"placing flower fields...")
-        world_settings = scene.cm.get_one(
-            WorldParameters, entity=core.get_id("world")
-        )
-        self.color = random.choice(
-            [
-                palettes.WHITE,
-                palettes.WATER,
-                palettes.FRESH_BLOOD,
-                palettes.FIRE,
-                palettes.GOLD,
-            ]
-        )
+        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        self.color = random.choice([
+            palettes.WHITE,
+            palettes.WATER,
+            palettes.FRESH_BLOOD,
+            palettes.FIRE,
+            palettes.GOLD,
+        ])
         for _ in range(world_settings.flower_fields):
             x = random.randint(0, settings.MAP_WIDTH - 1)
             y = random.randint(0, settings.MAP_HEIGHT - 1)
@@ -44,9 +40,7 @@ class PlaceFlowers(BuildWorldListener):
                 self.add_flower_field(scene, x, y)
 
     def add_flower_field(self, scene, x: int, y: int) -> None:
-        world_settings = scene.cm.get_one(
-            WorldParameters, entity=core.get_id("world")
-        )
+        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
         working_set = [(x, y)]
         maximum = 10
         while working_set and maximum > 0:

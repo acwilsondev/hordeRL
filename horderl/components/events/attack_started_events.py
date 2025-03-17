@@ -6,7 +6,9 @@ from horderl.components.base_components.events import Event
 
 
 class AttackStartListener(Component, ABC):
-    """Define a step to take when an attack starts."""
+    """
+    Define a step to take when an attack starts.
+    """
 
     @abstractmethod
     def on_attack_start(self, scene):
@@ -15,7 +17,9 @@ class AttackStartListener(Component, ABC):
 
 @dataclass
 class AttackStarted(Event):
-    """Emitted when the attack should begin."""
+    """
+    Emitted when the attack should begin.
+    """
 
     def listener_type(self):
         return AttackStartListener

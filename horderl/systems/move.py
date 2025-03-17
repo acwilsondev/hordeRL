@@ -81,9 +81,7 @@ def run(scene):
 
 def get_actors_with_step_intention(scene):
     return [
-        actor
-        for actor in scene.cm.get(Actor)
-        if actor.intention in STEP_INTENTIONS
+        actor for actor in scene.cm.get(Actor) if actor.intention in STEP_INTENTIONS
     ]
 
 
@@ -111,7 +109,9 @@ def get_step_target(scene, entity, step_action):
 
 
 def can_step(scene, entity, step_action) -> bool:
-    """Validate a step action."""
+    """
+    Validate a step action.
+    """
     move_component = scene.cm.get_one(Move, entity=entity)
     if not move_component:
         return False
@@ -122,9 +122,7 @@ def can_step(scene, entity, step_action) -> bool:
 
     if not in_bounds((target_x, target_y)):
         if entity == scene.player:
-            scene.message(
-                "You shouldn't leave the village.", color=palettes.WHITE
-            )
+            scene.message("You shouldn't leave the village.", color=palettes.WHITE)
         return False
 
     blocking_object = get_blocking_object(scene.cm, target_x, target_y)
@@ -152,6 +150,7 @@ def move(scene, entity: int, vector: Tuple[int, int]):
 
     This function is intended to be the final call before performing the actual move,
     and no validation occurs herein (except possibly to avoid crashes).
+
     """
     swamped = scene.cm.get_one(Hindered, entity=entity)
 

@@ -38,7 +38,9 @@ def cli():
 
     if not args.terminal_log:
         logging.basicConfig(
-            filename="./.log", filemode="a", format="%(levelname)s\t%(message)s"
+            filename="./.log",
+            filemode="a",
+            format="%(levelname)s\t%(message)s",
         )
     else:
         logging.basicConfig(format="%(levelname)s\t%(message)s")

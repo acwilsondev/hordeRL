@@ -24,14 +24,10 @@ class AbilityTracker(AttackStartListener):
         abilities = scene.cm.get_all(Ability, entity=self.entity)
         self.current_ability = (self.current_ability + 1) % len(abilities)
         ability = abilities[self.current_ability]
-        self._log_debug(
-            f"increment {self.current_ability} - {ability.ability_title}"
-        )
+        self._log_debug(f"increment {self.current_ability} - {ability.ability_title}")
 
     def decrement(self, scene):
         abilities = scene.cm.get_all(Ability, entity=self.entity)
         self.current_ability = (self.current_ability - 1) % len(abilities)
         ability = abilities[self.current_ability]
-        self._log_debug(
-            f"decrement {self.current_ability} - {ability.ability_title}"
-        )
+        self._log_debug(f"decrement {self.current_ability} - {ability.ability_title}")

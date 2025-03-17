@@ -19,8 +19,9 @@ class TimedActor(Actor, ABC):
     SIX_SECONDS = 6000
 
     REAL_TIME = 0
-
-    """Provides control and other 'mind' information."""
+    """
+    Provides control and other 'mind' information.
+    """
     control_mode: ControlMode = None  # which system controls this entity
     priority: int = PRIORITY_MEDIUM
     timer_delay: int = HALF_HOUR

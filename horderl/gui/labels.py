@@ -9,7 +9,9 @@ from ..gui.gui_element import GuiElement
 
 
 class Label(GuiElement):
-    """Represent a text label."""
+    """
+    Represent a text label.
+    """
 
     def __init__(
         self, x, y, value, fg=palettes.WHITE, bg=palettes.BACKGROUND, name=None
@@ -20,12 +22,16 @@ class Label(GuiElement):
         self.bg = bg
 
     def render(self, panel):
-        """Draw the bar onto the panel"""
+        """
+        Draw the bar onto the panel.
+        """
         panel.print(self.x, self.y, self.value, fg=self.fg, bg=self.bg)
 
 
 class GoldLabel(GuiElement):
-    """Represent a text label."""
+    """
+    Represent a text label.
+    """
 
     def __init__(self, x, y):
         super().__init__(x, y, name="gold-label")
@@ -35,7 +41,9 @@ class GoldLabel(GuiElement):
         self.value = f"{scene.gold}c"
 
     def render(self, panel):
-        """Draw the bar onto the panel"""
+        """
+        Draw the bar onto the panel.
+        """
         panel.print(
             self.x,
             self.y,
@@ -46,7 +54,9 @@ class GoldLabel(GuiElement):
 
 
 class CalendarLabel(GuiElement):
-    """Represent a text label."""
+    """
+    Represent a text label.
+    """
 
     def __init__(self, x, y):
         super().__init__(x, y, name="calendar-label")
@@ -58,7 +68,9 @@ class CalendarLabel(GuiElement):
         self.value = f"{timecode}"
 
     def render(self, panel):
-        """Draw the bar onto the panel"""
+        """
+        Draw the bar onto the panel.
+        """
         panel.print(
             self.x,
             self.y,
@@ -79,7 +91,9 @@ class HordeStatusLabel(GuiElement):
             self.value = calendar.status
 
     def render(self, panel):
-        """Draw the bar onto the panel"""
+        """
+        Draw the bar onto the panel.
+        """
         panel.print(
             self.x,
             self.y,
@@ -105,7 +119,9 @@ class SpeedLabel(GuiElement):
             self.value = ""
 
     def render(self, panel):
-        """Draw the bar onto the panel"""
+        """
+        Draw the bar onto the panel.
+        """
         panel.print(
             self.x,
             self.y,

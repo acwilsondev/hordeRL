@@ -8,7 +8,9 @@ from ..engine.constants import PRIORITY_MEDIUM
 
 @dataclass
 class Coordinates(Component):
-    """Provide location information."""
+    """
+    Provide location information.
+    """
 
     x: int = None
     y: int = None
@@ -17,7 +19,9 @@ class Coordinates(Component):
 
     @property
     def position(self) -> Tuple[int, int]:
-        """Get a position tuple"""
+        """
+        Get a position tuple.
+        """
         return self.x, self.y
 
     def direction_towards(self, other):

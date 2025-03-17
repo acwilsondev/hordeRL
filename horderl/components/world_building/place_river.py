@@ -24,7 +24,5 @@ class PlaceRiver(BuildWorldListener):
             self._log_warning(f"could not find a path for river")
         for x, y in river:
             self._log_debug(f"placing water ({x}, {y})")
-            params = scene.cm.get_one(
-                WorldParameters, entity=core.get_id("world")
-            )
+            params = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
             scene.cm.add(*make_water(x, y, rapidness=params.river_rapids)[1])

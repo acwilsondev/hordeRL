@@ -9,9 +9,7 @@ from ..components.base_components.entity import Entity
 from ..components.brains.brain import Brain
 from ..components.brains.default_active_actor import DefaultActiveActor
 from ..components.brains.painters.create_gold_actor import PlaceGoldController
-from ..components.brains.painters.create_hordeling_actor import (
-    PlaceHordelingController,
-)
+from ..components.brains.painters.create_hordeling_actor import PlaceHordelingController
 from ..components.events.die_events import Die
 from ..components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from ..components.serialization.save_game import SaveGame
@@ -58,6 +56,7 @@ class ShowDebug(EnergyActor):
     Attributes:
         energy_cost (int): The energy cost for activating this component, set to
                           INSTANT (zero) to avoid affecting gameplay timing.
+
     """
 
     energy_cost: int = EnergyActor.INSTANT
@@ -72,6 +71,7 @@ class ShowDebug(EnergyActor):
 
         Args:
             scene: The current game scene containing the GUI and component manager.
+
         """
         scene.gui.add_element(
             EasyMenu(
@@ -80,9 +80,7 @@ class ShowDebug(EnergyActor):
                     "examine game objects": get_examine_game_objects(scene),
                     "heal": get_heal(scene),
                     "get rich": get_rich(scene),
-                    "place hordeling": get_painter(
-                        scene, PlaceHordelingController
-                    ),
+                    "place hordeling": get_painter(scene, PlaceHordelingController),
                     "place gold": get_painter(scene, PlaceGoldController),
                     "wrath": get_wrath(scene, self.entity),
                     "suicide": get_suicide(scene),
@@ -104,7 +102,8 @@ class ShowDebug(EnergyActor):
 
 def get_examine_game_objects(scene):
     """
-    Create a function that displays a menu of all non-static game entities for inspection.
+    Create a function that displays a menu of all non-static game entities for
+    inspection.
 
     This debug function retrieves all non-static entities in the scene, sorts them by ID,
     and displays them in a menu. When an entity is selected from the menu, its details
@@ -115,6 +114,7 @@ def get_examine_game_objects(scene):
 
     Returns:
         function: A callback function that displays the entity selection menu when invoked.
+
     """
 
     def out_fn():
@@ -125,9 +125,7 @@ def get_examine_game_objects(scene):
             EasyMenu(
                 "Examine which?",
                 {
-                    entity.get_readable_key(): get_examine_object(
-                        scene, entity.entity
-                    )
+                    entity.get_readable_key(): get_examine_object(scene, entity.entity)
                     for entity in entities
                 },
                 settings.INVENTORY_WIDTH,
@@ -151,6 +149,7 @@ def get_examine_object(scene, entity):
 
     Returns:
         function: A callback function that prints entity details when invoked.
+
     """
 
     def out_fn():
@@ -186,6 +185,7 @@ def get_heal(scene):
 
     Returns:
         function: A callback function that heals the player when invoked.
+
     """
 
     def out_fn():
@@ -198,7 +198,8 @@ def get_heal(scene):
 
 def get_painter(scene, painter):
     """
-    Create a function that switches player control to a painting mode for placing entities.
+    Create a function that switches player control to a painting mode for placing
+    entities.
 
     This debug function creates a cursor at the player's position and switches the player's
     brain controller to the specified painter controller, allowing them to place entities
@@ -210,6 +211,7 @@ def get_painter(scene, painter):
 
     Returns:
         function: A callback function that activates the painter mode when invoked.
+
     """
 
     def out_fn():
@@ -241,6 +243,7 @@ def place_gold(scene):
 
     Returns:
         function: A callback function that activates gold placement mode when invoked.
+
     """
 
     def out_fn():
@@ -260,6 +263,7 @@ def get_rich(scene):
 
     Returns:
         function: A callback function that adds gold when invoked.
+
     """
 
     def out_fn():
@@ -280,6 +284,7 @@ def get_suicide(scene):
 
     Returns:
         function: A callback function that kills the player when invoked.
+
     """
 
     def out_fn():
@@ -305,6 +310,7 @@ def get_teleport_to(scene):
 
     Returns:
         function: A callback function that displays the teleport menu when invoked.
+
     """
 
     def out_fn():
@@ -340,6 +346,7 @@ def get_teleport_to_entity(scene, entity):
 
     Returns:
         function: A callback function that teleports the player when invoked.
+
     """
 
     def out_fn():
@@ -374,6 +381,7 @@ def get_wrath(scene, entity):
 
     Returns:
         function: A callback function that triggers the wrath effect when invoked.
+
     """
 
     def out_fn():
@@ -395,14 +403,15 @@ def get_activate_ability(scene):
 
     Returns:
         function: A callback function that displays the ability toggle menu when invoked.
+
     """
 
     def out_fn():
         ability_map = {}
 
         has_masonry = scene.cm.get_one(BuildWallAbility, entity=scene.player)
-        ability_map[f"Masonry ({'X' if has_masonry else ' '})"] = (
-            get_toggle_masonry(scene)
+        ability_map[f"Masonry ({'X' if has_masonry else ' '})"] = get_toggle_masonry(
+            scene
         )
 
         scene.gui.add_element(
@@ -429,6 +438,7 @@ def get_toggle_masonry(scene):
 
     Returns:
         function: A callback function that toggles the masonry ability when invoked.
+
     """
 
     def out_fn():
@@ -460,6 +470,7 @@ def get_pathfinding_for(scene):
 
     Returns:
         function: A callback function that displays the pathfinding menu when invoked.
+
     """
 
     def out_fn():
@@ -470,9 +481,7 @@ def get_pathfinding_for(scene):
             EasyMenu(
                 "Toggle pathfinding for which?",
                 {
-                    entity.get_readable_key(): get_show_pathing(
-                        scene, entity.entity
-                    )
+                    entity.get_readable_key(): get_show_pathing(scene, entity.entity)
                     for entity in entities
                 },
                 settings.INVENTORY_WIDTH,
@@ -496,6 +505,7 @@ def get_show_pathing(scene, entity):
 
     Returns:
         function: A callback function that toggles pathfinding visualization when invoked.
+
     """
 
     def out_fn():
@@ -525,13 +535,12 @@ def get_spawn_home(scene):
 
     Returns:
         function: A callback function that spawns a farmstead when invoked.
+
     """
 
     def out_fn():
         farmstead_id = place_farmstead(scene)
-        farmstead_point = scene.cm.get_one(
-            Coordinates, entity=farmstead_id
-        ).position
+        farmstead_point = scene.cm.get_one(Coordinates, entity=farmstead_id).position
         connect_point_to_road_network(scene, farmstead_point, trim_start=2)
 
     return out_fn
@@ -551,6 +560,7 @@ def quick_save(scene):
 
     Returns:
         function: A callback function that saves the game when invoked.
+
     """
 
     def out_fn():

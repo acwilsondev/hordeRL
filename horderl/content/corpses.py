@@ -17,9 +17,7 @@ def make_corpse(
         entity_id,
         [
             Entity(id=entity_id, entity=entity_id, name=name),
-            Appearance(
-                entity=entity_id, symbol=symbol, color=color, bg_color=bg_color
-            ),
+            Appearance(entity=entity_id, symbol=symbol, color=color, bg_color=bg_color),
             CorpseTag(entity=entity_id),
             Coordinates(
                 entity=entity_id,

@@ -31,15 +31,11 @@ def floaty_animation(x, y, symbol, color, name):
 
 
 def confused_animation(x, y):
-    return floaty_animation(
-        x, y, "?", palettes.LIGHT_WATER, "confused_animation"
-    )
+    return floaty_animation(x, y, "?", palettes.LIGHT_WATER, "confused_animation")
 
 
 def no_money_animation(x, y):
-    return floaty_animation(
-        x, y, "$", palettes.FRESH_BLOOD, "no_money_animation"
-    )
+    return floaty_animation(x, y, "$", palettes.FRESH_BLOOD, "no_money_animation")
 
 
 def help_animation(x, y):
@@ -55,6 +51,4 @@ def sleep_animation(x, y):
 
 
 def character_animation(x, y, char):
-    return floaty_animation(
-        x, y, char, palettes.LIGHT_WATER, "character_animation"
-    )
+    return floaty_animation(x, y, char, palettes.LIGHT_WATER, "character_animation")

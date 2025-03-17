@@ -22,9 +22,7 @@ def add_rock(scene, x: int, y: int) -> None:
 class PlaceRocks(BuildWorldListener):
     def on_build_world(self, scene):
         self._log_info(f"placing rock fields in town...")
-        world_settings = scene.cm.get_one(
-            WorldParameters, entity=core.get_id("world")
-        )
+        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
         for _ in range(world_settings.rock_fields):
             x = random.randint(0, settings.MAP_WIDTH - 1)
             y = random.randint(0, settings.MAP_HEIGHT - 1)
@@ -33,9 +31,7 @@ class PlaceRocks(BuildWorldListener):
                 self.add_rock_field(scene, x, y)
 
     def add_rock_field(self, scene, x: int, y: int) -> None:
-        world_settings = scene.cm.get_one(
-            WorldParameters, entity=core.get_id("world")
-        )
+        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
         working_set = [(x, y)]
         maximum = 10
         while working_set and maximum > 0:

@@ -7,7 +7,9 @@ from horderl.content.getables.gold import make_gold_nugget
 
 @dataclass
 class DropGold(DeathListener):
-    """Drop gold when the owner dies."""
+    """
+    Drop gold when the owner dies.
+    """
 
     def on_die(self, scene):
         self._log_info(f"dropped gold on death")

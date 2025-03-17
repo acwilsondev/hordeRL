@@ -1,9 +1,7 @@
 import random
 
 from horderl.components import Appearance, Coordinates
-from horderl.components.animation_effects.randomized_blinker import (
-    RandomizedBlinker,
-)
+from horderl.components.animation_effects.randomized_blinker import RandomizedBlinker
 from horderl.components.base_components.entity import Entity
 from horderl.components.diggable import Diggable
 from horderl.components.flooder import Flooder
@@ -57,7 +55,10 @@ def make_swampy_water(x, y, rapidness):
         entity_id,
         [
             Entity(
-                id=entity_id, entity=entity_id, name="swampy water", static=True
+                id=entity_id,
+                entity=entity_id,
+                name="swampy water",
+                static=True,
             ),
             Appearance(
                 entity=entity_id,

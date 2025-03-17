@@ -7,7 +7,9 @@ from . import core
 
 
 class EnhancedJSONEncoder(json.JSONEncoder):
-    """Provide a dataclass encoder."""
+    """
+    Provide a dataclass encoder.
+    """
 
     def default(self, o):
         if dataclasses.is_dataclass(o):
@@ -66,7 +68,9 @@ def load(file):
 
 
 def _load_from_data(data, loadable_classes):
-    """Load a set of data from loadable classes."""
+    """
+    Load a set of data from loadable classes.
+    """
     active_components = {}
     for key, obj in data.items():
         obj_class = obj["class"]
@@ -80,6 +84,8 @@ def _load_from_data(data, loadable_classes):
 
 
 def _gather_loadable_classes():
-    """Read the base_components directory to discover loadable base_components."""
+    """
+    Read the base_components directory to discover loadable base_components.
+    """
     # ignore this mess
     return Component.subclasses

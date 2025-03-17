@@ -5,7 +5,10 @@ from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.engine import core, palettes
 from horderl.engine.constants import PRIORITY_LOW
 
-description = "A field, turned for planting. By the end of Spring and Summer, the peasant will grow crops here."
+description = (
+    "A field, turned for planting. By the end of Spring and Summer, the peasant will"
+    " grow crops here."
+)
 
 
 def make_farm_plot(x, y, farmer, crop_color=palettes.FIRE):

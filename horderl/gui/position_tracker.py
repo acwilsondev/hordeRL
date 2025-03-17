@@ -7,7 +7,9 @@ from ..gui.labels import Label
 
 
 class PositionTracker(GuiElement):
-    """Automatically monitor FPS with a label."""
+    """
+    Automatically monitor FPS with a label.
+    """
 
     def __init__(self, x, y, entity):
         super().__init__(x, y)

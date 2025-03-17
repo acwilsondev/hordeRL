@@ -82,9 +82,7 @@ class DefaultActiveActor(Brain):
             self._log_debug("can't find a natural path")
             tunnel_target = self._get_emergency_step(scene)
             if tunnel_target:
-                scene.cm.add(
-                    TunnelToPoint(entity=self.entity, point=tunnel_target)
-                )
+                scene.cm.add(TunnelToPoint(entity=self.entity, point=tunnel_target))
             else:
                 self._log_warning(f"can't find a safe place to tunnel to")
                 scene.cm.add(Die(entity=self.entity))
@@ -118,13 +116,9 @@ class DefaultActiveActor(Brain):
         facing = coords.direction_towards(target)
         attack = scene.cm.get_one(Attack, entity=self.entity)
         scene.cm.add(
-            AttackAction(
-                entity=self.entity, target=self.target, damage=attack.damage
-            )
+            AttackAction(entity=self.entity, target=self.target, damage=attack.damage)
         )
-        scene.cm.add(
-            *stab(self.entity, coords.x + facing[0], coords.y + facing[1])[1]
-        )
+        scene.cm.add(*stab(self.entity, coords.x + facing[0], coords.y + facing[1])[1])
         self.pass_turn()
 
     def is_target_in_range(self, scene) -> bool:
@@ -133,16 +127,16 @@ class DefaultActiveActor(Brain):
         return coords.distance_from(target) < 2
 
     def get_next_step(self, scene):
-        """Get the next step towards my target."""
+        """
+        Get the next step towards my target.
+        """
         self_coords = scene.cm.get_one(Coordinates, entity=self.entity)
         target_coords = scene.cm.get_one(Coordinates, entity=self.target)
         path = Pathfinder().get_path(
             self.cost_map, self_coords.position, target_coords.position
         )
 
-        breadcrumb_tracker = scene.cm.get_one(
-            BreadcrumbTracker, entity=self.entity
-        )
+        breadcrumb_tracker = scene.cm.get_one(BreadcrumbTracker, entity=self.entity)
         if breadcrumb_tracker:
             breadcrumb_tracker.add_breadcrumbs(scene, path)
 
@@ -153,7 +147,9 @@ class DefaultActiveActor(Brain):
         return path[1]
 
     def _get_emergency_step(self, scene):
-        """Search for a point to tunnel to."""
+        """
+        Search for a point to tunnel to.
+        """
         self._log_debug("searching for emergency step for tunnel")
 
         coords = set(scene.cm.get(Coordinates, project=lambda c: c.position))

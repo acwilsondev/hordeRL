@@ -8,7 +8,10 @@ from horderl.components.relationships.owner import Owner
 from horderl.engine import core, palettes
 from horderl.engine.constants import PRIORITY_HIGH
 
-description = "The farmer swings their tool. Being untrained in the ways of farmery, you don't know how this helps."
+description = (
+    "The farmer swings their tool. Being untrained in the ways of farmery, you don't"
+    " know how this helps."
+)
 
 
 def farm_animation(owner, x, y):

@@ -10,7 +10,9 @@ from horderl.engine import constants
 
 @dataclass
 class EatAction(EnergyActor):
-    """Instance of a live attack."""
+    """
+    Instance of a live attack.
+    """
 
     target: int = constants.INVALID
 

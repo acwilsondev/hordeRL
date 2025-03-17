@@ -6,7 +6,10 @@ from horderl.components.events.terrain_changed_event import TerrainChangedEvent
 
 @dataclass
 class TerrainChangedOnDeath(DeathListener):
-    """This entity is a part of the terrain and should notify anything that cares about terrain when it dies."""
+    """
+    This entity is a part of the terrain and should notify anything that cares about
+    terrain when it dies.
+    """
 
     def on_die(self, scene):
         self._log_info("triggering, emitting TerrainChangedEvent")

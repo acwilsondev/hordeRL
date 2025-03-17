@@ -20,7 +20,8 @@ class StraightLineCostMapper(CostMapper):
                 # You can't bash your way through this one
                 entity = scene.cm.get_one(Entity, entity=point.entity)
                 self._log_debug(
-                    f"found impassible terrain: {entity.name} at position {point.position}"
+                    f"found impassible terrain: {entity.name} at position"
+                    f" {point.position}"
                 )
                 cost[point.x, point.y] = 0
         return cost

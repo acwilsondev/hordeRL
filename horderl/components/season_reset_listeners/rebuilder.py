@@ -5,16 +5,19 @@ from horderl.components import Coordinates
 from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.components.relationships.resident import Resident
-from horderl.components.season_reset_listeners.seasonal_actor import (
-    SeasonResetListener,
-)
+from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
 from horderl.components.tags.peasant_tag import PeasantTag
 from horderl.content.farmsteads.walls import make_wall
 
 
 @dataclass
 class Rebuilder(SeasonResetListener):
-    """Rebuild during a season reset if the resident is still alive. Otherwise, delete."""
+    """
+    Rebuild during a season reset if the resident is still alive.
+
+    Otherwise, delete.
+
+    """
 
     def on_season_reset(self, scene, season):
         house_structure = scene.cm.get_one(HouseStructure, entity=self.entity)

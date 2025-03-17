@@ -1,9 +1,7 @@
 from dataclasses import dataclass
 
 from horderl.components.events.die_events import Die
-from horderl.components.season_reset_listeners.seasonal_actor import (
-    SeasonResetListener,
-)
+from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
 
 
 @dataclass

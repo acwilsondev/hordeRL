@@ -13,7 +13,9 @@ class Component(object):
     subclasses = {}
 
     def on_component_delete(self, cm):
-        """Called by the CM when the component is deleted."""
+        """
+        Called by the CM when the component is deleted.
+        """
         pass
 
     def _log_debug(self, message):

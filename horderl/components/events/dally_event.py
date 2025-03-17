@@ -15,7 +15,9 @@ class DallyEvent(Event):
 
 
 class DallyListener(Component, ABC):
-    """Trigger when the owning entity takes a step."""
+    """
+    Trigger when the owning entity takes a step.
+    """
 
     @abstractmethod
     def on_dally(self, scene):

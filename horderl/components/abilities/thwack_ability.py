@@ -33,9 +33,7 @@ class ThwackAbility(Ability, EnergyActor):
             self.count -= 1
 
             # convert the thwack action to an attack action each adjacent enemy
-            thwackables = get_enemies_in_range(
-                scene, self.entity, max_range=sqrt(2)
-            )
+            thwackables = get_enemies_in_range(scene, self.entity, max_range=sqrt(2))
             attacks = [
                 AttackAction(entity=self.entity, target=t, damage=1)
                 for t in thwackables

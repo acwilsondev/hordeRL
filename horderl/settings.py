@@ -49,9 +49,7 @@ def create_options_file():
         "color_hordeling": "9b1a0a",
         "color_blood": "550f0a",
     }
-    with open(
-        get_relative_path("options.yaml"), mode="w+", encoding="utf-8"
-    ) as file:
+    with open(get_relative_path("options.yaml"), mode="w+", encoding="utf-8") as file:
         yaml.dump(option_data_base, file)
     return option_data_base
 

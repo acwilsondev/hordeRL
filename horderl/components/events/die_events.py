@@ -22,7 +22,9 @@ class Die(Event):
 
 
 class DeathListener(Component, ABC):
-    """Called when the entity dies."""
+    """
+    Called when the entity dies.
+    """
 
     @abstractmethod
     def on_die(self, scene):

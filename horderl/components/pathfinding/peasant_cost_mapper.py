@@ -8,7 +8,9 @@ from ..pathfinding.cost_mapper import CostMapper
 
 
 class PeasantCostMapper(CostMapper):
-    """Apply an additional cost to anything that might be painful to step on."""
+    """
+    Apply an additional cost to anything that might be painful to step on.
+    """
 
     def get_cost_map(self, scene):
         size = (settings.MAP_WIDTH, settings.MAP_HEIGHT)

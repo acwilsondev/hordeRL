@@ -19,7 +19,9 @@ def distance(x1, y1, x2, y2):
 
 
 def distance_squared(x1, y1, x2, y2):
-    """Return the distance between two points, squared."""
+    """
+    Return the distance between two points, squared.
+    """
     return (x1 - x2) ** 2 + (y1 - y2) ** 2
 
 
@@ -34,7 +36,9 @@ def get_3_by_3_box(x, y):
 
 
 def get_box(start_loc, end_loc):
-    """Get a box defined by the top left and bottom right points."""
+    """
+    Get a box defined by the top left and bottom right points.
+    """
     tiles = set()
     start_x, start_y = start_loc
     end_x, end_y = end_loc
@@ -57,8 +61,5 @@ def is_visible(scene, entity: int):
 
 def get_all_positions():
     return {
-        p
-        for p in product(
-            range(0, settings.MAP_WIDTH), range(0, settings.MAP_HEIGHT)
-        )
+        p for p in product(range(0, settings.MAP_WIDTH), range(0, settings.MAP_HEIGHT))
     }

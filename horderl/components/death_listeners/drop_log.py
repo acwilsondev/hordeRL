@@ -7,7 +7,9 @@ from horderl.content.getables.fallen_log import make_fallen_log
 
 @dataclass
 class DropFallenLog(DeathListener):
-    """Drop gold when the owner dies."""
+    """
+    Drop gold when the owner dies.
+    """
 
     def on_die(self, scene):
         self._log_info("dropped a log on death")

@@ -13,7 +13,9 @@ from horderl.engine import constants, core
 
 @dataclass
 class PainterBrain(Brain, ABC):
-    """Provide a base class for debug object placing controllers."""
+    """
+    Provide a base class for debug object placing controllers.
+    """
 
     energy_cost: int = EnergyActor.INSTANT
     cursor: int = constants.INVALID

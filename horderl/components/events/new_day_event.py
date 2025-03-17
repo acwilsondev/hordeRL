@@ -7,7 +7,9 @@ from horderl.components.base_components.events import Event
 
 @dataclass
 class DayBegan(Event):
-    """Add this to an entity to have it delete itself after some time."""
+    """
+    Add this to an entity to have it delete itself after some time.
+    """
 
     day: int = 0
 
@@ -20,7 +22,9 @@ class DayBegan(Event):
 
 @dataclass
 class DayBeganListener(Component, ABC):
-    """A world building step."""
+    """
+    A world building step.
+    """
 
     @abstractmethod
     def on_new_day(self, scene, day):

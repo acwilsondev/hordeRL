@@ -2,26 +2,26 @@ from typing import Tuple
 
 import numpy as np
 
-from .. import settings
-from ..components.base_components.class_register import LoadClasses
-from ..components.events.start_game_events import StartGame
-from ..components.population import Population
-from ..components.serialization.load_game import LoadGame
-from ..components.sound.battle_music import BattleMusic
-from ..components.sound.start_music import StartMusic
-from ..components.world_beauty import WorldBeauty
-from ..components.world_building.set_worldbuilder_params import SelectBiome
-from ..content.physics_controller import make_physics_controller
-from ..content.tax_handler import make_tax_handler
-from ..content.utilities import make_calendar
-from ..engine import GameScene, core, palettes
-from ..engine.component_manager import ComponentManager
-from ..engine.constants import PLAYER_ID
-from ..engine.core import timed
-from ..engine.message import Message
-from ..gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
-from ..gui.help_tab import HelpTab
-from ..gui.labels import (
+from horderl import settings
+from horderl.components.base_components.class_register import LoadClasses
+from horderl.components.events.start_game_events import StartGame
+from horderl.components.population import Population
+from horderl.components.serialization.load_game import LoadGame
+from horderl.components.sound.battle_music import BattleMusic
+from horderl.components.sound.start_music import StartMusic
+from horderl.components.world_beauty import WorldBeauty
+from horderl.components.world_building.set_worldbuilder_params import SelectBiome
+from horderl.content.physics_controller import make_physics_controller
+from horderl.content.tax_handler import make_tax_handler
+from horderl.content.utilities import make_calendar
+from horderl.engine import GameScene, core, palettes
+from horderl.engine.component_manager import ComponentManager
+from horderl.engine.constants import PLAYER_ID
+from horderl.engine.core import timed
+from horderl.engine.message import Message
+from horderl.gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
+from horderl.gui.help_tab import HelpTab
+from horderl.gui.labels import (
     AbilityLabel,
     CalendarLabel,
     GoldLabel,
@@ -30,16 +30,17 @@ from ..gui.labels import (
     SpeedLabel,
     VillageNameLabel,
 )
-from ..gui.message_box import MessageBox
-from ..gui.play_window import PlayWindow
-from ..gui.popup_message import PopupMessage
-from ..gui.vertical_anchor import VerticalAnchor
-from ..systems import act, control_turns, move
+from horderl.gui.message_box import MessageBox
+from horderl.gui.play_window import PlayWindow
+from horderl.gui.popup_message import PopupMessage
+from horderl.gui.vertical_anchor import VerticalAnchor
+from horderl.systems import act, control_turns, move
 
 
 class DefendScene(GameScene):
     """
-    Core gameplay scene responsible for managing the main game loop during village defense.
+    Core gameplay scene responsible for managing the main game loop during village
+    defense.
 
     This scene manages all aspects of village defense gameplay including:
     - Combat and movement systems
@@ -51,6 +52,7 @@ class DefendScene(GameScene):
     The DefendScene integrates multiple game systems and serves as the central
     coordinator for the main gameplay experience, connecting player actions
     with game mechanics and visual representation.
+
     """
 
     def __init__(self, from_file=""):
@@ -63,6 +65,7 @@ class DefendScene(GameScene):
         Args:
             from_file (str, optional): Path to a save file to load. If empty, starts a new game.
                                       Defaults to "".
+
         """
         super().__init__()
         self.player = PLAYER_ID
@@ -88,9 +91,7 @@ class DefendScene(GameScene):
         )
 
         anchor = VerticalAnchor(1, 1)
-        anchor.add_element(
-            Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________")
-        )
+        anchor.add_element(Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________"))
         anchor.add_element(HealthBar(1, 0))
         anchor.add_element(Thwackometer(1, 0))
         anchor.add_element(SpeedLabel(1, 0))
@@ -118,7 +119,8 @@ class DefendScene(GameScene):
 
     def on_load(self):
         """
-        Initialize the component manager and load all necessary game systems when the scene becomes active.
+        Initialize the component manager and load all necessary game systems when the
+        scene becomes active.
 
         This method is called when the scene is pushed to the scene stack and becomes active.
         It sets up:
@@ -130,6 +132,7 @@ class DefendScene(GameScene):
         - World beauty and population systems
 
         The method handles both new game creation and loading saved games.
+
         """
         self.cm = ComponentManager()
         self.play_window.cm = self.cm
@@ -150,13 +153,15 @@ class DefendScene(GameScene):
 
     def popup_message(self, message: str):
         """
-        Display a prominent popup message to the player while also adding it to the message log.
+        Display a prominent popup message to the player while also adding it to the
+        message log.
 
         This method serves as a high-visibility notification system for important game events
         that require the player's immediate attention.
 
         Args:
             message (str): The text content to display in the popup and add to the message log.
+
         """
         self.message(message)
         self.add_gui_element(PopupMessage(message))
@@ -176,6 +181,7 @@ class DefendScene(GameScene):
 
         This structured approach ensures game systems are processed in the correct order,
         maintaining game logic consistency.
+
         """
         act.run(self)
         move.run(self)
@@ -193,6 +199,7 @@ class DefendScene(GameScene):
             text (str): The text content of the message.
             color (Tuple[int, int, int], optional): RGB color tuple for the message.
                                                     Defaults to palettes.MEAT.
+
         """
         if len(self.messages) > 20:
             self.messages.pop(0)
@@ -207,5 +214,6 @@ class DefendScene(GameScene):
 
         Args:
             text (str): The warning text to display.
+
         """
         self.message(text, color=palettes.HORDELING)

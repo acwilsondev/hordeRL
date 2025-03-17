@@ -43,9 +43,7 @@ class DigHoleActor(Brain):
         hole_x = x + direction[0]
         hole_y = y + direction[1]
         if not _in_bounds(hole_x, hole_y):
-            scene.message(
-                "You can't build outside of the town.", color=palettes.WHITE
-            )
+            scene.message("You can't build outside of the town.", color=palettes.WHITE)
             self.back_out(scene)
         elif _is_empty(scene, hole_x, hole_y):
             self._apply_dig_hole(hole_x, hole_y, scene)
@@ -89,25 +87,22 @@ def _in_bounds(x, y):
 def _is_empty(scene, x, y) -> bool:
     target_coords = scene.cm.get(
         Coordinates,
-        query=lambda coords: coords.x == x
-        and coords.y == y
-        and not coords.buildable,
+        query=lambda coords: coords.x == x and coords.y == y and not coords.buildable,
     )
     return not target_coords
 
 
 def _get_diggables(scene, x, y) -> List[int]:
-    """Return True if there's something that can be removed by digging."""
+    """
+    Return True if there's something that can be removed by digging.
+    """
     fillable_entities = scene.cm.get(
         Coordinates,
         query=lambda coords: coords.x == x
         and coords.y == y
         and scene.cm.get_one(Diggable, entity=coords.entity),
     )
-    return [
-        fe.entity
-        for fe in sorted(fillable_entities, key=lambda fe: fe.priority)
-    ]
+    return [fe.entity for fe in sorted(fillable_entities, key=lambda fe: fe.priority)]
 
 
 KEY_ACTION_MAP = {

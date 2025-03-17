@@ -22,7 +22,9 @@ class LoadClasses(Event):
 
 @dataclass
 class LoadClassListener(Component, ABC):
-    """A world building step."""
+    """
+    A world building step.
+    """
 
     @abstractmethod
     def on_load_class(self, scene):

@@ -6,7 +6,9 @@ from ..components.events.die_events import Die
 
 @dataclass
 class DieOnAttackFinished(OnAttackFinishedListener):
-    """After this entity attacks, it dies."""
+    """
+    After this entity attacks, it dies.
+    """
 
     def on_attack_finished(self, scene, caller):
         if caller == self.entity:

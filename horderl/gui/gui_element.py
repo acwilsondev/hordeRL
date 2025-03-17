@@ -7,7 +7,9 @@ from ..engine.core import get_id
 
 @dataclass
 class GuiElement:
-    """Form the base behavior of a GuiElement."""
+    """
+    Form the base behavior of a GuiElement.
+    """
 
     x: int = 0
     y: int = 0
@@ -21,6 +23,7 @@ class GuiElement:
         Perform any actions necessary before rendering.
 
         Called while pushing the scene, after the scene's on_load method.
+
         """
 
     def update(self, scene) -> None:

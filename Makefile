@@ -4,8 +4,8 @@ install:
 	poetry install --with dev
 
 format:
-	poetry run black --line-length 80 -- .
-	poetry run isort .
+	poetry run black .
+	poetry run isort --profile=black .
 
 lint:
 	poetry run flake8 .

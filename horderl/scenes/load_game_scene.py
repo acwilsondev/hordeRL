@@ -1,23 +1,23 @@
 import os
 
-from .. import settings
-from ..engine import GameScene, palettes
-from ..gui.easy_menu import EasyMenu
-from ..gui.labels import Label
-from ..scenes.defend_scene import DefendScene
+from horderl import settings
+from horderl.engine import GameScene, palettes
+from horderl.gui.easy_menu import EasyMenu
+from horderl.gui.labels import Label
+from horderl.scenes.defend_scene import DefendScene
 
 
 class LoadMenuScene(GameScene):
-    """Show a menu with links to other scenes."""
+    """
+    Show a menu with links to other scenes.
+    """
 
     def __init__(self):
         super().__init__()
         self.title = "Load a village?"
         center_x = (settings.SCREEN_WIDTH - len(self.title)) // 2
         center_y = settings.SCREEN_HEIGHT // 2 - 4
-        title_label = Label(
-            center_x, center_y, self.title, fg=palettes.FRESH_BLOOD
-        )
+        title_label = Label(center_x, center_y, self.title, fg=palettes.FRESH_BLOOD)
         self.add_gui_element(title_label)
 
     def before_update(self):
@@ -27,7 +27,9 @@ class LoadMenuScene(GameScene):
         self.render()
 
     def update(self):
-        """Show the menu and wait for player selection."""
+        """
+        Show the menu and wait for player selection.
+        """
         files = []
 
         for file in os.listdir("."):

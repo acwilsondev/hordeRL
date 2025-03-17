@@ -1,12 +1,13 @@
 """
-Crops Module
+Crops Module.
 
-This module handles crop entities in the game, which are valuable resources that
-farmers grow and players must protect from hordelings. Crops have monetary value
-and can be harvested at the end of the season for gold.
+This module handles crop entities in the game, which are valuable resources that farmers
+grow and players must protect from hordelings. Crops have monetary value and can be
+harvested at the end of the season for gold.
 
 Crops are part of the agricultural system and represent one of the main economic
 elements that players need to protect to succeed.
+
 """
 
 from typing import List, Tuple
@@ -52,6 +53,7 @@ def make_crops(
         Tuple[int, List[Component]]: A tuple containing:
             - The entity ID of the created crop
             - A list of components that make up the crop entity
+
     """
     entity_id = core.get_id()
     components: List[Component] = [

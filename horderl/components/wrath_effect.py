@@ -9,7 +9,9 @@ from ..components.tags.hordeling_tag import HordelingTag
 
 @dataclass
 class WrathEffect(EnergyActor):
-    """Hordelings will spawn at this object's location."""
+    """
+    Hordelings will spawn at this object's location.
+    """
 
     energy_cost: int = EnergyActor.INSTANT
 

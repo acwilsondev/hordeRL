@@ -12,7 +12,9 @@ from ...scenes.start_menu import get_start_menu
 
 @dataclass
 class QuitGameListener(Component, ABC):
-    """Respond to a request to quit the game."""
+    """
+    Respond to a request to quit the game.
+    """
 
     @abstractmethod
     def on_quit_game(self, scene):
@@ -20,7 +22,9 @@ class QuitGameListener(Component, ABC):
 
 
 class QuitGame(Event):
-    """Signal an intent to quit the game."""
+    """
+    Signal an intent to quit the game.
+    """
 
     def listener_type(self):
         return QuitGameListener

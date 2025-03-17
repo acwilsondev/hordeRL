@@ -2,15 +2,15 @@ from dataclasses import dataclass
 
 from horderl import settings
 from horderl.components.events.start_game_events import GameStartListener
-from horderl.components.season_reset_listeners.seasonal_actor import (
-    SeasonResetListener,
-)
+from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
 from horderl.components.serialization.save_game import SaveGame
 
 
 @dataclass
 class SaveOnSeasonReset(SeasonResetListener, GameStartListener):
-    """Save the game each season."""
+    """
+    Save the game each season.
+    """
 
     def on_game_start(self, scene):
         self.autosave(scene)

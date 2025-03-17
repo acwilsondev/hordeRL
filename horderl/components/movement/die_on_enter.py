@@ -6,7 +6,9 @@ from horderl.components.events.step_event import EnterListener
 
 @dataclass
 class DieOnEnter(EnterListener):
-    """Whenever the owning entity is stepped on, it dies."""
+    """
+    Whenever the owning entity is stepped on, it dies.
+    """
 
     def on_enter(self, scene, stepper):
         self._log_debug(f"entity stepped on")

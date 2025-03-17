@@ -6,7 +6,9 @@ from ..events.step_event import EnterListener
 
 @dataclass
 class DrainOnEnter(EnterListener):
-    """Whenever the owning entity takes a step into a water containing square, pick it up."""
+    """
+    Whenever the owning entity takes a step into a water containing square, pick it up.
+    """
 
     damage: int = 0
 

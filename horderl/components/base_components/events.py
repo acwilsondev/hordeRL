@@ -8,7 +8,9 @@ from horderl.engine.core import log_debug
 
 @dataclass
 class Event(EnergyActor):
-    """Define an event that notifies listeners."""
+    """
+    Define an event that notifies listeners.
+    """
 
     energy_cost: int = EnergyActor.INSTANT
 
@@ -25,20 +27,29 @@ class Event(EnergyActor):
 
     @abstractmethod
     def listener_type(self):
-        """Return the type of listener to notify."""
+        """
+        Return the type of listener to notify.
+        """
         raise NotImplementedError("Must subclass Event")
 
     @abstractmethod
     def notify(self, scene: GameScene, listener) -> None:
-        """Notify a listener of the event."""
+        """
+        Notify a listener of the event.
+        """
         raise NotImplementedError("Must subclass Event")
 
     def _before_notify(self, scene: GameScene) -> None:
-        """Define actions to take before listeners have been notified."""
+        """
+        Define actions to take before listeners have been notified.
+        """
         pass
 
     def _after_notify(self, scene: GameScene) -> None:
-        """Define actions to take after listeners have been notified but before deleting the event."""
+        """
+        Define actions to take after listeners have been notified but before deleting
+        the event.
+        """
         pass
 
     def _after_remove(self, scene: GameScene) -> None:

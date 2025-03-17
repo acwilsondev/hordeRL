@@ -6,7 +6,9 @@ from ..gui.labels import Label
 
 
 class FPSCounter(GuiElement):
-    """Automatically monitor FPS with a label."""
+    """
+    Automatically monitor FPS with a label.
+    """
 
     def __init__(self, x, y):
         super().__init__(x, y)

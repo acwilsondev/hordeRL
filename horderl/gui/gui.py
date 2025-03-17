@@ -4,7 +4,9 @@ from .. import settings
 
 
 class Gui:
-    """Represent the engine's GUI"""
+    """
+    Represent the engine's GUI.
+    """
 
     def __init__(self, width=0, height=0, title=""):
         libtcodpy.console_set_custom_font(

@@ -7,7 +7,10 @@ from horderl.engine import constants
 
 @dataclass
 class ScheduleRebuild(DeathListener):
-    """When this wall dies, set a delayed trigger to attempt to rebuild at the season reset."""
+    """
+    When this wall dies, set a delayed trigger to attempt to rebuild at the season
+    reset.
+    """
 
     root: int = constants.INVALID
 

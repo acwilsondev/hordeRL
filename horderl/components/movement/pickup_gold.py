@@ -6,7 +6,9 @@ from ..pickup_gold import GoldPickup
 
 
 class PickupGoldOnStep(StepListener):
-    """Whenever the owning entity takes a step into a gold containing square, pick it up."""
+    """
+    Whenever the owning entity takes a step into a gold containing square, pick it up.
+    """
 
     def on_step(self, scene, point):
         self._log_debug("checking for gold at new location")
@@ -15,6 +17,4 @@ class PickupGoldOnStep(StepListener):
             if gold_coords.is_at_point(point):
                 scene.cm.delete(event.entity)
                 scene.gold += event.amount
-                scene.message(
-                    f"You found {event.amount} gold.", color=palettes.GOLD
-                )
+                scene.message(f"You found {event.amount} gold.", color=palettes.GOLD)

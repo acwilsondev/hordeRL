@@ -15,7 +15,9 @@ from horderl.engine.utilities import get_3_by_3_square, get_box
 
 
 def place_farmstead(scene) -> EntityId:
-    """Place a new house, farm, peasant, and connect them to the road network."""
+    """
+    Place a new house, farm, peasant, and connect them to the road network.
+    """
     coords: Set[Coordinates] = {
         (coord.x, coord.y) for coord in scene.cm.get(Coordinates)
     }
@@ -111,14 +113,12 @@ def _add_house(scene, x, y) -> EntityId:
         peasant = house[-1][-1]
         peasant_id = peasant[0]
 
-        crop_color = random.choice(
-            [
-                palettes.FIRE,
-                palettes.FOILAGE_C,
-                palettes.FRESH_BLOOD,
-                palettes.GOLD,
-            ]
-        )
+        crop_color = random.choice([
+            palettes.FIRE,
+            palettes.FOILAGE_C,
+            palettes.FRESH_BLOOD,
+            palettes.GOLD,
+        ])
         for point in finalized_plot:
             plot = make_farm_plot(point[0], point[1], peasant_id, crop_color)
             scene.cm.add(*plot[1])

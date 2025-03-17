@@ -9,7 +9,9 @@ from ..engine.constants import PRIORITY_LOW
 
 
 def make_player_corpse(x, y):
-    """Create a corpse with some remaining agency."""
+    """
+    Create a corpse with some remaining agency.
+    """
     entity_id = core.get_id()
 
     return (

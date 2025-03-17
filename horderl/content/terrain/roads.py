@@ -67,9 +67,7 @@ def can_connect_to_road(scene, start: Tuple[int, int]) -> bool:
         return False
 
 
-def connect_point_to_road_network(
-    scene, start: Tuple[int, int], trim_start: int = 0
-):
+def connect_point_to_road_network(scene, start: Tuple[int, int], trim_start: int = 0):
     road_coords = scene.cm.get(RoadMarker, project=lambda rm: (rm.entity, 100))
     cost_map = RoadCostMapper().get_cost_map(scene)
     best_entity: int = get_new_target(scene, cost_map, start, road_coords)

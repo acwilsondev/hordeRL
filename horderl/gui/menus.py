@@ -9,7 +9,9 @@ from ..gui.gui_element import GuiElement
 
 
 class Menu(GuiElement):
-    """Defines a multiple choice menu within the game."""
+    """
+    Defines a multiple choice menu within the game.
+    """
 
     def __init__(self, header, options, width, callback):
         super().__init__(0, 0, single_shot=True)
@@ -22,7 +24,9 @@ class Menu(GuiElement):
             self.pages.append([])
 
     def render(self, panel):
-        """Draw a menu to the screen and return the user's option."""
+        """
+        Draw a menu to the screen and return the user's option.
+        """
         page = 0
         index = None
         while not index:
@@ -40,8 +44,7 @@ class Menu(GuiElement):
             ) and has_next:
                 page += 1
             elif (
-                key_sym is tcod.event.KeySym.LEFT
-                or key_sym is tcod.event.KeySym.p
+                key_sym is tcod.event.KeySym.LEFT or key_sym is tcod.event.KeySym.p
             ) and has_previous:
                 page -= 1
             elif key_sym is tcod.event.KeySym.RETURN:
@@ -58,9 +61,7 @@ class Menu(GuiElement):
                 if self.callback:
                     self.callback(None)
 
-    def show_and_get_input(
-        self, root, options, has_next=False, has_previous=False
-    ):
+    def show_and_get_input(self, root, options, has_next=False, has_previous=False):
         lines = [
             "\n".join(
                 textwrap.wrap(
@@ -83,9 +84,7 @@ class Menu(GuiElement):
         if has_previous:
             height += 1
         window = tcod.console.Console(self.width, height, order="F")
-        window.draw_rect(
-            0, 0, self.width, height, 0, fg=palettes.WHITE, bg=None
-        )
+        window.draw_rect(0, 0, self.width, height, 0, fg=palettes.WHITE, bg=None)
         for i, _ in enumerate(lines):
             window.print(1, 0 + i, lines[i])
 

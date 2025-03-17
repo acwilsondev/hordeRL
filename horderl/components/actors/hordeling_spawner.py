@@ -11,7 +11,9 @@ from horderl.content.enemies.sneaker import make_sneaker
 
 @dataclass
 class HordelingSpawner(EnergyActor):
-    """Hordelings will spawn at this object's location."""
+    """
+    Hordelings will spawn at this object's location.
+    """
 
     energy_cost: int = EnergyActor.HOURLY
     waves: int = 1
@@ -29,7 +31,9 @@ class HordelingSpawner(EnergyActor):
 
 
 def spawn_hordeling(scene):
-    """Add a hordeling spawner to a random edge of the map."""
+    """
+    Add a hordeling spawner to a random edge of the map.
+    """
     x, y = get_wall_coords()
     roll = random.random()
     if roll > 0.8:
@@ -40,14 +44,12 @@ def spawn_hordeling(scene):
 
 
 def get_wall_coords():
-    return random.choice(
-        [
-            (get_random_width_location(), 0),
-            (0, get_random_height_location()),
-            (settings.MAP_WIDTH - 1, get_random_height_location()),
-            (get_random_width_location(), settings.MAP_HEIGHT - 1),
-        ]
-    )
+    return random.choice([
+        (get_random_width_location(), 0),
+        (0, get_random_height_location()),
+        (settings.MAP_WIDTH - 1, get_random_height_location()),
+        (get_random_width_location(), settings.MAP_HEIGHT - 1),
+    ])
 
 
 def get_random_width_location():

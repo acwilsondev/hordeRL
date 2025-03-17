@@ -59,9 +59,7 @@ class Calendar(EnergyActor):
                 self._end_attack(scene)
 
     def _start_attack(self, scene):
-        scene.popup_message(
-            "The Horde has arrived. Prepare to defend the village!"
-        )
+        scene.popup_message("The Horde has arrived. Prepare to defend the village!")
         spirits_wrath = scene.cm.get_one(
             WorldBeauty, entity=core.get_id("world")
         ).spirits_wrath
@@ -77,9 +75,7 @@ class Calendar(EnergyActor):
         self.is_recharging = True
         self.increment()
         scene.cm.add(DayBegan(entity=self.entity))
-        scene.cm.add(
-            ResetSeason(entity=self.entity, season=self.get_season_string())
-        )
+        scene.cm.add(ResetSeason(entity=self.entity, season=self.get_season_string()))
 
 
 def still_under_attack(scene):

@@ -1,6 +1,6 @@
 import sys
 
-from ..engine import GameScene
+from horderl.engine import GameScene
 
 
 class QuitScene(GameScene):
@@ -15,15 +15,16 @@ class QuitScene(GameScene):
 
     Unlike most scenes that have complex update logic and rendering, this
     scene has a single purpose: to exit the game safely.
+
     """
 
     def __init__(self):
         """
         Initialize the QuitScene.
 
-        The constructor simply calls the parent GameScene constructor.
-        No additional initialization is needed as this scene has minimal
-        functionality.
+        The constructor simply calls the parent GameScene constructor. No additional
+        initialization is needed as this scene has minimal functionality.
+
         """
         super().__init__()
 
@@ -31,11 +32,11 @@ class QuitScene(GameScene):
         """
         Perform the scene's update logic, which exits the game.
 
-        This method is called once during the scene's lifecycle. It
-        immediately calls sys.exit() to terminate the game process
-        with a standard successful exit code (0 by default).
+        This method is called once during the scene's lifecycle. It immediately calls
+        sys.exit() to terminate the game process with a standard successful exit code (0
+        by default).
 
-        No rendering or further processing occurs after this method
-        is called.
+        No rendering or further processing occurs after this method is called.
+
         """
         sys.exit()

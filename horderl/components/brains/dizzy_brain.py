@@ -45,9 +45,7 @@ class DizzyBrain(Brain):
                     f"deferred intention {intention} (usually for movement intentions)"
                 )
                 self._log_debug("taking a dizzy step")
-                continuing_actor = (
-                    self.back_out(scene) if self.turns <= 1 else self
-                )
+                continuing_actor = self.back_out(scene) if self.turns <= 1 else self
                 self.turns -= 1
                 continuing_actor.intention = random.choice(STEPS)
 

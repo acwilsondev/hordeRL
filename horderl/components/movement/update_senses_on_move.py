@@ -11,7 +11,10 @@ from ..material import Material
 
 
 class UpdateSenses(
-    StepListener, GameStartListener, TerrainChangedListener, AttackStartListener
+    StepListener,
+    GameStartListener,
+    TerrainChangedListener,
+    AttackStartListener,
 ):
     def on_attack_start(self, scene):
         self.refresh_fov(scene)

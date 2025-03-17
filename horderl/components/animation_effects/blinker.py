@@ -7,7 +7,9 @@ from horderl.engine import palettes
 
 @dataclass
 class AnimationBlinker(TimedActor):
-    """Flip the colors back and forth."""
+    """
+    Flip the colors back and forth.
+    """
 
     timer_delay: int = 250
     original_symbol: str = None

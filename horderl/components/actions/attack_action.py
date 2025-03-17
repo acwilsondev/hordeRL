@@ -16,7 +16,9 @@ from horderl.engine import constants
 
 @dataclass
 class AttackAction(EnergyActor):
-    """Instance of a live attack."""
+    """
+    Instance of a live attack.
+    """
 
     target: int = constants.INVALID
     damage: int = 0
@@ -69,6 +71,4 @@ class AttackAction(EnergyActor):
             target_attributes.hp = max(0, target_attributes.hp)
             if target_attributes.hp <= 0:
                 self._log_info(f"applying Die effect")
-                scene.cm.add(
-                    Die(entity=target_attributes.entity, killer=self.entity)
-                )
+                scene.cm.add(Die(entity=target_attributes.entity, killer=self.entity))

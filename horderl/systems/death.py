@@ -3,7 +3,9 @@ from ..components.events.die_events import Die
 
 
 def run(scene):
-    """Invoke death effects for all creatures with 0 or fewer hps."""
+    """
+    Invoke death effects for all creatures with 0 or fewer hps.
+    """
     healths = [f for f in scene.cm.get(Attributes) if (f.hp <= 0)]
     for health in healths:
         scene.cm.add(Die(entity=health.entity))

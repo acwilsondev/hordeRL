@@ -12,26 +12,18 @@ from ..engine import core
 
 
 def _fill_hole(scene, hole, painter):
-    world_params = scene.cm.get_one(
-        WorldParameters, entity=core.get_id("world")
-    )
+    world_params = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
 
     coordinates = scene.cm.get_one(Coordinates, entity=hole)
     scene.cm.delete(hole)
-    water = painter(
-        coordinates.x, coordinates.y, rapidness=world_params.river_rapids
-    )
+    water = painter(coordinates.x, coordinates.y, rapidness=world_params.river_rapids)
     scene.cm.add(*water[1])
 
 
 def is_adjacent(scene, first: int, second: int):
     first_coord: Coordinates = scene.cm.get_one(Coordinates, entity=first)
     second_coord: Coordinates = scene.cm.get_one(Coordinates, entity=second)
-    return (
-        first_coord
-        and second_coord
-        and first_coord.distance_from(second_coord) <= 1
-    )
+    return first_coord and second_coord and first_coord.distance_from(second_coord) <= 1
 
 
 @dataclass

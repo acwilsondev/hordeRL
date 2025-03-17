@@ -1,7 +1,9 @@
 """
 This module defines tree entities that can be placed in the game world.
-It provides factory functions to create different types of trees with their
-appropriate components, appearances, and behaviors.
+
+It provides factory functions to create different types of trees with their appropriate
+components, appearances, and behaviors.
+
 """
 
 from horderl.components import Appearance, Attributes, Coordinates
@@ -40,6 +42,7 @@ def make_wall_tree(x, y):
         tuple: A tuple containing (entity_id, component_list) where:
             - entity_id (int): The unique identifier for this tree entity
             - component_list (list): A list of components that define the tree's behavior
+
     """
     entity_id = core.get_id()
     return (
@@ -65,7 +68,9 @@ def make_wall_tree(x, y):
     )
 
 
-tree_description = "A tree of the Toshim Plains. You can chop it down to sell its valuable wood."
+tree_description = (
+    "A tree of the Toshim Plains. You can chop it down to sell its valuable wood."
+)
 
 
 def make_tree(x, y):
@@ -86,6 +91,7 @@ def make_tree(x, y):
             - component_list (list): A list of components that define the tree's behavior,
               including Attributes for health, TreeTag for identification, and components
               for handling what happens when the tree is cut down
+
     """
     entity_id = core.get_id()
     return (

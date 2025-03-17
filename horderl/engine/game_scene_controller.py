@@ -12,7 +12,8 @@ from ..gui.gui import Gui
 
 
 class GameSceneController:
-    """Finite State Machine (FSM) Controller for managing game scenes.
+    """
+    Finite State Machine (FSM) Controller for managing game scenes.
 
     This class serves as the central controller for the game's scene system,
     implementing a stack-based FSM architecture. It manages scene transitions,
@@ -26,11 +27,13 @@ class GameSceneController:
 
     The scene at the top of the stack is considered the active scene and
     receives update, render, and input events during each game loop iteration.
+
     """
 
     @log_debug(__name__)
     def __init__(self, title: str):
-        """Initialize a new GameSceneController instance.
+        """
+        Initialize a new GameSceneController instance.
 
         Creates a new controller with an empty scene stack and initializes
         all required subsystems (GUI, component manager, sound).
@@ -46,6 +49,7 @@ class GameSceneController:
             sound (DefaultSoundController): Controls game audio.
             _scene_stack (List[GameScene]): Stack of active game scenes with the
                                            most recent scene at the top.
+
         """
         self.title: str = title
         self.gui: Gui = Gui(
@@ -58,7 +62,8 @@ class GameSceneController:
 
     @log_debug(__name__)
     def push_scene(self, scene: GameScene):
-        """Add a new scene to the top of the scene stack and make it active.
+        """
+        Add a new scene to the top of the scene stack and make it active.
 
         This method performs the following actions:
         1. Loads the scene by providing references to controller, component manager,
@@ -71,6 +76,7 @@ class GameSceneController:
 
         Args:
             scene (GameScene): The scene instance to push onto the stack and activate.
+
         """
         scene.load(self, self.cm, self.gui, self.sound)
         for gui_element in scene.gui_elements:
@@ -79,7 +85,8 @@ class GameSceneController:
 
     @log_debug(__name__)
     def pop_scene(self):
-        """Remove and return the top scene from the scene stack.
+        """
+        Remove and return the top scene from the scene stack.
 
         This method:
         1. Removes the current active scene from the top of the stack
@@ -93,6 +100,7 @@ class GameSceneController:
 
         Note:
             Will raise IndexError if the stack is empty.
+
         """
         scene = self._scene_stack.pop()
         scene.on_unload()
@@ -100,7 +108,8 @@ class GameSceneController:
 
     @log_debug(__name__)
     def clear_scenes(self):
-        """Remove all scenes from the scene stack.
+        """
+        Remove all scenes from the scene stack.
 
         Completely empties the scene stack, effectively terminating any running
         game states. This is typically used during game shutdown or when
@@ -110,12 +119,14 @@ class GameSceneController:
             This method does not call on_unload() on the scenes being cleared.
             If cleanup is needed, pop_scene() should be called for each scene
             individually before using this method.
+
         """
         self._scene_stack.clear()
 
     @log_debug(__name__)
     def start(self):
-        """Invoke the FSM execution and run the main game loop.
+        """
+        Invoke the FSM execution and run the main game loop.
 
         This method starts the main game loop that continues until the scene stack
         is empty. For each iteration of the loop, it:
@@ -133,6 +144,7 @@ class GameSceneController:
         This method coordinates the execution flow between scenes and ensures
         proper sequencing of the update and render cycles according to the
         FSM design pattern.
+
         """
         while self._scene_stack:
             current_scene = self._scene_stack[-1]

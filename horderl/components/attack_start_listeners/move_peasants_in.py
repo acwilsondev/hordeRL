@@ -10,7 +10,9 @@ from horderl.components.tags.peasant_tag import PeasantTag
 
 @dataclass
 class MovePeasantsIn(AttackStartListener):
-    """Move peasants into their homes when the attack begins."""
+    """
+    Move peasants into their homes when the attack begins.
+    """
 
     def on_attack_start(self, scene):
         self._log_info("moving peasants into homes")
@@ -29,9 +31,7 @@ def _move_peasant_home(scene, peasant) -> None:
     if correct_home:
         house_coords = scene.cm.get_one(Coordinates, entity=correct_home.entity)
         if house_coords:
-            peasant_coords = scene.cm.get_one(
-                Coordinates, entity=peasant.entity
-            )
+            peasant_coords = scene.cm.get_one(Coordinates, entity=peasant.entity)
             if peasant_coords:
                 peasant_coords.x = house_coords.x
                 peasant_coords.y = house_coords.y

@@ -23,9 +23,7 @@ class GrowIntoTree(DayBeganListener):
             self._log_warning(f"no weather found")
             return
 
-        self.time_to_grow = max(
-            0, self.time_to_grow - max(0, weather.temperature)
-        )
+        self.time_to_grow = max(0, self.time_to_grow - max(0, weather.temperature))
 
         if self.time_to_grow <= 0:
             self._log_debug("sapling growing into a tree")

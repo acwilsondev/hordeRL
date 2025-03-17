@@ -1,10 +1,10 @@
-from horderl.components.season_reset_listeners.seasonal_actor import (
-    SeasonResetListener,
-)
+from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
 
 
 class CollectTaxesForKing(SeasonResetListener):
-    """Collect taxes from the player at the end of the year."""
+    """
+    Collect taxes from the player at the end of the year.
+    """
 
     value: int = 25
 
@@ -17,8 +17,8 @@ class CollectTaxesForKing(SeasonResetListener):
 
         if scene.gold < self.value:
             scene.popup_message(
-                f"The king attempted to collect {self.value}c, "
-                f"but you only had {scene.gold}c! For this, your life is forfeit. Game Over."
+                f"The king attempted to collect {self.value}c, but you only had"
+                f" {scene.gold}c! For this, your life is forfeit. Game Over."
             )
             scene.pop()
             return

@@ -13,7 +13,9 @@ class Brain(EnergyActor, ABC):
     old_brain: int = constants.INVALID
 
     def swap(self, scene: GameScene, new_brain: "Brain") -> None:
-        """Swap this brain with a new brain."""
+        """
+        Swap this brain with a new brain.
+        """
         new_brain.old_brain = self.id
         scene.cm.stash_component(self.id)
         scene.cm.add(new_brain)

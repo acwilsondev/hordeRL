@@ -11,7 +11,9 @@ from ..enums import Intention
 
 @dataclass
 class Ability(Component, ABC):
-    """Represent a Player ability."""
+    """
+    Represent a Player ability.
+    """
 
     unlock_cost: int = constants.INVALID
     use_cost: int = constants.INVALID

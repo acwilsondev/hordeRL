@@ -1,9 +1,7 @@
 from dataclasses import dataclass
 
 from ..components.events.tree_cut_event import TreeCutListener
-from ..components.season_reset_listeners.seasonal_actor import (
-    SeasonResetListener,
-)
+from ..components.season_reset_listeners.seasonal_actor import SeasonResetListener
 from ..components.world_building.world_parameters import WorldParameters
 from ..engine import core, palettes
 
@@ -30,7 +28,8 @@ class WorldBeauty(TreeCutListener, SeasonResetListener):
                 1, self.spirits_attitude - world_params.tree_cut_anger
             )
             self._log_info(
-                f"decreased wrath {self.spirits_wrath} and attitude {self.spirits_attitude}"
+                f"decreased wrath {self.spirits_wrath} and attitude"
+                f" {self.spirits_attitude}"
             )
 
     def on_season_reset(self, scene, season):
@@ -39,5 +38,6 @@ class WorldBeauty(TreeCutListener, SeasonResetListener):
             self.spirits_attitude += 1
             self.spirits_wrath -= 1
             self._log_info(
-                f"improved wrath {self.spirits_wrath} and attitude {self.spirits_attitude}"
+                f"improved wrath {self.spirits_wrath} and attitude"
+                f" {self.spirits_attitude}"
             )

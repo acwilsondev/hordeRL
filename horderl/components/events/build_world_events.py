@@ -7,7 +7,9 @@ from horderl.components.base_components.events import Event
 
 @dataclass
 class BuildWorld(Event):
-    """Event to trigger world building steps."""
+    """
+    Event to trigger world building steps.
+    """
 
     def listener_type(self):
         return BuildWorldListener
@@ -18,7 +20,9 @@ class BuildWorld(Event):
 
 @dataclass
 class BuildWorldListener(Component, ABC):
-    """A world building step."""
+    """
+    A world building step.
+    """
 
     @abstractmethod
     def on_build_world(self, scene):

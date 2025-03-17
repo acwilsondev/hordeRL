@@ -8,7 +8,9 @@ from horderl.components.base_components.timed_actor import TimedActor
 
 @dataclass
 class AnimationFloat(TimedActor):
-    """Randomly float up or right."""
+    """
+    Randomly float up or right.
+    """
 
     duration: int = 10
     timer_delay: int = 125

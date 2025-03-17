@@ -22,6 +22,7 @@ class LoadGame(EnergyActor):
         energy_cost (int): The energy cost of performing the load action.
                            Set to INSTANT by default to execute immediately.
         file_name (str): Path to the save file that should be loaded.
+
     """
 
     energy_cost: int = EnergyActor.INSTANT
@@ -42,6 +43,7 @@ class LoadGame(EnergyActor):
 
         Returns:
             None
+
         """
         scene.cm.delete_component(self)
 
@@ -65,6 +67,7 @@ class LoadGame(EnergyActor):
 
         Returns:
             None
+
         """
         start = core.time_ms()
         self._log_info(f"attempting to read game")

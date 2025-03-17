@@ -2,12 +2,8 @@ import random
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.components.brains.ability_actors.place_thing_actor import (
-    is_buildable,
-)
-from horderl.components.season_reset_listeners.seasonal_actor import (
-    SeasonResetListener,
-)
+from horderl.components.brains.ability_actors.place_thing_actor import is_buildable
+from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
 from horderl.components.tags.tree_tag import TreeTag
 from horderl.components.weather.weather import Weather
 from horderl.content.terrain.saplings import make_sapling
@@ -16,7 +12,9 @@ from horderl.engine.utilities import get_3_by_3_box
 
 @dataclass
 class SpawnSaplingInSpring(SeasonResetListener):
-    """Cause trees to spawn saplings."""
+    """
+    Cause trees to spawn saplings.
+    """
 
     # Attaches to the calendar- if attached to individual trees, will cause a circular dependency with saplings.
 

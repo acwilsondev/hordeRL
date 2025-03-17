@@ -66,9 +66,7 @@ class RangedAttackActor(Brain):
     def _get_next_enemy(self, scene):
         current_target = scene.cm.get_one(HordelingTag, entity=self.target)
         all_enemies = scene.cm.get(HordelingTag)
-        visible_enemies = [
-            e for e in all_enemies if is_visible(scene, e.entity)
-        ]
+        visible_enemies = [e for e in all_enemies if is_visible(scene, e.entity)]
         enemies = sorted(visible_enemies, key=lambda x: x.id)
 
         index = enemies.index(current_target)

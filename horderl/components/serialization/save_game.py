@@ -26,6 +26,7 @@ class SaveGame(EnergyActor):
         extra (Dict): Optional additional data to include in the save file,
                       provided as a dictionary that gets merged with the
                       serialized game state.
+
     """
 
     energy_cost: int = EnergyActor.INSTANT
@@ -50,6 +51,7 @@ class SaveGame(EnergyActor):
 
         Returns:
             None
+
         """
         # we don't want this object to get caught in the save game
         scene.cm.delete_component(self)

@@ -10,7 +10,9 @@ from horderl.engine import GameScene, constants
 
 @dataclass
 class StepEvent(Event):
-    """Emitted when the owning entity takes a step."""
+    """
+    Emitted when the owning entity takes a step.
+    """
 
     new_location: Tuple[int, int] = (-1, -1)
 
@@ -26,19 +28,17 @@ class StepEvent(Event):
         this_coords = scene.cm.get_one(Coordinates, entity=self.entity)
         enter_listeners = scene.cm.get(EnterListener)
         for enter_listener in enter_listeners:
-            other_coords = scene.cm.get_one(
-                Coordinates, entity=enter_listener.entity
-            )
+            other_coords = scene.cm.get_one(Coordinates, entity=enter_listener.entity)
             if this_coords.is_at(other_coords):
                 scene.cm.add(
-                    EnterEvent(
-                        entity=self.entity, entered=enter_listener.entity
-                    )
+                    EnterEvent(entity=self.entity, entered=enter_listener.entity)
                 )
 
 
 class StepListener(Component, ABC):
-    """Trigger when the owning entity takes a step."""
+    """
+    Trigger when the owning entity takes a step.
+    """
 
     @abstractmethod
     def on_step(self, scene, point):
@@ -47,7 +47,9 @@ class StepListener(Component, ABC):
 
 @dataclass
 class EnterEvent(Event):
-    """Emitted when the owning entity steps on another entity (if that entity cares)."""
+    """
+    Emitted when the owning entity steps on another entity (if that entity cares).
+    """
 
     entered: int = constants.INVALID
 
@@ -60,7 +62,9 @@ class EnterEvent(Event):
 
 
 class EnterListener(Component, ABC):
-    """Trigger when an entity steps on the owning entity."""
+    """
+    Trigger when an entity steps on the owning entity.
+    """
 
     @abstractmethod
     def on_enter(self, scene, stepper):
