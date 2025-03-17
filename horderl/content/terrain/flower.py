@@ -1,9 +1,9 @@
-from components import Appearance, Coordinates
-from components.base_components.entity import Entity
-from components.material import Material
-from components.movement.die_on_enter import DieOnEnter
-from engine import core, palettes
-from engine.constants import PRIORITY_LOWEST
+from ...components import Appearance, Coordinates
+from ...components.base_components.entity import Entity
+from ...components.material import Material
+from ...components.movement.die_on_enter import DieOnEnter
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_LOWEST
 
 
 def make_flower(x, y, color):

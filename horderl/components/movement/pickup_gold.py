@@ -1,7 +1,7 @@
-from components import Coordinates
-from components.events.step_event import StepListener
-from components.pickup_gold import GoldPickup
-from engine import palettes
+from .. import Coordinates
+from ..events.step_event import StepListener
+from ..pickup_gold import GoldPickup
+from ...engine import palettes
 
 
 class PickupGoldOnStep(StepListener):

@@ -1,9 +1,9 @@
 import random
 from dataclasses import dataclass
 
-from ... import settings
-from .. import Coordinates
-from ..base_components.timed_actor import TimedActor
+from horderl import settings
+from horderl.components import Coordinates
+from horderl.components.base_components.timed_actor import TimedActor
 
 
 @dataclass

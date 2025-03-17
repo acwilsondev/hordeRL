@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import List
 
+# TODO extract this functionality to the engine package
 import tcod
 
-from components.base_components.component import Component
+from ..base_components.component import Component
 
 
 @dataclass

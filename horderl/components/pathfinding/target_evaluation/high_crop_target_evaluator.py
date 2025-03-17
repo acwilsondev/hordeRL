@@ -1,7 +1,7 @@
-from components.pathfinding.target_evaluation.target_evaluator import \
+from ...pathfinding.target_evaluation.target_evaluator import \
     TargetEvaluator
-from components.tags.crop_info import CropInfo
-from components.target_value import TargetValue
+from ...tags.crop_info import CropInfo
+from ...target_value import TargetValue
 
 
 class HighCropTargetEvaluator(TargetEvaluator):

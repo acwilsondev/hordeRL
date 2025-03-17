@@ -1,9 +1,9 @@
 import numpy as np
 
-import settings
-from components import Coordinates
-from components.pathfinder_cost import PathfinderCost
-from components.pathfinding.cost_mapper import CostMapper
+from ... import settings
+from .. import Coordinates
+from ..pathfinder_cost import PathfinderCost
+from ..pathfinding.cost_mapper import CostMapper
 
 
 class NormalCostMapper(CostMapper):

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from ... import Coordinates
-from ...attacks.attack_effects.attack_effect import AttackEffect
-from ....content.states import knockback_animation
+from horderl.components import Coordinates
+from horderl.components.attacks.attack_effects.attack_effect import AttackEffect
+from horderl.content.states import knockback_animation
 
 
 @dataclass

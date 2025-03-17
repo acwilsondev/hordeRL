@@ -1,6 +1,5 @@
-from components.pathfinding.target_evaluation.target_evaluator import \
-    TargetEvaluator
-from components.tags.hordeling_tag import HordelingTag
+from ...pathfinding.target_evaluation.target_evaluator import TargetEvaluator
+from ...tags.hordeling_tag import HordelingTag
 
 
 class AllyTargetEvaluator(TargetEvaluator):

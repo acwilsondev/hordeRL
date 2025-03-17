@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from .. import Coordinates
-from ..brains.peasant_actor import PeasantActor
-from ..events.attack_started_events import AttackStartListener
-from ..house_structure import HouseStructure
-from ..relationships.residence import Residence
-from ..tags.peasant_tag import PeasantTag
+from horderl.components import Coordinates
+from horderl.components.brains.peasant_actor import PeasantActor
+from horderl.components.events.attack_started_events import AttackStartListener
+from horderl.components.house_structure import HouseStructure
+from horderl.components.relationships.residence import Residence
+from horderl.components.tags.peasant_tag import PeasantTag
 
 
 @dataclass

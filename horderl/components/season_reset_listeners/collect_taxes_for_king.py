@@ -1,4 +1,4 @@
-from components.season_reset_listeners.seasonal_actor import \
+from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
 
 

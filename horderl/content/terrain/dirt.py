@@ -1,20 +1,19 @@
 import random
-from typing import List, Tuple
 
-from components import Appearance, Coordinates
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from components.diggable import Diggable
-from components.material import Material
-from components.season_reset_listeners.grow_grass import GrowGrass
-from engine import core, palettes
-from engine.constants import PRIORITY_LOWEST
+from ...components import Appearance, Coordinates
+from ...components.base_components.component import Component
+from ...components.base_components.entity import Entity
+from ...components.diggable import Diggable
+from ...components.material import Material
+from ...components.season_reset_listeners.grow_grass import GrowGrass
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_LOWEST
 
 
 def make_dirt(x, y):
     entity_id = core.get_id()
     appearance = '"' if random.random() < 0.5 else "'"
-    entity: Tuple[int, List[Component]] = (
+    entity: tuple[int, list[Component]] = (
         entity_id,
         [
             Entity(id=entity_id, entity=entity_id, name="dirt", static=True),

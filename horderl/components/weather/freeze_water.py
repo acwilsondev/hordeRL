@@ -1,16 +1,16 @@
 import random
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
-from components.events.attack_started_events import AttackStartListener
-from components.events.hole_dug_events import HoleDug
-from components.season_reset_listeners.seasonal_actor import \
+from ..base_components.energy_actor import EnergyActor
+from ..events.attack_started_events import AttackStartListener
+from ..events.hole_dug_events import HoleDug
+from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.tags.ice_tag import IceTag
-from components.tags.water_tag import WaterTag
-from components.weather.weather import Weather
-from content.terrain.water import freeze, thaw
-from engine import core
+from ..tags.ice_tag import IceTag
+from ..tags.water_tag import WaterTag
+from ..weather.weather import Weather
+from ...content.terrain.water import freeze, thaw
+from ...engine import core
 
 
 @dataclass

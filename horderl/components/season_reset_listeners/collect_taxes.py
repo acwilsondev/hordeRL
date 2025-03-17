@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import List
 
-from components.season_reset_listeners.seasonal_actor import \
+from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.tax_value import TaxValue
-from engine import palettes
+from ..tax_value import TaxValue
+from ...engine import palettes
 
 
 @dataclass

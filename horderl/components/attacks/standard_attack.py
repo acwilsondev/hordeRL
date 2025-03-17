@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from .. import Coordinates
-from ..actions.attack_action import AttackAction
-from ..attacks.attack import Attack
-from ...content.attacks import stab
+from horderl.components import Coordinates
+from horderl.components.actions.attack_action import AttackAction
+from horderl.components.attacks.attack import Attack
+from horderl.content.attacks import stab
 
 
 @dataclass

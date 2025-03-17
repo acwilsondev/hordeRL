@@ -2,16 +2,16 @@ from typing import Iterator, List, Tuple
 
 import tcod.path
 
-from components import Appearance, Coordinates
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from components.pathfinding.road_cost_mapper import RoadCostMapper
-from components.pathfinding.target_selection import get_new_target
-from components.states.move_cost_affectors import EasyTerrain
-from components.tags.road_marker import RoadMarker
-from components.tags.water_tag import WaterTag
-from engine import core, palettes
-from engine.constants import PRIORITY_LOWEST
+from ...components import Appearance, Coordinates
+from ...components.base_components.component import Component
+from ...components.base_components.entity import Entity
+from ...components.pathfinding.road_cost_mapper import RoadCostMapper
+from ...components.pathfinding.target_selection import get_new_target
+from ...components.states.move_cost_affectors import EasyTerrain
+from ...components.tags.road_marker import RoadMarker
+from ...components.tags.water_tag import WaterTag
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_LOWEST
 
 
 def make_road(x, y):

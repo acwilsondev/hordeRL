@@ -1,13 +1,13 @@
 import random
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
-from components.events.new_day_event import DayBeganListener
-from components.events.start_game_events import GameStartListener
-from components.season_reset_listeners.seasonal_actor import \
+from ..base_components.energy_actor import EnergyActor
+from ..events.new_day_event import DayBeganListener
+from ..events.start_game_events import GameStartListener
+from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.world_building.world_parameters import WorldParameters
-from engine import core
+from ..world_building.world_parameters import WorldParameters
+from ...engine import core
 
 
 @dataclass

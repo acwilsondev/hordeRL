@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
-from components.weather.weather import Weather
-from engine import core
+from ..base_components.energy_actor import EnergyActor
+from ..weather.weather import Weather
+from ...engine import core
 
 
 @dataclass

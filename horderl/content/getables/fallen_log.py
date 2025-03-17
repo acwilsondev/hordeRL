@@ -1,9 +1,9 @@
-from components import Appearance, Coordinates
-from components.base_components.entity import Entity
-from components.material import Material
-from components.pickup_gold import GoldPickup
-from engine import core, palettes
-from engine.constants import PRIORITY_LOW
+from ...components import Appearance, Coordinates
+from ...components.base_components.entity import Entity
+from ...components.material import Material
+from ...components.pickup_gold import GoldPickup
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_LOW
 
 description = "A log has fallen here. This will fetch a fair price on the market."
 

@@ -1,10 +1,10 @@
 import numpy as np
 
-import settings
-from components import Attributes, Coordinates
-from components.base_components.entity import Entity
-from components.material import Material
-from components.pathfinding.cost_mapper import CostMapper
+from ... import settings
+from .. import Attributes, Coordinates
+from ..base_components.entity import Entity
+from ..material import Material
+from .cost_mapper import CostMapper
 
 
 class StraightLineCostMapper(CostMapper):

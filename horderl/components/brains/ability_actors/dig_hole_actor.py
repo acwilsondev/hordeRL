@@ -3,17 +3,17 @@ from typing import List
 
 import tcod
 
-from .... import settings
-from ... import Coordinates
-from ...base_components.energy_actor import EnergyActor
-from ...base_components.entity import Entity
-from ...brains.brain import Brain
-from ...diggable import Diggable
-from ...enums import Intention
-from ...events.die_events import Die
-from ....content.terrain.dirt import make_dirt
-from ....content.terrain.hole import make_hole
-from ....engine import core, palettes
+from horderl import settings
+from horderl.components import Coordinates
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.base_components.entity import Entity
+from horderl.components.brains.brain import Brain
+from horderl.components.diggable import Diggable
+from horderl.components.enums import Intention
+from horderl.components.events.die_events import Die
+from horderl.content.terrain.dirt import make_dirt
+from horderl.content.terrain.hole import make_hole
+from horderl.engine import core, palettes
 
 
 @dataclass

@@ -1,13 +1,13 @@
 import numpy as np
 import tcod
 
-import settings
-from components import Coordinates
-from components.events.attack_started_events import AttackStartListener
-from components.events.start_game_events import GameStartListener
-from components.events.step_event import StepListener
-from components.events.terrain_changed_event import TerrainChangedListener
-from components.material import Material
+from ... import settings
+from .. import Coordinates
+from ..events.attack_started_events import AttackStartListener
+from ..events.start_game_events import GameStartListener
+from ..events.step_event import StepListener
+from ..events.terrain_changed_event import TerrainChangedListener
+from ..material import Material
 
 
 class UpdateSenses(

@@ -1,11 +1,11 @@
-from components import Appearance, Coordinates
-from components.animation_effects.reset_owner_animation import \
+from ...components import Appearance, Coordinates
+from ...components.animation_effects.reset_owner_animation import \
     ResetOwnerAnimation
-from components.base_components.entity import Entity
-from components.events.delete_event import Delete
-from components.relationships.owner import Owner
-from engine import core, palettes
-from engine.constants import PRIORITY_HIGH
+from ...components.base_components.entity import Entity
+from ...components.events.delete_event import Delete
+from ...components.relationships.owner import Owner
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_HIGH
 
 description = "The farmer swings their tool. Being untrained in the ways of farmery, you don't know how this helps."
 

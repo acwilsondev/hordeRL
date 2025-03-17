@@ -4,19 +4,19 @@ It provides factory functions to create different types of trees with their
 appropriate components, appearances, and behaviors.
 """
 
-from components import Appearance, Attributes, Coordinates
-from components.base_components.entity import Entity
-from components.death_listeners.npc_corpse import Corpse
-from components.death_listeners.terrain_changes_on_death import \
+from ...components import Appearance, Attributes, Coordinates
+from ...components.base_components.entity import Entity
+from ...components.death_listeners.npc_corpse import Corpse
+from ...components.death_listeners.terrain_changes_on_death import \
     TerrainChangedOnDeath
-from components.faction import Faction
-from components.material import Material
-from components.pathfinder_cost import PathfinderCost
-from components.sellable import Sellable
-from components.tags.tree_tag import TreeTag
-from components.tree_cut_on_die import TreeCutOnDeath
-from engine import core, palettes
-from engine.constants import PRIORITY_MEDIUM
+from ...components.faction import Faction
+from ...components.material import Material
+from ...components.pathfinder_cost import PathfinderCost
+from ...components.sellable import Sellable
+from ...components.tags.tree_tag import TreeTag
+from ...components.tree_cut_on_die import TreeCutOnDeath
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_MEDIUM
 
 wall_tree_description = (
     "This hardy species of Toshim tree towers over the village. "

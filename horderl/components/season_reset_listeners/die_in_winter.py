@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 
-from components.actors.calendar_actor import Calendar
-from components.season_reset_listeners.seasonal_actor import \
+from horderl.components.tags.crop_info import CropInfo
+from horderl.engine import palettes
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.tags.crop_info import CropInfo
-from engine import core, palettes
 
 
 @dataclass

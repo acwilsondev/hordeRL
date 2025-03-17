@@ -1,18 +1,18 @@
 import random
 
-from components import Appearance, Coordinates
-from components.animation_effects.randomized_blinker import RandomizedBlinker
-from components.base_components.entity import Entity
-from components.diggable import Diggable
-from components.flooder import Flooder
-from components.material import Material
-from components.movement.drain_on_enter import DrainOnEnter
-from components.pathfinder_cost import PathfinderCost
-from components.states.move_cost_affectors import DifficultTerrain
-from components.tags.ice_tag import IceTag
-from components.tags.water_tag import WaterTag
-from engine import core, palettes
-from engine.constants import PRIORITY_LOWEST
+from ...components import Appearance, Coordinates
+from ...components.animation_effects.randomized_blinker import RandomizedBlinker
+from ...components.base_components.entity import Entity
+from ...components.diggable import Diggable
+from ...components.flooder import Flooder
+from ...components.material import Material
+from ...components.movement.drain_on_enter import DrainOnEnter
+from ...components.pathfinder_cost import PathfinderCost
+from ...components.states.move_cost_affectors import DifficultTerrain
+from ...components.tags.ice_tag import IceTag
+from ...components.tags.water_tag import WaterTag
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_LOWEST
 
 
 def make_water(x, y, rapidness=5000):

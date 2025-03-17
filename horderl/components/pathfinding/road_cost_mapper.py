@@ -1,9 +1,9 @@
 import numpy as np
 
-import settings
-from components import Attributes, Coordinates
-from components.pathfinding.cost_mapper import CostMapper
-from components.tags.water_tag import WaterTag
+from ... import settings
+from .. import Attributes, Coordinates
+from ..pathfinding.cost_mapper import CostMapper
+from ..tags.water_tag import WaterTag
 
 
 class RoadCostMapper(CostMapper):

@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from ...components.base_components.component import Component
-from ...components.base_components.events import Event
-from ...engine import GameScene
+from horderl.components.base_components.component import Component
+from horderl.components.base_components.events import Event
+from horderl.engine import GameScene
 
 
 @dataclass

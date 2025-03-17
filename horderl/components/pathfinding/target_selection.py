@@ -1,10 +1,8 @@
-import logging
-
 import numpy as np
 import tcod
 
-import settings
-from components import Coordinates
+from ... import settings
+from .. import Coordinates
 
 
 def get_new_target(scene, cost_map, start, entity_values) -> int:

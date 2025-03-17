@@ -1,12 +1,12 @@
 from typing import List, Tuple
 
-from components import Appearance, Coordinates
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from components.relationships.resident import Resident
-from components.season_reset_listeners.rebuilder import Rebuilder
-from engine import palettes
-from engine.constants import PRIORITY_MEDIUM
+from ...components import Appearance, Coordinates
+from ...components.base_components.component import Component
+from ...components.base_components.entity import Entity
+from ...components.relationships.resident import Resident
+from ...components.season_reset_listeners.rebuilder import Rebuilder
+from ...engine import palettes
+from ...engine.constants import PRIORITY_MEDIUM
 
 description = "Kinda creepy to be looking in this person's house, no?"
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from components.actions.attack_action import AttackAction
-from components.events.step_event import EnterListener
+from ..actions.attack_action import AttackAction
+from ..events.step_event import EnterListener
 
 
 @dataclass

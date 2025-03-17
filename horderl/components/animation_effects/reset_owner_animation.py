@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from ..base_components.actor import Actor
-from ..events.delete_event import DeleteListener
-from ..relationships.owner import Owner
+from horderl.components.base_components.actor import Actor
+from horderl.components.events.delete_event import DeleteListener
+from horderl.components.relationships.owner import Owner
 
 
 @dataclass

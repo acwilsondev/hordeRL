@@ -1,9 +1,8 @@
 import numpy as np
 import tcod
 
-import settings
-from components import Coordinates
-from components.pathfinding.cost_mapper import CostMapper
+from ... import settings
+from ..pathfinding.cost_mapper import CostMapper
 
 
 class SimplexCostMapper(CostMapper):

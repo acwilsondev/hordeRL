@@ -11,18 +11,18 @@ Crops are part of the agricultural system and represent one of the main economic
 elements that players need to protect to succeed.
 """
 
-from components import Appearance, Attributes, Coordinates, target_value
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from components.death_listeners.npc_corpse import Corpse
-from components.edible import Edible
-from components.faction import Faction
-from components.relationships.farmed_by import FarmedBy
-from components.tags.crop_info import CropInfo
-from components.target_value import TargetValue
-from components.tax_value import TaxValue
-from engine import core, palettes
-from engine.constants import PRIORITY_LOW
+from ...components import Appearance, Attributes, Coordinates, target_value
+from ...components.base_components.component import Component
+from ...components.base_components.entity import Entity
+from ...components.death_listeners.npc_corpse import Corpse
+from ...components.edible import Edible
+from ...components.faction import Faction
+from ...components.relationships.farmed_by import FarmedBy
+from ...components.tags.crop_info import CropInfo
+from ...components.target_value import TargetValue
+from ...components.tax_value import TaxValue
+from ...engine import core, palettes
+from ...engine.constants import PRIORITY_LOW
 
 crops_description = (
     "A valuable crop. They're easy pickens for the hordelings, "
