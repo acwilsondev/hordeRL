@@ -38,7 +38,8 @@ class PlayerBrain(Brain):
                 return
             else:
                 self._log_debug(
-                    f"deferred intention {intention} (usually for movement intentions)"
+                    f"deferred intention {intention} (usually for movement"
+                    " intentions)"
                 )
                 self.intention = intention
 

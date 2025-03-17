@@ -15,5 +15,7 @@ class DrainOnEnter(EnterListener):
     def on_enter(self, scene, stepper):
         self._log_debug(f"entity stepped on")
         scene.cm.add(
-            AttackAction(entity=self.entity, target=stepper, damage=self.damage)
+            AttackAction(
+                entity=self.entity, target=stepper, damage=self.damage
+            )
         )

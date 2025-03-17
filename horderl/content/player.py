@@ -30,7 +30,9 @@ from ..components.options import Options
 from ..components.season_reset_listeners.move_player_to_town_center import (
     MovePlayerToTownCenter,
 )
-from ..components.season_reset_listeners.save_on_season import SaveOnSeasonReset
+from ..components.season_reset_listeners.save_on_season import (
+    SaveOnSeasonReset,
+)
 from ..components.target_value import PLAYER, TargetValue
 from ..engine import PLAYER_ID, palettes
 
@@ -41,7 +43,9 @@ def make_player(x, y):
     return (
         entity_id,
         [
-            Entity(id=entity_id, entity=entity_id, name=settings.CHARACTER_NAME),
+            Entity(
+                id=entity_id, entity=entity_id, name=settings.CHARACTER_NAME
+            ),
             Coordinates(entity=entity_id, x=x, y=y),
             Appearance(
                 entity=entity_id,

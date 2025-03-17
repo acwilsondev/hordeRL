@@ -5,7 +5,9 @@ from horderl.components.actions.attack_action import AttackAction
 from horderl.components.attacks.attack import Attack
 from horderl.components.brains.brain import Brain
 from horderl.components.events.attack_started_events import AttackStartListener
-from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 from horderl.components.tags.hordeling_tag import HordelingTag
 from horderl.content.attacks import stab
 from horderl.engine import constants
@@ -55,9 +57,13 @@ class StationaryAttackActor(Brain, SeasonResetListener, AttackStartListener):
         facing = coords.direction_towards(target)
         attack = scene.cm.get_one(Attack, entity=self.entity)
         scene.cm.add(
-            AttackAction(entity=self.entity, target=self.target, damage=attack.damage)
+            AttackAction(
+                entity=self.entity, target=self.target, damage=attack.damage
+            )
         )
-        scene.cm.add(*stab(self.entity, coords.x + facing[0], coords.y + facing[1])[1])
+        scene.cm.add(
+            *stab(self.entity, coords.x + facing[0], coords.y + facing[1])[1]
+        )
         self.pass_turn()
 
     def is_target_in_range(self, scene) -> bool:

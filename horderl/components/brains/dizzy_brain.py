@@ -42,10 +42,13 @@ class DizzyBrain(Brain):
                 coords = scene.cm.get_one(Coordinates, entity=self.entity)
                 scene.cm.add(*confused_animation(coords.x, coords.y)[1])
                 self._log_debug(
-                    f"deferred intention {intention} (usually for movement intentions)"
+                    f"deferred intention {intention} (usually for movement"
+                    " intentions)"
                 )
                 self._log_debug("taking a dizzy step")
-                continuing_actor = self.back_out(scene) if self.turns <= 1 else self
+                continuing_actor = (
+                    self.back_out(scene) if self.turns <= 1 else self
+                )
                 self.turns -= 1
                 continuing_actor.intention = random.choice(STEPS)
 

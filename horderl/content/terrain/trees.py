@@ -69,7 +69,8 @@ def make_wall_tree(x, y):
 
 
 tree_description = (
-    "A tree of the Toshim Plains. You can chop it down to sell its valuable wood."
+    "A tree of the Toshim Plains. You can chop it down to sell its valuable"
+    " wood."
 )
 
 

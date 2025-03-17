@@ -22,7 +22,9 @@ class GrowCrops(AttackStartListener):
         if calendar.season > 2:
             return
 
-        crop_info = scene.cm.get(CropInfo, query=lambda ci: ci.field_id == self.entity)
+        crop_info = scene.cm.get(
+            CropInfo, query=lambda ci: ci.field_id == self.entity
+        )
         if crop_info:
             return
 
@@ -33,5 +35,7 @@ class GrowCrops(AttackStartListener):
 
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         scene.cm.add(
-            *make_crops(coords.x, coords.y, farmer, self.entity, self.crop_color)[1]
+            *make_crops(
+                coords.x, coords.y, farmer, self.entity, self.crop_color
+            )[1]
         )

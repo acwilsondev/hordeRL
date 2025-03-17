@@ -12,7 +12,12 @@ elements that players need to protect to succeed.
 
 from typing import List, Tuple
 
-from horderl.components import Appearance, Attributes, Coordinates, target_value
+from horderl.components import (
+    Appearance,
+    Attributes,
+    Coordinates,
+    target_value,
+)
 from horderl.components.base_components.component import Component
 from horderl.components.base_components.entity import Entity
 from horderl.components.death_listeners.npc_corpse import Corpse
@@ -26,8 +31,8 @@ from horderl.engine import core, palettes
 from horderl.engine.constants import PRIORITY_LOW
 
 crops_description = (
-    "A valuable crop. They're easy pickens for the hordelings, "
-    "but they will sell for 5 gold at the end of the season- if you protect them."
+    "A valuable crop. They're easy pickens for the hordelings, but they will"
+    " sell for 5 gold at the end of the season- if you protect them."
 )
 
 

@@ -14,7 +14,9 @@ from horderl.components.events.peasant_events import PeasantAdded
 from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.movement.move import Move
-from horderl.components.pathfinding.peasant_cost_mapper import PeasantCostMapper
+from horderl.components.pathfinding.peasant_cost_mapper import (
+    PeasantCostMapper,
+)
 from horderl.components.relationships.residence import Residence
 from horderl.components.tags.peasant_tag import PeasantTag
 from horderl.components.target_value import PEASANT, TargetValue

@@ -2,7 +2,9 @@ from dataclasses import dataclass
 from typing import List
 
 from horderl.components import Attributes, Coordinates
-from horderl.components.attacks.attack_effects.attack_effect import AttackEffect
+from horderl.components.attacks.attack_effects.attack_effect import (
+    AttackEffect,
+)
 from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.components.base_components.entity import Entity
 from horderl.components.cry_for_help import CryForHelp
@@ -28,7 +30,8 @@ class AttackAction(EnergyActor):
         target_entity = scene.cm.get_one(Entity, entity=self.target)
 
         scene.warn(
-            f"{this_entity.name} dealt {self.damage} dmg to {target_entity.name}!"
+            f"{this_entity.name} dealt {self.damage} dmg to"
+            f" {target_entity.name}!"
         )
 
         self._log_info(f"dealing {self.damage} dmg to {self.target}")
@@ -71,4 +74,6 @@ class AttackAction(EnergyActor):
             target_attributes.hp = max(0, target_attributes.hp)
             if target_attributes.hp <= 0:
                 self._log_info(f"applying Die effect")
-                scene.cm.add(Die(entity=target_attributes.entity, killer=self.entity))
+                scene.cm.add(
+                    Die(entity=target_attributes.entity, killer=self.entity)
+                )

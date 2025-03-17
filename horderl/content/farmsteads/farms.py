@@ -6,8 +6,8 @@ from horderl.engine import core, palettes
 from horderl.engine.constants import PRIORITY_LOW
 
 description = (
-    "A field, turned for planting. By the end of Spring and Summer, the peasant will"
-    " grow crops here."
+    "A field, turned for planting. By the end of Spring and Summer, the"
+    " peasant will grow crops here."
 )
 
 

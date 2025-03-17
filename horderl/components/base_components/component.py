@@ -31,7 +31,10 @@ class Component(object):
         logging.error(self.__msg_format(message))
 
     def __msg_format(self, message):
-        return f"EID#{self.entity}::{self.__class__.__name__}#{self.id} - {message}"
+        return (
+            f"EID#{self.entity}::{self.__class__.__name__}#{self.id} -"
+            f" {message}"
+        )
 
     def __init_subclass__(cls, **kwargs):
         Component.subclasses[cls.__name__] = cls

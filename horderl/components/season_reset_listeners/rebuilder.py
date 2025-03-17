@@ -5,7 +5,9 @@ from horderl.components import Coordinates
 from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.components.relationships.resident import Resident
-from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 from horderl.components.tags.peasant_tag import PeasantTag
 from horderl.content.farmsteads.walls import make_wall
 
@@ -74,7 +76,9 @@ class Rebuilder(SeasonResetListener):
 
     def _delete_farms(self, scene):
         self._log_debug(f"deleting farms for house")
-        resident_link: Resident = scene.cm.get_one(Resident, entity=self.entity)
+        resident_link: Resident = scene.cm.get_one(
+            Resident, entity=self.entity
+        )
         if not resident_link:
             self._log_warning(
                 "House with no historical resident found, should not happen"

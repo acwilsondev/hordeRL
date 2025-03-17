@@ -7,9 +7,6 @@ format:
 	poetry run black .
 	poetry run isort --profile=black .
 
-lint:
-	poetry run flake8 .
-
 test:
 	poetry run pytest
 

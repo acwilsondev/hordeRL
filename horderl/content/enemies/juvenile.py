@@ -8,7 +8,6 @@ from horderl.components.death_listeners.drop_gold import DropGold
 from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.faction import Faction
 from horderl.components.material import Material
-from horderl.components.movement.drain_on_enter import DrainOnEnter
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper

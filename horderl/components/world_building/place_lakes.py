@@ -22,19 +22,25 @@ def add_water(scene, x: int, y: int, painter, rapidness) -> None:
 class PlaceLakes(BuildWorldListener):
     def on_build_world(self, scene):
         self._log_info(f"placing lakes in town")
-        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        world_settings = scene.cm.get_one(
+            WorldParameters, entity=core.get_id("world")
+        )
 
         for _ in range(world_settings.lakes):
             x = random.randint(0, settings.MAP_WIDTH - 1)
             y = random.randint(0, settings.MAP_HEIGHT - 1)
-            coords = {(coord.x, coord.y) for coord in scene.cm.get(Coordinates)}
+            coords = {
+                (coord.x, coord.y) for coord in scene.cm.get(Coordinates)
+            }
             if (x, y) not in coords:
                 self.spawn_lake(scene, x, y)
 
     def spawn_lake(self, scene, x: int, y: int) -> None:
         working_set = [(x, y)]
         maximum = 50
-        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        world_settings = scene.cm.get_one(
+            WorldParameters, entity=core.get_id("world")
+        )
         if world_settings.is_water_swampy:
             water_painter = make_swampy_water
         else:

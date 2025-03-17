@@ -10,7 +10,9 @@ from horderl.components.serialization.load_game import LoadGame
 from horderl.components.sound.battle_music import BattleMusic
 from horderl.components.sound.start_music import StartMusic
 from horderl.components.world_beauty import WorldBeauty
-from horderl.components.world_building.set_worldbuilder_params import SelectBiome
+from horderl.components.world_building.set_worldbuilder_params import (
+    SelectBiome,
+)
 from horderl.content.physics_controller import make_physics_controller
 from horderl.content.tax_handler import make_tax_handler
 from horderl.content.utilities import make_calendar
@@ -91,7 +93,9 @@ class DefendScene(GameScene):
         )
 
         anchor = VerticalAnchor(1, 1)
-        anchor.add_element(Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________"))
+        anchor.add_element(
+            Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________")
+        )
         anchor.add_element(HealthBar(1, 0))
         anchor.add_element(Thwackometer(1, 0))
         anchor.add_element(SpeedLabel(1, 0))

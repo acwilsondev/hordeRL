@@ -16,11 +16,15 @@ class PeasantCostMapper(CostMapper):
         size = (settings.MAP_WIDTH, settings.MAP_HEIGHT)
         cost = np.ones(size, dtype=np.int8, order="F")
         for cost_component in scene.cm.get(PathfinderCost):
-            coords = scene.cm.get_one(Coordinates, entity=cost_component.entity)
+            coords = scene.cm.get_one(
+                Coordinates, entity=cost_component.entity
+            )
             cost[coords.x, coords.y] = cost_component.cost
 
         for drain_on_enter in scene.cm.get(DrainOnEnter):
-            coords = scene.cm.get_one(Coordinates, entity=drain_on_enter.entity)
+            coords = scene.cm.get_one(
+                Coordinates, entity=drain_on_enter.entity
+            )
             cost[coords.x, coords.y] += drain_on_enter.damage * 20
 
         return cost

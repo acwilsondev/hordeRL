@@ -19,7 +19,9 @@ class HealOnDally(DallyListener, AttackStartListener, SeasonResetListener):
             attributes = scene.cm.get_one(Attributes, entity=self.entity)
             if attributes.hp < attributes.max_hp:
                 attributes.hp = min(attributes.hp + 1, attributes.max_hp)
-                scene.message("You rest and your wounds heal.", color=palettes.WHITE)
+                scene.message(
+                    "You rest and your wounds heal.", color=palettes.WHITE
+                )
 
     def on_season_reset(self, scene, season):
         self.count = 0

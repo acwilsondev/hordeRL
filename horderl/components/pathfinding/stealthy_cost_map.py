@@ -11,14 +11,20 @@ class StealthyCostMapper(CostMapper):
         size = (settings.MAP_WIDTH, settings.MAP_HEIGHT)
         cost = np.ones(size, dtype=np.int8, order="F")
         for cost_component in scene.cm.get(PathfinderCost):
-            coords = scene.cm.get_one(Coordinates, entity=cost_component.entity)
+            coords = scene.cm.get_one(
+                Coordinates, entity=cost_component.entity
+            )
             cost[coords.x, coords.y] = cost_component.cost
 
         visibility_cost = np.where(
             scene.visibility_map,
-            np.ones((settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int)
+            np.ones(
+                (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int
+            )
             * 5,
-            np.ones((settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int),
+            np.ones(
+                (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int
+            ),
         )
         cost *= visibility_cost
 

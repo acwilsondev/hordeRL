@@ -41,7 +41,9 @@ class RandomizedBlinker(TimedActor):
                 self.new_symbol, self.new_color, self.new_bg_color
             )
         self.is_on = not self.is_on
-        self.pass_turn(random.randint(self.timer_delay // 2, self.timer_delay * 2))
+        self.pass_turn(
+            random.randint(self.timer_delay // 2, self.timer_delay * 2)
+        )
 
     def stop(self, scene):
         appearance = scene.cm.get_one(Appearance, entity=self.entity)

@@ -41,7 +41,15 @@ class HelpTab(GuiElement):
             bg=self.bg,
         )
 
-        panel.print(self.x, self.y + 4, "SPACE  : Use Ability", fg=self.mg, bg=self.bg)
-        panel.print(self.x, self.y + 5, "q      : Last Ability", fg=self.mg, bg=self.bg)
-        panel.print(self.x, self.y + 6, "e      : Next Ability", fg=self.mg, bg=self.bg)
-        panel.print(self.x, self.y + 7, "ESC    : Back", fg=self.mg, bg=self.bg)
+        panel.print(
+            self.x, self.y + 4, "SPACE  : Use Ability", fg=self.mg, bg=self.bg
+        )
+        panel.print(
+            self.x, self.y + 5, "q      : Last Ability", fg=self.mg, bg=self.bg
+        )
+        panel.print(
+            self.x, self.y + 6, "e      : Next Ability", fg=self.mg, bg=self.bg
+        )
+        panel.print(
+            self.x, self.y + 7, "ESC    : Back", fg=self.mg, bg=self.bg
+        )

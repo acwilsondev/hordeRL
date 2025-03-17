@@ -47,10 +47,14 @@ class PlayWindow(GuiElement):
 
         # hold terrain view
         self.terrain_console = tcod.console.Console(width, height, order="F")
-        self.shadow_terrain_console = tcod.console.Console(width, height, order="F")
+        self.shadow_terrain_console = tcod.console.Console(
+            width, height, order="F"
+        )
 
         self.black = tcod.console.Console(width, height, order="F")
-        self.console = tcod.console.Console(width, height, order="F")  # buffer console
+        self.console = tcod.console.Console(
+            width, height, order="F"
+        )  # buffer console
 
     def on_load(self) -> None:
         self.regenerate_grass()

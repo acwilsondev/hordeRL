@@ -52,7 +52,8 @@ def load(file):
     real_count = len(active_components)
     if real_count != expected_count:
         logging.warning(
-            f"Mismatched objects on load expected {expected_count}, found {real_count}"
+            f"Mismatched objects on load expected {expected_count}, found"
+            f" {real_count}"
         )
 
     stashed_components = _load_from_data(

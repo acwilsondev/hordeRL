@@ -33,7 +33,8 @@ class PlayerDeadBrain(Brain):
             elif intention is None:
                 self._log_debug(f"found no useable intention")
                 scene.warn(
-                    "You urge your lifeless corpse to action, without much success."
+                    "You urge your lifeless corpse to action, without much"
+                    " success."
                 )
                 return
 

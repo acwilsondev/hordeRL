@@ -79,13 +79,15 @@ class TestComponentManager(unittest.TestCase):
         fs_a = cm.get_one(A, entity=2)
         self.assertIsNone(
             fs_a,
-            "component manager contains base_components that should be orphaned",
+            "component manager contains base_components that should be"
+            " orphaned",
         )
 
         fs_b = cm.get_one(B, entity=2)
         self.assertIsNone(
             fs_b,
-            "component manager contains base_components that should be orphaned",
+            "component manager contains base_components that should be"
+            " orphaned",
         )
 
 

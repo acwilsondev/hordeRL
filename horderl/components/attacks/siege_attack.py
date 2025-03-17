@@ -19,6 +19,8 @@ class SiegeAttack(Attack):
         self._log_debug(f"applying attack against {target}")
         structure = scene.cm.get_one(Structure, entity=target)
         damage = self.damage * 5 if structure else self.damage
-        scene.cm.add(AttackAction(entity=self.entity, target=target, damage=damage))
+        scene.cm.add(
+            AttackAction(entity=self.entity, target=target, damage=damage)
+        )
         target_coords = scene.cm.get_one(Coordinates, target)
         scene.cm.add(*stab(self.entity, target_coords.x, target_coords.y)[1])

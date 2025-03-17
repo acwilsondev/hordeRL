@@ -34,8 +34,12 @@ class SelectBiome(EnergyActor):
                 "Which region?",
                 {
                     "Plains (Easy)": get_settings(scene, get_plains_params),
-                    "Forest (Moderate)": get_settings(scene, get_forest_params),
-                    "Mountains (Hard)": get_settings(scene, get_mountain_params),
+                    "Forest (Moderate)": get_settings(
+                        scene, get_forest_params
+                    ),
+                    "Mountains (Hard)": get_settings(
+                        scene, get_mountain_params
+                    ),
                     "Swamp (Hard)": get_settings(scene, get_swamp_params),
                     "Tundra (Brutal)": get_settings(scene, get_tundra_params),
                 },

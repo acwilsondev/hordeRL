@@ -2,7 +2,9 @@ from dataclasses import dataclass
 from typing import List
 
 from horderl.components import Attributes
-from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 
 
 @dataclass

@@ -29,9 +29,13 @@ def _move_peasant_home(scene, peasant) -> None:
         None,
     )
     if correct_home:
-        house_coords = scene.cm.get_one(Coordinates, entity=correct_home.entity)
+        house_coords = scene.cm.get_one(
+            Coordinates, entity=correct_home.entity
+        )
         if house_coords:
-            peasant_coords = scene.cm.get_one(Coordinates, entity=peasant.entity)
+            peasant_coords = scene.cm.get_one(
+                Coordinates, entity=peasant.entity
+            )
             if peasant_coords:
                 peasant_coords.x = house_coords.x
                 peasant_coords.y = house_coords.y

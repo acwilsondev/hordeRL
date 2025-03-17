@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.components.attacks.attack_effects.attack_effect import AttackEffect
+from horderl.components.attacks.attack_effects.attack_effect import (
+    AttackEffect,
+)
 from horderl.content.states import knockback_animation
 
 
@@ -16,5 +18,7 @@ class KnockbackAttack(AttackEffect):
         target_coords.x += direction[0]
         target_coords.y += direction[1]
 
-        attack_animation = knockback_animation(target_coords.x, target_coords.y)
+        attack_animation = knockback_animation(
+            target_coords.x, target_coords.y
+        )
         scene.cm.add(*attack_animation[1])

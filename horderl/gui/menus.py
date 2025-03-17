@@ -44,7 +44,8 @@ class Menu(GuiElement):
             ) and has_next:
                 page += 1
             elif (
-                key_sym is tcod.event.KeySym.LEFT or key_sym is tcod.event.KeySym.p
+                key_sym is tcod.event.KeySym.LEFT
+                or key_sym is tcod.event.KeySym.p
             ) and has_previous:
                 page -= 1
             elif key_sym is tcod.event.KeySym.RETURN:
@@ -61,7 +62,9 @@ class Menu(GuiElement):
                 if self.callback:
                     self.callback(None)
 
-    def show_and_get_input(self, root, options, has_next=False, has_previous=False):
+    def show_and_get_input(
+        self, root, options, has_next=False, has_previous=False
+    ):
         lines = [
             "\n".join(
                 textwrap.wrap(
@@ -84,7 +87,9 @@ class Menu(GuiElement):
         if has_previous:
             height += 1
         window = tcod.console.Console(self.width, height, order="F")
-        window.draw_rect(0, 0, self.width, height, 0, fg=palettes.WHITE, bg=None)
+        window.draw_rect(
+            0, 0, self.width, height, 0, fg=palettes.WHITE, bg=None
+        )
         for i, _ in enumerate(lines):
             window.print(1, 0 + i, lines[i])
 

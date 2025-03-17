@@ -24,7 +24,9 @@ class ShootAbility(SeasonResetListener, Ability):
 
     def use(self, scene, dispatcher):
         hordelings = [
-            e for e in scene.cm.get(HordelingTag) if is_visible(scene, e.entity)
+            e
+            for e in scene.cm.get(HordelingTag)
+            if is_visible(scene, e.entity)
         ]
         if not hordelings:
             self._handle_confused(scene)

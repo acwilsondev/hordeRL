@@ -5,7 +5,9 @@ from horderl.components import Coordinates
 from horderl.components.brains.peasant_actor import PeasantActor
 from horderl.components.events.start_game_events import GameStartListener
 from horderl.components.relationships.farmed_by import FarmedBy
-from horderl.components.season_reset_listeners.seasonal_actor import SeasonResetListener
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 from horderl.components.tags.peasant_tag import PeasantTag
 
 moves = [(-2, -2), (0, -2), (2, -2), (-2, 0), (2, 0), (-2, 2), (0, 2), (2, 2)]

@@ -17,4 +17,6 @@ class PickupGoldOnStep(StepListener):
             if gold_coords.is_at_point(point):
                 scene.cm.delete(event.entity)
                 scene.gold += event.amount
-                scene.message(f"You found {event.amount} gold.", color=palettes.GOLD)
+                scene.message(
+                    f"You found {event.amount} gold.", color=palettes.GOLD
+                )

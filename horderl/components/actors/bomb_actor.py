@@ -21,7 +21,9 @@ class BombActor(EnergyActor):
             self._explode(scene)
             self.pass_turn()
             return
-        scene.cm.add(*character_animation(coords.x, coords.y, f"{self.turns}")[1])
+        scene.cm.add(
+            *character_animation(coords.x, coords.y, f"{self.turns}")[1]
+        )
         self.turns -= 1
         self.pass_turn()
 
@@ -32,7 +34,9 @@ class BombActor(EnergyActor):
             if is_adjacent(scene, attribute.entity, self.entity):
                 targets.add(attribute.entity)
         for target in list(targets):
-            scene.cm.add(AttackAction(entity=self.entity, target=target, damage=3))
+            scene.cm.add(
+                AttackAction(entity=self.entity, target=target, damage=3)
+            )
 
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         explosion_area = get_3_by_3_square(coords.x, coords.y)
@@ -49,4 +53,8 @@ class BombActor(EnergyActor):
 def is_adjacent(scene, first: int, second: int):
     first_coord: Coordinates = scene.cm.get_one(Coordinates, entity=first)
     second_coord: Coordinates = scene.cm.get_one(Coordinates, entity=second)
-    return first_coord and second_coord and first_coord.distance_from(second_coord) < 2
+    return (
+        first_coord
+        and second_coord
+        and first_coord.distance_from(second_coord) < 2
+    )

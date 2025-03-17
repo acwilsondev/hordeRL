@@ -7,26 +7,26 @@ intro = (
 )
 
 controls = (
-    "Move around with the arrow keys. Switch through your abilities with 'q' and 'e'."
-    " Use an ability with Space."
+    "Move around with the arrow keys. Switch through your abilities with 'q'"
+    " and 'e'. Use an ability with Space."
 )
 
 money = (
-    "Peasants, crops, and other items will grant you income. Some abilities will cost"
-    " gold coins to activate. A few will cost gold to maintain each season.At the end"
-    " of each year, the king will expect a certain amount of taxes, so set some money"
-    " aside."
+    "Peasants, crops, and other items will grant you income. Some abilities"
+    " will cost gold coins to activate. A few will cost gold to maintain each"
+    " season.At the end of each year, the king will expect a certain amount of"
+    " taxes, so set some money aside."
 )
 
 money_pt2 = (
-    "By the way, you can use your 'Sell Things' ability to sell Trees to get some"
-    " initial income."
+    "By the way, you can use your 'Sell Things' ability to sell Trees to get"
+    " some initial income."
 )
 
 attacks = (
-    "There are many kinds of hordelings, and the strength of the attacks will increase"
-    " with time. You should build defenses and hire warriors to help fight against"
-    " their onslaught."
+    "There are many kinds of hordelings, and the strength of the attacks will"
+    " increase with time. You should build defenses and hire warriors to help"
+    " fight against their onslaught."
 )
 
 

@@ -31,7 +31,9 @@ class EasyMenu(GuiElement):
         self.option_map = options
         self.options = [o for o in options.keys()]
         self.width = width
-        self.pages = [self.options[i : i + 10] for i in range(0, len(self.options), 10)]
+        self.pages = [
+            self.options[i : i + 10] for i in range(0, len(self.options), 10)
+        ]
         self.hide_background = hide_background
         self.return_only = return_only
         if len(self.pages) == 0:
@@ -55,11 +57,13 @@ class EasyMenu(GuiElement):
             )
             key_sym = int(key_event.sym)
             if (
-                key_sym == tcod.event.KeySym.RIGHT or key_sym == tcod.event.KeySym.n
+                key_sym == tcod.event.KeySym.RIGHT
+                or key_sym == tcod.event.KeySym.n
             ) and has_next:
                 page += 1
             elif (
-                key_sym == tcod.event.KeySym.LEFT or key_sym == tcod.event.KeySym.p
+                key_sym == tcod.event.KeySym.LEFT
+                or key_sym == tcod.event.KeySym.p
             ) and has_previous:
                 page -= 1
             elif key_sym == tcod.event.KeySym.RETURN:
@@ -80,7 +84,9 @@ class EasyMenu(GuiElement):
                     )
                     callback()
 
-    def show_and_get_input(self, root, options, has_next=False, has_previous=False):
+    def show_and_get_input(
+        self, root, options, has_next=False, has_previous=False
+    ):
         lines = textwrap.wrap(
             self.header,
             self.width,

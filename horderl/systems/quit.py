@@ -6,7 +6,9 @@ from ..scenes.start_menu import get_start_menu
 
 
 def run(scene):
-    quitters = [b for b in scene.cm.get(Actor) if b.intention is Intention.BACK]
+    quitters = [
+        b for b in scene.cm.get(Actor) if b.intention is Intention.BACK
+    ]
     if quitters:
         if settings.AUTOSAVE:
             SaveGame().act(scene)

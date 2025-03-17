@@ -56,7 +56,9 @@ class PlaceThingActor(Brain, ABC):
 def is_buildable(scene, x, y):
     target_coords = scene.cm.get(
         Coordinates,
-        query=lambda coords: coords.x == x and coords.y == y and not coords.buildable,
+        query=lambda coords: coords.x == x
+        and coords.y == y
+        and not coords.buildable,
     )
     return not target_coords
 
