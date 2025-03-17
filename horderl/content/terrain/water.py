@@ -1,18 +1,18 @@
 import random
 
-from ...components import Appearance, Coordinates
-from ...components.animation_effects.randomized_blinker import RandomizedBlinker
-from ...components.base_components.entity import Entity
-from ...components.diggable import Diggable
-from ...components.flooder import Flooder
-from ...components.material import Material
-from ...components.movement.drain_on_enter import DrainOnEnter
-from ...components.pathfinder_cost import PathfinderCost
-from ...components.states.move_cost_affectors import DifficultTerrain
-from ...components.tags.ice_tag import IceTag
-from ...components.tags.water_tag import WaterTag
-from ...engine import core, palettes
-from ...engine.constants import PRIORITY_LOWEST
+from horderl.components import Appearance, Coordinates
+from horderl.components.animation_effects.randomized_blinker import RandomizedBlinker
+from horderl.components.base_components.entity import Entity
+from horderl.components.diggable import Diggable
+from horderl.components.flooder import Flooder
+from horderl.components.material import Material
+from horderl.components.movement.drain_on_enter import DrainOnEnter
+from horderl.components.pathfinder_cost import PathfinderCost
+from horderl.components.states.move_cost_affectors import DifficultTerrain
+from horderl.components.tags.ice_tag import IceTag
+from horderl.components.tags.water_tag import WaterTag
+from horderl.engine import core, palettes
+from horderl.engine.constants import PRIORITY_LOWEST
 
 
 def make_water(x, y, rapidness=5000):

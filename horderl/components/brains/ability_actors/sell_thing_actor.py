@@ -3,16 +3,16 @@ from typing import List
 
 import tcod
 
-from components import Coordinates
-from components.base_components.energy_actor import EnergyActor
-from components.base_components.entity import Entity
-from components.brains.brain import Brain
-from components.enums import Intention
-from components.events.die_events import Die
-from components.sellable import Sellable
-from content.terrain.dirt import make_dirt
-from engine import core, palettes
-from engine.types import EntityId
+from horderl.components import Coordinates
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.base_components.entity import Entity
+from horderl.components.brains.brain import Brain
+from horderl.components.enums import Intention
+from horderl.components.events.die_events import Die
+from horderl.components.sellable import Sellable
+from horderl.content.terrain.dirt import make_dirt
+from horderl.engine import core, palettes
+from horderl.engine.types import EntityId
 
 
 @dataclass

@@ -5,7 +5,7 @@ from ..events.attack_started_events import AttackStartListener
 from ..events.dally_event import DallyListener
 from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from ...engine import palettes
+from horderl.engine import palettes
 
 
 @dataclass

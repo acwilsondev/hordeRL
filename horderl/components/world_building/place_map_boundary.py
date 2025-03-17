@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from ... import settings
-from ...components.events.build_world_events import BuildWorldListener
+from horderl.components.events.build_world_events import BuildWorldListener
 from ...content.terrain.trees import make_wall_tree
 
 

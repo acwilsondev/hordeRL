@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from ..events.die_events import DeathListener
-from ..events.peasant_events import PeasantDied
-from ...engine import core
+from horderl.components.events.die_events import DeathListener
+from horderl.components.events.peasant_events import PeasantDied
+from horderl.engine import core
 
 
 @dataclass

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 from ..animation_effects.blinker import AnimationBlinker
 from ..base_components.energy_actor import EnergyActor
-from ...engine import GameScene, constants
+from horderl.engine import GameScene, constants
 
 
 @dataclass

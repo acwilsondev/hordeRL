@@ -1,15 +1,15 @@
 import random
 
-from ...components import Appearance, Coordinates
-from ...components.base_components.component import Component
-from ...components.base_components.entity import Entity
-from ...components.death_listeners.drop_gold import DropGold
-from ...components.diggable import Diggable
-from ...components.material import Material
-from ...components.pathfinder_cost import PathfinderCost
-from ...components.states.move_cost_affectors import DifficultTerrain
-from ...engine import core, palettes
-from ...engine.constants import PRIORITY_LOWEST
+from horderl.components import Appearance, Coordinates
+from horderl.components.base_components.component import Component
+from horderl.components.base_components.entity import Entity
+from horderl.components.death_listeners.drop_gold import DropGold
+from horderl.components.diggable import Diggable
+from horderl.components.material import Material
+from horderl.components.pathfinder_cost import PathfinderCost
+from horderl.components.states.move_cost_affectors import DifficultTerrain
+from horderl.engine import core, palettes
+from horderl.engine.constants import PRIORITY_LOWEST
 
 
 def make_rock(x, y):

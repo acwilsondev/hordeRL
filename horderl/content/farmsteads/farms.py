@@ -1,9 +1,9 @@
-from ...components import Appearance, Coordinates
-from ...components.attack_start_listeners.grow_crops import GrowCrops
-from ...components.base_components.entity import Entity
-from ...components.relationships.farmed_by import FarmedBy
-from ...engine import core, palettes
-from ...engine.constants import PRIORITY_LOW
+from horderl.components import Appearance, Coordinates
+from horderl.components.attack_start_listeners.grow_crops import GrowCrops
+from horderl.components.base_components.entity import Entity
+from horderl.components.relationships.farmed_by import FarmedBy
+from horderl.engine import core, palettes
+from horderl.engine.constants import PRIORITY_LOW
 
 description = "A field, turned for planting. By the end of Spring and Summer, the peasant will grow crops here."
 

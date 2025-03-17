@@ -1,11 +1,11 @@
 import random
 from typing import List
 
-from components.events.delete_event import Delete
-from components.season_reset_listeners.seasonal_actor import \
+from horderl.components.events.delete_event import Delete
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.tax_value import TaxValue
-from engine import palettes
+from horderl.components.tax_value import TaxValue
+from horderl.engine import palettes
 
 
 class ExtractContractFees(SeasonResetListener):

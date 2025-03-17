@@ -1,4 +1,4 @@
-from ..season_reset_listeners.seasonal_actor import \
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
 
 

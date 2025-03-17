@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
 from typing import Dict
 
-from ...components.base_components.energy_actor import EnergyActor
-from ...components.world_building.world_parameters import WorldParameters
-from ...engine import core, palettes
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.world_building.world_parameters import WorldParameters
+from horderl.engine import core, palettes
 
 
 @dataclass

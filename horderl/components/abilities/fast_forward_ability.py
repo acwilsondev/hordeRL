@@ -3,7 +3,7 @@ from typing import Callable
 
 from .control_mode_ability import ControlModeAbility
 from ..brains.fast_forward_actor import FastForwardBrain
-from ...engine import palettes
+from horderl.engine import palettes
 
 
 @dataclass

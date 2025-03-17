@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import Callable
 
-from components.abilities.control_mode_ability import ControlModeAbility
-from components.brains.ability_actors.plant_sapling_actor import \
+from horderl.components.abilities.control_mode_ability import ControlModeAbility
+from horderl.components.brains.ability_actors.plant_sapling_actor import \
     PlaceSaplingActor
-from engine import palettes
+from horderl.engine import palettes
 
 
 @dataclass

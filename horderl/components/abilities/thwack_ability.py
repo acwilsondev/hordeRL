@@ -9,7 +9,7 @@ from ..base_components.energy_actor import EnergyActor
 from ..brains.brain import Brain
 from ..brains.dizzy_brain import DizzyBrain
 from ...content.attacks import thwack_animation, thwack_dizzy_animation
-from ...engine import palettes
+from horderl.engine import palettes
 from ...systems.utilities import get_enemies_in_range
 
 

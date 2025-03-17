@@ -3,12 +3,12 @@ from dataclasses import dataclass
 
 import tcod
 
-import settings
-from components import Coordinates
-from components.base_components.energy_actor import EnergyActor
-from components.brains.brain import Brain
-from components.enums import Intention
-from engine import constants, core
+from horderl import settings
+from horderl.components import Coordinates
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.brains.brain import Brain
+from horderl.components.enums import Intention
+from horderl.engine import constants, core
 
 
 @dataclass

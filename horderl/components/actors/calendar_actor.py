@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 
-from components.actors.hordeling_spawner import HordelingSpawner
-from components.base_components.energy_actor import EnergyActor
-from components.events.attack_started_events import AttackStarted
-from components.events.new_day_event import DayBegan
-from components.season_reset_listeners.reset_season import ResetSeason
-from components.tags.hordeling_tag import HordelingTag
-from components.world_beauty import WorldBeauty
-from content.spawners.hordeling_spawner_spawner import hordeling_spawner
-from engine import core
+from horderl.components.actors.hordeling_spawner import HordelingSpawner
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.events.attack_started_events import AttackStarted
+from horderl.components.events.new_day_event import DayBegan
+from horderl.components.season_reset_listeners.reset_season import ResetSeason
+from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.world_beauty import WorldBeauty
+from horderl.content.spawners.hordeling_spawner_spawner import hordeling_spawner
+from horderl.engine import core
 
 MAX_HOUR = 23
 MAX_DAY = 30

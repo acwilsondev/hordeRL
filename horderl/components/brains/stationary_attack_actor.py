@@ -1,16 +1,16 @@
 from dataclasses import dataclass
 
-from components import Coordinates
-from components.actions.attack_action import AttackAction
-from components.attacks.attack import Attack
-from components.brains.brain import Brain
-from components.events.attack_started_events import AttackStartListener
-from components.season_reset_listeners.seasonal_actor import \
+from horderl.components import Coordinates
+from horderl.components.actions.attack_action import AttackAction
+from horderl.components.attacks.attack import Attack
+from horderl.components.brains.brain import Brain
+from horderl.components.events.attack_started_events import AttackStartListener
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.tags.hordeling_tag import HordelingTag
-from content.attacks import stab
-from engine import constants
-from engine.core import log_debug
+from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.content.attacks import stab
+from horderl.engine import constants
+from horderl.engine.core import log_debug
 
 
 @dataclass

@@ -1,22 +1,22 @@
 import random
 
-from ...components import Appearance, Attributes, Coordinates
-from ...components.attacks.standard_attack import StandardAttack
-from ...components.base_components.entity import Entity
-from ...components.brains.default_active_actor import DefaultActiveActor
-from ...components.death_listeners.drop_gold import DropGold
-from ...components.death_listeners.npc_corpse import Corpse
-from ...components.faction import Faction
-from ...components.material import Material
-from ...components.movement.move import Move
-from ...components.pathfinder_cost import PathfinderCost
-from ...components.pathfinding.stealthy_cost_map import StealthyCostMapper
-from ...components.pathfinding.target_evaluation.hordeling_target_evaluator import \
+from horderl.components import Appearance, Attributes, Coordinates
+from horderl.components.attacks.standard_attack import StandardAttack
+from horderl.components.base_components.entity import Entity
+from horderl.components.brains.default_active_actor import DefaultActiveActor
+from horderl.components.death_listeners.drop_gold import DropGold
+from horderl.components.death_listeners.npc_corpse import Corpse
+from horderl.components.faction import Faction
+from horderl.components.material import Material
+from horderl.components.movement.move import Move
+from horderl.components.pathfinder_cost import PathfinderCost
+from horderl.components.pathfinding.stealthy_cost_map import StealthyCostMapper
+from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import \
     HordelingTargetEvaluator
-from ...components.stomach import Stomach
-from ...components.tags.hordeling_tag import HordelingTag
-from ...engine import core, palettes
-from ...engine.constants import PRIORITY_MEDIUM
+from horderl.components.stomach import Stomach
+from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.engine import core, palettes
+from horderl.engine.constants import PRIORITY_MEDIUM
 
 description = "This shadowy creature lurks just out of sight."
 

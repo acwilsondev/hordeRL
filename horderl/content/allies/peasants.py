@@ -1,25 +1,25 @@
 from typing import List
 
-from components import Appearance, Attributes, Coordinates
-from components.base_components.component import Component
-from components.base_components.entity import Entity
-from components.brains.peasant_actor import PeasantActor
-from components.cry_for_help import CryForHelp
-from components.death_listeners.npc_corpse import Corpse
-from components.death_listeners.on_die_emit_peasant_died import \
+from horderl.components import Appearance, Attributes, Coordinates
+from horderl.components.base_components.component import Component
+from horderl.components.base_components.entity import Entity
+from horderl.components.brains.peasant_actor import PeasantActor
+from horderl.components.cry_for_help import CryForHelp
+from horderl.components.death_listeners.npc_corpse import Corpse
+from horderl.components.death_listeners.on_die_emit_peasant_died import \
     OnDieEmitPeasantDied
-from components.edible import Edible
-from components.events.peasant_events import PeasantAdded
-from components.faction import Faction
-from components.material import Material
-from components.movement.move import Move
-from components.pathfinding.peasant_cost_mapper import PeasantCostMapper
-from components.relationships.residence import Residence
-from components.tags.peasant_tag import PeasantTag
-from components.target_value import PEASANT, TargetValue
-from engine import core, palettes
-from engine.constants import PRIORITY_MEDIUM
-from engine.types import EntityId
+from horderl.components.edible import Edible
+from horderl.components.events.peasant_events import PeasantAdded
+from horderl.components.faction import Faction
+from horderl.components.material import Material
+from horderl.components.movement.move import Move
+from horderl.components.pathfinding.peasant_cost_mapper import PeasantCostMapper
+from horderl.components.relationships.residence import Residence
+from horderl.components.tags.peasant_tag import PeasantTag
+from horderl.components.target_value import PEASANT, TargetValue
+from horderl.engine import core, palettes
+from horderl.engine.constants import PRIORITY_MEDIUM
+from horderl.engine.types import EntityId
 
 peasant_description = (
     "A peasant, tasked with working the fields. "

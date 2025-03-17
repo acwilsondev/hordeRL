@@ -1,18 +1,18 @@
-from ..components import Appearance, Attributes, Coordinates
-from ..component.attacks.standard_attack import StandardAttack
-from ..component.base_components.entity import Entity
-from ..component.brains.stationary_attack_actor import StationaryAttackActor
-from ..component.death_listeners.npc_corpse import Corpse
-from ..component.faction import Faction
-from ..component.material import Material
-from ..component.pathfinder_cost import PathfinderCost
-from ..component.pathfinding.normal_cost_mapper import NormalCostMapper
-from ..component.pathfinding.target_evaluation.ally_target_evaluator import \
+from horderl.components import Appearance, Attributes, Coordinates
+from horderl.components.attacks.standard_attack import StandardAttack
+from horderl.components.base_components.entity import Entity
+from horderl.components.brains.stationary_attack_actor import StationaryAttackActor
+from horderl.components.death_listeners.npc_corpse import Corpse
+from horderl.components.faction import Faction
+from horderl.components.material import Material
+from horderl.components.pathfinder_cost import PathfinderCost
+from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
+from horderl.components.pathfinding.target_evaluation.ally_target_evaluator import \
     AllyTargetEvaluator
-from components.sellable import Sellable
-from components.tax_value import TaxValue
-from engine import core, palettes
-from engine.constants import PRIORITY_MEDIUM
+from horderl.components.sellable import Sellable
+from horderl.components.tax_value import TaxValue
+from horderl.engine import core, palettes
+from horderl.engine.constants import PRIORITY_MEDIUM
 
 
 def make_knight(x, y):

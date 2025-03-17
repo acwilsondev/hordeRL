@@ -1,4 +1,4 @@
-from components.enums import Intention
+from horderl.components.enums import Intention
 
 VECTOR_STEP_MAP = {
     (0, -1): Intention.STEP_NORTH,

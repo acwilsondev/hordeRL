@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import List
 
-from components import Attributes
-from components.season_reset_listeners.seasonal_actor import \
+from horderl.components import Attributes
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
 
 

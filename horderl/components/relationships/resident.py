@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from ..tags.tag import Tag
-from ...engine import constants
+from horderl.engine import constants
 
 
 @dataclass

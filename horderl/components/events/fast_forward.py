@@ -1,11 +1,11 @@
 from calendar import Calendar
 from dataclasses import dataclass
 
-from ...components.actors.calendar_actor import Calendar
-from ...components.base_components.energy_actor import EnergyActor
-from ...components.events.new_day_event import DayBegan
-from ...engine import core
-from ...engine.core import log_debug
+from horderl.components.actors.calendar_actor import Calendar
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.events.new_day_event import DayBegan
+from horderl.engine import core
+from horderl.engine.core import log_debug
 
 
 @dataclass

@@ -1,9 +1,9 @@
 import random
 from dataclasses import dataclass
 
-from ...components.events.build_world_events import BuildWorldListener
-from ...components.world_building.world_parameters import WorldParameters
-from ...engine import core
+from horderl.components.events.build_world_events import BuildWorldListener
+from horderl.components.world_building.world_parameters import WorldParameters
+from horderl.engine import core
 from ...procgen import town_names
 
 

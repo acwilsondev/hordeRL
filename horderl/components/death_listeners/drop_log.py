@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from .. import Coordinates
-from ..events.die_events import DeathListener
-from ...content.getables.fallen_log import make_fallen_log
+from horderl.components import Coordinates
+from horderl.components.events.die_events import DeathListener
+from horderl.content.getables.fallen_log import make_fallen_log
 
 
 @dataclass

@@ -2,30 +2,30 @@ import random
 from dataclasses import dataclass
 from typing import Optional
 
-from components import Coordinates
-from components.actions.attack_action import AttackAction
-from components.actions.eat_action import EatAction
-from components.actions.tunnel_to_point import TunnelToPoint
-from components.actors import VECTOR_STEP_MAP
-from components.animation_effects.blinker import AnimationBlinker
-from components.attacks.attack import Attack
-from components.brains.brain import Brain
-from components.brains.sleeping_brain import SleepingBrain
-from components.edible import Edible
-from components.events.die_events import Die
-from components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
-from components.pathfinding.cost_mapper import CostMapper
-from components.pathfinding.normal_cost_mapper import NormalCostMapper
-from components.pathfinding.pathfinder import Pathfinder
-from components.pathfinding.target_evaluation.hordeling_target_evaluator import \
+from horderl.components import Coordinates
+from horderl.components.actions.attack_action import AttackAction
+from horderl.components.actions.eat_action import EatAction
+from horderl.components.actions.tunnel_to_point import TunnelToPoint
+from horderl.components.actors import VECTOR_STEP_MAP
+from horderl.components.animation_effects.blinker import AnimationBlinker
+from horderl.components.attacks.attack import Attack
+from horderl.components.brains.brain import Brain
+from horderl.components.brains.sleeping_brain import SleepingBrain
+from horderl.components.edible import Edible
+from horderl.components.events.die_events import Die
+from horderl.components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
+from horderl.components.pathfinding.cost_mapper import CostMapper
+from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
+from horderl.components.pathfinding.pathfinder import Pathfinder
+from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import \
     HordelingTargetEvaluator
-from components.pathfinding.target_evaluation.target_evaluator import \
+from horderl.components.pathfinding.target_evaluation.target_evaluator import \
     TargetEvaluator
-from components.pathfinding.target_selection import get_new_target
-from content.attacks import stab
-from content.terrain import roads
-from engine import constants, palettes, utilities
-from engine.core import log_debug
+from horderl.components.pathfinding.target_selection import get_new_target
+from horderl.content.attacks import stab
+from horderl.content.terrain import roads
+from horderl.engine import constants, palettes, utilities
+from horderl.engine.core import log_debug
 
 
 @dataclass

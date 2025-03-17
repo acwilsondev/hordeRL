@@ -2,14 +2,14 @@ from dataclasses import dataclass
 
 import tcod
 
-from components.actions.attack_action import AttackAction
-from components.animation_effects.blinker import AnimationBlinker
-from components.base_components.energy_actor import EnergyActor
-from components.brains.brain import Brain
-from components.enums import Intention
-from components.tags.hordeling_tag import HordelingTag
-from engine import constants, core
-from engine.utilities import is_visible
+from horderl.components.actions.attack_action import AttackAction
+from horderl.components.animation_effects.blinker import AnimationBlinker
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.brains.brain import Brain
+from horderl.components.enums import Intention
+from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.engine import constants, core
+from horderl.engine.utilities import is_visible
 
 
 @dataclass

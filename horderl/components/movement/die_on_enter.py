@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from components.events.die_events import Die
-from components.events.step_event import EnterListener
+from horderl.components.events.die_events import Die
+from horderl.components.events.step_event import EnterListener
 
 
 @dataclass

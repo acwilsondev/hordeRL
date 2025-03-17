@@ -4,12 +4,12 @@ from typing import List, Tuple
 
 import tcod
 
-from ... import Coordinates
-from ...base_components.component import Component
-from ...base_components.energy_actor import EnergyActor
-from ..brain import Brain
-from ...enums import Intention
-from ....engine import constants, core
+from horderl.components import Coordinates
+from horderl.components.base_components.component import Component
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.brains.brain import Brain
+from horderl.components.enums import Intention
+from horderl.engine import constants, core
 
 
 @dataclass

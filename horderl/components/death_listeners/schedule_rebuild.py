@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from ..events.die_events import DeathListener
-from ..house_structure.house_structure import HouseStructure
-from ...engine import constants
+from horderl.components.events.die_events import DeathListener
+from horderl.components.house_structure import HouseStructure
+from horderl.engine import constants
 
 
 @dataclass

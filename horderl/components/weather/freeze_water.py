@@ -10,7 +10,7 @@ from ..tags.ice_tag import IceTag
 from ..tags.water_tag import WaterTag
 from ..weather.weather import Weather
 from ...content.terrain.water import freeze, thaw
-from ...engine import core
+from horderl.engine import core
 
 
 @dataclass

@@ -1,15 +1,14 @@
-import logging
 from dataclasses import dataclass
 from typing import List
 
-from components import Coordinates
-from components.house_structure import HouseStructure
-from components.relationships.farmed_by import FarmedBy
-from components.relationships.resident import Resident
-from components.season_reset_listeners.seasonal_actor import \
+from horderl.components import Coordinates
+from horderl.components.house_structure import HouseStructure
+from horderl.components.relationships.farmed_by import FarmedBy
+from horderl.components.relationships.resident import Resident
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.tags.peasant_tag import PeasantTag
-from content.farmsteads.walls import make_wall
+from horderl.components.tags.peasant_tag import PeasantTag
+from horderl.content.farmsteads.walls import make_wall
 
 
 @dataclass

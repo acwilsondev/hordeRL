@@ -1,10 +1,10 @@
 import random
 from dataclasses import dataclass, field
 
-from components import Coordinates
-from components.events.new_day_event import DayBeganListener
-from components.weather.weather import Weather
-from content.terrain.trees import make_tree
+from horderl.components import Coordinates
+from horderl.components.events.new_day_event import DayBeganListener
+from horderl.components.weather.weather import Weather
+from horderl.content.terrain.trees import make_tree
 
 
 def temperature_time_to_grow():

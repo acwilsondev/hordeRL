@@ -4,7 +4,7 @@ from typing import Callable
 
 from ..abilities.ability import Ability
 from ..animation_effects.blinker import AnimationBlinker
-from ...engine.core import log_debug
+from horderl.engine.core import log_debug
 
 
 @dataclass

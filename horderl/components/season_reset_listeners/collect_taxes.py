@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import List
 
-from ..season_reset_listeners.seasonal_actor import \
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from ..tax_value import TaxValue
-from ...engine import palettes
+from horderl.components.tax_value import TaxValue
+from horderl.engine import palettes
 
 
 @dataclass

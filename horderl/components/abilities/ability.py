@@ -5,7 +5,7 @@ from .. import Coordinates
 from ..base_components.component import Component
 from ..enums import Intention
 from ...content.states import no_money_animation
-from ...engine import constants
+from horderl.engine import constants
 
 
 @dataclass

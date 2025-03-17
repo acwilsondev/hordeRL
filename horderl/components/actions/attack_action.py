@@ -1,17 +1,17 @@
 from dataclasses import dataclass
 from typing import List
 
-from components import Attributes, Coordinates
-from components.attacks.attack_effects.attack_effect import AttackEffect
-from components.base_components.energy_actor import EnergyActor
-from components.base_components.entity import Entity
-from components.cry_for_help import CryForHelp
-from components.events.attack_events import AttackFinished
-from components.events.die_events import Die
-from components.house_structure import HouseStructure
-from components.relationships.owner import Owner
-from content.states import help_animation
-from engine import constants
+from horderl.components import Attributes, Coordinates
+from horderl.components.attacks.attack_effects.attack_effect import AttackEffect
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.base_components.entity import Entity
+from horderl.components.cry_for_help import CryForHelp
+from horderl.components.events.attack_events import AttackFinished
+from horderl.components.events.die_events import Die
+from horderl.components.house_structure import HouseStructure
+from horderl.components.relationships.owner import Owner
+from horderl.content.states import help_animation
+from horderl.engine import constants
 
 
 @dataclass

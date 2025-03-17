@@ -7,7 +7,7 @@ from ..events.start_game_events import GameStartListener
 from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
 from ..world_building.world_parameters import WorldParameters
-from ...engine import core
+from horderl.engine import core
 
 
 @dataclass

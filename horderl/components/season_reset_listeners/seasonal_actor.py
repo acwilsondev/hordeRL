@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ..base_components.component import Component
+from horderl.components.base_components.component import Component
 
 
 class SeasonResetListener(Component, ABC):

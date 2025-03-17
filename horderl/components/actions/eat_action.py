@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
-from components.base_components.entity import Entity
-from components.events.die_events import Die
-from components.stomach import Stomach
-from components.tags.peasant_tag import PeasantTag
-from engine import constants
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.base_components.entity import Entity
+from horderl.components.events.die_events import Die
+from horderl.components.stomach import Stomach
+from horderl.components.tags.peasant_tag import PeasantTag
+from horderl.engine import constants
 
 
 @dataclass

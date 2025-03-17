@@ -2,10 +2,10 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from ... import settings
-from ...components.base_components.component import Component
-from ...components.base_components.events import Event
-from ...components.serialization.save_game import SaveGame
-from ...engine import GameScene
+from horderl.components.base_components.component import Component
+from horderl.components.base_components.events import Event
+from horderl.components.serialization.save_game import SaveGame
+from horderl.engine import GameScene
 from ...scenes.start_menu import get_start_menu
 
 

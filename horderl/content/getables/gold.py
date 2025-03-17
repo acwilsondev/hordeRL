@@ -1,9 +1,9 @@
-from ...components import Appearance, Coordinates
-from ...components.base_components.entity import Entity
-from ...components.material import Material
-from ...components.pickup_gold import GoldPickup
-from ...engine import core, palettes
-from ...engine.constants import PRIORITY_LOW
+from horderl.components import Appearance, Coordinates
+from horderl.components.base_components.entity import Entity
+from horderl.components.material import Material
+from horderl.components.pickup_gold import GoldPickup
+from horderl.engine import core, palettes
+from horderl.engine.constants import PRIORITY_LOW
 
 description = "A gold nugget glimmers in the sun. Selling it will yield a fair bounty."
 

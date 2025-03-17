@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from components.base_components.energy_actor import EnergyActor
-from components.brains.painters.painter_brain import PainterBrain
-from content.enemies.juvenile import make_juvenile
-from engine import constants
+from horderl.components.base_components.energy_actor import EnergyActor
+from horderl.components.brains.painters.painter_brain import PainterBrain
+from horderl.content.enemies.juvenile import make_juvenile
+from horderl.engine import constants
 
 
 @dataclass

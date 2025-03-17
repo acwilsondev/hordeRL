@@ -1,12 +1,12 @@
 import random
 
 from ... import settings
-from ...components.events.build_world_events import BuildWorldListener
-from ...components.pathfinding.pathfinder import Pathfinder
-from ...components.pathfinding.simplex_cost_mapper import SimplexCostMapper
-from ...components.world_building.world_parameters import WorldParameters
+from horderl.components.events.build_world_events import BuildWorldListener
+from horderl.components.pathfinding.pathfinder import Pathfinder
+from horderl.components.pathfinding.simplex_cost_mapper import SimplexCostMapper
+from horderl.components.world_building.world_parameters import WorldParameters
 from ...content.terrain.water import make_water
-from ...engine import core
+from horderl.engine import core
 
 
 class PlaceRiver(BuildWorldListener):

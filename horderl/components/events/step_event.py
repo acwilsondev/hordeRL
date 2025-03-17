@@ -2,10 +2,10 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Tuple
 
-from ...components import Coordinates
-from ...components.base_components.component import Component
-from ...components.base_components.events import Event
-from ...engine import GameScene, constants
+from horderl.components import Coordinates
+from horderl.components.base_components.component import Component
+from horderl.components.base_components.events import Event
+from horderl.engine import GameScene, constants
 
 
 @dataclass

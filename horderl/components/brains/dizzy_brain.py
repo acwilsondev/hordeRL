@@ -3,13 +3,13 @@ from dataclasses import dataclass
 
 import tcod
 
-from components import Coordinates
-from components.ability_tracker import AbilityTracker
-from components.brains.brain import Brain
-from components.enums import Intention
-from components.events.show_help_dialogue import ShowHelpDialogue
-from content.states import confused_animation
-from engine import core
+from horderl.components import Coordinates
+from horderl.components.ability_tracker import AbilityTracker
+from horderl.components.brains.brain import Brain
+from horderl.components.enums import Intention
+from horderl.components.events.show_help_dialogue import ShowHelpDialogue
+from horderl.content.states import confused_animation
+from horderl.engine import core
 
 
 @dataclass

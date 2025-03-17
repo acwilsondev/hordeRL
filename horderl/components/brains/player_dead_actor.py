@@ -2,12 +2,11 @@ from dataclasses import dataclass
 
 import tcod
 
-from components import Coordinates
-from components.ability_tracker import AbilityTracker
-from components.brains.brain import Brain
-from components.enums import Intention
-from content.states import confused_animation
-from engine import core
+from horderl.components.ability_tracker import AbilityTracker
+from horderl.components.brains.brain import Brain
+from horderl.components.enums import Intention
+from horderl.content.states import confused_animation
+from horderl.engine import core
 
 
 @dataclass

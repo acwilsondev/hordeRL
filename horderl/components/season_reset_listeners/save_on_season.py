@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-import settings
-from components.events.start_game_events import GameStartListener
-from components.season_reset_listeners.seasonal_actor import \
+from horderl import settings
+from horderl.components.events.start_game_events import GameStartListener
+from horderl.components.season_reset_listeners.seasonal_actor import \
     SeasonResetListener
-from components.serialization.save_game import SaveGame
+from horderl.components.serialization.save_game import SaveGame
 
 
 @dataclass

@@ -3,7 +3,7 @@ from typing import Callable
 
 from ..abilities.control_mode_ability import ControlModeAbility
 from ..brains.ability_actors.place_spikes_actor import PlaceSpikesActor
-from ...engine import palettes
+from horderl.engine import palettes
 
 
 @dataclass

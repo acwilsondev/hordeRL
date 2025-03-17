@@ -9,7 +9,7 @@ from ..season_reset_listeners.seasonal_actor import \
     SeasonResetListener
 from ..tags.hordeling_tag import HordelingTag
 from ...content.states import confused_animation
-from ...engine.utilities import is_visible
+from horderl.engine.utilities import is_visible
 
 
 @dataclass

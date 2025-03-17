@@ -2,12 +2,12 @@ import random
 from dataclasses import dataclass
 
 from ... import settings
-from ...components import Coordinates
-from ...components.events.build_world_events import BuildWorldListener
-from ...components.world_building.world_parameters import WorldParameters
+from horderl.components import Coordinates
+from horderl.components.events.build_world_events import BuildWorldListener
+from horderl.components.world_building.world_parameters import WorldParameters
 from ...content.terrain.rocks import make_rock
-from ...engine import core
-from ...engine.utilities import get_3_by_3_box
+from horderl.engine import core
+from horderl.engine.utilities import get_3_by_3_box
 
 
 def add_rock(scene, x: int, y: int) -> None:

@@ -1,6 +1,6 @@
 import logging
 
-from ...engine.sound.sound_controller import SoundController
+from horderl.engine.sound.sound_controller import SoundController
 
 
 class DefaultSoundController(SoundController):
