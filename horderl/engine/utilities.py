@@ -57,5 +57,8 @@ def is_visible(scene, entity: int):
 
 def get_all_positions():
     return {
-        p for p in product(range(0, settings.MAP_WIDTH), range(0, settings.MAP_HEIGHT))
+        p
+        for p in product(
+            range(0, settings.MAP_WIDTH), range(0, settings.MAP_HEIGHT)
+        )
     }

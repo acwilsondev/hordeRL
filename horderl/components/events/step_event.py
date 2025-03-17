@@ -26,10 +26,14 @@ class StepEvent(Event):
         this_coords = scene.cm.get_one(Coordinates, entity=self.entity)
         enter_listeners = scene.cm.get(EnterListener)
         for enter_listener in enter_listeners:
-            other_coords = scene.cm.get_one(Coordinates, entity=enter_listener.entity)
+            other_coords = scene.cm.get_one(
+                Coordinates, entity=enter_listener.entity
+            )
             if this_coords.is_at(other_coords):
                 scene.cm.add(
-                    EnterEvent(entity=self.entity, entered=enter_listener.entity)
+                    EnterEvent(
+                        entity=self.entity, entered=enter_listener.entity
+                    )
                 )
 
 

@@ -5,8 +5,9 @@ from horderl.components import Coordinates
 from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.components.relationships.resident import Resident
-from horderl.components.season_reset_listeners.seasonal_actor import \
-    SeasonResetListener
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 from horderl.components.tags.peasant_tag import PeasantTag
 from horderl.content.farmsteads.walls import make_wall
 

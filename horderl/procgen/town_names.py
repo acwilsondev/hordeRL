@@ -29,7 +29,17 @@ rules = {
         "Cod",
         "Lin",
     ],
-    "second": ["burg", "ham", "ton", "hill", "shim", "cod", "ling", "mont", "bog"],
+    "second": [
+        "burg",
+        "ham",
+        "ton",
+        "hill",
+        "shim",
+        "cod",
+        "ling",
+        "mont",
+        "bog",
+    ],
 }
 """
 Dictionary of tracery grammar rules for town name generation.

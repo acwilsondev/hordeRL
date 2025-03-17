@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import Callable
 
-from .control_mode_ability import ControlModeAbility
-from ..brains.fast_forward_actor import FastForwardBrain
 from horderl.engine import palettes
+
+from ..brains.fast_forward_actor import FastForwardBrain
+from .control_mode_ability import ControlModeAbility
 
 
 @dataclass

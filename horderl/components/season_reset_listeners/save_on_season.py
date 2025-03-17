@@ -2,8 +2,9 @@ from dataclasses import dataclass
 
 from horderl import settings
 from horderl.components.events.start_game_events import GameStartListener
-from horderl.components.season_reset_listeners.seasonal_actor import \
-    SeasonResetListener
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 from horderl.components.serialization.save_game import SaveGame
 
 

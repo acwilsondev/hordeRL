@@ -1,13 +1,13 @@
 import random
 from dataclasses import dataclass
 
+from horderl.engine import core
+
 from ..base_components.energy_actor import EnergyActor
 from ..events.new_day_event import DayBeganListener
 from ..events.start_game_events import GameStartListener
-from ..season_reset_listeners.seasonal_actor import \
-    SeasonResetListener
+from ..season_reset_listeners.seasonal_actor import SeasonResetListener
 from ..world_building.world_parameters import WorldParameters
-from horderl.engine import core
 
 
 @dataclass
@@ -28,7 +28,9 @@ class Weather(DayBeganListener, GameStartListener, SeasonResetListener):
     def set_seasonal_norm(self, scene, season):
         seasonal_temps = {"Spring": 20, "Summer": 30, "Fall": 10, "Winter": -5}
         self.seasonal_norm = seasonal_temps[season]
-        world_params = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        world_params = scene.cm.get_one(
+            WorldParameters, entity=core.get_id("world")
+        )
         self.seasonal_norm += world_params.temperature_modifier
         self._log_info(f"set normal temp {self.seasonal_norm}")
         old_temp = self.temperature

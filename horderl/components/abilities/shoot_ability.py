@@ -1,15 +1,14 @@
 from dataclasses import dataclass
 
-from .. import Coordinates
-from .ability import Ability
-from ..animation_effects.blinker import AnimationBlinker
-from ..brains.ability_actors.ranged_attack_actor import \
-    RangedAttackActor
-from ..season_reset_listeners.seasonal_actor import \
-    SeasonResetListener
-from ..tags.hordeling_tag import HordelingTag
-from ...content.states import confused_animation
 from horderl.engine.utilities import is_visible
+
+from ...content.states import confused_animation
+from .. import Coordinates
+from ..animation_effects.blinker import AnimationBlinker
+from ..brains.ability_actors.ranged_attack_actor import RangedAttackActor
+from ..season_reset_listeners.seasonal_actor import SeasonResetListener
+from ..tags.hordeling_tag import HordelingTag
+from .ability import Ability
 
 
 @dataclass

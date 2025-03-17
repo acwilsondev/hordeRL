@@ -49,7 +49,9 @@ class SellThingActor(Brain):
             sellable: Sellable = scene.cm.get_one(Sellable, entity=entity)
             entity_component = scene.cm.get_one(Entity, entity=entity)
             if not entity_component:
-                self._log_warning(f"found a sellable without an entity: {entity}")
+                self._log_warning(
+                    f"found a sellable without an entity: {entity}"
+                )
             scene.message(
                 f"You sold a {entity_component.name} for {sellable.value}c!",
                 color=palettes.GOLD,
@@ -70,7 +72,8 @@ def _get_sellables(scene, point) -> List[EntityId]:
     nearby = [
         c.entity
         for c in scene.cm.get(Coordinates)
-        if c.distance_from_point(point[0], point[1]) == 0 and c.entity in sellables
+        if c.distance_from_point(point[0], point[1]) == 0
+        and c.entity in sellables
     ]
     return nearby
 

@@ -5,8 +5,14 @@ from typing import Callable, Dict, Generic, Iterable, List, Set, Type
 from ..components.base_components.component import Component
 from ..engine import constants
 from ..engine.core import log_debug
-from ..engine.types import (ComponentList, ComponentType, EntityDict,
-                            EntityDictIndex, T, U)
+from ..engine.types import (
+    ComponentList,
+    ComponentType,
+    EntityDict,
+    EntityDictIndex,
+    T,
+    U,
+)
 
 
 class ComponentManager(object):
@@ -59,7 +65,9 @@ class ComponentManager(object):
         """
         return set(k for k in self.components_by_entity.keys())
 
-    def _add_component_to_indexes(self, component: T, component_type: Type[T]) -> None:
+    def _add_component_to_indexes(
+        self, component: T, component_type: Type[T]
+    ) -> None:
         """Add a component to ComponentManager's indexes.
 
         Updates the internal indexes to include the given component under its entity
@@ -257,7 +265,9 @@ class ComponentManager(object):
         :return: None
         :raises ValueError: If the component is None
         """
-        logging.debug(f"System::ComponentManager deleting component {component}")
+        logging.debug(
+            f"System::ComponentManager deleting component {component}"
+        )
         if not component:
             raise ValueError("Cannot delete None.")
         entity = component.entity
@@ -271,11 +281,13 @@ class ComponentManager(object):
                     self.components[component_type].remove(component)
                 if (
                     component
-                    in self.components_by_entity[component.entity][component_type]
+                    in self.components_by_entity[component.entity][
+                        component_type
+                    ]
                 ):
-                    self.components_by_entity[component.entity][component_type].remove(
-                        component
-                    )
+                    self.components_by_entity[component.entity][
+                        component_type
+                    ].remove(component)
             if component.id in self.components_by_id:
                 del self.components_by_id[component.id]
 
@@ -289,16 +301,22 @@ class ComponentManager(object):
         assert isinstance(cid, int), "cid must be an int"
 
         # todo can leak stashed base_components if the managing entity is destroyed before the stash is recalled
-        logging.debug(f"System::ComponentManager attempting to stash component {cid}")
+        logging.debug(
+            f"System::ComponentManager attempting to stash component {cid}"
+        )
         component = self.get_component_by_id(cid)
-        logging.debug(f"System::ComponentManager stashing component {component}")
+        logging.debug(
+            f"System::ComponentManager stashing component {component}"
+        )
         self.stashed_components[cid] = component
         self.delete_component(component)
 
     def unstash_component(self, cid: int):
         assert isinstance(cid, int), "cid must be an int"
 
-        logging.debug(f"System::ComponentManager attempting to unstash component {cid}")
+        logging.debug(
+            f"System::ComponentManager attempting to unstash component {cid}"
+        )
         component = self.stashed_components[cid]
         self.add(component)
         del self.stashed_components[cid]
@@ -315,7 +333,9 @@ class ComponentManager(object):
         :return: None
         """
         assert isinstance(eid, int), "eid must be an int"
-        logging.debug(f"System::ComponentManager attempting to stash entity {eid}")
+        logging.debug(
+            f"System::ComponentManager attempting to stash entity {eid}"
+        )
         components = self.get_entity(eid)
 
         component_ids = set()
@@ -326,10 +346,14 @@ class ComponentManager(object):
                 self.stash_component(component.id)
 
         self.stashed_entities[eid] = component_ids
-        logging.debug(f"System::ComponentManager completed stash {component_ids}")
+        logging.debug(
+            f"System::ComponentManager completed stash {component_ids}"
+        )
 
     def unstash_entity(self, eid):
-        logging.debug(f"System::ComponentManager attempting to unstash entity {eid}")
+        logging.debug(
+            f"System::ComponentManager attempting to unstash entity {eid}"
+        )
         component_ids = list(self.stashed_entities[eid])
         for component_id in component_ids:
             self.unstash_component(component_id)
@@ -355,7 +379,9 @@ class ComponentManager(object):
         }
 
     def from_data(self, loaded_data):
-        active_components = [v for k, v in loaded_data["active_components"].items()]
+        active_components = [
+            v for k, v in loaded_data["active_components"].items()
+        ]
         for _, obj in [item for item in self.components_by_id.items()]:
             self.delete_component(obj)
         self.add(*active_components)

@@ -18,7 +18,9 @@ def cli():
     parser = argparse.ArgumentParser(description="Oh No! It's THE HORDE!")
     parser.add_argument("--prof", action="store_true", help="profile the game")
     parser.add_argument(
-        "--debug", action="store_true", help="allow a crash when an exception is thrown"
+        "--debug",
+        action="store_true",
+        help="allow a crash when an exception is thrown",
     )
     parser.add_argument(
         "-l",

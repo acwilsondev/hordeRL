@@ -1,7 +1,8 @@
+from horderl.engine import palettes
+
 from .. import Coordinates
 from ..events.step_event import StepListener
 from ..pickup_gold import GoldPickup
-from horderl.engine import palettes
 
 
 class PickupGoldOnStep(StepListener):
@@ -14,4 +15,6 @@ class PickupGoldOnStep(StepListener):
             if gold_coords.is_at_point(point):
                 scene.cm.delete(event.entity)
                 scene.gold += event.amount
-                scene.message(f"You found {event.amount} gold.", color=palettes.GOLD)
+                scene.message(
+                    f"You found {event.amount} gold.", color=palettes.GOLD
+                )

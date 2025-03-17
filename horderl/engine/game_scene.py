@@ -1,11 +1,11 @@
 from typing import final
 
-from . import serialization
-from .component_manager import ComponentManager
-from .sound.sound_controller import SoundController
 from ..gui.gui import Gui
 from ..gui.gui_element import GuiElement
 from ..gui.popup_message import PopupMessage
+from . import serialization
+from .component_manager import ComponentManager
+from .sound.sound_controller import SoundController
 
 
 class GameScene:

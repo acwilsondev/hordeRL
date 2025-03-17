@@ -2,9 +2,12 @@ import random
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.components.brains.ability_actors.place_thing_actor import is_buildable
-from horderl.components.season_reset_listeners.seasonal_actor import \
-    SeasonResetListener
+from horderl.components.brains.ability_actors.place_thing_actor import (
+    is_buildable,
+)
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 from horderl.components.tags.tree_tag import TreeTag
 from horderl.components.weather.weather import Weather
 from horderl.content.terrain.saplings import make_sapling

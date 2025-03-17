@@ -1,13 +1,14 @@
 import random
 from dataclasses import dataclass
 
-from ... import settings
 from horderl.components import Coordinates
 from horderl.components.events.build_world_events import BuildWorldListener
 from horderl.components.world_building.world_parameters import WorldParameters
-from ...content.terrain.flower import make_flower
 from horderl.engine import core, palettes
 from horderl.engine.utilities import get_3_by_3_box
+
+from ... import settings
+from ...content.terrain.flower import make_flower
 
 
 def add_flower(scene, x: int, y: int, color) -> None:
@@ -23,7 +24,9 @@ class PlaceFlowers(BuildWorldListener):
 
     def on_build_world(self, scene):
         self._log_info(f"placing flower fields...")
-        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        world_settings = scene.cm.get_one(
+            WorldParameters, entity=core.get_id("world")
+        )
         self.color = random.choice(
             [
                 palettes.WHITE,
@@ -41,7 +44,9 @@ class PlaceFlowers(BuildWorldListener):
                 self.add_flower_field(scene, x, y)
 
     def add_flower_field(self, scene, x: int, y: int) -> None:
-        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        world_settings = scene.cm.get_one(
+            WorldParameters, entity=core.get_id("world")
+        )
         working_set = [(x, y)]
         maximum = 10
         while working_set and maximum > 0:

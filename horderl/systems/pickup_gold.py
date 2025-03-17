@@ -11,7 +11,7 @@ def run(scene):
 
 @log_debug(__name__)
 def pickup_gold(scene, event):
-    # if the player is standing on this the gold nugget, delete the gold nugget 
+    # if the player is standing on this the gold nugget, delete the gold nugget
     # and add 10 to their gold.
     coords = scene.cm.get_one(Coordinates, entity=event.entity)
     player_coords = scene.cm.get_one(Coordinates, entity=PLAYER_ID)

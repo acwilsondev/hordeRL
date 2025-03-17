@@ -1,16 +1,17 @@
 from dataclasses import dataclass
 from math import sqrt
 
+from horderl.engine import palettes
+
+from ...content.attacks import thwack_animation, thwack_dizzy_animation
+from ...systems.utilities import get_enemies_in_range
 from .. import Coordinates
-from .ability import Ability
 from ..actions.attack_action import AttackAction
 from ..animation_effects.blinker import AnimationBlinker
 from ..base_components.energy_actor import EnergyActor
 from ..brains.brain import Brain
 from ..brains.dizzy_brain import DizzyBrain
-from ...content.attacks import thwack_animation, thwack_dizzy_animation
-from horderl.engine import palettes
-from ...systems.utilities import get_enemies_in_range
+from .ability import Ability
 
 
 @dataclass
@@ -32,7 +33,9 @@ class ThwackAbility(Ability, EnergyActor):
             self.count -= 1
 
             # convert the thwack action to an attack action each adjacent enemy
-            thwackables = get_enemies_in_range(scene, self.entity, max_range=sqrt(2))
+            thwackables = get_enemies_in_range(
+                scene, self.entity, max_range=sqrt(2)
+            )
             attacks = [
                 AttackAction(entity=self.entity, target=t, damage=1)
                 for t in thwackables
@@ -68,7 +71,9 @@ class ThwackAbility(Ability, EnergyActor):
         brain.swap(scene, DizzyBrain(entity=self.entity))
         scene.cm.add(
             AnimationBlinker(
-                entity=self.entity, new_symbol="?", new_color=palettes.LIGHT_WATER
+                entity=self.entity,
+                new_symbol="?",
+                new_color=palettes.LIGHT_WATER,
             )
         )
 

@@ -69,4 +69,6 @@ class AttackAction(EnergyActor):
             target_attributes.hp = max(0, target_attributes.hp)
             if target_attributes.hp <= 0:
                 self._log_info(f"applying Die effect")
-                scene.cm.add(Die(entity=target_attributes.entity, killer=self.entity))
+                scene.cm.add(
+                    Die(entity=target_attributes.entity, killer=self.entity)
+                )

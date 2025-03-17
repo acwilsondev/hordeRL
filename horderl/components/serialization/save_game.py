@@ -57,7 +57,9 @@ class SaveGame(EnergyActor):
         self._log_info("attempting to save game")
         params = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
         scene.save_game(
-            scene.cm.get_serial_form(), f"./{params.get_file_name()}.world", self.extra
+            scene.cm.get_serial_form(),
+            f"./{params.get_file_name()}.world",
+            self.extra,
         )
         self._log_info("save complete")
         scene.message("Game saved.", color=palettes.LIGHT_WATER)

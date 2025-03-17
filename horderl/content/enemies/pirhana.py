@@ -13,8 +13,9 @@ from horderl.components.movement.drain_on_enter import DrainOnEnter
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.target_evaluation.high_crop_target_evaluator import \
-    HighCropTargetEvaluator
+from horderl.components.pathfinding.target_evaluation.high_crop_target_evaluator import (
+    HighCropTargetEvaluator,
+)
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
 from horderl.engine import core, palettes

@@ -5,7 +5,9 @@ from horderl.components.pickup_gold import GoldPickup
 from horderl.engine import core, palettes
 from horderl.engine.constants import PRIORITY_LOW
 
-description = "A log has fallen here. This will fetch a fair price on the market."
+description = (
+    "A log has fallen here. This will fetch a fair price on the market."
+)
 
 
 def make_fallen_log(x, y):

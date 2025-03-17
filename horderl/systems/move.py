@@ -13,9 +13,12 @@ from ..components.events.step_event import StepEvent
 from ..components.faction import Faction
 from ..components.material import Material
 from ..components.movement.move import Move
-from ..components.states.move_cost_affectors import (DifficultTerrain,
-                                                   EasyTerrain, Haste,
-                                                   Hindered)
+from ..components.states.move_cost_affectors import (
+    DifficultTerrain,
+    EasyTerrain,
+    Haste,
+    Hindered,
+)
 from ..engine import palettes
 from ..systems.utilities import get_blocking_object
 
@@ -78,7 +81,9 @@ def run(scene):
 
 def get_actors_with_step_intention(scene):
     return [
-        actor for actor in scene.cm.get(Actor) if actor.intention in STEP_INTENTIONS
+        actor
+        for actor in scene.cm.get(Actor)
+        if actor.intention in STEP_INTENTIONS
     ]
 
 
@@ -117,7 +122,9 @@ def can_step(scene, entity, step_action) -> bool:
 
     if not in_bounds((target_x, target_y)):
         if entity == scene.player:
-            scene.message("You shouldn't leave the village.", color=palettes.WHITE)
+            scene.message(
+                "You shouldn't leave the village.", color=palettes.WHITE
+            )
         return False
 
     blocking_object = get_blocking_object(scene.cm, target_x, target_y)

@@ -24,7 +24,11 @@ def make_dirt(x, y):
                 bg_color=palettes.BACKGROUND,
             ),
             Coordinates(
-                entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST, buildable=True
+                entity=entity_id,
+                x=x,
+                y=y,
+                priority=PRIORITY_LOWEST,
+                buildable=True,
             ),
             Material(entity=entity_id, blocks=False, blocks_sight=False),
             Diggable(entity=entity_id, is_free=True),

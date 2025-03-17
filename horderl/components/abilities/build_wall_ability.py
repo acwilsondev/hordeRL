@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import Callable
 
+from horderl.engine import palettes
+
 from ..abilities.control_mode_ability import ControlModeAbility
 from ..brains.ability_actors.place_stone_wall_actor import PlaceStoneWallActor
-from horderl.engine import palettes
 
 
 @dataclass

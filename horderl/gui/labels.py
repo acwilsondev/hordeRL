@@ -60,7 +60,11 @@ class CalendarLabel(GuiElement):
     def render(self, panel):
         """Draw the bar onto the panel"""
         panel.print(
-            self.x, self.y, f"{self.value}", fg=palettes.GOLD, bg=palettes.BACKGROUND
+            self.x,
+            self.y,
+            f"{self.value}",
+            fg=palettes.GOLD,
+            bg=palettes.BACKGROUND,
         )
 
 
@@ -118,7 +122,11 @@ class AbilityLabel(GuiElement):
 
     def render(self, panel: tcod.console.Console) -> None:
         panel.print(
-            self.x, self.y, f"{self.value}", fg=palettes.WHITE, bg=palettes.BACKGROUND
+            self.x,
+            self.y,
+            f"{self.value}",
+            fg=palettes.WHITE,
+            bg=palettes.BACKGROUND,
         )
 
     def update(self, scene):
@@ -138,7 +146,11 @@ class VillageNameLabel(GuiElement):
 
     def render(self, panel: tcod.console.Console) -> None:
         panel.print(
-            self.x, self.y, self.value, fg=palettes.WHITE, bg=palettes.BACKGROUND
+            self.x,
+            self.y,
+            self.value,
+            fg=palettes.WHITE,
+            bg=palettes.BACKGROUND,
         )
 
     def update(self, scene):

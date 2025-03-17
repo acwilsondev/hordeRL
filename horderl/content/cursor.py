@@ -11,7 +11,11 @@ def make_cursor(x, y):
         [
             Entity(id=entity_id, entity=entity_id, name="cursor"),
             Coordinates(
-                entity=entity_id, x=x, y=y, priority=PRIORITY_HIGH, buildable=True
+                entity=entity_id,
+                x=x,
+                y=y,
+                priority=PRIORITY_HIGH,
+                buildable=True,
             ),
             Appearance(
                 entity=entity_id,

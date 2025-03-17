@@ -17,10 +17,12 @@ from horderl.components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from horderl.components.pathfinding.cost_mapper import CostMapper
 from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
 from horderl.components.pathfinding.pathfinder import Pathfinder
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import \
-    HordelingTargetEvaluator
-from horderl.components.pathfinding.target_evaluation.target_evaluator import \
-    TargetEvaluator
+from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
+    HordelingTargetEvaluator,
+)
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+)
 from horderl.components.pathfinding.target_selection import get_new_target
 from horderl.content.attacks import stab
 from horderl.content.terrain import roads
@@ -80,13 +82,18 @@ class DefaultActiveActor(Brain):
             self._log_debug("can't find a natural path")
             tunnel_target = self._get_emergency_step(scene)
             if tunnel_target:
-                scene.cm.add(TunnelToPoint(entity=self.entity, point=tunnel_target))
+                scene.cm.add(
+                    TunnelToPoint(entity=self.entity, point=tunnel_target)
+                )
             else:
                 self._log_warning(f"can't find a safe place to tunnel to")
                 scene.cm.add(Die(entity=self.entity))
             self.pass_turn()
         else:
-            next_step = (next_step_node[0] - coords.x, next_step_node[1] - coords.y)
+            next_step = (
+                next_step_node[0] - coords.x,
+                next_step_node[1] - coords.y,
+            )
             self.intention = VECTOR_STEP_MAP[next_step]
             self._log_debug(f"set intention {self.intention}")
 
@@ -111,9 +118,13 @@ class DefaultActiveActor(Brain):
         facing = coords.direction_towards(target)
         attack = scene.cm.get_one(Attack, entity=self.entity)
         scene.cm.add(
-            AttackAction(entity=self.entity, target=self.target, damage=attack.damage)
+            AttackAction(
+                entity=self.entity, target=self.target, damage=attack.damage
+            )
         )
-        scene.cm.add(*stab(self.entity, coords.x + facing[0], coords.y + facing[1])[1])
+        scene.cm.add(
+            *stab(self.entity, coords.x + facing[0], coords.y + facing[1])[1]
+        )
         self.pass_turn()
 
     def is_target_in_range(self, scene) -> bool:
@@ -129,7 +140,9 @@ class DefaultActiveActor(Brain):
             self.cost_map, self_coords.position, target_coords.position
         )
 
-        breadcrumb_tracker = scene.cm.get_one(BreadcrumbTracker, entity=self.entity)
+        breadcrumb_tracker = scene.cm.get_one(
+            BreadcrumbTracker, entity=self.entity
+        )
         if breadcrumb_tracker:
             breadcrumb_tracker.add_breadcrumbs(scene, path)
 

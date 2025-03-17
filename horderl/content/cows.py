@@ -17,7 +17,10 @@ def make_cow(x, y) -> Entity:
     entity_id = core.get_id()
     components: List[Component] = [
         Entity(
-            id=entity_id, entity=entity_id, name="cows", description=cows_description
+            id=entity_id,
+            entity=entity_id,
+            name="cows",
+            description=cows_description,
         ),
         Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_MEDIUM),
         Appearance(

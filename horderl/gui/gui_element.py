@@ -13,7 +13,7 @@ class GuiElement:
     y: int = 0
     name: str = ""
     id: int = field(default_factory=get_id)
-     # if true, the GUI won't store this element, but will render it immediately
+    # if true, the GUI won't store this element, but will render it immediately
     single_shot: bool = False
 
     def on_load(self) -> None:

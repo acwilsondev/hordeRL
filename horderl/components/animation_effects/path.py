@@ -21,7 +21,9 @@ class AnimationPath(TimedActor):
         entity = self.entity
         path_nodes = scene.cm.get_all(PathNode, entity=entity)
         try:
-            next_node = next(p for p in path_nodes if p.step == self.current_step)
+            next_node = next(
+                p for p in path_nodes if p.step == self.current_step
+            )
             coords = scene.cm.get_one(Coordinates, entity=entity)
 
             coords.x = next_node.x

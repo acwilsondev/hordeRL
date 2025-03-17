@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from horderl.components.events.build_world_events import BuildWorldListener
+
 from ...content.farmsteads.houses import place_farmstead
 
 

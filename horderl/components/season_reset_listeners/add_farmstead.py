@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.components.season_reset_listeners.seasonal_actor import \
-    SeasonResetListener
+from horderl.components.season_reset_listeners.seasonal_actor import (
+    SeasonResetListener,
+)
 from horderl.content.farmsteads.houses import place_farmstead
 from horderl.content.terrain.roads import connect_point_to_road_network
 

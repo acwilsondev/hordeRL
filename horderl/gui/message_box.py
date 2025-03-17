@@ -13,7 +13,11 @@ class MessageBox(GuiElement):
 
     def render(self, panel):
         panel.print(
-            self.x, self.y, "Messages________________", bg=None, fg=palettes.WHITE
+            self.x,
+            self.y,
+            "Messages________________",
+            bg=None,
+            fg=palettes.WHITE,
         )
         y = 1
         output = []

@@ -1,8 +1,8 @@
 from .. import settings
-from .. components.base_components.actor import Actor
-from .. components.enums import Intention
-from .. components.serialization.save_game import SaveGame
-from .. scenes.start_menu import get_start_menu
+from ..components.base_components.actor import Actor
+from ..components.enums import Intention
+from ..components.serialization.save_game import SaveGame
+from ..scenes.start_menu import get_start_menu
 
 
 def run(scene):

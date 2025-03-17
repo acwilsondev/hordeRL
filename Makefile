@@ -1,10 +1,10 @@
-.PHONY: install format lint test check run
+.PHONY: install format lint test radon check run
 
 install:
 	poetry install --with dev
 
 format:
-	poetry run black .
+	poetry run black --line-length 80 -- .
 	poetry run isort .
 
 lint:
@@ -13,7 +13,11 @@ lint:
 test:
 	poetry run pytest
 
-check: format lint test
+radon:
+	poetry run radon cc .
+	poetry run radon mi .
+	poetry run radon raw .
+check: format lint test radon
 
 run:
 	poetry run python hordeRL.py --log DEBUG --terminal_log

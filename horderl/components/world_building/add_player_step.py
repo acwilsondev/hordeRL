@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
-from ... import settings
 from horderl.components.events.build_world_events import BuildWorldListener
+
+from ... import settings
 from ...content.player import make_player
 
 

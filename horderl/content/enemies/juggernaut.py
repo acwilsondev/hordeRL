@@ -1,7 +1,9 @@
 import random
 
 from horderl.components import Appearance, Attributes, Coordinates
-from horderl.components.attacks.attack_effects.knockback_attack import KnockbackAttack
+from horderl.components.attacks.attack_effects.knockback_attack import (
+    KnockbackAttack,
+)
 from horderl.components.attacks.siege_attack import SiegeAttack
 from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.components.base_components.entity import Entity
@@ -12,10 +14,12 @@ from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.juggernaut_cost_mapper import \
-    StraightLineCostMapper
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import \
-    HordelingTargetEvaluator
+from horderl.components.pathfinding.juggernaut_cost_mapper import (
+    StraightLineCostMapper,
+)
+from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
+    HordelingTargetEvaluator,
+)
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
 from horderl.engine import core, palettes

@@ -23,7 +23,8 @@ def make_explosion(x, y):
             bg_color=palettes.BACKGROUND,
         ),
         StepAnimation(
-            entity=entity_id, steps=[(palettes.GOLD, "*"), (palettes.FRESH_BLOOD, "*")]
+            entity=entity_id,
+            steps=[(palettes.GOLD, "*"), (palettes.FRESH_BLOOD, "*")],
         ),
     ]
     return entity_id, components

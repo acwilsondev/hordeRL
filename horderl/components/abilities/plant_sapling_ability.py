@@ -2,8 +2,9 @@ from dataclasses import dataclass
 from typing import Callable
 
 from horderl.components.abilities.control_mode_ability import ControlModeAbility
-from horderl.components.brains.ability_actors.plant_sapling_actor import \
-    PlaceSaplingActor
+from horderl.components.brains.ability_actors.plant_sapling_actor import (
+    PlaceSaplingActor,
+)
 from horderl.engine import palettes
 
 

@@ -6,8 +6,7 @@ import tcod.event
 from tcod import libtcodpy
 from tcod.event_constants import K_RETURN
 
-from .. import engine
-from .. import settings
+from .. import engine, settings
 from ..engine import core
 from ..engine.palettes import WHITE
 from ..gui.gui_element import GuiElement
@@ -30,7 +29,9 @@ class EasyMenu(GuiElement):
         self.option_map = options
         self.options = [o for o in options.keys()]
         self.width = width
-        self.pages = [self.options[i : i + 10] for i in range(0, len(self.options), 10)]
+        self.pages = [
+            self.options[i : i + 10] for i in range(0, len(self.options), 10)
+        ]
         self.hide_background = hide_background
         self.return_only = return_only
         if len(self.pages) == 0:
@@ -45,15 +46,20 @@ class EasyMenu(GuiElement):
             has_next = page + 1 < len(self.pages)
             has_previous = page > 0
             key_event = self.show_and_get_input(
-                panel, self.pages[page], has_next=has_next, has_previous=has_previous
+                panel,
+                self.pages[page],
+                has_next=has_next,
+                has_previous=has_previous,
             )
             key_sym = int(key_event.sym)
             if (
-                key_sym == tcod.event.KeySym.RIGHT or key_sym == tcod.event.KeySym.n
+                key_sym == tcod.event.KeySym.RIGHT
+                or key_sym == tcod.event.KeySym.n
             ) and has_next:
                 page += 1
             elif (
-                key_sym == tcod.event.KeySym.LEFT or key_sym == tcod.event.KeySym.p
+                key_sym == tcod.event.KeySym.LEFT
+                or key_sym == tcod.event.KeySym.p
             ) and has_previous:
                 page -= 1
             elif key_sym == tcod.event.KeySym.RETURN:
@@ -74,9 +80,14 @@ class EasyMenu(GuiElement):
                     )
                     callback()
 
-    def show_and_get_input(self, root, options, has_next=False, has_previous=False):
+    def show_and_get_input(
+        self, root, options, has_next=False, has_previous=False
+    ):
         lines = textwrap.wrap(
-            self.header, self.width, break_long_words=False, replace_whitespace=False
+            self.header,
+            self.width,
+            break_long_words=False,
+            replace_whitespace=False,
         )
         header_height = len(lines)
 

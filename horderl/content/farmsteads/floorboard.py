@@ -16,7 +16,10 @@ def make_floorboard(root_id, x, y, resident) -> Tuple[int, List[Component]]:
         root_id,
         [
             Entity(
-                id=root_id, entity=root_id, name="floorboard", description=description
+                id=root_id,
+                entity=root_id,
+                name="floorboard",
+                description=description,
             ),
             Appearance(
                 entity=root_id,

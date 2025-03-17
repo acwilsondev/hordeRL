@@ -12,7 +12,11 @@ class Gui:
             libtcodpy.FONT_LAYOUT_CP437 | libtcodpy.FONT_TYPE_GREYSCALE,
         )
         self.root = libtcodpy.console_init_root(
-            width, height, title=title, order="F", renderer=libtcodpy.RENDERER_SDL2
+            width,
+            height,
+            title=title,
+            order="F",
+            renderer=libtcodpy.RENDERER_SDL2,
         )
         self.gui_elements = set()
 

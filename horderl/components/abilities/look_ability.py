@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 
-from .. import Coordinates
-from .ability import Ability
-from ..brains.ability_actors.look_cursor_controller import \
-    LookCursorController
 from ...content.cursor import make_cursor
+from .. import Coordinates
+from ..brains.ability_actors.look_cursor_controller import LookCursorController
+from .ability import Ability
 
 
 @dataclass

@@ -14,7 +14,10 @@ def make_bomb(x, y):
     entity_id = core.get_id()
     components: List[Component] = [
         Entity(
-            id=entity_id, entity=entity_id, name="bomb", description=bomb_description
+            id=entity_id,
+            entity=entity_id,
+            name="bomb",
+            description=bomb_description,
         ),
         Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOW),
         Appearance(

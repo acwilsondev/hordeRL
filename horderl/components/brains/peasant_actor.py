@@ -70,6 +70,9 @@ class PeasantActor(Brain):
                     0 <= new_position[0] < settings.MAP_WIDTH
                     and 0 <= new_position[1] < settings.MAP_HEIGHT
                 ):
-                    step_cost = (step, cost_map[new_position[0], new_position[1]])
+                    step_cost = (
+                        step,
+                        cost_map[new_position[0], new_position[1]],
+                    )
                     step_costs.append(step_cost)
         return step_costs

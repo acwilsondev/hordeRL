@@ -47,10 +47,14 @@ class PlayWindow(GuiElement):
 
         # hold terrain view
         self.terrain_console = tcod.console.Console(width, height, order="F")
-        self.shadow_terrain_console = tcod.console.Console(width, height, order="F")
+        self.shadow_terrain_console = tcod.console.Console(
+            width, height, order="F"
+        )
 
         self.black = tcod.console.Console(width, height, order="F")
-        self.console = tcod.console.Console(width, height, order="F")  # buffer console
+        self.console = tcod.console.Console(
+            width, height, order="F"
+        )  # buffer console
 
     def on_load(self) -> None:
         self.regenerate_grass()
@@ -102,7 +106,11 @@ class PlayWindow(GuiElement):
             self.width, self.height, order="F", buffer=buffer
         )
         self.console.blit(
-            panel, dest_x=self.x, dest_y=self.y, width=self.width, height=self.height
+            panel,
+            dest_x=self.x,
+            dest_y=self.y,
+            width=self.width,
+            height=self.height,
         )
 
     def regenerate_grass(self):
@@ -129,7 +137,10 @@ class PlayWindow(GuiElement):
 
     def add_snow(self):
         all_tiles = set(
-            product(range(1, settings.MAP_WIDTH - 1), range(1, settings.MAP_HEIGHT - 1))
+            product(
+                range(1, settings.MAP_WIDTH - 1),
+                range(1, settings.MAP_HEIGHT - 1),
+            )
         )
         unsnowed = all_tiles - self.snowy
         if not unsnowed:

@@ -40,7 +40,9 @@ def get_enemies(scene, entity):
         # entities without a faction cannot have enemies
         return []
     return [
-        f.entity for f in scene.cm.get(Faction) if f.faction != entity_faction.faction
+        f.entity
+        for f in scene.cm.get(Faction)
+        if f.faction != entity_faction.faction
     ]
 
 

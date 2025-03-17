@@ -112,7 +112,12 @@ def _add_house(scene, x, y) -> EntityId:
         peasant_id = peasant[0]
 
         crop_color = random.choice(
-            [palettes.FIRE, palettes.FOILAGE_C, palettes.FRESH_BLOOD, palettes.GOLD]
+            [
+                palettes.FIRE,
+                palettes.FOILAGE_C,
+                palettes.FRESH_BLOOD,
+                palettes.GOLD,
+            ]
         )
         for point in finalized_plot:
             plot = make_farm_plot(point[0], point[1], peasant_id, crop_color)

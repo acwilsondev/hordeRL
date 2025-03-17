@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import Callable
 
+from horderl.engine import palettes
+
 from ..abilities.control_mode_ability import ControlModeAbility
 from ..brains.ability_actors.place_spikes_actor import PlaceSpikesActor
-from horderl.engine import palettes
 
 
 @dataclass

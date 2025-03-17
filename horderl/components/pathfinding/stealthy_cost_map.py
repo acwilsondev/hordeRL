@@ -16,9 +16,13 @@ class StealthyCostMapper(CostMapper):
 
         visibility_cost = np.where(
             scene.visibility_map,
-            np.ones((settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int)
+            np.ones(
+                (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int
+            )
             * 5,
-            np.ones((settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int),
+            np.ones(
+                (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=int
+            ),
         )
         cost *= visibility_cost
 

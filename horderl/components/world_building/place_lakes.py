@@ -1,13 +1,14 @@
 import random
 from dataclasses import dataclass
 
-from ... import settings
 from horderl.components import Coordinates
 from horderl.components.events.build_world_events import BuildWorldListener
 from horderl.components.world_building.world_parameters import WorldParameters
-from ...content.terrain.water import make_swampy_water, make_water
 from horderl.engine import core
 from horderl.engine.utilities import get_3_by_3_box
+
+from ... import settings
+from ...content.terrain.water import make_swampy_water, make_water
 
 
 def add_water(scene, x: int, y: int, painter, rapidness) -> None:
@@ -21,7 +22,9 @@ def add_water(scene, x: int, y: int, painter, rapidness) -> None:
 class PlaceLakes(BuildWorldListener):
     def on_build_world(self, scene):
         self._log_info(f"placing lakes in town")
-        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        world_settings = scene.cm.get_one(
+            WorldParameters, entity=core.get_id("world")
+        )
 
         for _ in range(world_settings.lakes):
             x = random.randint(0, settings.MAP_WIDTH - 1)
@@ -33,7 +36,9 @@ class PlaceLakes(BuildWorldListener):
     def spawn_lake(self, scene, x: int, y: int) -> None:
         working_set = [(x, y)]
         maximum = 50
-        world_settings = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
+        world_settings = scene.cm.get_one(
+            WorldParameters, entity=core.get_id("world")
+        )
         if world_settings.is_water_swampy:
             water_painter = make_swampy_water
         else:
@@ -42,7 +47,11 @@ class PlaceLakes(BuildWorldListener):
         while working_set and maximum > 0:
             working_x, working_y = working_set.pop(0)
             add_water(
-                scene, working_x, working_y, water_painter, world_settings.river_rapids
+                scene,
+                working_x,
+                working_y,
+                water_painter,
+                world_settings.river_rapids,
             )
             maximum -= 1
             working_set += [

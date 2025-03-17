@@ -21,8 +21,15 @@ from ..engine.core import timed
 from ..engine.message import Message
 from ..gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
 from ..gui.help_tab import HelpTab
-from ..gui.labels import (AbilityLabel, CalendarLabel, GoldLabel,
-                        HordeStatusLabel, Label, SpeedLabel, VillageNameLabel)
+from ..gui.labels import (
+    AbilityLabel,
+    CalendarLabel,
+    GoldLabel,
+    HordeStatusLabel,
+    Label,
+    SpeedLabel,
+    VillageNameLabel,
+)
 from ..gui.message_box import MessageBox
 from ..gui.play_window import PlayWindow
 from ..gui.popup_message import PopupMessage
@@ -81,7 +88,9 @@ class DefendScene(GameScene):
         )
 
         anchor = VerticalAnchor(1, 1)
-        anchor.add_element(Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________"))
+        anchor.add_element(
+            Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________")
+        )
         anchor.add_element(HealthBar(1, 0))
         anchor.add_element(Thwackometer(1, 0))
         anchor.add_element(SpeedLabel(1, 0))

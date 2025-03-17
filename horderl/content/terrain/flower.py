@@ -14,10 +14,17 @@ def make_flower(x, y, color):
         [
             Entity(id=entity_id, entity=entity_id, name="flower"),
             Appearance(
-                entity=entity_id, symbol='"', color=color, bg_color=palettes.BACKGROUND
+                entity=entity_id,
+                symbol='"',
+                color=color,
+                bg_color=palettes.BACKGROUND,
             ),
             Coordinates(
-                entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST, buildable=True
+                entity=entity_id,
+                x=x,
+                y=y,
+                priority=PRIORITY_LOWEST,
+                buildable=True,
             ),
             DieOnEnter(entity=entity_id),
             Material(entity=entity_id, blocks=False, blocks_sight=False),

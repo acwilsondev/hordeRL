@@ -1,15 +1,18 @@
 import random
 from dataclasses import dataclass
 
-from ... import settings
 from horderl.components.base_components.energy_actor import EnergyActor
-from horderl.components.world_building.world_parameters import (get_forest_params,
-                                                        get_mountain_params,
-                                                        get_plains_params,
-                                                        get_swamp_params,
-                                                        get_tundra_params)
-from ...content.world_builder import make_world_build
+from horderl.components.world_building.world_parameters import (
+    get_forest_params,
+    get_mountain_params,
+    get_plains_params,
+    get_swamp_params,
+    get_tundra_params,
+)
 from horderl.engine import core
+
+from ... import settings
+from ...content.world_builder import make_world_build
 from ...gui.easy_menu import EasyMenu
 
 
@@ -32,7 +35,9 @@ class SelectBiome(EnergyActor):
                 {
                     "Plains (Easy)": get_settings(scene, get_plains_params),
                     "Forest (Moderate)": get_settings(scene, get_forest_params),
-                    "Mountains (Hard)": get_settings(scene, get_mountain_params),
+                    "Mountains (Hard)": get_settings(
+                        scene, get_mountain_params
+                    ),
                     "Swamp (Hard)": get_settings(scene, get_swamp_params),
                     "Tundra (Brutal)": get_settings(scene, get_tundra_params),
                 },

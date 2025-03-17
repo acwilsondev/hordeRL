@@ -6,8 +6,9 @@ from horderl.components.base_components.entity import Entity
 from horderl.components.brains.peasant_actor import PeasantActor
 from horderl.components.cry_for_help import CryForHelp
 from horderl.components.death_listeners.npc_corpse import Corpse
-from horderl.components.death_listeners.on_die_emit_peasant_died import \
-    OnDieEmitPeasantDied
+from horderl.components.death_listeners.on_die_emit_peasant_died import (
+    OnDieEmitPeasantDied,
+)
 from horderl.components.edible import Edible
 from horderl.components.events.peasant_events import PeasantAdded
 from horderl.components.faction import Faction

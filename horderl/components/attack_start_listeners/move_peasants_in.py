@@ -23,12 +23,15 @@ def _move_peasant_home(scene, peasant) -> None:
     home_address = scene.cm.get_one(Residence, entity=peasant.entity)
     possible_homes = scene.cm.get(HouseStructure)
     correct_home = next(
-        (hs for hs in possible_homes if hs.house_id == home_address.house_id), None
+        (hs for hs in possible_homes if hs.house_id == home_address.house_id),
+        None,
     )
     if correct_home:
         house_coords = scene.cm.get_one(Coordinates, entity=correct_home.entity)
         if house_coords:
-            peasant_coords = scene.cm.get_one(Coordinates, entity=peasant.entity)
+            peasant_coords = scene.cm.get_one(
+                Coordinates, entity=peasant.entity
+            )
             if peasant_coords:
                 peasant_coords.x = house_coords.x
                 peasant_coords.y = house_coords.y

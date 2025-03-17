@@ -21,7 +21,10 @@ def save(components, file, extra=None):
     if extra is None:
         extra = {}
     save_info = {
-        "info": {"object_count": len(components["active_components"]), "extra": extra},
+        "info": {
+            "object_count": len(components["active_components"]),
+            "extra": extra,
+        },
         "named_ids": core.get_named_ids(),
         "objects": components,
     }

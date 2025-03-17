@@ -1,8 +1,9 @@
 import time
 from dataclasses import dataclass, field
 
-from ... import settings
 from horderl.components.base_components.component import Component
+
+from ... import settings
 
 DEFAULT_LAKES: int = 1
 DEFAULT_LAKE_PROLIFERATION: float = 0.2

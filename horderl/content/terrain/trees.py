@@ -7,8 +7,9 @@ appropriate components, appearances, and behaviors.
 from horderl.components import Appearance, Attributes, Coordinates
 from horderl.components.base_components.entity import Entity
 from horderl.components.death_listeners.npc_corpse import Corpse
-from horderl.components.death_listeners.terrain_changes_on_death import \
-    TerrainChangedOnDeath
+from horderl.components.death_listeners.terrain_changes_on_death import (
+    TerrainChangedOnDeath,
+)
 from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
@@ -64,9 +65,7 @@ def make_wall_tree(x, y):
     )
 
 
-tree_description = (
-    "A tree of the Toshim Plains. You can chop it down to sell its valuable wood."
-)
+tree_description = "A tree of the Toshim Plains. You can chop it down to sell its valuable wood."
 
 
 def make_tree(x, y):

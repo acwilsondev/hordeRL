@@ -1,5 +1,4 @@
-from ...pathfinding.target_evaluation.target_evaluator import \
-    TargetEvaluator
+from ...pathfinding.target_evaluation.target_evaluator import TargetEvaluator
 from ...target_value import TargetValue
 
 

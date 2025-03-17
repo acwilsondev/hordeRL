@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 
 from ..events.start_game_events import GameStartListener
-from ..season_reset_listeners.seasonal_actor import \
-    SeasonResetListener
+from ..season_reset_listeners.seasonal_actor import SeasonResetListener
 
 
 @dataclass

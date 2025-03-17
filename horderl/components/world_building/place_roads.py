@@ -1,13 +1,14 @@
 import random
 from typing import List
 
-from ... import settings
 from horderl.components import Coordinates
 from horderl.components.events.build_world_events import BuildWorldListener
 from horderl.components.house_structure import HouseStructure
 from horderl.components.tags.town_center_flag import TownCenterFlag
-from ...content.terrain.roads import connect_point_to_road_network, make_road
 from horderl.engine.utilities import get_3_by_3_box, get_3_by_3_square
+
+from ... import settings
+from ...content.terrain.roads import connect_point_to_road_network, make_road
 
 
 def get_town_center(house_coords, scene):
@@ -53,5 +54,8 @@ class PlaceRoads(BuildWorldListener):
         self._log_info(f"placing highway")
         start = (0, random.randint(2, settings.MAP_WIDTH - 3))
         connect_point_to_road_network(scene, start)
-        end = (settings.MAP_WIDTH - 1, random.randint(2, settings.MAP_HEIGHT - 3))
+        end = (
+            settings.MAP_WIDTH - 1,
+            random.randint(2, settings.MAP_HEIGHT - 3),
+        )
         connect_point_to_road_network(scene, end)

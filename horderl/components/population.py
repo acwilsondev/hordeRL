@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 
-from ..components.events.peasant_events import (PeasantAddedListener,
-                                              PeasantDiedListener)
+from ..components.events.peasant_events import (
+    PeasantAddedListener,
+    PeasantDiedListener,
+)
 
 
 @dataclass

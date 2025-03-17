@@ -183,7 +183,9 @@ def log_debug(module):
                 start = time_ms()
                 logger.debug(f" {fn.__name__} => {args} - {kwargs}")
                 result = fn(*args, **kwargs)
-                logger.debug(f" {fn.__name__} {time_ms() - start}ms <= {result}")
+                logger.debug(
+                    f" {fn.__name__} {time_ms() - start}ms <= {result}"
+                )
                 return result
             except Exception as ex:
                 logger.debug("Exception {0}".format(ex))

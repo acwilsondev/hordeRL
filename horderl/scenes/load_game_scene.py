@@ -15,7 +15,9 @@ class LoadMenuScene(GameScene):
         self.title = "Load a village?"
         center_x = (settings.SCREEN_WIDTH - len(self.title)) // 2
         center_y = settings.SCREEN_HEIGHT // 2 - 4
-        title_label = Label(center_x, center_y, self.title, fg=palettes.FRESH_BLOOD)
+        title_label = Label(
+            center_x, center_y, self.title, fg=palettes.FRESH_BLOOD
+        )
         self.add_gui_element(title_label)
 
     def before_update(self):

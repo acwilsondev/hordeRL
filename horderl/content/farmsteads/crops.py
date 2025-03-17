@@ -5,7 +5,7 @@ This module handles crop entities in the game, which are valuable resources that
 farmers grow and players must protect from hordelings. Crops have monetary value
 and can be harvested at the end of the season for gold.
 
-Crops are part of the agricultural system and represent one of the main economic 
+Crops are part of the agricultural system and represent one of the main economic
 elements that players need to protect to succeed.
 """
 
@@ -56,11 +56,17 @@ def make_crops(
     entity_id = core.get_id()
     components: List[Component] = [
         Entity(
-            id=entity_id, entity=entity_id, name="crop", description=crops_description
+            id=entity_id,
+            entity=entity_id,
+            name="crop",
+            description=crops_description,
         ),
         Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOW),
         Appearance(
-            entity=entity_id, symbol="δ", color=color, bg_color=palettes.BACKGROUND
+            entity=entity_id,
+            symbol="δ",
+            color=color,
+            bg_color=palettes.BACKGROUND,
         ),
         FarmedBy(entity=entity_id, farmer=farmer),
         CropInfo(entity=entity_id, field_id=field_id, farmer_id=farmer),

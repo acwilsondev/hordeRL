@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
+from horderl.engine import constants
+
+from ...content.states import no_money_animation
 from .. import Coordinates
 from ..base_components.component import Component
 from ..enums import Intention
-from ...content.states import no_money_animation
-from horderl.engine import constants
 
 
 @dataclass

@@ -1,8 +1,7 @@
 import logging
 from dataclasses import dataclass
 
-from .. import engine
-from .. import settings
+from .. import engine, settings
 from ..components import Attributes, Coordinates, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility
 from ..components.base_components.energy_actor import EnergyActor
@@ -10,8 +9,9 @@ from ..components.base_components.entity import Entity
 from ..components.brains.brain import Brain
 from ..components.brains.default_active_actor import DefaultActiveActor
 from ..components.brains.painters.create_gold_actor import PlaceGoldController
-from ..components.brains.painters.create_hordeling_actor import \
-    PlaceHordelingController
+from ..components.brains.painters.create_hordeling_actor import (
+    PlaceHordelingController,
+)
 from ..components.events.die_events import Die
 from ..components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from ..components.serialization.save_game import SaveGame
@@ -80,7 +80,9 @@ class ShowDebug(EnergyActor):
                     "examine game objects": get_examine_game_objects(scene),
                     "heal": get_heal(scene),
                     "get rich": get_rich(scene),
-                    "place hordeling": get_painter(scene, PlaceHordelingController),
+                    "place hordeling": get_painter(
+                        scene, PlaceHordelingController
+                    ),
                     "place gold": get_painter(scene, PlaceGoldController),
                     "wrath": get_wrath(scene, self.entity),
                     "suicide": get_suicide(scene),
@@ -123,7 +125,9 @@ def get_examine_game_objects(scene):
             EasyMenu(
                 "Examine which?",
                 {
-                    entity.get_readable_key(): get_examine_object(scene, entity.entity)
+                    entity.get_readable_key(): get_examine_object(
+                        scene, entity.entity
+                    )
                     for entity in entities
                 },
                 settings.INVENTORY_WIDTH,
@@ -214,7 +218,9 @@ def get_painter(scene, painter):
         scene.cm.add(*cursor[1])
         player_controller = scene.cm.get_one(Brain, entity=scene.player)
         new_controller = painter(
-            entity=scene.player, old_actor=player_controller.id, cursor=cursor[0]
+            entity=scene.player,
+            old_actor=player_controller.id,
+            cursor=cursor[0],
         )
         scene.cm.stash_component(player_controller.id)
         scene.cm.add(new_controller)
@@ -395,8 +401,8 @@ def get_activate_ability(scene):
         ability_map = {}
 
         has_masonry = scene.cm.get_one(BuildWallAbility, entity=scene.player)
-        ability_map[f"Masonry ({'X' if has_masonry else ' '})"] = get_toggle_masonry(
-            scene
+        ability_map[f"Masonry ({'X' if has_masonry else ' '})"] = (
+            get_toggle_masonry(scene)
         )
 
         scene.gui.add_element(
@@ -464,7 +470,9 @@ def get_pathfinding_for(scene):
             EasyMenu(
                 "Toggle pathfinding for which?",
                 {
-                    entity.get_readable_key(): get_show_pathing(scene, entity.entity)
+                    entity.get_readable_key(): get_show_pathing(
+                        scene, entity.entity
+                    )
                     for entity in entities
                 },
                 settings.INVENTORY_WIDTH,
@@ -521,7 +529,9 @@ def get_spawn_home(scene):
 
     def out_fn():
         farmstead_id = place_farmstead(scene)
-        farmstead_point = scene.cm.get_one(Coordinates, entity=farmstead_id).position
+        farmstead_point = scene.cm.get_one(
+            Coordinates, entity=farmstead_id
+        ).position
         connect_point_to_road_network(scene, farmstead_point, trim_start=2)
 
     return out_fn
