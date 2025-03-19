@@ -20,4 +20,4 @@ debug:
 	poetry run python hordeRL.py --log DEBUG --terminal_log
 
 run:
-	poetry run python hordeRL.py --terminal_log
+	poetry run python hordeRL.py --termina
