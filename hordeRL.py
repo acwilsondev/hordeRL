@@ -40,7 +40,7 @@ def cli():
 
     # Convert string log level to logging constant
     log_level = getattr(logging, args.log)
-    
+
     # Configure logging based on arguments
     if args.terminal_log:
         # Terminal-only logging (disable file logging)
@@ -48,7 +48,7 @@ def cli():
             environment="development",
             console_level=log_level,
             log_dir=os.path.dirname(os.path.abspath(__file__)),
-            log_file=None
+            log_file=None,
         )
     else:
         # Both terminal and file logging
@@ -57,7 +57,7 @@ def cli():
             console_level=log_level,
             file_level=log_level,
             log_dir=os.path.dirname(os.path.abspath(__file__)),
-            log_file=".log"
+            log_file=".log",
         )
 
     if args.prof:

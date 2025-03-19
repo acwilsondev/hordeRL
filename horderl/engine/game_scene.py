@@ -60,10 +60,15 @@ class GameScene:
         """
         if element.single_shot:
             # if it's a single shot (menu or popup message), we need to render it directly to the existing window
-            self.logger.debug(f"Rendering single-shot GUI element: {element.__class__.__name__}")
+            self.logger.debug(
+                "Rendering single-shot GUI element:"
+                f" {element.__class__.__name__}"
+            )
             element.render(self.gui.root)
         else:
-            self.logger.debug(f"Adding persistent GUI element: {element.__class__.__name__}")
+            self.logger.debug(
+                f"Adding persistent GUI element: {element.__class__.__name__}"
+            )
             self.gui_elements.append(element)
 
     def popup_message(self, message: str):
@@ -233,7 +238,9 @@ class GameScene:
             serialization.save(objects, file_name, extras)
             self.logger.debug(f"Game saved successfully to {file_name}")
         except Exception as e:
-            self.logger.error(f"Failed to save game to {file_name}: {str(e)}", exc_info=True)
+            self.logger.error(
+                f"Failed to save game to {file_name}: {str(e)}", exc_info=True
+            )
 
     def load_game(self, file_name):
         """
@@ -254,5 +261,8 @@ class GameScene:
             self.logger.debug(f"Game loaded successfully from {file_name}")
             return data
         except Exception as e:
-            self.logger.error(f"Failed to load game from {file_name}: {str(e)}", exc_info=True)
+            self.logger.error(
+                f"Failed to load game from {file_name}: {str(e)}",
+                exc_info=True,
+            )
             raise

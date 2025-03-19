@@ -6,12 +6,11 @@ with support for both file and console logging, different environments, and
 consistent log formatting.
 """
 
-import os
-import sys
 import logging
 import logging.handlers
-from typing import Optional, Dict, Any
-
+import os
+import sys
+from typing import Any, Dict, Optional
 
 # Default log levels for different environments
 DEFAULT_CONSOLE_LEVEL = {
@@ -71,11 +70,12 @@ def configure_logging(
     if environment == "development":
         console_formatter = logging.Formatter(
             "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-            datefmt="%H:%M:%S"
+            datefmt="%H:%M:%S",
         )
         file_formatter = logging.Formatter(
-            "%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d): %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S"
+            "%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d):"
+            " %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
         )
     else:  # production or test
         console_formatter = logging.Formatter(
@@ -114,18 +114,20 @@ def configure_logging(
         f"Logging configured: environment={environment}, "
         f"console_level={logging.getLevelName(console_level)}"
     )
-    
+
     # Add file logging info only if file logging is enabled
     if log_file is not None:
         log_message += (
             f", file_level={logging.getLevelName(file_level)}, "
             f"log_file={log_file_path}"
         )
-    
+
     logger.info(log_message)
 
 
-def get_logger(name: str, extra: Optional[Dict[str, Any]] = None) -> logging.Logger:
+def get_logger(
+    name: str, extra: Optional[Dict[str, Any]] = None
+) -> logging.Logger:
     """
     Get a logger with the specified name.
 
@@ -137,10 +139,9 @@ def get_logger(name: str, extra: Optional[Dict[str, Any]] = None) -> logging.Log
         A configured logger instance
     """
     logger = logging.getLogger(name)
-    
+
     if extra:
         # Return a logger adapter if extra context is provided
         return logging.LoggerAdapter(logger, extra)
-    
-    return logger
 
+    return logger

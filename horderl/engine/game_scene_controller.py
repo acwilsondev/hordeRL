@@ -59,7 +59,9 @@ class GameSceneController:
         self.sound = DefaultSoundController()
         self._scene_stack: List[GameScene] = []
         self.logger = get_logger(__name__)
-        self.logger.debug("GameSceneController instantiated", extra={"title": self.title})
+        self.logger.debug(
+            "GameSceneController instantiated", extra={"title": self.title}
+        )
 
     @log_debug(__name__)
     def push_scene(self, scene: GameScene):
@@ -88,8 +90,8 @@ class GameSceneController:
             extra={
                 "scene_type": scene.__class__.__name__,
                 "stack_size": len(self._scene_stack),
-                "action": "push_scene"
-            }
+                "action": "push_scene",
+            },
         )
 
     @log_debug(__name__)
@@ -118,8 +120,8 @@ class GameSceneController:
             extra={
                 "scene_type": scene.__class__.__name__,
                 "stack_size": len(self._scene_stack),
-                "action": "pop_scene"
-            }
+                "action": "pop_scene",
+            },
         )
         return scene
 
@@ -142,10 +144,7 @@ class GameSceneController:
         self._scene_stack.clear()
         self.logger.info(
             f"Scene stack cleared, removed {stack_size} scenes",
-            extra={
-                "previous_size": stack_size,
-                "action": "clear_scenes"
-            }
+            extra={"previous_size": stack_size, "action": "clear_scenes"},
         )
 
     @log_debug(__name__)
@@ -173,21 +172,21 @@ class GameSceneController:
         """
         self.logger.info(
             "Starting game scene controller main loop",
-            extra={"action": "start", "stack_size": len(self._scene_stack)}
+            extra={"action": "start", "stack_size": len(self._scene_stack)},
         )
         while self._scene_stack:
             current_scene = self._scene_stack[-1]
             scene_name = current_scene.__class__.__name__
-            
+
             self.logger.debug(
                 f"Processing frame for scene: {scene_name}",
                 extra={
                     "scene_type": scene_name,
                     "stack_position": len(self._scene_stack) - 1,
-                    "phase": "before_frame"
-                }
+                    "phase": "before_frame",
+                },
             )
-            
+
             current_scene.before_update()
             current_scene.update()
             current_scene.render()
