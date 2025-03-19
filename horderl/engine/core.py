@@ -1,8 +1,9 @@
-import logging
 from time import perf_counter_ns
 
 import tcod.event
 import tcod.noise
+
+from horderl.engine.logging import get_logger
 
 
 def get_key_event():
@@ -116,7 +117,8 @@ def set_named_ids(new_mapping):
 
     """
     global NAME_ID_MAP
-    logging.info("Core::set_named_ids id mapping loaded")
+    logger = get_logger("core")
+    logger.info("ID mapping loaded", extra={"action": "set_named_ids", "mapping_size": len(new_mapping)})
     NAME_ID_MAP = new_mapping
 
 
@@ -150,16 +152,25 @@ def timed(ms, module):
     :rtype: callable
 
     """
-
     def outer(func):
         def inner(*args, **kwargs):
-            logger = logging.getLogger(module)
+            logger = get_logger(module)
 
             t0 = time_ms()
             result = func(*args, **kwargs)
             t1 = time_ms()
-            if t1 - t0 > ms:
-                logger.warning(f"call to {func} took {t1-t0}ms (>{ms}ms)")
+            duration = t1 - t0
+            if duration > ms:
+                logger.warning(
+                    f"Function execution exceeded time threshold",
+                    extra={
+                        "function": func.__name__,
+                        "duration_ms": duration,
+                        "threshold_ms": ms,
+                        "args_count": len(args),
+                        "kwargs_count": len(kwargs)
+                    }
+                )
             return result
 
         return inner
@@ -181,21 +192,48 @@ def log_debug(module):
     :rtype: callable
 
     """
-
     def outer(fn):
         def decorated(*args, **kwargs):
-            logger = logging.getLogger(module)
+            logger = get_logger(module)
 
             try:
                 start = time_ms()
-                logger.debug(f" {fn.__name__} => {args} - {kwargs}")
-                result = fn(*args, **kwargs)
+                # Log function entry with structured data
                 logger.debug(
-                    f" {fn.__name__} {time_ms() - start}ms <= {result}"
+                    "Function entry",
+                    extra={
+                        "function": fn.__name__,
+                        "event": "function_entry",
+                        "function_args": str(args),
+                        "function_kwargs": str(kwargs)
+                    }
+                )
+                
+                result = fn(*args, **kwargs)
+                
+                # Log function exit with structured data
+                duration = time_ms() - start
+                logger.debug(
+                    "Function exit",
+                    extra={
+                        "function": fn.__name__,
+                        "event": "function_exit",
+                        "duration_ms": duration,
+                        "return_value": str(result)
+                    }
                 )
                 return result
             except Exception as ex:
-                logger.debug("Exception {0}".format(ex))
+                logger.error(
+                    f"Exception in {fn.__name__}",
+                    extra={
+                        "function": fn.__name__,
+                        "event": "function_exception",
+                        "exception_type": type(ex).__name__,
+                        "exception_message": str(ex)
+                    },
+                    exc_info=True
+                )
                 raise ex
 
         return decorated

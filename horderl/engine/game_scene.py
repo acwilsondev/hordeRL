@@ -2,6 +2,7 @@ from typing import final
 
 from horderl.engine import serialization
 from horderl.engine.component_manager import ComponentManager
+from horderl.engine.logging import get_logger
 from horderl.engine.sound.sound_controller import SoundController
 from horderl.gui.gui import Gui
 from horderl.gui.gui_element import GuiElement
@@ -43,6 +44,7 @@ class GameScene:
         self.controller = None
         self.gui = None
         self.sound = None
+        self.logger = get_logger(f"{self.__class__.__name__}")
 
     def add_gui_element(self, element: GuiElement):
         """
@@ -58,8 +60,10 @@ class GameScene:
         """
         if element.single_shot:
             # if it's a single shot (menu or popup message), we need to render it directly to the existing window
+            self.logger.debug(f"Rendering single-shot GUI element: {element.__class__.__name__}")
             element.render(self.gui.root)
         else:
+            self.logger.debug(f"Adding persistent GUI element: {element.__class__.__name__}")
             self.gui_elements.append(element)
 
     def popup_message(self, message: str):
@@ -73,6 +77,7 @@ class GameScene:
             message (str): The text message to display in the popup
 
         """
+        self.logger.info(f"Displaying popup message: {message}")
         self.add_gui_element(PopupMessage(message))
 
     # Scene Lifecycle Hooks
@@ -143,6 +148,7 @@ class GameScene:
 
         """
         self.gui.root.clear()
+        self.logger.debug(f"Rendering {len(self.gui_elements)} GUI elements")
         for element in self.gui_elements:
             element.update(self)
         for element in self.gui_elements:
@@ -161,6 +167,7 @@ class GameScene:
         This is the final lifecycle method called before the scene is removed from the active stack.
 
         """
+        self.logger.info(f"Unloading scene: {self.__class__.__name__}")
         pass
 
     @final
@@ -189,10 +196,12 @@ class GameScene:
             sound (SoundController): The sound system for audio playback
 
         """
+        self.logger.info(f"Loading scene: {self.__class__.__name__}")
         self.controller = controller
         self.cm = cm
         self.gui = gui
         self.sound = sound
+        self.logger.debug(f"Calling on_load() for {self.__class__.__name__}")
         self.on_load()
 
     def pop(self):
@@ -204,6 +213,7 @@ class GameScene:
         from the stack.
 
         """
+        self.logger.info(f"Popping scene: {self.__class__.__name__}")
         self.controller.pop_scene()
 
     def save_game(self, objects, file_name, extras):
@@ -218,7 +228,12 @@ class GameScene:
             extras: Additional data to be included in the save file
 
         """
-        serialization.save(objects, file_name, extras)
+        self.logger.info(f"Saving game to file: {file_name}")
+        try:
+            serialization.save(objects, file_name, extras)
+            self.logger.debug(f"Game saved successfully to {file_name}")
+        except Exception as e:
+            self.logger.error(f"Failed to save game to {file_name}: {str(e)}", exc_info=True)
 
     def load_game(self, file_name):
         """
@@ -233,4 +248,11 @@ class GameScene:
             The deserialized game objects and state from the save file
 
         """
-        return serialization.load(file_name)
+        self.logger.info(f"Loading game from file: {file_name}")
+        try:
+            data = serialization.load(file_name)
+            self.logger.debug(f"Game loaded successfully from {file_name}")
+            return data
+        except Exception as e:
+            self.logger.error(f"Failed to load game from {file_name}: {str(e)}", exc_info=True)
+            raise

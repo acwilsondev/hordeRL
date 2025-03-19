@@ -3,8 +3,10 @@
 import argparse
 import cProfile
 import logging
+import os
 
 from horderl.engine.game_scene_controller import GameSceneController
+from horderl.engine.logging import configure_logging
 from horderl.scenes.start_menu import get_start_menu
 
 
@@ -36,16 +38,27 @@ def cli():
     )
     args = parser.parse_args()
 
-    if not args.terminal_log:
-        logging.basicConfig(
-            filename="./.log",
-            filemode="a",
-            format="%(levelname)s\t%(message)s",
+    # Convert string log level to logging constant
+    log_level = getattr(logging, args.log)
+    
+    # Configure logging based on arguments
+    if args.terminal_log:
+        # Terminal-only logging (disable file logging)
+        configure_logging(
+            environment="development",
+            console_level=log_level,
+            log_dir=os.path.dirname(os.path.abspath(__file__)),
+            log_file=None
         )
     else:
-        logging.basicConfig(format="%(levelname)s\t%(message)s")
-
-    logging.getLogger().setLevel(args.log)
+        # Both terminal and file logging
+        configure_logging(
+            environment="development",
+            console_level=log_level,
+            file_level=log_level,
+            log_dir=os.path.dirname(os.path.abspath(__file__)),
+            log_file=".log"
+        )
 
     if args.prof:
         pr = cProfile.Profile()
