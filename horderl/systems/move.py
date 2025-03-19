@@ -4,7 +4,7 @@ from typing import Tuple
 from .. import settings
 from ..components import Senses
 from ..components.attacks.attack import Attack
-from ..components.base_components.actor import Actor
+from ..engine.components.actor import Actor
 from ..components.brains.brain import Brain
 from ..components.coordinates import Coordinates
 from ..components.enums import Intention

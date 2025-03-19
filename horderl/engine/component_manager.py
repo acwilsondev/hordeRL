@@ -19,8 +19,8 @@ deep inheritance hierarchies, enabling behavior to be added or removed at runtim
 from collections import defaultdict
 from typing import Callable, Dict, Generic, Iterable, List, Set, Type
 
-from horderl.components.base_components.component import Component
 from horderl.engine import constants
+from horderl.engine.components.component import Component
 from horderl.engine.logging import get_logger
 from horderl.engine.types import (
     ComponentList,

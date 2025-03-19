@@ -1,7 +1,6 @@
 import random
 from dataclasses import dataclass
 
-from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.components.world_building.world_parameters import (
     get_forest_params,
     get_mountain_params,
@@ -10,6 +9,7 @@ from horderl.components.world_building.world_parameters import (
     get_tundra_params,
 )
 from horderl.engine import core
+from horderl.engine.components.energy_actor import EnergyActor
 
 from ... import settings
 from ...content.world_builder import make_world_build

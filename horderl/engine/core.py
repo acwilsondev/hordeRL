@@ -35,7 +35,6 @@ def time_ms():
     """
     logger = get_logger("core")
     result = int(perf_counter_ns() / 1000000)
-    logger.debug("Time measured", extra={"result_ms": result})
     return result
 
 
@@ -198,8 +197,8 @@ def get_key_event():
                 "Event polling duration exceeded threshold",
                 extra={
                     "action": "get_key_event",
+                    "events_count": len(list(events)),
                     "poll_duration_ms": poll_duration,
-                    "events_count": len(events),
                 },
             )
 
@@ -207,7 +206,6 @@ def get_key_event():
             "Retrieved events from event queue",
             extra={
                 "action": "get_key_event",
-                "events_count": len(events),
                 "poll_duration_ms": poll_duration,
             },
         )
@@ -226,16 +224,6 @@ def get_key_event():
                 return event
         logger.debug("No key events found", extra={"action": "get_key_event"})
         return None
-    except tcod.event.EventError as e:
-        logger.error(
-            "TCOD event error",
-            extra={
-                "action": "get_key_event",
-                "error_type": "EventError",
-                "error_message": str(e),
-            },
-        )
-        raise RuntimeError(f"Error retrieving event: {e}") from e
     except Exception as e:
         logger.error(
             "Unexpected error processing events",
@@ -283,16 +271,6 @@ def wait_for_char():
                     if e.sym == tcod.event.KeySym.RETURN:
                         return e
                     return e
-    except tcod.event.EventError as e:
-        logger.error(
-            "TCOD event error while waiting for input",
-            extra={
-                "action": "wait_for_char",
-                "error_type": "EventError",
-                "error_message": str(e),
-            },
-        )
-        raise RuntimeError(f"Error waiting for event: {e}") from e
     except Exception as e:
         logger.error(
             "Unexpected error while waiting for input",
@@ -379,7 +357,7 @@ def get_id(name=None):
             "Retrieved existing named ID",
             extra={
                 "action": "get_id",
-                "name": name,
+                "entity_name": name,
                 "id_value": NAME_ID_MAP[name],
             },
         )
@@ -401,7 +379,7 @@ def get_id(name=None):
         NAME_ID_MAP[name] = new_id
         logger.debug(
             "Created new ID mapping",
-            extra={"action": "get_id", "name": name, "id_value": new_id},
+            extra={"action": "get_id", "entity_name": name, "id_value": new_id},
         )
 
         # Log function exit with return value

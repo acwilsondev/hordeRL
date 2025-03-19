@@ -2,9 +2,9 @@ import random
 from dataclasses import dataclass
 
 from horderl.engine import core
+from horderl.engine.components.energy_actor import EnergyActor
 
 from ...content.terrain.water import freeze, thaw
-from ..base_components.energy_actor import EnergyActor
 from ..events.attack_started_events import AttackStartListener
 from ..events.hole_dug_events import HoleDug
 from ..season_reset_listeners.seasonal_actor import SeasonResetListener

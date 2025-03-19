@@ -5,8 +5,6 @@ import tcod
 
 from horderl import settings
 from horderl.components import Coordinates
-from horderl.components.base_components.energy_actor import EnergyActor
-from horderl.components.base_components.entity import Entity
 from horderl.components.brains.brain import Brain
 from horderl.components.diggable import Diggable
 from horderl.components.enums import Intention
@@ -14,6 +12,8 @@ from horderl.components.events.die_events import Die
 from horderl.content.terrain.dirt import make_dirt
 from horderl.content.terrain.hole import make_hole
 from horderl.engine import core, palettes
+from horderl.engine.components.energy_actor import EnergyActor
+from horderl.engine.components.entity import Entity
 
 
 @dataclass

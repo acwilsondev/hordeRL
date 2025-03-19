@@ -1,12 +1,12 @@
 import random
 
 from horderl.components import Appearance, Coordinates
-from horderl.components.base_components.component import Component
-from horderl.components.base_components.entity import Entity
 from horderl.components.diggable import Diggable
 from horderl.components.material import Material
 from horderl.components.season_reset_listeners.grow_grass import GrowGrass
 from horderl.engine import core, palettes
+from horderl.engine.components.component import Component
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_LOWEST
 
 

@@ -1,8 +1,8 @@
 from abc import abstractmethod
 from dataclasses import dataclass
 
-from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.engine import GameScene
+from horderl.engine.components.energy_actor import EnergyActor
 from horderl.engine.core import log_debug
 
 
@@ -43,14 +43,12 @@ class Event(EnergyActor):
         """
         Define actions to take before listeners have been notified.
         """
-        pass
 
     def _after_notify(self, scene: GameScene) -> None:
         """
         Define actions to take after listeners have been notified but before deleting
         the event.
         """
-        pass
 
     def _after_remove(self, scene: GameScene) -> None:
         pass

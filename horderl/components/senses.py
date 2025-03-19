@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
+from horderl.engine.components.component import Component
+
 from .. import settings
-from ..components.base_components.component import Component
 
 
 @dataclass

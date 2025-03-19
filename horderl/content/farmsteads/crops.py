@@ -18,8 +18,6 @@ from horderl.components import (
     Coordinates,
     target_value,
 )
-from horderl.components.base_components.component import Component
-from horderl.components.base_components.entity import Entity
 from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.edible import Edible
 from horderl.components.faction import Faction
@@ -28,6 +26,8 @@ from horderl.components.tags.crop_info import CropInfo
 from horderl.components.target_value import TargetValue
 from horderl.components.tax_value import TaxValue
 from horderl.engine import core, palettes
+from horderl.engine.components.component import Component
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_LOW
 
 crops_description = (

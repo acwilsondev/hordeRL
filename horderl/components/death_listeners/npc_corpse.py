@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.components.base_components.entity import Entity
 from horderl.components.events.die_events import DeathListener
 from horderl.content import corpses
 from horderl.engine import palettes
+from horderl.engine.components.entity import Entity
 
 
 @dataclass

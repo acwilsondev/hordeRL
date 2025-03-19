@@ -5,10 +5,10 @@ from enum import Enum
 from horderl import settings
 from horderl.components import Coordinates
 from horderl.components.actors import STEP_VECTOR_MAP, STEPS
-from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.pathfinding.cost_mapper import CostMapper
+from horderl.engine.components.energy_actor import EnergyActor
 from horderl.engine.core import log_debug
 
 

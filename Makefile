@@ -16,6 +16,8 @@ radon:
 	poetry run radon raw .
 check: format lint test radon
 
-run:
+debug:
 	poetry run python hordeRL.py --log DEBUG --terminal_log
 
+run:
+	poetry run python hordeRL.py --terminal_log

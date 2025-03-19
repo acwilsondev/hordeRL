@@ -3,7 +3,8 @@ import json
 import traceback
 from pathlib import Path
 
-from ..components.base_components.component import Component
+from horderl.engine.components.component import Component
+
 from . import core
 from .logging import get_logger
 

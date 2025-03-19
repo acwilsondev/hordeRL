@@ -5,10 +5,10 @@ import tcod
 
 from horderl import settings
 from horderl.components import Coordinates
-from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.engine import constants, core
+from horderl.engine.components.energy_actor import EnergyActor
 
 
 @dataclass

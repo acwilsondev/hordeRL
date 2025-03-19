@@ -1,17 +1,19 @@
-from ..components.base_components.entity import Entity
-from ..components.events.build_world_events import BuildWorld
-from ..components.events.start_game_events import StartGame
-from ..components.world_building.add_player_step import AddPlayerStep
-from ..components.world_building.delete_world_builder import DeleteWorldBuilder
-from ..components.world_building.place_copses import PlaceTrees
-from ..components.world_building.place_flowers import PlaceFlowers
-from ..components.world_building.place_lakes import PlaceLakes
-from ..components.world_building.place_peasants import PlacePeasants
-from ..components.world_building.place_river import PlaceRiver
-from ..components.world_building.place_roads import PlaceRoads
-from ..components.world_building.place_rocks import PlaceRocks
-from ..components.world_building.set_world_name import SetWorldName
-from ..engine import core
+from horderl.components.events.build_world_events import BuildWorld
+from horderl.components.events.start_game_events import StartGame
+from horderl.components.world_building.add_player_step import AddPlayerStep
+from horderl.components.world_building.delete_world_builder import (
+    DeleteWorldBuilder,
+)
+from horderl.components.world_building.place_copses import PlaceTrees
+from horderl.components.world_building.place_flowers import PlaceFlowers
+from horderl.components.world_building.place_lakes import PlaceLakes
+from horderl.components.world_building.place_peasants import PlacePeasants
+from horderl.components.world_building.place_river import PlaceRiver
+from horderl.components.world_building.place_roads import PlaceRoads
+from horderl.components.world_building.place_rocks import PlaceRocks
+from horderl.components.world_building.set_world_name import SetWorldName
+from horderl.engine import core
+from horderl.engine.components.entity import Entity
 
 
 def make_world_build():

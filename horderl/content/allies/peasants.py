@@ -1,8 +1,6 @@
 from typing import List
 
 from horderl.components import Appearance, Attributes, Coordinates
-from horderl.components.base_components.component import Component
-from horderl.components.base_components.entity import Entity
 from horderl.components.brains.peasant_actor import PeasantActor
 from horderl.components.cry_for_help import CryForHelp
 from horderl.components.death_listeners.npc_corpse import Corpse
@@ -21,6 +19,8 @@ from horderl.components.relationships.residence import Residence
 from horderl.components.tags.peasant_tag import PeasantTag
 from horderl.components.target_value import PEASANT, TargetValue
 from horderl.engine import core, palettes
+from horderl.engine.components.component import Component
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 from horderl.engine.types import EntityId
 

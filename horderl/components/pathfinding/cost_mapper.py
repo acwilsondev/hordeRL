@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ..base_components.component import Component
+from horderl.engine.components.component import Component
 
 
 class CostMapper(Component, ABC):

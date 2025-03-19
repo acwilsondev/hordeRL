@@ -1,5 +1,6 @@
+from horderl.engine.components.entity import Entity
+
 from ..components import Appearance, Coordinates
-from ..components.base_components.entity import Entity
 from ..components.die_on_attack_finished import DieOnAttackFinished
 from ..components.diggable import Diggable
 from ..components.material import Material

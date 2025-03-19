@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from horderl.components.base_components.component import Component
-from horderl.components.base_components.events import Event
 from horderl.engine import constants
+from horderl.engine.components.component import Component
+from horderl.engine.components.events import Event
 
 
 @dataclass
