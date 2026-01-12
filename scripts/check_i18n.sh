@@ -4,7 +4,7 @@ set -euo pipefail
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 locale_dir="$repo_root/horderl/resources/locales"
 
-python - <<'PY'
+python3 - <<'PY'
 import json
 import re
 from pathlib import Path
