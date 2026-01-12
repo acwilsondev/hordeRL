@@ -4,12 +4,13 @@ set -euo pipefail
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 locale_dir="$repo_root/horderl/resources/locales"
 
-python3 - <<'PY'
+REPO_ROOT="$repo_root" python3 - <<'PY'
 import json
 import re
+import os
 from pathlib import Path
 
-repo_root = Path(__file__).resolve().parents[1]
+repo_root = Path(os.environ["REPO_ROOT"]).resolve()
 locale_dir = repo_root / "horderl" / "resources" / "locales"
 
 pattern = re.compile(r"t\(\s*(['\"])(.*?)\1")
