@@ -11,7 +11,7 @@ Oh No! It's THE HORDE! combines traditional roguelike gameplay with tower defens
 
 ### Steps to Set Up with Poetry
 
-1. Install Python 3.8 or newer. The game requires Python 3.8+ to run properly.
+1. Install Python 3.8.1-3.10.x. The game requires Python >=3.8.1,<3.11.
 2. Install Poetry by following the instructions at [https://python-poetry.org/docs/#installation](https://python-poetry.org/docs/#installation).
 3. Install the dependencies:
 
@@ -21,10 +21,14 @@ Oh No! It's THE HORDE! combines traditional roguelike gameplay with tower defens
 
 ### Running the Game
 
-To run the game, use the following command:
+To run the game, use one of the following commands:
 
 ```sh
 poetry run python ./hordeRL.py
+```
+
+```sh
+poetry run horderl
 ```
 
 ### Command-Line Options
@@ -35,12 +39,19 @@ The game supports several command-line options to customize your experience:
 poetry run python ./hordeRL.py [options]
 ```
 
-Available options:
+Available options (run `poetry run horderl --help` to see the full list):
 
 | Option | Description |
 |--------|-------------|
 | `--prof` | Profile the game performance (outputs to prof.txt) |
 | `--debug` | Allow exceptions to crash the game (useful for development) |
+| `--options-path PATH` | Path to the options.yaml file (defaults to horderl/options.yaml and will be created if missing) |
+| `--character-name NAME` | Override the player character name |
+| `--seed SEED` | Override the world seed |
+| `--torch-radius INT` | Override the torch radius |
+| `--grass-density FLOAT` | Override the grass density |
+| `--autosave/--no-autosave` | Enable or disable autosave |
+| `--music/--no-music` | Enable or disable music |
 | `-l, --log LEVEL` | Set logging level (INFO, WARNING, CRITICAL, ERROR, DEBUG) |
 | `-t, --terminal_log` | Display logs in the terminal instead of writing to .log file |
 
