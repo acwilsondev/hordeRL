@@ -24,4 +24,5 @@ run:
 
 clean:
 	rm -rf .pytest_cache .mypy_cache .ruff_cache .coverage coverage.xml \
-		dist build *.egg-info
+		dist build *.egg-info \
+		*.world prof.txt .log logs
