@@ -124,7 +124,7 @@ class DefendScene(GameScene):
             Label(
                 1,
                 1,
-                f\"@ {self.config.character_name}_______________\",
+                f"@ {self.config.character_name}_______________",
             )
         )
         anchor.add_element(HealthBar(1, 0))
