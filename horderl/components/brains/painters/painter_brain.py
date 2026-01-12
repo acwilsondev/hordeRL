@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 import tcod
 
-from horderl import settings
 from horderl.components import Coordinates
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
@@ -51,9 +50,9 @@ class PainterBrain(Brain, ABC):
         direction = STEP_VECTORS[intention]
         cursor_coords.x += direction[0]
         cursor_coords.y += direction[1]
-        if 0 > cursor_coords.x or cursor_coords.x >= settings.MAP_WIDTH:
+        if 0 > cursor_coords.x or cursor_coords.x >= scene.config.map_width:
             cursor_coords.x -= direction[0]
-        if 0 > cursor_coords.y or cursor_coords.y >= settings.MAP_HEIGHT:
+        if 0 > cursor_coords.y or cursor_coords.y >= scene.config.map_height:
             cursor_coords.y -= direction[1]
 
 

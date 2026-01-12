@@ -1,7 +1,5 @@
 import numpy as np
 import tcod
-
-from ... import settings
 from ..pathfinding.cost_mapper import CostMapper
 
 
@@ -12,7 +10,7 @@ class SimplexCostMapper(CostMapper):
         )
         cost = noise[
             tcod.noise.grid(
-                shape=(settings.MAP_WIDTH, settings.MAP_HEIGHT),
+                shape=(scene.config.map_width, scene.config.map_height),
                 scale=0.5,
                 origin=(0, 0),
             )

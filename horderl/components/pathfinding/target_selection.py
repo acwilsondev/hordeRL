@@ -1,13 +1,12 @@
 import numpy as np
 import tcod
 
-from ... import settings
 from .. import Coordinates
 
 
 def get_new_target(scene, cost_map, start, entity_values) -> int:
     dist = tcod.path.maxarray(
-        (settings.MAP_WIDTH, settings.MAP_HEIGHT), dtype=np.int32
+        (scene.config.map_width, scene.config.map_height), dtype=np.int32
     )
     dist[start[0], start[1]] = 0
     tcod.path.dijkstra2d(dist, cost_map, 2, 3, out=dist)

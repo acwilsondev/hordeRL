@@ -3,7 +3,6 @@ import textwrap
 import tcod
 import tcod.event
 
-from .. import settings
 from ..engine import core, palettes
 from ..gui.gui_element import GuiElement
 
@@ -13,12 +12,13 @@ class Menu(GuiElement):
     Defines a multiple choice menu within the game.
     """
 
-    def __init__(self, header, options, width, callback):
+    def __init__(self, header, options, width, callback, config):
         super().__init__(0, 0, single_shot=True)
         self.header = header
         self.options = options
         self.width = width
         self.callback = callback
+        self.config = config
         self.pages = [options[i : i + 10] for i in range(0, len(options), 10)]
         if len(self.pages) == 0:
             self.pages.append([])
@@ -109,8 +109,8 @@ class Menu(GuiElement):
         elif has_next and has_previous:
             window.print(0, y, " <- (p) previous (n) next ->", bg=None)
 
-        x = settings.SCREEN_WIDTH // 2 - self.width // 2
-        y = settings.SCREEN_HEIGHT // 2 - height // 2
+        x = self.config.screen_width // 2 - self.width // 2
+        y = self.config.screen_height // 2 - height // 2
         window.blit(root, x, y, width=self.width, height=height)
         tcod.console_flush()
 

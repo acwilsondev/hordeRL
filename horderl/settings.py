@@ -1,121 +1,62 @@
-import os
-import struct
-import sys
+"""Deprecated settings module.
 
-import yaml
+Prefer importing Config/load_config from horderl.config.
+This module remains as a compatibility shim.
+"""
 
+from horderl.config import (
+    Config,
+    from_hex,
+    get_relative_path,
+    load_config,
+    resource_path,
+)
 
-def resource_path(relative_path):
-    try:
-        # required for accessing resources within pyinstaller executable
-        # noinspection PyProtectedMember,PyUnresolvedReferences
-        base_path = sys._MEIPASS
-    except AttributeError:
-        # sys._MEIPASS only exists within python compiled for pyinstaller executables
-        base_path = os.path.dirname(__file__)
-    return os.path.join(base_path, relative_path)
+_DEFAULT_CONFIG = load_config(get_relative_path("options.yaml"), overrides={})
 
+AUTOSAVE = _DEFAULT_CONFIG.autosave_enabled
+GRASS_DENSITY = _DEFAULT_CONFIG.grass_density
+CHARACTER_NAME = _DEFAULT_CONFIG.character_name
+TORCH_RADIUS = _DEFAULT_CONFIG.torch_radius
+MUSIC_ENABLED = _DEFAULT_CONFIG.music_enabled
+SEED = _DEFAULT_CONFIG.world_seed
 
-def get_relative_path(relative_path):
-    base_path = os.path.dirname(__file__)
-    return os.path.join(base_path, relative_path)
+BACKGROUND = _DEFAULT_CONFIG.color_background
+GRASS = _DEFAULT_CONFIG.color_grass
+WALL_TREE = _DEFAULT_CONFIG.color_wall_tree
+NORMAL_TREE = _DEFAULT_CONFIG.color_normal_tree
+GOLD = _DEFAULT_CONFIG.color_gold
+WHITE = _DEFAULT_CONFIG.color_white
+GABRIEL_2_1 = _DEFAULT_CONFIG.color_peasant
+SHADOW = _DEFAULT_CONFIG.color_shadow
+FIRE = _DEFAULT_CONFIG.color_fire
+STRAW = _DEFAULT_CONFIG.color_straw
+DIRT = _DEFAULT_CONFIG.color_dirt
+WOOD = _DEFAULT_CONFIG.color_wood
+MEAT = _DEFAULT_CONFIG.color_meat
+STONE = _DEFAULT_CONFIG.color_stone
+WATER = _DEFAULT_CONFIG.color_water
+FRESH_BLOOD = _DEFAULT_CONFIG.color_fresh_blood
+LIGHT_WATER = _DEFAULT_CONFIG.color_light_water
+HORDELING = _DEFAULT_CONFIG.color_hordeling
+BLOOD = _DEFAULT_CONFIG.color_blood
 
+FONT = _DEFAULT_CONFIG.font
 
-def create_options_file():
-    option_data_base = {
-        "autosave-enabled": True,
-        "character-name": "Sir Cameron",
-        "grass-density": 0.1,
-        "torch-radius": -1,
-        "music-enabled": True,
-        "world_seed": "RANDOM",
-        "color_background": "000000",
-        "color_grass": "1f240a",
-        "color_wall_tree": "39571c",
-        "color_normal_tree": "a58c27",
-        "color_gold": "efac28",
-        "color_white": "efd8a1",
-        "color_peasant": "ab5c1c",
-        "color_shadow": "183f39",
-        "color_fire": "ef692f",
-        "color_straw": "efb775",
-        "color_dirt": "a56243",
-        "color_wood": "773421",
-        "color_meat": "684c3c",
-        "color_stone": "927e6a",
-        "color_water": "276468",
-        "color_fresh_blood": "ef3a0c",
-        "color_light_water": "3c9f9c",
-        "color_hordeling": "9b1a0a",
-        "color_blood": "550f0a",
-    }
-    with open(
-        get_relative_path("options.yaml"), mode="w+", encoding="utf-8"
-    ) as file:
-        yaml.dump(option_data_base, file)
-    return option_data_base
+SCREEN_WIDTH = _DEFAULT_CONFIG.screen_width
+SCREEN_HEIGHT = _DEFAULT_CONFIG.screen_height
 
+MAP_WIDTH = _DEFAULT_CONFIG.map_width
+MAP_HEIGHT = _DEFAULT_CONFIG.map_height
 
-try:
-    with open("options.yaml") as options:
-        option_data = yaml.load(options, Loader=yaml.FullLoader)
-except FileNotFoundError:
-    option_data = create_options_file()
+BAR_WIDTH = _DEFAULT_CONFIG.bar_width
+PANEL_HEIGHT = _DEFAULT_CONFIG.panel_height
+PANEL_Y = _DEFAULT_CONFIG.panel_y
+MSG_X = _DEFAULT_CONFIG.msg_x
+MSG_WIDTH = _DEFAULT_CONFIG.msg_width
+MSG_HEIGHT = _DEFAULT_CONFIG.msg_height
+INVENTORY_WIDTH = _DEFAULT_CONFIG.inventory_width
 
-
-AUTOSAVE = option_data["autosave-enabled"]
-GRASS_DENSITY = option_data["grass-density"]
-CHARACTER_NAME = option_data["character-name"]
-TORCH_RADIUS = option_data["torch-radius"]
-MUSIC_ENABLED = option_data["music-enabled"]
-SEED = option_data["world_seed"]
-
-
-# colors
-def from_hex(hex_code):
-    return struct.unpack("BBB", bytes.fromhex(hex_code))
-
-
-BACKGROUND = from_hex(option_data["color_background"])
-GRASS = from_hex(option_data["color_grass"])
-WALL_TREE = from_hex(option_data["color_wall_tree"])
-NORMAL_TREE = from_hex(option_data["color_normal_tree"])
-GOLD = from_hex(option_data["color_gold"])
-WHITE = from_hex(option_data["color_white"])
-GABRIEL_2_1 = from_hex(option_data["color_peasant"])
-SHADOW = from_hex(option_data["color_shadow"])
-FIRE = from_hex(option_data["color_fire"])
-STRAW = from_hex(option_data["color_straw"])
-DIRT = from_hex(option_data["color_dirt"])
-WOOD = from_hex(option_data["color_wood"])
-MEAT = from_hex(option_data["color_meat"])
-STONE = from_hex(option_data["color_stone"])
-WATER = from_hex(option_data["color_water"])
-FRESH_BLOOD = from_hex(option_data["color_fresh_blood"])
-LIGHT_WATER = from_hex(option_data["color_light_water"])
-HORDELING = from_hex(option_data["color_hordeling"])
-BLOOD = from_hex(option_data["color_blood"])
-
-# Nonconfigurable options
-FONT = resource_path("resources/tiles.png")
-
-# actual size of the window
-SCREEN_WIDTH = 60
-SCREEN_HEIGHT = 40
-
-# size of the map
-MAP_WIDTH = SCREEN_WIDTH - 25
-MAP_HEIGHT = SCREEN_HEIGHT
-
-# sizes and coordinates relevant for the GUI
-BAR_WIDTH = 20
-PANEL_HEIGHT = 7
-PANEL_Y = SCREEN_HEIGHT - PANEL_HEIGHT
-MSG_X = BAR_WIDTH + 2
-MSG_WIDTH = SCREEN_WIDTH - BAR_WIDTH - 2
-MSG_HEIGHT = PANEL_HEIGHT - 1
-INVENTORY_WIDTH = 50
-
-FOV_ALGO = "BASIC"
-FOV_LIGHT_WALLS = True
-SPAWN_FREQUENCY = 15
+FOV_ALGO = _DEFAULT_CONFIG.fov_algo
+FOV_LIGHT_WALLS = _DEFAULT_CONFIG.fov_light_walls
+SPAWN_FREQUENCY = _DEFAULT_CONFIG.spawn_frequency

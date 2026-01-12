@@ -1,18 +1,18 @@
 from dataclasses import dataclass
 
-from .. import settings
 from ..gui.easy_menu import EasyMenu
 from ..gui.gui_element import GuiElement
 
 
 @dataclass
 class PopupMessage(GuiElement):
-    def __init__(self, message):
+    def __init__(self, message, config):
         super().__init__(0, 0, name=message, single_shot=True)
         self.menu = EasyMenu(
             message + " [ENTER]",
             {},
-            settings.INVENTORY_WIDTH,
+            config.inventory_width,
+            config,
             return_only=True,
         )
 

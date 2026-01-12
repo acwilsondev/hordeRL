@@ -5,13 +5,14 @@ import cProfile
 import logging
 import os
 
+from horderl.config import get_relative_path, load_config
 from horderl.engine.game_scene_controller import GameSceneController
 from horderl.engine.logging import configure_logging
 from horderl.scenes.start_menu import get_start_menu
 
 
-def main():
-    game = GameSceneController("Oh No! It's THE HORDE!")
+def main(config):
+    game = GameSceneController("Oh No! It's THE HORDE!", config)
     game.push_scene(get_start_menu())
     game.start()
 
@@ -23,6 +24,49 @@ def cli():
         "--debug",
         action="store_true",
         help="allow a crash when an exception is thrown",
+    )
+    parser.add_argument(
+        "--options-path",
+        default=None,
+        help="path to options.yaml (defaults to the packaged options.yaml)",
+    )
+    parser.add_argument(
+        "--character-name",
+        dest="character_name",
+        default=None,
+        help="override the player character name",
+    )
+    parser.add_argument(
+        "--seed",
+        dest="world_seed",
+        default=None,
+        help="override the world seed",
+    )
+    parser.add_argument(
+        "--torch-radius",
+        type=int,
+        default=None,
+        help="override the torch radius",
+    )
+    parser.add_argument(
+        "--grass-density",
+        type=float,
+        default=None,
+        help="override the grass density",
+    )
+    parser.add_argument(
+        "--autosave",
+        dest="autosave_enabled",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="enable or disable autosave",
+    )
+    parser.add_argument(
+        "--music",
+        dest="music_enabled",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="enable or disable music",
     )
     parser.add_argument(
         "-l",
@@ -37,6 +81,17 @@ def cli():
         help="log events to terminal instead of file",
     )
     args = parser.parse_args()
+    config = load_config(
+        args.options_path or get_relative_path("options.yaml"),
+        overrides={
+            "character_name": args.character_name,
+            "world_seed": args.world_seed,
+            "torch_radius": args.torch_radius,
+            "grass_density": args.grass_density,
+            "autosave_enabled": args.autosave_enabled,
+            "music_enabled": args.music_enabled,
+        },
+    )
 
     # Convert string log level to logging constant
     log_level = getattr(logging, args.log)
@@ -63,11 +118,11 @@ def cli():
     if args.prof:
         pr = cProfile.Profile()
         pr.enable()
-        main()
+        main(config)
         pr.disable()
         pr.dump_stats("prof.txt")
     else:
-        main()
+        main(config)
 
 
 if __name__ == "__main__":

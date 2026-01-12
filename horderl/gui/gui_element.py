@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
-import tcod
+if TYPE_CHECKING:
+    import tcod
 
 from ..engine.core import get_id
 
@@ -29,5 +31,5 @@ class GuiElement:
     def update(self, scene) -> None:
         pass
 
-    def render(self, panel: tcod.console.Console) -> None:
+    def render(self, panel: "tcod.console.Console") -> None:
         raise NotImplementedError("GuiElement must define render()")

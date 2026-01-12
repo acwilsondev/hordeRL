@@ -2,7 +2,6 @@ import random
 from dataclasses import dataclass
 from enum import Enum
 
-from horderl import settings
 from horderl.components import Coordinates
 from horderl.components.actors import STEP_VECTOR_MAP, STEPS
 from horderl.components.brains.brain import Brain
@@ -67,8 +66,8 @@ class PeasantActor(Brain):
                     STEP_VECTOR_MAP[step][1] + coords.position[1],
                 )
                 if (
-                    0 <= new_position[0] < settings.MAP_WIDTH
-                    and 0 <= new_position[1] < settings.MAP_HEIGHT
+                    0 <= new_position[0] < scene.config.map_width
+                    and 0 <= new_position[1] < scene.config.map_height
                 ):
                     step_cost = (
                         step,

@@ -1,7 +1,6 @@
 import numpy as np
 import tcod
 
-from ... import settings
 from .. import Coordinates
 from ..events.attack_started_events import AttackStartListener
 from ..events.start_game_events import GameStartListener
@@ -31,7 +30,9 @@ class UpdateSenses(
     def refresh_fov(self, scene):
         mob = scene.cm.get_one(Coordinates, entity=self.entity)
         transparency = np.ones(
-            (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=bool
+            (scene.config.map_width, scene.config.map_height),
+            order="F",
+            dtype=bool,
         )
         materials = scene.cm.get(Material, query=lambda m: m.blocks_sight)
         for material in materials:
@@ -41,5 +42,5 @@ class UpdateSenses(
                 transparency,
                 (mob.x, mob.y),
                 light_walls=True,
-                radius=settings.TORCH_RADIUS,
+                radius=scene.config.torch_radius,
             )

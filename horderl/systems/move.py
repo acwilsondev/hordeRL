@@ -1,7 +1,6 @@
 import logging
 from typing import Tuple
 
-from .. import settings
 from ..components import Senses
 from ..components.attacks.attack import Attack
 from ..engine.components.actor import Actor
@@ -122,7 +121,7 @@ def can_step(scene, entity, step_action) -> bool:
     target_x = entity_coords.x + step_action[0]
     target_y = entity_coords.y + step_action[1]
 
-    if not in_bounds((target_x, target_y)):
+    if not in_bounds(scene, (target_x, target_y)):
         if entity == scene.player:
             scene.message(
                 "You shouldn't leave the village.", color=palettes.WHITE
@@ -135,9 +134,9 @@ def can_step(scene, entity, step_action) -> bool:
     return not (entity_material and blocking_object)
 
 
-def in_bounds(point):
-    return point[0] in range(settings.MAP_WIDTH) and point[1] in range(
-        settings.MAP_HEIGHT
+def in_bounds(scene, point):
+    return point[0] in range(scene.config.map_width) and point[1] in range(
+        scene.config.map_height
     )
 
 

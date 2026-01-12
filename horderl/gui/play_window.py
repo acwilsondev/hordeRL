@@ -5,13 +5,11 @@ import numpy as np
 import tcod
 from tcod import console
 
-from .. import settings
 from ..components import Appearance, Coordinates
 from ..engine import palettes
 from ..engine.component_manager import ComponentManager
 from ..engine.core import timed
 from ..gui.gui_element import GuiElement
-from ..settings import MAP_HEIGHT, MAP_WIDTH
 
 
 class PlayWindow(GuiElement):
@@ -24,6 +22,7 @@ class PlayWindow(GuiElement):
         component_manager: ComponentManager,
         visibility_map: np.array,
         memory_map: np.array,
+        config,
     ):
         """
         :param x: horizontal starting position of the PlayWindow
@@ -41,6 +40,7 @@ class PlayWindow(GuiElement):
         self.width = width
         self.height = height
         self.snowy = set()
+        self.config = config
 
         # store a console with the static terrain on it so that we don't have to regenerate it each frame
         self.memory_console = tcod.console.Console(width, height, order="F")
@@ -115,11 +115,11 @@ class PlayWindow(GuiElement):
 
     def regenerate_grass(self):
         memory_color = palettes.SHADOW
-        for y in range(MAP_HEIGHT):
-            for x in range(MAP_WIDTH):
+        for y in range(self.config.map_height):
+            for x in range(self.config.map_width):
                 grass_color = palettes.GRASS
 
-                if random.random() < settings.GRASS_DENSITY:
+                if random.random() < self.config.grass_density:
                     symbol = ord(random.choice([".", ",", '"', "'"]))
                 else:
                     symbol = ord(" ")
@@ -138,8 +138,8 @@ class PlayWindow(GuiElement):
     def add_snow(self):
         all_tiles = set(
             product(
-                range(1, settings.MAP_WIDTH - 1),
-                range(1, settings.MAP_HEIGHT - 1),
+                range(1, self.config.map_width - 1),
+                range(1, self.config.map_height - 1),
             )
         )
         unsnowed = all_tiles - self.snowy
@@ -147,7 +147,7 @@ class PlayWindow(GuiElement):
             return
         x, y = random.choice(list(unsnowed))
 
-        if random.random() < settings.GRASS_DENSITY / 2:
+        if random.random() < self.config.grass_density / 2:
             symbol = ord(random.choice([".", ",", '"', "'"]))
         else:
             symbol = ord(" ")
@@ -173,7 +173,7 @@ class PlayWindow(GuiElement):
         x, y = random.choice(snowy_tiles)
         self.snowy.remove((x, y))
 
-        if random.random() < settings.GRASS_DENSITY:
+        if random.random() < self.config.grass_density:
             symbol = ord(random.choice([".", ",", '"', "'"]))
         else:
             symbol = ord(" ")

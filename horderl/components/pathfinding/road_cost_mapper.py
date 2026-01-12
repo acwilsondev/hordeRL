@@ -1,6 +1,4 @@
 import numpy as np
-
-from ... import settings
 from .. import Attributes, Coordinates
 from ..pathfinding.cost_mapper import CostMapper
 from ..tags.water_tag import WaterTag
@@ -8,7 +6,7 @@ from ..tags.water_tag import WaterTag
 
 class RoadCostMapper(CostMapper):
     def get_cost_map(self, scene):
-        size = (settings.MAP_WIDTH, settings.MAP_HEIGHT)
+        size = (scene.config.map_width, scene.config.map_height)
         cost = np.ones(size, dtype=np.uint16, order="F")
         for coord in scene.cm.get(Coordinates):
             if scene.cm.get_one(Attributes, entity=coord.entity):
