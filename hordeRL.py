@@ -120,12 +120,12 @@ def cli():
             console_level=log_level,
             log_dir=os.path.dirname(os.path.abspath(__file__)),
             log_file=None,
+            console_enabled=True,
         )
     else:
-        # Both terminal and file logging
+        # Default to file-only logging
         configure_logging(
             environment="development",
-            console_level=log_level,
             file_level=log_level,
             log_dir=os.path.dirname(os.path.abspath(__file__)),
             log_file=".log",

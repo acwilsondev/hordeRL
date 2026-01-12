@@ -34,6 +34,7 @@ def configure_logging(
     console_level: Optional[int] = None,
     file_level: Optional[int] = None,
     capture_warnings: bool = True,
+    console_enabled: bool = False,
 ) -> None:
     """
     Configure the logging system for the application.
@@ -45,6 +46,7 @@ def configure_logging(
         console_level: Override the default console logging level for the environment
         file_level: Override the default file logging level for the environment
         capture_warnings: Whether to capture warnings via logging
+        console_enabled: Whether to enable console logging
 
     Returns:
         None
@@ -83,17 +85,17 @@ def configure_logging(
             "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
         }
 
-    handlers = {
-        "console": {
+    log_file_path = None
+    handlers: Dict[str, Dict[str, Any]] = {}
+    handler_names = []
+    if console_enabled:
+        handlers["console"] = {
             "class": "logging.StreamHandler",
             "level": console_level,
             "formatter": "console",
             "stream": sys.stdout,
         }
-    }
-
-    log_file_path = None
-    handler_names = ["console"]
+        handler_names.append("console")
     if log_file is not None:
         log_file_path = os.path.join(log_dir, log_file)
         handlers["file"] = {
