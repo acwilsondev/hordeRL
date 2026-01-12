@@ -12,6 +12,7 @@ from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.owner import Owner
 from horderl.content.states import help_animation
 from horderl.engine import constants
+from horderl.i18n import t
 from horderl.engine.components.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
 
@@ -30,8 +31,12 @@ class AttackAction(EnergyActor):
         target_entity = scene.cm.get_one(Entity, entity=self.target)
 
         scene.warn(
-            f"{this_entity.name} dealt {self.damage} dmg to"
-            f" {target_entity.name}!"
+            t(
+                "message.attack_damage",
+                attacker=this_entity.name,
+                damage=self.damage,
+                target=target_entity.name,
+            )
         )
 
         self._log_info(f"dealing {self.damage} dmg to {self.target}")

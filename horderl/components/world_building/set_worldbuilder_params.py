@@ -10,6 +10,7 @@ from horderl.components.world_building.world_parameters import (
 )
 from horderl.engine import core
 from horderl.engine.components.energy_actor import EnergyActor
+from horderl.i18n import t
 
 from ...content.world_builder import make_world_build
 from ...gui.easy_menu import EasyMenu
@@ -30,17 +31,23 @@ class SelectBiome(EnergyActor):
         self._log_info(f"setting worldbuilder params")
         scene.gui.add_element(
             EasyMenu(
-                "Which region?",
+                t("menu.biome.title"),
                 {
-                    "Plains (Easy)": get_settings(scene, get_plains_params),
-                    "Forest (Moderate)": get_settings(
+                    t("menu.biome.plains_easy"): get_settings(
+                        scene, get_plains_params
+                    ),
+                    t("menu.biome.forest_moderate"): get_settings(
                         scene, get_forest_params
                     ),
-                    "Mountains (Hard)": get_settings(
+                    t("menu.biome.mountains_hard"): get_settings(
                         scene, get_mountain_params
                     ),
-                    "Swamp (Hard)": get_settings(scene, get_swamp_params),
-                    "Tundra (Brutal)": get_settings(scene, get_tundra_params),
+                    t("menu.biome.swamp_hard"): get_settings(
+                        scene, get_swamp_params
+                    ),
+                    t("menu.biome.tundra_brutal"): get_settings(
+                        scene, get_tundra_params
+                    ),
                 },
                 scene.config.inventory_width,
                 scene.config,
