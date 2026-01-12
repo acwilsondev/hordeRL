@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import struct
 import sys
@@ -6,6 +7,8 @@ from dataclasses import dataclass, field, fields
 from typing import Any, Dict
 
 CONFIG_VERSION = 1
+
+logger = logging.getLogger(__name__)
 
 
 def resource_path(relative_path: str) -> str:
@@ -367,9 +370,19 @@ def load_config(
     normalized = _normalize_options(merged)
     palette_name = normalized.get("color_palette")
     if palette_name and palette_name != "default":
-        palette_colors = _load_palette(palette_name)
-        for key, value in palette_colors.items():
-            normalized[key] = value
+        palette_path = _resolve_palette_path(palette_name)
+        try:
+            palette_colors = _load_palette(palette_name)
+        except (FileNotFoundError, ValueError, json.JSONDecodeError) as exc:
+            logger.warning(
+                "Failed to load color palette '%s' from '%s': %s. Falling back to default.",
+                palette_name,
+                palette_path,
+                exc,
+            )
+        else:
+            for key, value in palette_colors.items():
+                normalized[key] = value
     normalized = {
         key: _parse_color(value) if key in _COLOR_FIELDS else value
         for key, value in normalized.items()

@@ -1,4 +1,5 @@
 import json
+import logging
 
 import pytest
 
@@ -82,3 +83,21 @@ def test_load_config_applies_color_palette(tmp_path):
 
     assert config.color_background == (255, 255, 255)
     assert config.color_grass == (1, 2, 3)
+
+
+def test_load_config_warns_on_invalid_palette(tmp_path, caplog):
+    options_path = tmp_path / "options.yaml"
+    palette_path = tmp_path / "palette.json"
+    palette_path.write_text("")
+    options_path.write_text(
+        yaml.safe_dump({"color-palette": str(palette_path)})
+    )
+
+    with caplog.at_level(logging.WARNING):
+        config = load_config(str(options_path), overrides={})
+
+    assert config.color_background == (0, 0, 0)
+    assert any(
+        "Failed to load color palette" in record.message
+        for record in caplog.records
+    )
