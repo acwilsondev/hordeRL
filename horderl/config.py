@@ -64,6 +64,7 @@ def _default_option_values() -> Dict[str, Any]:
 @dataclass
 class Config:
     """Runtime configuration values for the game."""
+
     autosave_enabled: bool = True
     character_name: str = "Sir Cameron"
     grass_density: float = 0.1
@@ -129,7 +130,9 @@ class Config:
         default_factory=lambda: from_hex("550f0a")
     )
 
-    font: str = field(default_factory=lambda: resource_path("resources/tiles.png"))
+    font: str = field(
+        default_factory=lambda: resource_path("resources/tiles.png")
+    )
     screen_width: int = 60
     screen_height: int = 40
     map_width: int | None = None
@@ -154,18 +157,14 @@ class Config:
             else self.map_width
         )
         self.map_height = (
-            self.screen_height
-            if self.map_height is None
-            else self.map_height
+            self.screen_height if self.map_height is None else self.map_height
         )
         self.panel_y = (
             self.screen_height - self.panel_height
             if self.panel_y is None
             else self.panel_y
         )
-        self.msg_x = (
-            self.bar_width + 2 if self.msg_x is None else self.msg_x
-        )
+        self.msg_x = self.bar_width + 2 if self.msg_x is None else self.msg_x
         self.msg_width = (
             self.screen_width - self.bar_width - 2
             if self.msg_width is None
@@ -280,7 +279,8 @@ def _validate_types(values: Dict[str, Any]) -> None:
             continue
         if not isinstance(value, expected):
             raise ValueError(
-                f"Invalid type for {field_name}: expected {expected}, got {type(value)}"
+                f"Invalid type for {field_name}: expected {expected}, got"
+                f" {type(value)}"
             )
 
 
@@ -292,7 +292,9 @@ def _parse_color(value: Any) -> Any:
     return value
 
 
-def _ensure_options_file(options_path: str, defaults: Dict[str, Any]) -> Dict[str, Any]:
+def _ensure_options_file(
+    options_path: str, defaults: Dict[str, Any]
+) -> Dict[str, Any]:
     import yaml
 
     if os.path.exists(options_path):
@@ -306,7 +308,9 @@ def _ensure_options_file(options_path: str, defaults: Dict[str, Any]) -> Dict[st
     return defaults
 
 
-def load_config(options_path: str, overrides: Dict[str, Any] | None = None) -> Config:
+def load_config(
+    options_path: str, overrides: Dict[str, Any] | None = None
+) -> Config:
     """Load configuration from defaults, options.yaml, and CLI overrides."""
     import yaml
 

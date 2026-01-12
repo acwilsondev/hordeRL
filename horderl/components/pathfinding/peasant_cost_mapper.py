@@ -1,4 +1,5 @@
 import numpy as np
+
 from .. import Coordinates
 from ..movement.drain_on_enter import DrainOnEnter
 from ..pathfinder_cost import PathfinderCost

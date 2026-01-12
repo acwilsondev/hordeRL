@@ -3,13 +3,13 @@ from typing import List
 from tcod import libtcodpy as tcd
 
 from horderl.config import Config
-from ..engine import GameScene
+
+from ..engine import GameScene, palettes
 from ..engine.component_manager import ComponentManager
 from ..engine.core import log_debug
 from ..engine.logging import get_logger
 from ..engine.sound.default_sound_controller import DefaultSoundController
 from ..gui.gui import Gui
-from ..engine import palettes
 
 
 class GameSceneController:

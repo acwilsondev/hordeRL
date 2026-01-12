@@ -382,7 +382,11 @@ def get_id(name=None):
         NAME_ID_MAP[name] = new_id
         logger.debug(
             "Created new ID mapping",
-            extra={"action": "get_id", "entity_name": name, "id_value": new_id},
+            extra={
+                "action": "get_id",
+                "entity_name": name,
+                "id_value": new_id,
+            },
         )
 
         # Log function exit with return value

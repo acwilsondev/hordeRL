@@ -1,4 +1,5 @@
 import numpy as np
+
 from .. import Coordinates
 from ..pathfinder_cost import PathfinderCost
 from ..pathfinding.cost_mapper import CostMapper

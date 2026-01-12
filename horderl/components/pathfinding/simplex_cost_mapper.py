@@ -1,5 +1,6 @@
 import numpy as np
 import tcod
+
 from ..pathfinding.cost_mapper import CostMapper
 
 

@@ -1,4 +1,5 @@
 import numpy as np
+
 from .. import Attributes, Coordinates
 from ..pathfinding.cost_mapper import CostMapper
 from ..tags.water_tag import WaterTag

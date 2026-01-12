@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 
 from horderl.engine.components.component import Component
 
-
 DEFAULT_LAKES: int = 1
 DEFAULT_LAKE_PROLIFERATION: float = 0.2
 DEFAULT_COPSE: int = 10
@@ -18,7 +17,9 @@ DEFAULT_TREE_CUT_ANGER: int = 1
 
 
 def get_seed(config):
-    return time.time_ns() if config.world_seed == "RANDOM" else config.world_seed
+    return (
+        time.time_ns() if config.world_seed == "RANDOM" else config.world_seed
+    )
 
 
 @dataclass
