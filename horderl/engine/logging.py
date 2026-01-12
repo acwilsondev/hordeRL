@@ -7,6 +7,7 @@ consistent log formatting.
 """
 
 import logging
+import logging.config
 import logging.handlers
 import os
 import sys
@@ -52,7 +53,7 @@ def configure_logging(
         raise ValueError(f"Unknown environment: {environment}")
 
     # Create log directory if it doesn't exist
-    if not os.path.exists(log_dir):
+    if log_file is not None and not os.path.exists(log_dir):
         os.makedirs(log_dir)
 
     # Set default levels based on environment if not explicitly provided
@@ -61,49 +62,66 @@ def configure_logging(
     if file_level is None:
         file_level = DEFAULT_FILE_LEVEL[environment]
 
-    # Configure root logger
-    root_logger = logging.getLogger()
-    root_logger.setLevel(logging.DEBUG)  # Capture all logs
-    root_logger.handlers = []  # Remove any existing handlers
-
     # Create formatters
     if environment == "development":
-        console_formatter = logging.Formatter(
-            "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-            datefmt="%H:%M:%S",
-        )
-        file_formatter = logging.Formatter(
-            "%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d):"
-            " %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S",
-        )
+        console_formatter = {
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            "datefmt": "%H:%M:%S",
+        }
+        file_formatter = {
+            "format": (
+                "%(asctime)s [%(levelname)s] %(name)s "
+                "(%(filename)s:%(lineno)d): %(message)s"
+            ),
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        }
     else:  # production or test
-        console_formatter = logging.Formatter(
-            "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-        )
-        file_formatter = logging.Formatter(
-            "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-        )
+        console_formatter = {
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+        }
+        file_formatter = {
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+        }
 
-    # Console handler
-    console_handler = logging.StreamHandler(stream=sys.stdout)
-    console_handler.setLevel(console_level)
-    console_handler.setFormatter(console_formatter)
-    root_logger.addHandler(console_handler)
+    handlers = {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": console_level,
+            "formatter": "console",
+            "stream": sys.stdout,
+        }
+    }
 
-    # File handler (rotating) - only if log_file is provided
     log_file_path = None
+    handler_names = ["console"]
     if log_file is not None:
         log_file_path = os.path.join(log_dir, log_file)
-        file_handler = logging.handlers.RotatingFileHandler(
-            log_file_path,
-            maxBytes=10 * 1024 * 1024,  # 10 MB
-            backupCount=5,
-            encoding="utf-8",
-        )
-        file_handler.setLevel(file_level)
-        file_handler.setFormatter(file_formatter)
-        root_logger.addHandler(file_handler)
+        handlers["file"] = {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": file_level,
+            "formatter": "file",
+            "filename": log_file_path,
+            "maxBytes": 10 * 1024 * 1024,
+            "backupCount": 5,
+            "encoding": "utf-8",
+        }
+        handler_names.append("file")
+
+    logging.config.dictConfig(
+        {
+            "version": 1,
+            "disable_existing_loggers": False,
+            "formatters": {
+                "console": console_formatter,
+                "file": file_formatter,
+            },
+            "handlers": handlers,
+            "root": {
+                "level": "DEBUG",
+                "handlers": handler_names,
+            },
+        }
+    )
 
     # Capture warnings from the warnings module
     logging.captureWarnings(capture_warnings)
