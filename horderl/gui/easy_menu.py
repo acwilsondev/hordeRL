@@ -87,6 +87,7 @@ class EasyMenu(GuiElement):
     def show_and_get_input(
         self, root, options, has_next=False, has_previous=False
     ):
+        import tcod
         from tcod import libtcodpy
         from tcod.event_constants import K_RETURN
 
