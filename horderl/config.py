@@ -34,6 +34,7 @@ def _default_option_values() -> Dict[str, Any]:
     return {
         "autosave-enabled": True,
         "character-name": "Sir Cameron",
+        "locale": "en",
         "grass-density": 0.1,
         "torch-radius": -1,
         "music-enabled": True,
@@ -67,6 +68,7 @@ class Config:
 
     autosave_enabled: bool = True
     character_name: str = "Sir Cameron"
+    locale: str = "en"
     grass_density: float = 0.1
     torch_radius: int = -1
     music_enabled: bool = True
@@ -207,6 +209,7 @@ _COLOR_FIELDS = [
 _OPTIONS_FIELD_MAP = {
     "autosave-enabled": "autosave_enabled",
     "character-name": "character_name",
+    "locale": "locale",
     "grass-density": "grass_density",
     "torch-radius": "torch_radius",
     "music-enabled": "music_enabled",
@@ -247,6 +250,7 @@ def _validate_types(values: Dict[str, Any]) -> None:
     expected_types = {
         "autosave_enabled": bool,
         "character_name": str,
+        "locale": str,
         "grass_density": (int, float),
         "torch_radius": int,
         "music_enabled": bool,
