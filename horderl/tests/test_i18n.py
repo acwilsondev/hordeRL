@@ -6,9 +6,7 @@ from horderl import i18n
 
 
 def _write_locale(tmp_path, locale, data):
-    locale_path = (
-        tmp_path / "resources" / "locales" / f"{locale}.json"
-    )
+    locale_path = tmp_path / "resources" / "locales" / f"{locale}.json"
     locale_path.parent.mkdir(parents=True, exist_ok=True)
     locale_path.write_text(json.dumps(data))
     return locale_path

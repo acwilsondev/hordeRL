@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from horderl.engine import constants
-from horderl.i18n import t
 from horderl.engine.components.component import Component
+from horderl.i18n import t
 
 from ...content.states import no_money_animation
 from .. import Coordinates

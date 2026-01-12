@@ -33,9 +33,7 @@ class PlayerDeadBrain(Brain):
                 ability.apply(scene, self.id)
             elif intention is None:
                 self._log_debug(f"found no useable intention")
-                scene.warn(
-                    t("warning.player_dead_no_action")
-                )
+                scene.warn(t("warning.player_dead_no_action"))
                 return
 
 

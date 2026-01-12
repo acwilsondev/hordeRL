@@ -13,9 +13,7 @@ class CollectTaxesForKing(SeasonResetListener):
 
     def on_season_reset(self, scene, season):
         if season != "Spring":
-            scene.warn(
-                t("warning.king_collects", amount=self.value)
-            )
+            scene.warn(t("warning.king_collects", amount=self.value))
             return
 
         if scene.gold < self.value:

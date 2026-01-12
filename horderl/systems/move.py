@@ -18,8 +18,8 @@ from ..components.states.move_cost_affectors import (
     Hindered,
 )
 from ..engine import palettes
-from ..i18n import t
 from ..engine.components.actor import Actor
+from ..i18n import t
 from ..systems.utilities import get_blocking_object
 
 
@@ -124,9 +124,7 @@ def can_step(scene, entity, step_action) -> bool:
 
     if not in_bounds(scene, (target_x, target_y)):
         if entity == scene.player:
-            scene.message(
-                t("message.leave_village"), color=palettes.WHITE
-            )
+            scene.message(t("message.leave_village"), color=palettes.WHITE)
         return False
 
     blocking_object = get_blocking_object(scene.cm, target_x, target_y)

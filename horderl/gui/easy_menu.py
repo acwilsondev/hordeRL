@@ -3,9 +3,9 @@ from typing import Callable, Optional
 
 from .. import engine
 from ..engine import core
-from ..i18n import t
 from ..engine.palettes import WHITE
 from ..gui.gui_element import GuiElement
+from ..i18n import t
 
 
 class EasyMenu(GuiElement):
@@ -81,9 +81,9 @@ class EasyMenu(GuiElement):
                 if 0 <= index < len(self.options):
                     option_at_index = self.options[index]
                     callback = self.option_map.get(
-                    option_at_index,
-                    lambda: print(t("menu.nav.no_option")),
-                )
+                        option_at_index,
+                        lambda: print(t("menu.nav.no_option")),
+                    )
                     callback()
 
     def show_and_get_input(

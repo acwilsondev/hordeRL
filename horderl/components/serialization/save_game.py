@@ -3,8 +3,8 @@ from typing import Dict
 
 from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.engine import core, palettes
-from horderl.i18n import t
 from horderl.engine.components.energy_actor import EnergyActor
+from horderl.i18n import t
 
 
 @dataclass

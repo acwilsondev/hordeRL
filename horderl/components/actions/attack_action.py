@@ -12,9 +12,9 @@ from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.owner import Owner
 from horderl.content.states import help_animation
 from horderl.engine import constants
-from horderl.i18n import t
 from horderl.engine.components.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
+from horderl.i18n import t
 
 
 @dataclass

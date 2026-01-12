@@ -4,8 +4,8 @@ import tcod
 import tcod.event
 
 from ..engine import core, palettes
-from ..i18n import t
 from ..gui.gui_element import GuiElement
+from ..i18n import t
 
 
 class Menu(GuiElement):

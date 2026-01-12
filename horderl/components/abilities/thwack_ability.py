@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from math import sqrt
 
 from horderl.engine import palettes
-from horderl.i18n import t
 from horderl.engine.components.energy_actor import EnergyActor
+from horderl.i18n import t
 
 from ...content.attacks import thwack_animation, thwack_dizzy_animation
 from ...systems.utilities import get_enemies_in_range

@@ -1,6 +1,6 @@
 from ..engine import palettes
-from ..i18n import t
 from ..gui.gui_element import GuiElement
+from ..i18n import t
 
 
 class HelpTab(GuiElement):

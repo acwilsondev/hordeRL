@@ -30,9 +30,7 @@ class ExtractContractFees(SeasonResetListener):
             contract_fees = -1 * sum(tax.value for tax in taxes)
 
         if quitters:
-            scene.warn(
-                t("warning.contract_quitters")
-            )
+            scene.warn(t("warning.contract_quitters"))
         if contract_fees > 0:
             scene.message(
                 t("message.contract_fees", amount=contract_fees),

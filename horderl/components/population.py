@@ -19,7 +19,5 @@ class Population(PeasantAddedListener, PeasantDiedListener):
         self._log_info("population decreased")
         self.population -= 1
         if self.population <= 0:
-            scene.popup_message(
-                t("message.peasants_dead")
-            )
+            scene.popup_message(t("message.peasants_dead"))
             scene.pop()

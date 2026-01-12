@@ -1,4 +1,4 @@
-.PHONY: install format lint test radon check run clean
+.PHONY: install format lint test radon check run clean debug localization
 
 install:
 	poetry install --with dev
@@ -14,7 +14,11 @@ radon:
 	poetry run radon cc .
 	poetry run radon mi .
 	poetry run radon raw .
-check: format lint test radon
+
+localization:
+	./scripts/check_i18n.sh
+
+check: localization format lint test radon
 
 debug:
 	poetry run python hordeRL.py --log DEBUG --terminal_log
