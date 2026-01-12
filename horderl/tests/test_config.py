@@ -85,6 +85,19 @@ def test_load_config_applies_color_palette(tmp_path):
     assert config.color_grass == (1, 2, 3)
 
 
+def test_load_config_accepts_hash_color_values(tmp_path):
+    options_path = tmp_path / "options.yaml"
+    palette_path = tmp_path / "palette.json"
+    palette_path.write_text(json.dumps({"color_background": "#282828"}))
+    options_path.write_text(
+        yaml.safe_dump({"color-palette": str(palette_path)})
+    )
+
+    config = load_config(str(options_path), overrides={})
+
+    assert config.color_background == (40, 40, 40)
+
+
 def test_load_config_warns_on_invalid_palette(tmp_path, caplog):
     options_path = tmp_path / "options.yaml"
     palette_path = tmp_path / "palette.json"

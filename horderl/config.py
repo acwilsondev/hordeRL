@@ -260,7 +260,8 @@ def _validate_types(values: Dict[str, Any]) -> None:
 
 def _parse_color(value: Any) -> Any:
     if isinstance(value, str):
-        return from_hex(value)
+        normalized = value.lstrip("#")
+        return from_hex(normalized)
     if isinstance(value, list):
         return tuple(value)
     return value
