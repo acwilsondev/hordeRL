@@ -64,6 +64,13 @@ def configure_logging(
     if file_level is None:
         file_level = DEFAULT_FILE_LEVEL[environment]
 
+    root_logger = logging.getLogger()
+    root_logger.handlers.clear()
+    for logger in logging.root.manager.loggerDict.values():
+        if isinstance(logger, logging.Logger):
+            logger.handlers.clear()
+            logger.propagate = True
+
     # Create formatters
     if environment == "development":
         console_formatter = {
