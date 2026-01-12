@@ -24,13 +24,13 @@ class LoadMenuScene(GameScene):
         )
         self.add_gui_element(self.title_label)
 
-    def before_update(self):
+    def before_update(self, dt: float):
         # pre-render the gui elements so that they show up before menu pauses
         # execution
         self.gui = self.controller.gui
         self.render()
 
-    def update(self):
+    def update(self, dt: float):
         """
         Show the menu and wait for player selection.
         """

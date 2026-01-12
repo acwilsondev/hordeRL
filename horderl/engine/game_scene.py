@@ -108,7 +108,7 @@ class GameScene:
         """
         pass
 
-    def before_update(self):
+    def before_update(self, dt: float):
         """
         Lifecycle hook called at the beginning of each frame before the update.
 
@@ -119,10 +119,13 @@ class GameScene:
 
         This method is called once per frame, before the update() method.
 
+        Args:
+            dt (float): Elapsed time in seconds since the last frame.
+
         """
         pass
 
-    def update(self):
+    def update(self, dt: float):
         """
         Lifecycle hook for the main game logic update, called once per frame.
 
@@ -135,10 +138,13 @@ class GameScene:
         This is the main method where most of the scene's behavior should be implemented.
         It's called once per frame after before_update() and before render().
 
+        Args:
+            dt (float): Elapsed time in seconds since the last frame.
+
         """
         pass
 
-    def render(self):
+    def render(self, dt: float):
         """
         Lifecycle hook for rendering the scene, called once per frame.
 
@@ -152,11 +158,14 @@ class GameScene:
 
         Override this method if you need custom rendering behavior beyond GUI elements.
 
+        Args:
+            dt (float): Elapsed time in seconds since the last frame.
+
         """
         self.gui.root.clear()
         self.logger.debug(f"Rendering {len(self.gui_elements)} GUI elements")
         for element in self.gui_elements:
-            element.update(self)
+            element.update(self, dt)
         for element in self.gui_elements:
             element.render(self.gui.root)
 

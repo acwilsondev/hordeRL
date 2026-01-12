@@ -40,7 +40,7 @@ class HealthBar(Bar):
     fg_color: tuple = palettes.FRESH_BLOOD
     mg_color: tuple = palettes.BLOOD
 
-    def update(self, scene):
+    def update(self, scene, dt: float):
         player_health = scene.cm.get_one(Attributes, entity=PLAYER_ID)
         if player_health:
             self.value = player_health.hp
@@ -55,7 +55,7 @@ class PeasantBar(Bar):
     fg_color: tuple = palettes.WHITE
     mg_color: tuple = palettes.GABRIEL_2_1
 
-    def update(self, scene):
+    def update(self, scene, dt: float):
         population = scene.cm.get_one(Population, entity=core.get_id("world"))
         self.value = population.population
         self.max_value = population.population
@@ -67,7 +67,7 @@ class HordelingBar(Bar):
     fg_color: tuple = palettes.HORDELING
     mg_color: tuple = palettes.BLOOD
 
-    def update(self, scene):
+    def update(self, scene, dt: float):
         hordelings = len(scene.cm.get(HordelingTag))
         self.value = hordelings
         self.max_value = hordelings
@@ -88,7 +88,7 @@ class Thwackometer(Bar):
 
     max: int = 0  # we'll need this when the player dies
 
-    def update(self, scene):
+    def update(self, scene, dt: float):
         thwack_ability = scene.cm.get_one(ThwackAbility, entity=PLAYER_ID)
         dizzy = scene.cm.get_one(DizzyBrain, entity=PLAYER_ID)
 
