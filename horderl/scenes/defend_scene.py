@@ -136,7 +136,7 @@ class DefendScene(GameScene):
         anchor.add_space(1)
 
         anchor.add_element(VillageNameLabel(1, 6))
-        anchor.add_element(Label(1, 7, \"Peasants\"))
+        anchor.add_element(Label(1, 7, "Peasants"))
         anchor.add_element(PeasantBar(1, 8))
         anchor.add_element(HordeStatusLabel(1, 9))
         anchor.add_element(HordelingBar(1, 10))
