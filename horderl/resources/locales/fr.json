@@ -80,5 +80,7 @@
   "ability.place_knight": "Placer un chevalier",
   "ability.thwack": "Asséner un coup",
   "ability.fast_forward": "Avance rapide",
-  "ability.build_wall": "Construire un mur"
+  "ability.build_wall": "Construire un mur",
+  "color_palette": "Palette de couleurs",
+  "colors": "Couleurs"
 }
