@@ -76,6 +76,12 @@ def cli():
         help="enable or disable music",
     )
     parser.add_argument(
+        "--color-palette",
+        dest="color_palette",
+        default=None,
+        help="override the color palette name or path",
+    )
+    parser.add_argument(
         "-l",
         "--log",
         choices=["INFO", "WARNING", "CRITICAL", "ERROR", "DEBUG"],
@@ -98,6 +104,7 @@ def cli():
             "grass_density": args.grass_density,
             "autosave_enabled": args.autosave_enabled,
             "music_enabled": args.music_enabled,
+            "color_palette": args.color_palette,
         },
     )
     load_locale(config.locale)

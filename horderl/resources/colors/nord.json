@@ -1,0 +1,21 @@
+{
+  "color_background": "#020408",
+  "color_grass": "#3A5F5A",
+  "color_wall_tree": "#5E6E6A",
+  "color_normal_tree": "#4E6B63",
+  "color_gold": "#C6B87A",
+  "color_white": "#E6ECEA",
+  "color_peasant": "#4A4F5A",
+  "color_shadow": "#020408",
+  "color_fire": "#E07A2D",
+  "color_straw": "#9E9A6B",
+  "color_dirt": "#3E3B36",
+  "color_wood": "#5A5E54",
+  "color_meat": "#8E3A3A",
+  "color_stone": "#8A9094",
+  "color_water": "#2F4F73",           
+  "color_fresh_blood": "#A83232",
+  "color_light_water": "#4F7FA3",
+  "color_hordeling": "#6E2A2A",
+  "color_blood": "#5A1F1F"
+}
