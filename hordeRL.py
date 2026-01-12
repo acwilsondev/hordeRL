@@ -153,8 +153,7 @@ def cli():
         environment=config.log_environment,
         console_level=log_level,
         file_level=log_level,
-        log_dir=config.log_dir
-        or os.path.dirname(os.path.abspath(__file__)),
+        log_dir=config.log_dir or os.path.dirname(os.path.abspath(__file__)),
         log_file=config.log_file,
         console_enabled=config.log_console_enabled,
     )
