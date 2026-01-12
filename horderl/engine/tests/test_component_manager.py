@@ -1,8 +1,8 @@
 import unittest
 from dataclasses import dataclass
 
-from horderl.components.base_components.component import Component
 from horderl.engine.component_manager import ComponentManager
+from horderl.engine.components.component import Component
 
 
 class TestComponentManager(unittest.TestCase):

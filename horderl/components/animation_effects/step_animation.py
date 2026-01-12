@@ -2,8 +2,8 @@ from dataclasses import dataclass, field
 from typing import List
 
 from horderl.components import Appearance
-from horderl.components.base_components.timed_actor import TimedActor
 from horderl.components.events.delete_event import Delete
+from horderl.engine.components.timed_actor import TimedActor
 
 
 @dataclass

@@ -2,7 +2,6 @@ import random
 
 from horderl.components import Appearance, Attributes, Coordinates
 from horderl.components.attacks.standard_attack import StandardAttack
-from horderl.components.base_components.entity import Entity
 from horderl.components.brains.default_active_actor import DefaultActiveActor
 from horderl.components.death_listeners.drop_gold import DropGold
 from horderl.components.death_listeners.npc_corpse import Corpse
@@ -17,6 +16,7 @@ from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
 from horderl.engine import core, palettes
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 
 

@@ -1,11 +1,12 @@
 import logging
 from dataclasses import dataclass
 
+from horderl.engine.components.energy_actor import EnergyActor
+from horderl.engine.components.entity import Entity
+
 from .. import engine, settings
 from ..components import Attributes, Coordinates, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility
-from ..components.base_components.energy_actor import EnergyActor
-from ..components.base_components.entity import Entity
 from ..components.brains.brain import Brain
 from ..components.brains.default_active_actor import DefaultActiveActor
 from ..components.brains.painters.create_gold_actor import PlaceGoldController

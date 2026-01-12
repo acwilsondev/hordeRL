@@ -1,7 +1,7 @@
 import time
 from dataclasses import dataclass, field
 
-from horderl.components.base_components.component import Component
+from horderl.engine.components.component import Component
 
 from ... import settings
 

@@ -1,4 +1,5 @@
-from ..components.base_components.energy_actor import EnergyActor
+from horderl.engine.components.energy_actor import EnergyActor
+
 from ..components.brains.brain import Brain
 
 

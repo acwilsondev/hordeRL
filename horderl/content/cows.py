@@ -1,8 +1,9 @@
 from typing import List
 
+from horderl.engine.components.component import Component
+from horderl.engine.components.entity import Entity
+
 from ..components import Appearance, Attributes, Coordinates, target_value
-from ..components.base_components.component import Component
-from ..components.base_components.entity import Entity
 from ..components.edible import Edible
 from ..components.faction import Faction
 from ..components.target_value import TargetValue

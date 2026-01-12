@@ -1,8 +1,9 @@
 import numpy as np
 
+from horderl.engine.components.entity import Entity
+
 from ... import settings
 from .. import Attributes, Coordinates
-from ..base_components.entity import Entity
 from ..material import Material
 from .cost_mapper import CostMapper
 

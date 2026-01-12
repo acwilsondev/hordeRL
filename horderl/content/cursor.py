@@ -1,5 +1,6 @@
+from horderl.engine.components.entity import Entity
+
 from ..components import Appearance, Coordinates
-from ..components.base_components.entity import Entity
 from ..engine import core, palettes
 from ..engine.constants import PRIORITY_HIGH
 

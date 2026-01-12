@@ -1,8 +1,8 @@
 from horderl.components import Appearance, Coordinates
-from horderl.components.base_components.entity import Entity
 from horderl.components.material import Material
 from horderl.components.movement.die_on_enter import DieOnEnter
 from horderl.engine import core, palettes
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_LOWEST
 
 

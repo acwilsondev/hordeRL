@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from ...base_components.component import Component
+from horderl.engine.components.component import Component
 
 
 @dataclass

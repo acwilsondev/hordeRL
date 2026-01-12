@@ -43,7 +43,7 @@ class DefaultActiveActor(Brain):
             TargetEvaluator, entity=self.entity
         )
         if not target_evaluator:
-            self._log_warning(f"missing target evaluator")
+            self._log_warning("missing target evaluator")
             target_evaluator = HordelingTargetEvaluator()
 
         entity_values = target_evaluator.get_targets(scene)
@@ -88,7 +88,7 @@ class DefaultActiveActor(Brain):
                     TunnelToPoint(entity=self.entity, point=tunnel_target)
                 )
             else:
-                self._log_warning(f"can't find a safe place to tunnel to")
+                self._log_warning("can't find a safe place to tunnel to")
                 scene.cm.add(Die(entity=self.entity))
             self.pass_turn()
         else:

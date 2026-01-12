@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
+from horderl.engine.components.energy_actor import EnergyActor
+
 from ..components import Coordinates
-from ..components.base_components.energy_actor import EnergyActor
 from ..components.events.hole_dug_events import HoleDugListener
 from ..components.floodable import Floodable
 from ..components.flooder import Flooder

@@ -3,7 +3,6 @@ from typing import Tuple
 import numpy as np
 
 from horderl import settings
-from horderl.components.base_components.class_register import LoadClasses
 from horderl.components.events.start_game_events import StartGame
 from horderl.components.population import Population
 from horderl.components.serialization.load_game import LoadGame
@@ -18,6 +17,7 @@ from horderl.content.tax_handler import make_tax_handler
 from horderl.content.utilities import make_calendar
 from horderl.engine import GameScene, core, palettes
 from horderl.engine.component_manager import ComponentManager
+from horderl.engine.components.class_register import LoadClasses
 from horderl.engine.constants import PLAYER_ID
 from horderl.engine.core import timed
 from horderl.engine.message import Message

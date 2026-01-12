@@ -4,7 +4,7 @@ from typing import List
 # TODO extract this functionality to the engine package
 import tcod
 
-from ..base_components.component import Component
+from horderl.engine.components.component import Component
 
 
 @dataclass

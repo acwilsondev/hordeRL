@@ -1,7 +1,8 @@
+from horderl.engine.components.entity import Entity
+
 from ..components.actors.calendar_actor import Calendar
 from ..components.announce_game_start import AnnounceGameStart
 from ..components.attack_start_listeners.move_peasants_in import MovePeasantsIn
-from ..components.base_components.entity import Entity
 from ..components.season_reset_listeners.add_farmstead import AddFarmstead
 from ..components.season_reset_listeners.die_in_winter import CropsDieInWinter
 from ..components.season_reset_listeners.move_peasants_out import (

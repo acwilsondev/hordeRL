@@ -1,3 +1,5 @@
+from horderl.engine.components.entity import Entity
+
 from .. import settings
 from ..components import Appearance, Attributes, Coordinates, Senses
 from ..components.abilities.build_fence_ability import BuildFenceAbility
@@ -17,7 +19,6 @@ from ..components.abilities.shoot_ability import ShootAbility
 from ..components.abilities.thwack_ability import ThwackAbility
 from ..components.ability_tracker import AbilityTracker
 from ..components.attacks.standard_attack import StandardAttack
-from ..components.base_components.entity import Entity
 from ..components.brains.player_brain import PlayerBrain
 from ..components.death_listeners.player_corpse import PlayerCorpse
 from ..components.faction import Faction

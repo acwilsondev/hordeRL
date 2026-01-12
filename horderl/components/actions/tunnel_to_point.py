@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from typing import Tuple
 
 from horderl.components import Coordinates
-from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.content.terrain.hole import make_hole
 from horderl.engine import constants
+from horderl.engine.components.energy_actor import EnergyActor
 
 
 @dataclass

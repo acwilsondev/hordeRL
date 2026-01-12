@@ -1,6 +1,6 @@
 from horderl.components.actors.hordeling_spawner import HordelingSpawner
-from horderl.components.base_components.entity import Entity
 from horderl.engine import core
+from horderl.engine.components.entity import Entity
 
 description = "How did you even see this?"
 

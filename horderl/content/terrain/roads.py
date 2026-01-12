@@ -3,14 +3,14 @@ from typing import Iterator, List, Tuple
 import tcod.path
 
 from horderl.components import Appearance, Coordinates
-from horderl.components.base_components.component import Component
-from horderl.components.base_components.entity import Entity
 from horderl.components.pathfinding.road_cost_mapper import RoadCostMapper
 from horderl.components.pathfinding.target_selection import get_new_target
 from horderl.components.states.move_cost_affectors import EasyTerrain
 from horderl.components.tags.road_marker import RoadMarker
 from horderl.components.tags.water_tag import WaterTag
 from horderl.engine import core, palettes
+from horderl.engine.components.component import Component
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_LOWEST
 
 

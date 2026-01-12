@@ -7,7 +7,6 @@ components, appearances, and behaviors.
 """
 
 from horderl.components import Appearance, Attributes, Coordinates
-from horderl.components.base_components.entity import Entity
 from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.death_listeners.terrain_changes_on_death import (
     TerrainChangedOnDeath,
@@ -19,6 +18,7 @@ from horderl.components.sellable import Sellable
 from horderl.components.tags.tree_tag import TreeTag
 from horderl.components.tree_cut_on_die import TreeCutOnDeath
 from horderl.engine import core, palettes
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 
 wall_tree_description = (
