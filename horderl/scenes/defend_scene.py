@@ -35,7 +35,7 @@ from horderl.gui.message_box import MessageBox
 from horderl.gui.play_window import PlayWindow
 from horderl.gui.popup_message import PopupMessage
 from horderl.gui.vertical_anchor import VerticalAnchor
-from horderl.systems import act, control_turns, move
+from horderl.systems import act, control_turns, move, real_time
 
 
 class DefendScene(GameScene):
@@ -186,14 +186,16 @@ class DefendScene(GameScene):
         the method execution exceeds 100ms, helping identify performance bottlenecks.
 
         The update follows a specific sequence:
-        1. act.run - Process entity actions and abilities
-        2. move.run - Handle movement and physics
-        3. control_turns.run - Manage turn order and player input
+        1. real_time.run - Process real-time actors and animations
+        2. act.run - Process entity actions and abilities
+        3. move.run - Handle movement and physics
+        4. control_turns.run - Manage turn order and player input
 
         This structured approach ensures game systems are processed in the correct order,
         maintaining game logic consistency.
 
         """
+        real_time.run(self, dt)
         act.run(self)
         move.run(self)
         control_turns.run(self)
