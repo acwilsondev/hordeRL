@@ -27,13 +27,15 @@ class PlaceFlowers(BuildWorldListener):
         world_settings = scene.cm.get_one(
             WorldParameters, entity=core.get_id("world")
         )
-        self.color = random.choice([
-            palettes.WHITE,
-            palettes.WATER,
-            palettes.FRESH_BLOOD,
-            palettes.FIRE,
-            palettes.GOLD,
-        ])
+        self.color = random.choice(
+            [
+                palettes.WHITE,
+                palettes.WATER,
+                palettes.FRESH_BLOOD,
+                palettes.FIRE,
+                palettes.GOLD,
+            ]
+        )
         for _ in range(world_settings.flower_fields):
             x = random.randint(0, settings.MAP_WIDTH - 1)
             y = random.randint(0, settings.MAP_HEIGHT - 1)
