@@ -42,7 +42,7 @@ class NavigationMenuScene(GameScene):
         self.options = option_scene_map
         self.title_label = None
 
-    def before_update(self):
+    def before_update(self, dt: float):
         """
         Pre-render GUI elements before the menu is displayed.
 
@@ -60,7 +60,7 @@ class NavigationMenuScene(GameScene):
         self.gui = self.controller.gui
         self.render()
 
-    def update(self):
+    def update(self, dt: float):
         """
         Show the interactive menu and wait for player selection.
 
