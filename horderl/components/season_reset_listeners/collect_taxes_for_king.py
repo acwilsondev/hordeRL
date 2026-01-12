@@ -1,6 +1,7 @@
 from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
+from horderl.i18n import t
 
 
 class CollectTaxesForKing(SeasonResetListener):
@@ -13,16 +14,17 @@ class CollectTaxesForKing(SeasonResetListener):
     def on_season_reset(self, scene, season):
         if season != "Spring":
             scene.warn(
-                f"The king will collect {self.value}c from you at the end of"
-                " the year."
+                t("warning.king_collects", amount=self.value)
             )
             return
 
         if scene.gold < self.value:
             scene.popup_message(
-                f"The king attempted to collect {self.value}c, but you only"
-                f" had {scene.gold}c! For this, your life is forfeit. Game"
-                " Over."
+                t(
+                    "popup.king_collects_insufficient",
+                    amount=self.value,
+                    gold=scene.gold,
+                )
             )
             scene.pop()
             return
@@ -30,8 +32,10 @@ class CollectTaxesForKing(SeasonResetListener):
         scene.gold -= self.value
         old_value = self.value
         self.value += 25
-        message = (
-            f"The king collected {old_value}c from you at the end of the year."
-            f" Next year, the amount will be {self.value}c."
+        scene.popup_message(
+            t(
+                "popup.king_collects_paid",
+                amount=old_value,
+                next_amount=self.value,
+            )
         )
-        scene.popup_message(message)

@@ -18,6 +18,7 @@ from ..components.states.move_cost_affectors import (
     Hindered,
 )
 from ..engine import palettes
+from ..i18n import t
 from ..engine.components.actor import Actor
 from ..systems.utilities import get_blocking_object
 
@@ -124,7 +125,7 @@ def can_step(scene, entity, step_action) -> bool:
     if not in_bounds(scene, (target_x, target_y)):
         if entity == scene.player:
             scene.message(
-                "You shouldn't leave the village.", color=palettes.WHITE
+                t("message.leave_village"), color=palettes.WHITE
             )
         return False
 
@@ -193,7 +194,7 @@ def _apply_post_move_factors(coords, entity, scene):
         scene.cm.add(Haste(entity=entity))
     elif difficult_terrain and not easy_terrain:
         if entity == scene.player:
-            scene.message("You stumbled over the terrain.")
+            scene.message(t("message.stumble"))
         scene.cm.add(Hindered(entity=entity))
 
 

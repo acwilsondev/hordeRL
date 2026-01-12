@@ -8,12 +8,12 @@ import os
 from horderl.config import get_relative_path, load_config
 from horderl.engine.game_scene_controller import GameSceneController
 from horderl.engine.logging import configure_logging
-from horderl.i18n import load_locale
+from horderl.i18n import load_locale, t
 from horderl.scenes.start_menu import get_start_menu
 
 
 def main(config):
-    game = GameSceneController("Oh No! It's THE HORDE!", config)
+    game = GameSceneController(t("game.title"), config)
     game.push_scene(get_start_menu())
     game.start()
 

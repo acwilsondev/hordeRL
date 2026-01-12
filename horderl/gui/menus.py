@@ -4,6 +4,7 @@ import tcod
 import tcod.event
 
 from ..engine import core, palettes
+from ..i18n import t
 from ..gui.gui_element import GuiElement
 
 
@@ -103,11 +104,11 @@ class Menu(GuiElement):
 
         # add nav
         if has_previous and not has_next:
-            window.print(0, y, " <- (p) previous", bg=None)
+            window.print(0, y, t("menu.nav.previous"), bg=None)
         elif has_next and not has_previous:
-            window.print(0, y, "(n) next ->", bg=None)
+            window.print(0, y, t("menu.nav.next"), bg=None)
         elif has_next and has_previous:
-            window.print(0, y, " <- (p) previous (n) next ->", bg=None)
+            window.print(0, y, t("menu.nav.previous_next"), bg=None)
 
         x = self.config.screen_width // 2 - self.width // 2
         y = self.config.screen_height // 2 - height // 2

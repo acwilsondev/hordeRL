@@ -6,6 +6,7 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
 )
 from horderl.components.tax_value import TaxValue
 from horderl.engine import palettes
+from horderl.i18n import t
 
 
 @dataclass
@@ -17,7 +18,7 @@ class CollectTaxes(SeasonResetListener):
         )
         collected_taxes = sum(tax.value for tax in taxes)
         scene.message(
-            f"You collect {collected_taxes}c from the village.",
+            t("message.collect_taxes", amount=collected_taxes),
             color=palettes.GOLD,
         )
         scene.gold += collected_taxes

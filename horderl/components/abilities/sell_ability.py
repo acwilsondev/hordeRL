@@ -10,6 +10,7 @@ from .control_mode_ability import ControlModeAbility
 @dataclass
 class SellAbility(ControlModeAbility):
     ability_title: str = "Sell Things"
+    ability_title_key: str = "ability.sell"
     unlock_cost: int = 0
     use_cost: int = 0
 

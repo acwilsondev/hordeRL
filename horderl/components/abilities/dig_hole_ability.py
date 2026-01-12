@@ -10,6 +10,7 @@ from ..brains.ability_actors.dig_hole_actor import DigHoleActor
 @dataclass
 class DigHoleAbility(ControlModeAbility):
     ability_title: str = "Dig Hole"
+    ability_title_key: str = "ability.dig_hole"
     unlock_cost: int = 100
     use_cost: int = 2
 

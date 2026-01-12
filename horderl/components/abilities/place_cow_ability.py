@@ -10,6 +10,7 @@ from .control_mode_ability import ControlModeAbility
 @dataclass
 class PlaceCowAbility(ControlModeAbility):
     ability_title: str = "Place Cow"
+    ability_title_key: str = "ability.place_cow"
     unlock_cost: int = 100
     use_cost: int = 100
 

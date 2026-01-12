@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from math import sqrt
 
 from horderl.engine import palettes
+from horderl.i18n import t
 from horderl.engine.components.energy_actor import EnergyActor
 
 from ...content.attacks import thwack_animation, thwack_dizzy_animation
@@ -17,6 +18,7 @@ from .ability import Ability
 @dataclass
 class ThwackAbility(Ability, EnergyActor):
     ability_title: str = "Thwack"
+    ability_title_key: str = "ability.thwack"
     unlock_cost: int = 0
     use_cost: int = 0
     count: int = 0
@@ -53,7 +55,7 @@ class ThwackAbility(Ability, EnergyActor):
                     )[1]
                 )
             else:
-                scene.warn("You thwacked yourself dizzy!")
+                scene.warn(t("warning.thwack_dizzy"))
                 scene.cm.add(
                     *thwack_dizzy_animation(
                         self.entity, thwacker_coords.x, thwacker_coords.y

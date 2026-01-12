@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from horderl.engine import core, palettes
+from horderl.i18n import t
 from horderl.engine.components.energy_actor import EnergyActor
 
 
@@ -75,4 +76,4 @@ class LoadGame(EnergyActor):
         scene.cm.from_data(data)
         end = core.time_ms()
         self._log_info(f"loaded {len(data)} objects in {end - start}ms")
-        scene.message("Game loaded.", color=palettes.LIGHT_WATER)
+        scene.message(t("message.game_loaded"), color=palettes.LIGHT_WATER)
