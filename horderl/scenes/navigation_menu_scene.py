@@ -58,7 +58,7 @@ class NavigationMenuScene(GameScene):
         # pre-render the gui elements so that they show up before menu pauses
         # execution
         self.gui = self.controller.gui
-        self.render()
+        self.render(dt)
 
     def update(self, dt: float):
         """
