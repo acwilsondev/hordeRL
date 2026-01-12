@@ -2,11 +2,11 @@ from dataclasses import dataclass
 
 from horderl.components import Appearance
 from horderl.engine import palettes
-from horderl.engine.components.timed_actor import TimedActor
+from horderl.engine.components.real_time_actor import RealTimeActor
 
 
 @dataclass
-class AnimationBlinker(TimedActor):
+class AnimationBlinker(RealTimeActor):
     """
     Flip the colors back and forth.
     """

@@ -2,11 +2,11 @@ from dataclasses import dataclass
 
 from horderl.components import Coordinates
 from horderl.components.path_node import PathNode
-from horderl.engine.components.timed_actor import TimedActor
+from horderl.engine.components.real_time_actor import RealTimeActor
 
 
 @dataclass
-class AnimationPath(TimedActor):
+class AnimationPath(RealTimeActor):
     current_step: int = 0
     timer_delay: int = 30
     delete_on_complete: bool = (

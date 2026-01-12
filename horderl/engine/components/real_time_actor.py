@@ -8,7 +8,7 @@ from horderl.engine.constants import PRIORITY_MEDIUM
 
 
 @dataclass
-class TimedActor(Actor, ABC):
+class RealTimeActor(Actor, ABC):
     SLOWEST = 100000
     MINIMUM_FLICKER = 125
     QUARTER_HOUR = 250

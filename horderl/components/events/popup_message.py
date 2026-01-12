@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from horderl.engine.components.timed_actor import TimedActor
+from horderl.engine.components.real_time_actor import RealTimeActor
 
 
 @dataclass
-class PopupMessage(TimedActor):
-    timer_delay: int = TimedActor.REAL_TIME
+class PopupMessage(RealTimeActor):
+    timer_delay: int = RealTimeActor.REAL_TIME
     message: str = ""
 
     def act(self, scene):
