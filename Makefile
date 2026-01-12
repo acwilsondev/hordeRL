@@ -1,4 +1,4 @@
-.PHONY: install format lint test radon check run
+.PHONY: install format lint test radon check run clean
 
 install:
 	poetry install --with dev
@@ -21,3 +21,7 @@ debug:
 
 run:
 	poetry run python hordeRL.py --termina
+
+clean:
+	rm -rf .pytest_cache .mypy_cache .ruff_cache .coverage coverage.xml \
+		dist build *.egg-info
