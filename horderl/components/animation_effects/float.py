@@ -2,11 +2,11 @@ import random
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.engine.components.timed_actor import TimedActor
+from horderl.engine.components.real_time_actor import RealTimeActor
 
 
 @dataclass
-class AnimationFloat(TimedActor):
+class AnimationFloat(RealTimeActor):
     """
     Randomly float up or right.
     """

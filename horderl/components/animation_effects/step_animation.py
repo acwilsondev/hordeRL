@@ -3,11 +3,11 @@ from typing import List
 
 from horderl.components import Appearance
 from horderl.components.events.delete_event import Delete
-from horderl.engine.components.timed_actor import TimedActor
+from horderl.engine.components.real_time_actor import RealTimeActor
 
 
 @dataclass
-class StepAnimation(TimedActor):
+class StepAnimation(RealTimeActor):
     """
     Flip the colors back and forth.
     """
