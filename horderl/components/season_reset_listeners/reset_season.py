@@ -4,6 +4,7 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
 from horderl.engine.components.events import Event
+from horderl.i18n import t
 
 
 @dataclass
@@ -18,4 +19,9 @@ class ResetSeason(Event):
         listener.on_season_reset(scene, self.season)
 
     def _after_notify(self, scene):
-        scene.message(f"{self.season} has begun.")
+        scene.message(
+            t(
+                "message.season_begin",
+                season=t(f"season.{self.season.lower()}"),
+            )
+        )

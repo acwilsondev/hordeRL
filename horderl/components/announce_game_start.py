@@ -1,15 +1,10 @@
 from ..components.events.start_game_events import GameStartListener
+from ..i18n import t
 
 
 class AnnounceGameStart(GameStartListener):
     def on_game_start(self, scene):
-        scene.message(
-            "You have been tasked with protecting the peasants of the Toshim"
-            " Plains."
-        )
-        scene.message(
-            "At the end of each season, the horde will come, ravenous in"
-            " hunger."
-        )
-        scene.message("Press the 'h' key if you need help.")
+        scene.message(t("message.start.protect"))
+        scene.message(t("message.start.horde"))
+        scene.message(t("message.start.help"))
         scene.cm.delete_component(self)

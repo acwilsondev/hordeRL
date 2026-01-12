@@ -7,6 +7,7 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
 )
 from horderl.components.tax_value import TaxValue
 from horderl.engine import palettes
+from horderl.i18n import t
 
 
 class ExtractContractFees(SeasonResetListener):
@@ -29,13 +30,10 @@ class ExtractContractFees(SeasonResetListener):
             contract_fees = -1 * sum(tax.value for tax in taxes)
 
         if quitters:
-            scene.warn(
-                f"Several mercenaries abandoned you, because you could not pay"
-                f" them."
-            )
+            scene.warn(t("warning.contract_quitters"))
         if contract_fees > 0:
             scene.message(
-                f"You racked up {contract_fees}c in contract fees.",
+                t("message.contract_fees", amount=contract_fees),
                 color=palettes.GOLD,
             )
             scene.gold -= contract_fees

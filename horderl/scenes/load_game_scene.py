@@ -3,6 +3,7 @@ import os
 from horderl.engine import GameScene, palettes
 from horderl.gui.easy_menu import EasyMenu
 from horderl.gui.labels import Label
+from horderl.i18n import t
 from horderl.scenes.defend_scene import DefendScene
 
 
@@ -13,7 +14,7 @@ class LoadMenuScene(GameScene):
 
     def __init__(self):
         super().__init__()
-        self.title = "Load a village?"
+        self.title = t("menu.load_title")
         self.title_label = None
 
     def on_load(self):
@@ -42,7 +43,7 @@ class LoadMenuScene(GameScene):
 
         self.gui.add_element(
             EasyMenu(
-                "Load which?",
+                t("menu.load_prompt"),
                 {world: self.get_world_loader(world) for world in files},
                 self.config.inventory_width,
                 self.config,

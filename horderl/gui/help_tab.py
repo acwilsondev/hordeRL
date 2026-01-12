@@ -1,5 +1,6 @@
 from ..engine import palettes
 from ..gui.gui_element import GuiElement
+from ..i18n import t
 
 
 class HelpTab(GuiElement):
@@ -28,7 +29,7 @@ class HelpTab(GuiElement):
         panel.print(
             self.x,
             self.y,
-            "Controls_________________________",
+            t("help.controls_title"),
             fg=self.fg,
             bg=self.bg,
         )
@@ -36,20 +37,36 @@ class HelpTab(GuiElement):
         panel.print(
             self.x,
             self.y + 2,
-            "← ↓ →  : Move / Attack",
+            t("help.move_attack"),
             fg=self.mg,
             bg=self.bg,
         )
 
         panel.print(
-            self.x, self.y + 4, "SPACE  : Use Ability", fg=self.mg, bg=self.bg
+            self.x,
+            self.y + 4,
+            t("help.use_ability"),
+            fg=self.mg,
+            bg=self.bg,
         )
         panel.print(
-            self.x, self.y + 5, "q      : Last Ability", fg=self.mg, bg=self.bg
+            self.x,
+            self.y + 5,
+            t("help.last_ability"),
+            fg=self.mg,
+            bg=self.bg,
         )
         panel.print(
-            self.x, self.y + 6, "e      : Next Ability", fg=self.mg, bg=self.bg
+            self.x,
+            self.y + 6,
+            t("help.next_ability"),
+            fg=self.mg,
+            bg=self.bg,
         )
         panel.print(
-            self.x, self.y + 7, "ESC    : Back", fg=self.mg, bg=self.bg
+            self.x,
+            self.y + 7,
+            t("help.back"),
+            fg=self.mg,
+            bg=self.bg,
         )

@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 from horderl.engine import constants
 from horderl.engine.components.component import Component
+from horderl.i18n import t
 
 from ...content.states import no_money_animation
 from .. import Coordinates
@@ -18,6 +19,11 @@ class Ability(Component, ABC):
     unlock_cost: int = constants.INVALID
     use_cost: int = constants.INVALID
     intention: Intention = ""
+    ability_title_key: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.ability_title_key:
+            self.ability_title = t(self.ability_title_key)
 
     @abstractmethod
     def use(self, scene, dispatcher):
@@ -30,7 +36,7 @@ class Ability(Component, ABC):
         self.use(scene, dispatcher)
 
     def _handle_no_money(self, scene):
-        scene.warn("You can't afford to use that ability.")
+        scene.warn(t("warning.no_money"))
         player_coords = scene.cm.get_one(Coordinates, entity=self.entity)
         confused_anim = no_money_animation(player_coords.x, player_coords.y)
         scene.cm.add(*confused_anim[1])

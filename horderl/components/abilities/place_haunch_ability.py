@@ -10,6 +10,7 @@ from .control_mode_ability import ControlModeAbility
 @dataclass
 class PlaceHaunchAbility(ControlModeAbility):
     ability_title: str = "Place Haunch"
+    ability_title_key: str = "ability.place_haunch"
     unlock_cost: int = 100
     use_cost: int = 15
 

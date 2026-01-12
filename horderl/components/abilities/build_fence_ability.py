@@ -10,6 +10,7 @@ from ..brains.ability_actors.place_fence_actor import PlaceFenceActor
 @dataclass
 class BuildFenceAbility(ControlModeAbility):
     ability_title: str = "Build Fence"
+    ability_title_key: str = "ability.build_fence"
     unlock_cost: int = 100
     use_cost: int = 5
 

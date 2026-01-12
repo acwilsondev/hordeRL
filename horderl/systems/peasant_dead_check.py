@@ -1,11 +1,9 @@
 from ..components.tags.peasant_tag import PeasantTag
+from ..i18n import t
 
 
 def run(scene):
     faction_members = scene.cm.get(PeasantTag)
     if not faction_members:
-        scene.popup_message(
-            "All of the peasants were killed! The king will have your head for"
-            " this. Game Over."
-        )
+        scene.popup_message(t("message.peasants_dead"))
         scene.pop()

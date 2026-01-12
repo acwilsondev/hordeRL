@@ -4,6 +4,7 @@ from typing import Dict
 from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.engine import core, palettes
 from horderl.engine.components.energy_actor import EnergyActor
+from horderl.i18n import t
 
 
 @dataclass
@@ -64,4 +65,4 @@ class SaveGame(EnergyActor):
             self.extra,
         )
         self._log_info("save complete")
-        scene.message("Game saved.", color=palettes.LIGHT_WATER)
+        scene.message(t("message.game_saved"), color=palettes.LIGHT_WATER)

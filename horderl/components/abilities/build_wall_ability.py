@@ -10,6 +10,7 @@ from ..brains.ability_actors.place_stone_wall_actor import PlaceStoneWallActor
 @dataclass
 class BuildWallAbility(ControlModeAbility):
     ability_title: str = "Build Wall"
+    ability_title_key: str = "ability.build_wall"
     unlock_cost: int = 100
     use_cost: int = 10
 

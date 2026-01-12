@@ -6,6 +6,7 @@ from ..components.states.move_cost_affectors import Haste, Hindered
 from ..components.world_building.world_parameters import WorldParameters
 from ..engine import PLAYER_ID, core, palettes
 from ..gui.gui_element import GuiElement
+from ..i18n import t
 
 
 class Label(GuiElement):
@@ -47,7 +48,7 @@ class GoldLabel(GuiElement):
         panel.print(
             self.x,
             self.y,
-            f"Gold: {self.value}",
+            t("label.gold", value=self.value),
             fg=palettes.GOLD,
             bg=palettes.BACKGROUND,
         )
@@ -112,9 +113,9 @@ class SpeedLabel(GuiElement):
         hindered = scene.cm.get_one(Hindered, entity=PLAYER_ID)
         haste = scene.cm.get_one(Haste, entity=PLAYER_ID)
         if hindered:
-            self.value = "*Hindered*"
+            self.value = t("label.hindered")
         elif haste:
-            self.value = "*Haste*"
+            self.value = t("label.haste")
         else:
             self.value = ""
 
@@ -134,7 +135,7 @@ class SpeedLabel(GuiElement):
 class AbilityLabel(GuiElement):
     def __init__(self, x, y):
         super().__init__(x, y, name="hindered-label")
-        self.value = "No Abilities"
+        self.value = t("label.no_abilities")
 
     def render(self, panel: tcod.console.Console) -> None:
         panel.print(
@@ -152,13 +153,13 @@ class AbilityLabel(GuiElement):
             ability = ability_tracker.get_current_ability(scene)
             self.value = f"{ability.ability_title} - {ability.use_cost}c"
         else:
-            self.value = "LOADING"
+            self.value = t("label.loading")
 
 
 class VillageNameLabel(GuiElement):
     def __init__(self, x, y):
         super().__init__(x, y, name="village-name-label")
-        self.value = "Village"
+        self.value = t("label.village")
 
     def render(self, panel: tcod.console.Console) -> None:
         panel.print(
@@ -175,4 +176,4 @@ class VillageNameLabel(GuiElement):
             params = params[0]
             self.value = f"{params.world_name}"
         else:
-            self.value = "LOADING"
+            self.value = t("label.loading")

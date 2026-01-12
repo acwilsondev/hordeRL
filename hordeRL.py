@@ -8,11 +8,12 @@ import os
 from horderl.config import get_relative_path, load_config
 from horderl.engine.game_scene_controller import GameSceneController
 from horderl.engine.logging import configure_logging
+from horderl.i18n import load_locale, t
 from horderl.scenes.start_menu import get_start_menu
 
 
 def main(config):
-    game = GameSceneController("Oh No! It's THE HORDE!", config)
+    game = GameSceneController(t("game.title"), config)
     game.push_scene(get_start_menu())
     game.start()
 
@@ -35,6 +36,12 @@ def cli():
         dest="character_name",
         default=None,
         help="override the player character name",
+    )
+    parser.add_argument(
+        "--locale",
+        dest="locale",
+        default=None,
+        help="override the locale code for translations",
     )
     parser.add_argument(
         "--seed",
@@ -85,6 +92,7 @@ def cli():
         args.options_path or get_relative_path("options.yaml"),
         overrides={
             "character_name": args.character_name,
+            "locale": args.locale,
             "world_seed": args.world_seed,
             "torch_radius": args.torch_radius,
             "grass_density": args.grass_density,
@@ -92,6 +100,7 @@ def cli():
             "music_enabled": args.music_enabled,
         },
     )
+    load_locale(config.locale)
 
     # Convert string log level to logging constant
     log_level = getattr(logging, args.log)

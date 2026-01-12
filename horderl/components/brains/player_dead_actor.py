@@ -7,6 +7,7 @@ from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.content.states import confused_animation
 from horderl.engine import core
+from horderl.i18n import t
 
 
 @dataclass
@@ -32,10 +33,7 @@ class PlayerDeadBrain(Brain):
                 ability.apply(scene, self.id)
             elif intention is None:
                 self._log_debug(f"found no useable intention")
-                scene.warn(
-                    "You urge your lifeless corpse to action, without much"
-                    " success."
-                )
+                scene.warn(t("warning.player_dead_no_action"))
                 return
 
 

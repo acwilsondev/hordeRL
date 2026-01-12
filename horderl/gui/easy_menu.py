@@ -5,6 +5,7 @@ from .. import engine
 from ..engine import core
 from ..engine.palettes import WHITE
 from ..gui.gui_element import GuiElement
+from ..i18n import t
 
 
 class EasyMenu(GuiElement):
@@ -80,7 +81,8 @@ class EasyMenu(GuiElement):
                 if 0 <= index < len(self.options):
                     option_at_index = self.options[index]
                     callback = self.option_map.get(
-                        option_at_index, lambda: print("no menu option")
+                        option_at_index,
+                        lambda: print(t("menu.nav.no_option")),
                     )
                     callback()
 
@@ -121,11 +123,11 @@ class EasyMenu(GuiElement):
 
         # add nav
         if has_previous and not has_next:
-            window.print(0, y, " <- (p) previous", bg=None)
+            window.print(0, y, t("menu.nav.previous"), bg=None)
         elif has_next and not has_previous:
-            window.print(0, y, "(n) next ->", bg=None)
+            window.print(0, y, t("menu.nav.next"), bg=None)
         elif has_next and has_previous:
-            window.print(0, y, " <- (p) previous (n) next ->", bg=None)
+            window.print(0, y, t("menu.nav.previous_next"), bg=None)
 
         if self.hide_background:
             # Draw a blank screen
