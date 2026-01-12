@@ -22,11 +22,13 @@ def test_load_config_creates_options_file(tmp_path):
 def test_load_config_merges_overrides(tmp_path):
     options_path = tmp_path / "options.yaml"
     options_path.write_text(
-        yaml.safe_dump({
-            "character-name": "Sir Test",
-            "grass-density": 0.2,
-            "color_background": "ffffff",
-        })
+        yaml.safe_dump(
+            {
+                "character-name": "Sir Test",
+                "grass-density": 0.2,
+                "color_background": "ffffff",
+            }
+        )
     )
 
     config = load_config(

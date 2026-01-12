@@ -42,13 +42,15 @@ def spawn_hordeling(scene):
         scene.cm.add(*make_juvenile(x, y)[1])
 
 
-def get_wall_coords(config):
-    return random.choice([
-        (get_random_width_location(config), 0),
-        (0, get_random_height_location(config)),
-        (config.map_width - 1, get_random_height_location(config)),
-        (get_random_width_location(config), config.map_height - 1),
-    ])
+def get_wall_coords():
+    return random.choice(
+        [
+            (get_random_width_location(), 0),
+            (0, get_random_height_location()),
+            (settings.MAP_WIDTH - 1, get_random_height_location()),
+            (get_random_width_location(), settings.MAP_HEIGHT - 1),
+        ]
+    )
 
 
 def get_random_width_location(config):
