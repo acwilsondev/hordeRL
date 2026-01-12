@@ -3,10 +3,7 @@ from typing import List
 
 import tcod
 
-from horderl import settings
 from horderl.components import Coordinates
-from horderl.components.base_components.energy_actor import EnergyActor
-from horderl.components.base_components.entity import Entity
 from horderl.components.brains.brain import Brain
 from horderl.components.diggable import Diggable
 from horderl.components.enums import Intention
@@ -14,6 +11,8 @@ from horderl.components.events.die_events import Die
 from horderl.content.terrain.dirt import make_dirt
 from horderl.content.terrain.hole import make_hole
 from horderl.engine import core, palettes
+from horderl.engine.components.energy_actor import EnergyActor
+from horderl.engine.components.entity import Entity
 
 
 @dataclass
@@ -42,7 +41,7 @@ class DigHoleActor(Brain):
         direction = STEP_VECTORS[direction]
         hole_x = x + direction[0]
         hole_y = y + direction[1]
-        if not _in_bounds(hole_x, hole_y):
+        if not _in_bounds(hole_x, hole_y, scene.config):
             scene.message(
                 "You can't build outside of the town.", color=palettes.WHITE
             )
@@ -80,9 +79,9 @@ class DigHoleActor(Brain):
         old_actor.pass_turn()
 
 
-def _in_bounds(x, y):
-    in_x_bounds = 0 <= x <= settings.MAP_WIDTH - 1
-    in_y_bounds = 0 <= y <= settings.MAP_HEIGHT - 1
+def _in_bounds(x, y, config):
+    in_x_bounds = 0 <= x <= config.map_width - 1
+    in_y_bounds = 0 <= y <= config.map_height - 1
     return in_y_bounds and in_x_bounds
 
 

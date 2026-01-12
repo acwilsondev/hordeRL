@@ -1,7 +1,6 @@
 import sys
 from collections import OrderedDict
 
-from horderl import settings
 from horderl.engine import GameScene, palettes
 from horderl.gui.easy_menu import EasyMenu
 from horderl.gui.labels import Label
@@ -39,11 +38,9 @@ class NavigationMenuScene(GameScene):
 
         """
         super().__init__()
+        self.title = title
         self.options = option_scene_map
-        center_x = (settings.SCREEN_WIDTH - len(title)) // 2
-        center_y = settings.SCREEN_HEIGHT // 2 - 4
-        title_label = Label(center_x, center_y, title, fg=palettes.FRESH_BLOOD)
-        self.add_gui_element(title_label)
+        self.title_label = None
 
     def before_update(self):
         """
@@ -88,6 +85,7 @@ class NavigationMenuScene(GameScene):
                     for link in self.options.items()
                 },
                 24,
+                self.config,
                 hide_background=False,
                 on_escape=lambda: sys.exit(0),
             )
@@ -125,4 +123,10 @@ class NavigationMenuScene(GameScene):
         initialization sequence and runs before the update cycle begins.
 
         """
+        center_x = (self.config.screen_width - len(self.title)) // 2
+        center_y = self.config.screen_height // 2 - 4
+        self.title_label = Label(
+            center_x, center_y, self.title, fg=palettes.FRESH_BLOOD
+        )
+        self.add_gui_element(self.title_label)
         self.sound.play("theme")

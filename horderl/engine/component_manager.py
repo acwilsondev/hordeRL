@@ -1,11 +1,28 @@
-import logging
+"""
+Component management system for the HordeRL entity-component architecture.
+
+This module provides the ComponentManager class, which serves as the central
+repository for all game entities and their associated components. It manages
+the lifecycle of components, provides efficient access to components through
+multiple indexing strategies, and supports operations such as:
+
+- Adding and retrieving components by type, entity, or unique ID
+- Removing components and entities from the game world
+- Temporarily stashing and later unstashing components or entire entities
+- Querying and filtering components based on custom criteria
+- Serializing component state for save/load functionality
+
+The entity-component system allows for flexible game object composition without
+deep inheritance hierarchies, enabling behavior to be added or removed at runtime.
+"""
+
 from collections import defaultdict
 from typing import Callable, Dict, Generic, Iterable, List, Set, Type
 
-from ..components.base_components.component import Component
-from ..engine import constants
-from ..engine.core import log_debug
-from ..engine.types import (
+from horderl.engine import constants
+from horderl.engine.components.component import Component
+from horderl.engine.logging import get_logger
+from horderl.engine.types import (
     ComponentList,
     ComponentType,
     EntityDict,
@@ -15,7 +32,7 @@ from ..engine.types import (
 )
 
 
-class ComponentManager(object):
+class ComponentManager:
     """
     Manage game entities and their components within the entity-component system.
 
@@ -47,6 +64,7 @@ class ComponentManager(object):
         - stashed_entities: Maps entity IDs to sets of stashed component IDs
 
         """
+        self.logger = get_logger(__name__)
         self.components: Dict[ComponentType, ComponentList] = defaultdict(list)
         self.components_by_entity: EntityDictIndex = defaultdict(
             lambda: defaultdict(list)
@@ -58,7 +76,6 @@ class ComponentManager(object):
         # A mapping from the entity id to the related stashed base_components
         self.stashed_entities: Dict[int, Set[int]] = {}
 
-    # properties
     # properties
     @property
     def entities(self) -> Set[int]:
@@ -92,7 +109,6 @@ class ComponentManager(object):
         components.append(component)
         self.components_by_id[component.id] = component
 
-    @log_debug(__name__)
     def clear(self) -> None:
         """
         Clear all active components and entities from the component manager.
@@ -103,6 +119,7 @@ class ComponentManager(object):
         :return: None
 
         """
+        self.logger.debug("Clearing component manager")
         self.components = defaultdict(list)
         self.components_by_entity = defaultdict(lambda: defaultdict(list))
         self.components_by_id = {}
@@ -115,18 +132,46 @@ class ComponentManager(object):
         Add one or more components to the ComponentManager.
 
         Each component is added to all relevant indexes in the component manager, making
-        it accessible through various query methods.
+        it accessible through various query methods. All inputs are validated to ensure
+        they are proper Component instances.
 
         :param component: The first component to add
         :type component: Component
         :param components: Additional components to add
         :type components: Component
         :return: None
+        :raises TypeError: If any input is not a Component instance
+        :raises ValueError: If any component has an invalid entity ID
 
         """
+        if not isinstance(component, Component):
+            self.logger.error(
+                "Invalid component type provided",
+                extra={
+                    "expected": "Component",
+                    "received": type(component).__name__,
+                },
+            )
+            raise TypeError(
+                f"Expected Component instance, got {type(component).__name__}"
+            )
+
         self._add(component)
-        for component in components:
-            self._add(component)
+
+        for comp in components:
+            if not isinstance(comp, Component):
+                self.logger.error(
+                    "Invalid component type provided in additional components",
+                    extra={
+                        "expected": "Component",
+                        "received": type(comp).__name__,
+                    },
+                )
+                raise TypeError(
+                    f"Expected Component instance, got {type(comp).__name__}"
+                )
+
+            self._add(comp)
 
     def get(
         self,
@@ -230,6 +275,9 @@ class ComponentManager(object):
         itself from the component manager's indexes. Does not delete any references to
         the entity or its components that might exist elsewhere in the game.
 
+        If the entity also has stashed components, those are deleted as well to prevent
+        stashed component leaks.
+
         :param entity: The ID of the entity to delete
         :type entity: int
         :return: None
@@ -242,7 +290,25 @@ class ComponentManager(object):
                 " delete_component?"
             )
 
-        logging.debug(f"System::ComponentManager deleting entity {entity}")
+        self.logger.debug(
+            "Deleting entity",
+            extra={"entity_id": entity, "operation": "delete_entity"},
+        )
+
+        # Clean up any stashed components belonging to this entity
+        if entity in self.stashed_entities:
+            self.logger.debug(
+                "Entity has stashed components that will be removed",
+                extra={
+                    "entity_id": entity,
+                    "stashed_component_count": len(
+                        self.stashed_entities[entity]
+                    ),
+                },
+            )
+            # Remove the stashed components to prevent leaks
+            self.drop_stashed_entity(entity)
+
         components = self.get_entity(entity)
 
         for _, component_list in components.items():
@@ -297,8 +363,15 @@ class ComponentManager(object):
         :raises ValueError: If the component is None
 
         """
-        logging.debug(
-            f"System::ComponentManager deleting component {component}"
+        self.logger.debug(
+            "Deleting component",
+            extra={
+                "component_id": component.id if component else None,
+                "component_type": (
+                    type(component).__name__ if component else None
+                ),
+                "entity_id": component.entity if component else None,
+            },
         )
         if not component:
             raise ValueError("Cannot delete None.")
@@ -329,82 +402,303 @@ class ComponentManager(object):
             self.delete_component(component)
 
     # stashing
-    def stash_component(self, cid: int):
-        assert isinstance(cid, int), "cid must be an int"
+    def stash_component(self, cid: int) -> None:
+        """
+        Move a component to the stash.
+
+        Temporarily removes a component from the active game state and places it in the stash
+        for later retrieval.
+
+        :param cid: The ID of the component to stash
+        :type cid: int
+        :return: None
+        :raises ValueError: If the component ID is not an integer
+        :raises KeyError: If the component ID does not exist
+        """
+        if not isinstance(cid, int):
+            raise ValueError(
+                f"Component ID must be an integer, got {type(cid).__name__}"
+            )
 
         # todo can leak stashed base_components if the managing entity is destroyed before the stash is recalled
-        logging.debug(
-            f"System::ComponentManager attempting to stash component {cid}"
+        self.logger.debug(
+            "Attempting to stash component", extra={"component_id": cid}
         )
-        component = self.get_component_by_id(cid)
-        logging.debug(
-            f"System::ComponentManager stashing component {component}"
+
+        try:
+            component = self.components_by_id[cid]
+        except KeyError:
+            self.logger.error(
+                "Failed to stash component: component not found",
+                extra={"component_id": cid},
+            )
+            raise KeyError(f"Component with ID {cid} not found")
+
+        if cid in self.stashed_components:
+            self.logger.warning(
+                "Component is already stashed",
+                extra={
+                    "component_id": cid,
+                    "component_type": type(component).__name__,
+                    "entity_id": component.entity,
+                },
+            )
+            return
+
+        self.logger.debug(
+            "Stashing component",
+            extra={
+                "component_id": component.id,
+                "component_type": type(component).__name__,
+                "entity_id": component.entity,
+                "operation": "stash",
+            },
         )
         self.stashed_components[cid] = component
         self.delete_component(component)
 
-    def unstash_component(self, cid: int):
-        assert isinstance(cid, int), "cid must be an int"
+    def unstash_component(self, cid: int) -> Component:
+        """
+        Retrieve a component from the stash and return it to the active game state.
 
-        logging.debug(
-            f"System::ComponentManager attempting to unstash component {cid}"
+        Moves a previously stashed component back into the active component manager.
+
+        :param cid: The ID of the component to unstash
+        :type cid: int
+        :return: The unstashed component
+        :rtype: Component
+        :raises ValueError: If the component ID is not an integer
+        :raises KeyError: If the component ID is not in the stash
+        """
+        if not isinstance(cid, int):
+            raise ValueError(
+                f"Component ID must be an integer, got {type(cid).__name__}"
+            )
+
+        self.logger.debug(
+            "Attempting to unstash component", extra={"component_id": cid}
         )
-        component = self.stashed_components[cid]
+
+        try:
+            component = self.stashed_components[cid]
+        except KeyError:
+            self.logger.error(
+                "Failed to unstash component: component not found in stash",
+                extra={"component_id": cid},
+            )
+            raise KeyError(f"Component with ID {cid} not found in stash")
+
+        self.logger.debug(
+            "Unstashing component",
+            extra={
+                "component_id": component.id,
+                "component_type": type(component).__name__,
+                "entity_id": component.entity,
+                "operation": "unstash",
+            },
+        )
+
         self.add(component)
         del self.stashed_components[cid]
         return component
 
-    def stash_entity(self, eid: int):
+    def stash_entity(self, eid: int) -> None:
         """
         Move an entire entity to the stash.
 
         Temporarily removes an entity and all its components from the active game state
-        and places them in the stash for later retrieval.
+        and places them in the stash for later retrieval. If the entity is already
+        stashed, this will log a warning and do nothing.
 
         :param eid: The ID of the entity to stash
         :type eid: int
         :return: None
-
+        :raises ValueError: If eid is not an integer
+        :raises ValueError: If entity has no components
         """
-        assert isinstance(eid, int), "eid must be an int"
-        logging.debug(
-            f"System::ComponentManager attempting to stash entity {eid}"
-        )
-        components = self.get_entity(eid)
+        if not isinstance(eid, int):
+            self.logger.error(
+                "Invalid entity ID type provided",
+                extra={
+                    "expected": "int",
+                    "received": type(eid).__name__,
+                    "entity_id": str(eid),
+                },
+            )
+            raise ValueError(
+                f"Entity ID must be an integer, got {type(eid).__name__}"
+            )
 
+        if eid in self.stashed_entities:
+            self.logger.warning(
+                "Entity is already stashed", extra={"entity_id": eid}
+            )
+            return
+
+        self.logger.debug(
+            "Attempting to stash entity",
+            extra={"entity_id": eid, "operation": "stash_entity"},
+        )
+
+        components = self.get_entity(eid)
         component_ids = set()
 
+        # Check if the entity has any components
+        has_components = False
+        for _, component_list in components.items():
+            if component_list:
+                has_components = True
+                break
+
+        if not has_components:
+            self.logger.warning(
+                "No components found for entity", extra={"entity_id": eid}
+            )
+
+        # Process components
         for _, component_list in components.items():
             for component in component_list:
                 component_ids.add(component.id)
                 self.stash_component(component.id)
 
         self.stashed_entities[eid] = component_ids
-        logging.debug(
-            f"System::ComponentManager completed stash {component_ids}"
+        self.logger.info(
+            "Completed entity stash",
+            extra={
+                "entity_id": eid,
+                "component_count": len(component_ids),
+                "component_ids": list(component_ids),
+                "operation": "stash_entity_complete",
+            },
         )
 
-    def unstash_entity(self, eid):
-        logging.debug(
-            f"System::ComponentManager attempting to unstash entity {eid}"
+    def unstash_entity(self, eid: int) -> None:
+        """
+        Retrieve a stashed entity and return it to the active game state.
+
+        Moves a previously stashed entity and all its components back into the active
+        component manager.
+
+        :param eid: The ID of the entity to unstash
+        :type eid: int
+        :return: None
+        :raises ValueError: If eid is not an integer
+        :raises KeyError: If the entity ID is not in the stash
+        """
+        if not isinstance(eid, int):
+            self.logger.error(
+                "Invalid entity ID type provided",
+                extra={
+                    "expected": "int",
+                    "received": type(eid).__name__,
+                    "entity_id": str(eid),
+                },
+            )
+            raise ValueError(
+                f"Entity ID must be an integer, got {type(eid).__name__}"
+            )
+
+        self.logger.debug(
+            "Attempting to unstash entity",
+            extra={"entity_id": eid, "operation": "unstash_entity"},
         )
+
+        if eid not in self.stashed_entities:
+            self.logger.error(
+                "Failed to unstash entity: entity not found in stash",
+                extra={"entity_id": eid},
+            )
+            raise KeyError(f"Entity with ID {eid} not found in stash")
+
         component_ids = list(self.stashed_entities[eid])
+        unstashed_count = 0
+
         for component_id in component_ids:
-            self.unstash_component(component_id)
+            try:
+                self.unstash_component(component_id)
+                unstashed_count += 1
+            except KeyError:
+                self.logger.warning(
+                    "Component in stashed entity not found in stash",
+                    extra={"entity_id": eid, "component_id": component_id},
+                )
 
         del self.stashed_entities[eid]
-        logging.debug(f"System::ComponentManager completed unstash")
-
-    def drop_stashed_entity(self, eid):
-        """
-        Forget about a stashed entity.
-        """
-        logging.debug(
-            f"System::ComponentManager attempting to drop stashed entity {eid}"
+        self.logger.info(
+            "Completed entity unstash",
+            extra={
+                "entity_id": eid,
+                "component_count": len(component_ids),
+                "unstashed_count": unstashed_count,
+                "operation": "unstash_entity_complete",
+            },
         )
-        self.unstash_entity(eid)
-        self.delete(eid)
-        logging.debug(f"System::ComponentManager completed stash drop")
+
+    def drop_stashed_entity(self, eid: int) -> None:
+        """
+        Permanently remove a stashed entity and its components.
+
+        This method cleanly removes an entity from the stash without returning it to the
+        active game state. This helps prevent stashed component leaks by ensuring all
+        components associated with the entity are properly cleaned up and removed.
+
+        :param eid: The ID of the entity to drop from the stash
+        :type eid: int
+        :return: None
+        :raises ValueError: If eid is not an integer
+        :raises KeyError: If the entity ID is not in the stash
+        """
+        if not isinstance(eid, int):
+            self.logger.error(
+                "Invalid entity ID type provided",
+                extra={
+                    "expected": "int",
+                    "received": type(eid).__name__,
+                    "entity_id": str(eid),
+                },
+            )
+            raise ValueError(
+                f"Entity ID must be an integer, got {type(eid).__name__}"
+            )
+
+        self.logger.debug(
+            "Attempting to drop stashed entity",
+            extra={"entity_id": eid, "operation": "drop_stashed_entity"},
+        )
+
+        if eid not in self.stashed_entities:
+            self.logger.error(
+                "Failed to drop stashed entity: entity not found in stash",
+                extra={"entity_id": eid},
+            )
+            raise KeyError(f"Entity with ID {eid} not found in stash")
+
+        # Directly remove components from stash instead of unstashing them
+        component_ids = list(self.stashed_entities[eid])
+        self.logger.debug(
+            "Removing stashed components",
+            extra={
+                "entity_id": eid,
+                "component_count": len(component_ids),
+                "component_ids": component_ids,
+            },
+        )
+
+        for component_id in component_ids:
+            if component_id in self.stashed_components:
+                del self.stashed_components[component_id]
+
+        # Remove the entity from stashed entities
+        del self.stashed_entities[eid]
+
+        self.logger.info(
+            "Completed stashed entity drop",
+            extra={
+                "entity_id": eid,
+                "component_count": len(component_ids),
+                "operation": "drop_stashed_entity_complete",
+            },
+        )
 
     # serialization functions
     def get_serial_form(self):
@@ -431,19 +725,53 @@ class ComponentManager(object):
         Add a component to the component manager.
 
         Adds the component to all relevant indexes in the component manager, organizing
-        it by type, entity, and component ID.
+        it by type, entity, and component ID. Validates that the component has a valid
+        entity ID before adding it to the system.
 
         :param component: The component to add to the component manager
         :type component: Component
         :return: None
-        :raises AssertionError: If the component has an invalid entity ID
+        :raises ValueError: If the component has an invalid entity ID
+        :raises TypeError: If the input is not a Component instance
 
         """
+        if not isinstance(component, Component):
+            self.logger.error(
+                "Invalid component type provided to _add",
+                extra={
+                    "expected": "Component",
+                    "received": type(component).__name__,
+                },
+            )
+            raise TypeError(
+                f"Expected Component instance, got {type(component).__name__}"
+            )
+
         entity = component.entity
-        assert entity != constants.INVALID, (
-            f"Invalid entity id! {component}. Did you forget to set the owning"
-            " entity?"
+        if entity == constants.INVALID:
+            self.logger.error(
+                "Component has invalid entity ID",
+                extra={
+                    "component_id": getattr(component, "id", None),
+                    "component_type": type(component).__name__,
+                    "entity_id": entity,
+                },
+            )
+            raise ValueError(
+                f"Invalid entity ID! {component}. Did you forget to set the"
+                " owning entity?"
+            )
+
+        self.logger.debug(
+            "Adding component",
+            extra={
+                "component_id": component.id,
+                "component_type": type(component).__name__,
+                "entity_id": entity,
+                "operation": "add",
+            },
         )
+
         component_classes = type(component).mro()
         for component_class in component_classes:
             self.components_by_entity[entity][component_class].append(

@@ -1,9 +1,9 @@
 from abc import ABC
 from dataclasses import dataclass
 
-from horderl.components.base_components.actor import Actor
 from horderl.components.enums import ControlMode, Intention
 from horderl.engine import core
+from horderl.engine.components.actor import Actor
 from horderl.engine.constants import PRIORITY_MEDIUM
 
 
@@ -34,7 +34,7 @@ class TimedActor(Actor, ABC):
     def can_act(self) -> bool:
         return self.next_update <= core.time_ms()
 
-    def pass_turn(self, time=None) -> None:
-        if time is None:
-            time = self.timer_delay
-        self.next_update = core.time_ms() + time
+    def pass_turn(self, delay=None) -> None:
+        if delay is None:
+            delay = self.timer_delay
+        self.next_update = core.time_ms() + delay

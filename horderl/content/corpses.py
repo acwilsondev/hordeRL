@@ -1,8 +1,8 @@
 import random
 
-from .. import settings
+from horderl.engine.components.entity import Entity
+
 from ..components import Appearance, Coordinates
-from ..components.base_components.entity import Entity
 from ..components.events.delete_event import Delete
 from ..components.tags.corpse_tag import CorpseTag
 from ..engine import core, palettes
@@ -58,12 +58,12 @@ def make_blood_pool(x, y, color):
     )
 
 
-def make_blood_splatter(count, x, y, color):
+def make_blood_splatter(count, x, y, color, config):
     pools = []
     for _ in range(count):
         x2 = x + int(random.triangular(-count, 0, count))
         y2 = y + int(random.triangular(-count, 0, count))
 
-        if 0 < x2 < settings.MAP_WIDTH and 0 < y2 < settings.MAP_HEIGHT:
+        if 0 < x2 < config.map_width and 0 < y2 < config.map_height:
             pools += make_blood_pool(x2, y2, color)[1]
     return pools

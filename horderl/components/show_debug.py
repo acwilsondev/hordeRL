@@ -1,11 +1,12 @@
 import logging
 from dataclasses import dataclass
 
-from .. import engine, settings
+from horderl.engine.components.energy_actor import EnergyActor
+from horderl.engine.components.entity import Entity
+
+from .. import engine
 from ..components import Attributes, Coordinates, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility
-from ..components.base_components.energy_actor import EnergyActor
-from ..components.base_components.entity import Entity
 from ..components.brains.brain import Brain
 from ..components.brains.default_active_actor import DefaultActiveActor
 from ..components.brains.painters.create_gold_actor import PlaceGoldController
@@ -94,7 +95,8 @@ class ShowDebug(EnergyActor):
                     "spawn a home": get_spawn_home(scene),
                     "quicksave": quick_save(scene),
                 },
-                settings.INVENTORY_WIDTH,
+                scene.config.inventory_width,
+                scene.config,
             )
         )
         scene.cm.delete_component(self)
@@ -134,7 +136,8 @@ def get_examine_game_objects(scene):
                     )
                     for entity in entities
                 },
-                settings.INVENTORY_WIDTH,
+                scene.config.inventory_width,
+                scene.config,
             )
         )
 
@@ -334,7 +337,8 @@ def get_teleport_to(scene):
                     )
                     for entity in entities
                 },
-                settings.INVENTORY_WIDTH,
+                scene.config.inventory_width,
+                scene.config,
             )
         )
 
@@ -428,7 +432,8 @@ def get_activate_ability(scene):
             EasyMenu(
                 "Toggle which ability?",
                 ability_map,
-                settings.INVENTORY_WIDTH,
+                scene.config.inventory_width,
+                scene.config,
             )
         )
 
@@ -496,7 +501,8 @@ def get_pathfinding_for(scene):
                     )
                     for entity in entities
                 },
-                settings.INVENTORY_WIDTH,
+                scene.config.inventory_width,
+                scene.config,
             )
         )
 

@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 from horderl.components.events.build_world_events import BuildWorldListener
 
-from ... import settings
 from ...content.player import make_player
 
 
@@ -10,5 +9,9 @@ from ...content.player import make_player
 class AddPlayerStep(BuildWorldListener):
     def on_build_world(self, scene):
         self._log_info(f"adding player to map")
-        player = make_player(settings.MAP_HEIGHT // 2, settings.MAP_WIDTH // 2)
+        player = make_player(
+            scene.config.map_height // 2,
+            scene.config.map_width // 2,
+            scene.config,
+        )
         scene.cm.add(*player[1])

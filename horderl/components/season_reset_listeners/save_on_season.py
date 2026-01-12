@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-from horderl import settings
 from horderl.components.events.start_game_events import GameStartListener
 from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
@@ -21,7 +20,7 @@ class SaveOnSeasonReset(SeasonResetListener, GameStartListener):
         self.autosave(scene)
 
     def autosave(self, scene):
-        if not settings.AUTOSAVE:
+        if not scene.config.autosave_enabled:
             self._log_info(f"autosave is disabled")
             return
         scene.cm.add(SaveGame(entity=scene.player))

@@ -1,4 +1,5 @@
-from .. import settings
+from horderl.engine.components.entity import Entity
+
 from ..components import Appearance, Attributes, Coordinates, Senses
 from ..components.abilities.build_fence_ability import BuildFenceAbility
 from ..components.abilities.build_spikes_ability import BuildSpikesAbility
@@ -17,7 +18,6 @@ from ..components.abilities.shoot_ability import ShootAbility
 from ..components.abilities.thwack_ability import ThwackAbility
 from ..components.ability_tracker import AbilityTracker
 from ..components.attacks.standard_attack import StandardAttack
-from ..components.base_components.entity import Entity
 from ..components.brains.player_brain import PlayerBrain
 from ..components.death_listeners.player_corpse import PlayerCorpse
 from ..components.faction import Faction
@@ -37,14 +37,16 @@ from ..components.target_value import PLAYER, TargetValue
 from ..engine import PLAYER_ID, palettes
 
 
-def make_player(x, y):
+def make_player(x, y, config):
     entity_id = PLAYER_ID
 
     return (
         entity_id,
         [
             Entity(
-                id=entity_id, entity=entity_id, name=settings.CHARACTER_NAME
+                id=entity_id,
+                entity=entity_id,
+                name=config.character_name,
             ),
             Coordinates(entity=entity_id, x=x, y=y),
             Appearance(
@@ -54,7 +56,7 @@ def make_player(x, y):
                 bg_color=palettes.BACKGROUND,
             ),
             PlayerCorpse(entity=entity_id),
-            Senses(entity=entity_id, sight_radius=settings.TORCH_RADIUS),
+            Senses(entity=entity_id, sight_radius=config.torch_radius),
             PlayerBrain(entity=entity_id),
             Attributes(entity=entity_id, hp=5, max_hp=5),
             StandardAttack(entity=entity_id, damage=1),

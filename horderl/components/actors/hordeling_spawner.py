@@ -1,12 +1,11 @@
 import random
 from dataclasses import dataclass
 
-from horderl import settings
-from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.content.enemies.juggernaut import make_juggernaut
 from horderl.content.enemies.juvenile import make_juvenile
 from horderl.content.enemies.pirhana import make_pirhana
 from horderl.content.enemies.sneaker import make_sneaker
+from horderl.engine.components.energy_actor import EnergyActor
 
 
 @dataclass
@@ -34,7 +33,7 @@ def spawn_hordeling(scene):
     """
     Add a hordeling spawner to a random edge of the map.
     """
-    x, y = get_wall_coords()
+    x, y = get_wall_coords(scene.config)
     roll = random.random()
     if roll > 0.8:
         maker = random.choice([make_sneaker, make_juggernaut, make_pirhana])
@@ -54,9 +53,9 @@ def get_wall_coords():
     )
 
 
-def get_random_width_location():
-    return random.randrange(1, settings.MAP_WIDTH - 1)
+def get_random_width_location(config):
+    return random.randrange(1, config.map_width - 1)
 
 
-def get_random_height_location():
-    return random.randrange(1, settings.MAP_HEIGHT - 1)
+def get_random_height_location(config):
+    return random.randrange(1, config.map_height - 1)

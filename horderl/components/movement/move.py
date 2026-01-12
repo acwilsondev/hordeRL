@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from ..base_components.component import Component
-from ..base_components.energy_actor import EnergyActor
+from horderl.engine.components.component import Component
+from horderl.engine.components.energy_actor import EnergyActor
 
 
 @dataclass

@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 
-from .. import settings
-from ..components.base_components.component import Component
+from horderl.engine.components.component import Component
 
 
 @dataclass
 class Senses(Component):
-    sight_radius: int = settings.TORCH_RADIUS
+    sight_radius: int = -1
     dirty: bool = True

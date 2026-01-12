@@ -1,5 +1,4 @@
 from horderl.components import Appearance, Attributes, Coordinates
-from horderl.components.base_components.entity import Entity
 from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.death_listeners.schedule_rebuild import ScheduleRebuild
 from horderl.components.faction import Faction
@@ -8,6 +7,7 @@ from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.relationships.owner import Owner
 from horderl.components.structure import Structure
 from horderl.engine import core, palettes, types
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 from horderl.engine.types import EntityId
 

@@ -1,4 +1,5 @@
-from ..components.base_components.entity import Entity
+from horderl.engine.components.entity import Entity
+
 from ..components.season_reset_listeners.collect_taxes import CollectTaxes
 from ..components.season_reset_listeners.collect_taxes_for_king import (
     CollectTaxesForKing,

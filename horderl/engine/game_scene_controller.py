@@ -1,12 +1,13 @@
-import logging
 from typing import List
 
 from tcod import libtcodpy as tcd
 
-from .. import settings
-from ..engine import GameScene
+from horderl.config import Config
+
+from ..engine import GameScene, palettes
 from ..engine.component_manager import ComponentManager
 from ..engine.core import log_debug
+from ..engine.logging import get_logger
 from ..engine.sound.default_sound_controller import DefaultSoundController
 from ..gui.gui import Gui
 
@@ -31,7 +32,7 @@ class GameSceneController:
     """
 
     @log_debug(__name__)
-    def __init__(self, title: str):
+    def __init__(self, title: str, config: Config):
         """
         Initialize a new GameSceneController instance.
 
@@ -52,13 +53,21 @@ class GameSceneController:
 
         """
         self.title: str = title
+        self.config = config
+        palettes.apply_config(config)
         self.gui: Gui = Gui(
-            settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT, title=self.title
+            config.screen_width,
+            config.screen_height,
+            title=self.title,
+            font_path=config.font,
         )
         self.cm = ComponentManager()
         self.sound = DefaultSoundController()
         self._scene_stack: List[GameScene] = []
-        logging.getLogger(__name__).debug("GameSceneController instantiated")
+        self.logger = get_logger(__name__)
+        self.logger.debug(
+            "GameSceneController instantiated", extra={"title": self.title}
+        )
 
     @log_debug(__name__)
     def push_scene(self, scene: GameScene):
@@ -82,6 +91,14 @@ class GameSceneController:
         for gui_element in scene.gui_elements:
             gui_element.on_load()
         self._scene_stack.append(scene)
+        self.logger.info(
+            f"Scene pushed: {scene.__class__.__name__}",
+            extra={
+                "scene_type": scene.__class__.__name__,
+                "stack_size": len(self._scene_stack),
+                "action": "push_scene",
+            },
+        )
 
     @log_debug(__name__)
     def pop_scene(self):
@@ -104,6 +121,14 @@ class GameSceneController:
         """
         scene = self._scene_stack.pop()
         scene.on_unload()
+        self.logger.info(
+            f"Scene popped: {scene.__class__.__name__}",
+            extra={
+                "scene_type": scene.__class__.__name__,
+                "stack_size": len(self._scene_stack),
+                "action": "pop_scene",
+            },
+        )
         return scene
 
     @log_debug(__name__)
@@ -121,7 +146,12 @@ class GameSceneController:
             individually before using this method.
 
         """
+        stack_size = len(self._scene_stack)
         self._scene_stack.clear()
+        self.logger.info(
+            f"Scene stack cleared, removed {stack_size} scenes",
+            extra={"previous_size": stack_size, "action": "clear_scenes"},
+        )
 
     @log_debug(__name__)
     def start(self):
@@ -146,8 +176,23 @@ class GameSceneController:
         FSM design pattern.
 
         """
+        self.logger.info(
+            "Starting game scene controller main loop",
+            extra={"action": "start", "stack_size": len(self._scene_stack)},
+        )
         while self._scene_stack:
             current_scene = self._scene_stack[-1]
+            scene_name = current_scene.__class__.__name__
+
+            self.logger.debug(
+                f"Processing frame for scene: {scene_name}",
+                extra={
+                    "scene_type": scene_name,
+                    "stack_position": len(self._scene_stack) - 1,
+                    "phase": "before_frame",
+                },
+            )
+
             current_scene.before_update()
             current_scene.update()
             current_scene.render()

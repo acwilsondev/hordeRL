@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from horderl.components import Appearance
-from horderl.components.base_components.timed_actor import TimedActor
 from horderl.engine import palettes
+from horderl.engine.components.timed_actor import TimedActor
 
 
 @dataclass

@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
 from horderl.components.actors.hordeling_spawner import HordelingSpawner
-from horderl.components.base_components.energy_actor import EnergyActor
 from horderl.components.events.attack_started_events import AttackStarted
 from horderl.components.events.new_day_event import DayBegan
 from horderl.components.season_reset_listeners.reset_season import ResetSeason
@@ -11,6 +10,7 @@ from horderl.content.spawners.hordeling_spawner_spawner import (
     hordeling_spawner,
 )
 from horderl.engine import core
+from horderl.engine.components.energy_actor import EnergyActor
 
 MAX_HOUR = 23
 MAX_DAY = 30

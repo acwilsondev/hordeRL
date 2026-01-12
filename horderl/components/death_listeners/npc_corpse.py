@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.components.base_components.entity import Entity
 from horderl.components.events.die_events import DeathListener
 from horderl.content import corpses
 from horderl.engine import palettes
+from horderl.engine.components.entity import Entity
 
 
 @dataclass
@@ -19,7 +19,7 @@ class Corpse(DeathListener):
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
 
         splatter = corpses.make_blood_splatter(
-            5, coords.x, coords.y, self.color
+            5, coords.x, coords.y, self.color, scene.config
         )
         if splatter:
             scene.cm.add(*splatter)

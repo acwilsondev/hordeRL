@@ -1,6 +1,5 @@
 import numpy as np
 
-from ... import settings
 from .. import Coordinates
 from ..movement.drain_on_enter import DrainOnEnter
 from ..pathfinder_cost import PathfinderCost
@@ -13,7 +12,7 @@ class PeasantCostMapper(CostMapper):
     """
 
     def get_cost_map(self, scene):
-        size = (settings.MAP_WIDTH, settings.MAP_HEIGHT)
+        size = (scene.config.map_width, scene.config.map_height)
         cost = np.ones(size, dtype=np.int8, order="F")
         for cost_component in scene.cm.get(PathfinderCost):
             coords = scene.cm.get_one(

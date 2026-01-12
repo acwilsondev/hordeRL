@@ -1,15 +1,15 @@
 import numpy as np
 
-from ... import settings
+from horderl.engine.components.entity import Entity
+
 from .. import Attributes, Coordinates
-from ..base_components.entity import Entity
 from ..material import Material
 from .cost_mapper import CostMapper
 
 
 class StraightLineCostMapper(CostMapper):
     def get_cost_map(self, scene):
-        size = (settings.MAP_WIDTH, settings.MAP_HEIGHT)
+        size = (scene.config.map_width, scene.config.map_height)
         cost = np.ones(size, dtype=np.int8, order="F")
 
         points = scene.cm.get(Coordinates)

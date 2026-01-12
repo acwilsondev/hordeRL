@@ -7,7 +7,6 @@ from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.engine import core
 from horderl.engine.utilities import get_3_by_3_box
 
-from ... import settings
 from ...content.terrain.water import make_swampy_water, make_water
 
 
@@ -27,8 +26,8 @@ class PlaceLakes(BuildWorldListener):
         )
 
         for _ in range(world_settings.lakes):
-            x = random.randint(0, settings.MAP_WIDTH - 1)
-            y = random.randint(0, settings.MAP_HEIGHT - 1)
+            x = random.randint(0, scene.config.map_width - 1)
+            y = random.randint(0, scene.config.map_height - 1)
             coords = {
                 (coord.x, coord.y) for coord in scene.cm.get(Coordinates)
             }
@@ -61,7 +60,7 @@ class PlaceLakes(BuildWorldListener):
                 for _x, _y in get_3_by_3_box(working_x, working_y)
                 if (
                     random.random() <= world_settings.lake_proliferation
-                    and 0 < _x < settings.MAP_WIDTH
-                    and 0 < _y < settings.MAP_HEIGHT
+                    and 0 < _x < scene.config.map_width
+                    and 0 < _y < scene.config.map_height
                 )
             ]

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
 from typing import List, Tuple
 
+from horderl.engine.components.component import Component
+
 from ...content.breadcrumb import make_breadcrumb
-from ..base_components.component import Component
 
 
 @dataclass

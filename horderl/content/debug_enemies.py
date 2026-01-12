@@ -1,6 +1,7 @@
+from horderl.engine.components.entity import Entity
+
 from ..components import Appearance, Attributes, Coordinates
 from ..components.attacks.attack import Attack
-from ..components.base_components.entity import Entity
 from ..components.death_listeners.drop_gold import DropGold
 from ..components.death_listeners.npc_corpse import Corpse
 from ..components.faction import Faction

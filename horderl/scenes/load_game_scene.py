@@ -1,6 +1,5 @@
 import os
 
-from horderl import settings
 from horderl.engine import GameScene, palettes
 from horderl.gui.easy_menu import EasyMenu
 from horderl.gui.labels import Label
@@ -15,12 +14,15 @@ class LoadMenuScene(GameScene):
     def __init__(self):
         super().__init__()
         self.title = "Load a village?"
-        center_x = (settings.SCREEN_WIDTH - len(self.title)) // 2
-        center_y = settings.SCREEN_HEIGHT // 2 - 4
-        title_label = Label(
+        self.title_label = None
+
+    def on_load(self):
+        center_x = (self.config.screen_width - len(self.title)) // 2
+        center_y = self.config.screen_height // 2 - 4
+        self.title_label = Label(
             center_x, center_y, self.title, fg=palettes.FRESH_BLOOD
         )
-        self.add_gui_element(title_label)
+        self.add_gui_element(self.title_label)
 
     def before_update(self):
         # pre-render the gui elements so that they show up before menu pauses
@@ -42,7 +44,8 @@ class LoadMenuScene(GameScene):
             EasyMenu(
                 "Load which?",
                 {world: self.get_world_loader(world) for world in files},
-                settings.INVENTORY_WIDTH,
+                self.config.inventory_width,
+                self.config,
                 on_escape=self.pop(),
             )
         )

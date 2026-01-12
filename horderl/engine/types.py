@@ -1,6 +1,6 @@
 from typing import Dict, List, NewType, Tuple, Type, TypeVar
 
-from ..components.base_components.component import Component
+from horderl.engine.components.component import Component
 
 T = TypeVar("T")
 U = TypeVar("U")

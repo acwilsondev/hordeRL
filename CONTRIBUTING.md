@@ -41,6 +41,7 @@ Thank you for considering contributing to HordeRL! This document provides guidel
 ### Development Dependencies
 
 The project includes several development dependencies:
+
 - Testing tools (pytest)
 - Linting and code quality tools
 - Debugging utilities
@@ -67,16 +68,14 @@ We follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for
 ### Code Formatting
 
 We use the following tools for code quality:
+
 - [Black](https://black.readthedocs.io/en/stable/) for code formatting
 - [isort](https://pycqa.github.io/isort/) for import sorting
-- [flake8](https://flake8.pycqa.org/en/latest/) for linting
 
 Run these tools before submitting changes:
 
 ```bash
-poetry run black .
-poetry run isort .
-poetry run flake8
+make check
 ```
 
 ## How to Submit Changes
@@ -111,7 +110,7 @@ poetry run flake8
    - Explain how to test your changes
 
 6. **Address review feedback** and make any requested changes
-   
+
 7. Once approved, your changes will be merged
 
 ## Development Workflow
@@ -134,7 +133,7 @@ poetry run flake8
 Write tests for all new features and bug fixes. Run the test suite before submitting your changes:
 
 ```bash
-poetry run pytest
+make test
 ```
 
 ### Debugging
@@ -157,4 +156,3 @@ python hordeRL.py --log DEBUG --terminal_log --prof
 4. Once merged, create a new release tag
 
 Thank you for contributing to HordeRL!
-

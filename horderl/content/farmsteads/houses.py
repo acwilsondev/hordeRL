@@ -2,7 +2,6 @@ import logging
 import random
 from typing import Set
 
-from horderl import settings
 from horderl.components import Coordinates
 from horderl.components.house_structure import HouseStructure
 from horderl.content.allies.peasants import make_peasant
@@ -22,13 +21,13 @@ def place_farmstead(scene) -> EntityId:
         (coord.x, coord.y) for coord in scene.cm.get(Coordinates)
     }
 
-    x, y = _get_point()
+    x, y = _get_point(scene.config)
     footprint = get_3_by_3_square(x, y)
 
     attempts = 100
     while not coords.isdisjoint(footprint) and attempts > 0:
         attempts -= 1
-        x, y = _get_point()
+        x, y = _get_point(scene.config)
         footprint = get_3_by_3_square(x, y)
 
     if not attempts:
@@ -127,7 +126,7 @@ def _add_house(scene, x, y) -> EntityId:
     return house[0]
 
 
-def _get_point():
-    x = random.randint(5, settings.MAP_WIDTH - 5)
-    y = random.randint(5, settings.MAP_HEIGHT - 5)
+def _get_point(config):
+    x = random.randint(5, config.map_width - 5)
+    y = random.randint(5, config.map_height - 5)
     return x, y

@@ -1,9 +1,10 @@
 from typing import List
 
+from horderl.engine.components.component import Component
+from horderl.engine.components.entity import Entity
+
 from ..components import Appearance, Coordinates
 from ..components.actors.bomb_actor import BombActor
-from ..components.base_components.component import Component
-from ..components.base_components.entity import Entity
 from ..engine import core, palettes
 from ..engine.constants import PRIORITY_LOW
 

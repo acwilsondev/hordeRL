@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from horderl.components import Coordinates
 from horderl.components.events.die_events import DeathListener
 from horderl.content.getables.gold import make_gold_nugget
+from horderl.engine.logging import get_logger
 
 
 @dataclass
@@ -12,6 +13,9 @@ class DropGold(DeathListener):
     """
 
     def on_die(self, scene):
-        self._log_info(f"dropped gold on death")
+        get_logger(__class__).info(
+            "dropped gold nugget on death",
+            extra={"entity": self.entity},
+        )
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         scene.cm.add(*make_gold_nugget(coords.x, coords.y)[1])
