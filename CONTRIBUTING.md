@@ -6,7 +6,7 @@ Thank you for considering contributing to HordeRL! This document provides guidel
 
 ### Prerequisites
 
-- Python 3.8.1 or newer (up to 3.11)
+- Python 3.11 (up to 3.11.x)
 - [Poetry](https://python-poetry.org/docs/#installation) for dependency management
 
 ### Setting Up Your Development Environment
