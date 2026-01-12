@@ -16,9 +16,6 @@ Key features include:
 
 from time import perf_counter_ns
 
-import tcod.event
-import tcod.noise
-
 from horderl.engine.logging import get_logger
 
 
@@ -181,6 +178,8 @@ def get_key_event():
     :raises Exception: For any other unexpected errors during event processing
     """
 
+    import tcod.event
+
     logger = get_logger("core")
     try:
         poll_start = time_ms()
@@ -251,6 +250,8 @@ def wait_for_char():
     :raises Exception: For any other unexpected errors during event processing
 
     """
+    import tcod.event
+
     logger = get_logger("core")
     logger.debug("Waiting for key press", extra={"action": "wait_for_char"})
 
@@ -297,6 +298,8 @@ def get_noise_generator(dimensions=3):
     :rtype: tcod.noise.Noise
 
     """
+    import tcod.noise
+
     logger = get_logger("core")
     start = time_ms()
     logger.debug("Creating noise generator", extra={"dimensions": dimensions})
@@ -379,7 +382,11 @@ def get_id(name=None):
         NAME_ID_MAP[name] = new_id
         logger.debug(
             "Created new ID mapping",
-            extra={"action": "get_id", "entity_name": name, "id_value": new_id},
+            extra={
+                "action": "get_id",
+                "entity_name": name,
+                "id_value": new_id,
+            },
         )
 
         # Log function exit with return value

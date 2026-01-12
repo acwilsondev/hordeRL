@@ -163,7 +163,9 @@ class DefaultActiveActor(Brain):
         self._log_debug("searching for emergency step for tunnel")
 
         coords = set(scene.cm.get(Coordinates, project=lambda c: c.position))
-        open_positions = list(utilities.get_all_positions() - coords)
+        open_positions = list(
+            utilities.get_all_positions(scene.config) - coords
+        )
         random.shuffle(open_positions)
         found = None
         while open_positions and not found:

@@ -6,7 +6,6 @@ from horderl.engine import GameScene
 from horderl.engine.components.component import Component
 from horderl.engine.components.events import Event
 
-from ... import settings
 from ...scenes.start_menu import get_start_menu
 
 
@@ -34,7 +33,7 @@ class QuitGame(Event):
         scene.cm.delete_component(self)
 
     def _after_remove(self, scene: GameScene) -> None:
-        if settings.AUTOSAVE:
+        if scene.config.autosave_enabled:
             SaveGame().act(scene)
         scene.pop()
         scene.controller.push_scene(get_start_menu())

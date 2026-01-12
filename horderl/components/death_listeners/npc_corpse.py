@@ -19,7 +19,7 @@ class Corpse(DeathListener):
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
 
         splatter = corpses.make_blood_splatter(
-            5, coords.x, coords.y, self.color
+            5, coords.x, coords.y, self.color, scene.config
         )
         if splatter:
             scene.cm.add(*splatter)

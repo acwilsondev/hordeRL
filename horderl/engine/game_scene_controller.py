@@ -2,8 +2,9 @@ from typing import List
 
 from tcod import libtcodpy as tcd
 
-from .. import settings
-from ..engine import GameScene
+from horderl.config import Config
+
+from ..engine import GameScene, palettes
 from ..engine.component_manager import ComponentManager
 from ..engine.core import log_debug
 from ..engine.logging import get_logger
@@ -31,7 +32,7 @@ class GameSceneController:
     """
 
     @log_debug(__name__)
-    def __init__(self, title: str):
+    def __init__(self, title: str, config: Config):
         """
         Initialize a new GameSceneController instance.
 
@@ -52,8 +53,13 @@ class GameSceneController:
 
         """
         self.title: str = title
+        self.config = config
+        palettes.apply_config(config)
         self.gui: Gui = Gui(
-            settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT, title=self.title
+            config.screen_width,
+            config.screen_height,
+            title=self.title,
+            font_path=config.font,
         )
         self.cm = ComponentManager()
         self.sound = DefaultSoundController()

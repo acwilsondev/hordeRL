@@ -44,6 +44,7 @@ class GameScene:
         self.controller = None
         self.gui = None
         self.sound = None
+        self.config = None
         self.logger = get_logger(f"{self.__class__.__name__}")
 
     def add_gui_element(self, element: GuiElement):
@@ -83,7 +84,7 @@ class GameScene:
 
         """
         self.logger.info(f"Displaying popup message: {message}")
-        self.add_gui_element(PopupMessage(message))
+        self.add_gui_element(PopupMessage(message, self.config))
 
     # Scene Lifecycle Hooks
     # - on_load
@@ -206,6 +207,7 @@ class GameScene:
         self.cm = cm
         self.gui = gui
         self.sound = sound
+        self.config = controller.config
         self.logger.debug(f"Calling on_load() for {self.__class__.__name__}")
         self.on_load()
 

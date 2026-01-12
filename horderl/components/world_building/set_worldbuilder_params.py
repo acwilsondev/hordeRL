@@ -11,14 +11,13 @@ from horderl.components.world_building.world_parameters import (
 from horderl.engine import core
 from horderl.engine.components.energy_actor import EnergyActor
 
-from ... import settings
 from ...content.world_builder import make_world_build
 from ...gui.easy_menu import EasyMenu
 
 
 def get_settings(scene, factory):
     def out_fn():
-        params = factory(core.get_id("world"))
+        params = factory(core.get_id("world"), scene.config)
         random.seed(params.world_seed)
         scene.cm.add(params, *make_world_build()[1])
 
@@ -43,7 +42,8 @@ class SelectBiome(EnergyActor):
                     "Swamp (Hard)": get_settings(scene, get_swamp_params),
                     "Tundra (Brutal)": get_settings(scene, get_tundra_params),
                 },
-                settings.INVENTORY_WIDTH,
+                scene.config.inventory_width,
+                scene.config,
                 on_escape=lambda: scene.pop(),
             )
         )

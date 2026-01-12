@@ -1,4 +1,8 @@
 import unittest
+
+import pytest
+
+pytest.importorskip("tcod")
 from dataclasses import dataclass
 
 from horderl.engine.component_manager import ComponentManager

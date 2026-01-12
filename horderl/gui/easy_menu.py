@@ -1,12 +1,7 @@
 import textwrap
 from typing import Callable, Optional
 
-import tcod
-import tcod.event
-from tcod import libtcodpy
-from tcod.event_constants import K_RETURN
-
-from .. import engine, settings
+from .. import engine
 from ..engine import core
 from ..engine.palettes import WHITE
 from ..gui.gui_element import GuiElement
@@ -22,6 +17,7 @@ class EasyMenu(GuiElement):
         header,
         options,
         width,
+        config,
         hide_background=True,
         return_only=False,
         on_escape=None,
@@ -31,6 +27,7 @@ class EasyMenu(GuiElement):
         self.option_map = options
         self.options = [o for o in options.keys()]
         self.width = width
+        self.config = config
         self.pages = [
             self.options[i : i + 10] for i in range(0, len(self.options), 10)
         ]
@@ -44,6 +41,9 @@ class EasyMenu(GuiElement):
         """
         Draw a menu to the screen and return the user's option.
         """
+        import tcod
+        import tcod.event
+
         page = 0
         index = None
         while index is None:
@@ -87,6 +87,10 @@ class EasyMenu(GuiElement):
     def show_and_get_input(
         self, root, options, has_next=False, has_previous=False
     ):
+        import tcod
+        from tcod import libtcodpy
+        from tcod.event_constants import K_RETURN
+
         lines = textwrap.wrap(
             self.header,
             self.width,
@@ -126,20 +130,22 @@ class EasyMenu(GuiElement):
         if self.hide_background:
             # Draw a blank screen
             background = tcod.console.Console(
-                settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT, order="F"
+                self.config.screen_width,
+                self.config.screen_height,
+                order="F",
             )
             background.draw_rect(
                 0,
                 0,
-                settings.SCREEN_WIDTH,
-                settings.SCREEN_HEIGHT,
+                self.config.screen_width,
+                self.config.screen_height,
                 0,
                 bg=engine.palettes.BACKGROUND,
             )
             background.blit(root)
 
-        x = settings.SCREEN_WIDTH // 2 - self.width // 2
-        y = settings.SCREEN_HEIGHT // 2 - height // 2
+        x = self.config.screen_width // 2 - self.width // 2
+        y = self.config.screen_height // 2 - height // 2
         window.blit(root, x, y, width=self.width, height=height)
 
         libtcodpy.console_flush()

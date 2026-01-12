@@ -1,7 +1,6 @@
 import random
 from dataclasses import dataclass
 
-from horderl import settings
 from horderl.components import Coordinates
 from horderl.engine.components.timed_actor import TimedActor
 
@@ -25,7 +24,7 @@ class AnimationFloat(TimedActor):
         coords.x += up_or_over[0]
         coords.y += up_or_over[1]
 
-        if coords.x >= settings.MAP_WIDTH or coords.y <= 0:
+        if coords.x >= scene.config.map_width or coords.y <= 0:
             scene.cm.delete(entity)
 
     def act(self, scene):

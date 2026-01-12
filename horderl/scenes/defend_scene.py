@@ -2,7 +2,6 @@ from typing import Tuple
 
 import numpy as np
 
-from horderl import settings
 from horderl.components.events.start_game_events import StartGame
 from horderl.components.population import Population
 from horderl.components.serialization.load_game import LoadGame
@@ -72,50 +71,10 @@ class DefendScene(GameScene):
         super().__init__()
         self.player = PLAYER_ID
 
-        # track tiles the player has seen
-        self.memory_map = np.zeros(
-            (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=bool
-        )
-        self.visibility_map = np.zeros(
-            (settings.MAP_WIDTH, settings.MAP_HEIGHT), order="F", dtype=bool
-        )
+        self.memory_map = None
+        self.visibility_map = None
         self.messages = []
-
-        # build out the gui
-        self.play_window = PlayWindow(
-            25,
-            0,
-            settings.MAP_WIDTH,
-            settings.MAP_HEIGHT,
-            self.cm,
-            self.visibility_map,
-            self.memory_map,
-        )
-
-        anchor = VerticalAnchor(1, 1)
-        anchor.add_element(
-            Label(1, 1, f"@ {settings.CHARACTER_NAME}_______________")
-        )
-        anchor.add_element(HealthBar(1, 0))
-        anchor.add_element(Thwackometer(1, 0))
-        anchor.add_element(SpeedLabel(1, 0))
-        anchor.add_element(CalendarLabel(1, 0))
-        anchor.add_element(GoldLabel(1, 0))
-        anchor.add_element(AbilityLabel(1, 0))
-        anchor.add_space(1)
-
-        anchor.add_element(VillageNameLabel(1, 6))
-        anchor.add_element(Label(1, 7, "Peasants"))
-        anchor.add_element(PeasantBar(1, 8))
-        anchor.add_element(HordeStatusLabel(1, 9))
-        anchor.add_element(HordelingBar(1, 10))
-        anchor.add_element(MessageBox(1, 11, 23, 16, self.messages))
-        anchor.add_space(16)
-
-        anchor.add_element(HelpTab(1, 27))
-
-        self.add_gui_element(anchor)
-        self.add_gui_element(self.play_window)
+        self.play_window = None
 
         self.gold = 0
 
@@ -139,7 +98,55 @@ class DefendScene(GameScene):
 
         """
         self.cm = ComponentManager()
-        self.play_window.cm = self.cm
+        self.memory_map = np.zeros(
+            (self.config.map_width, self.config.map_height),
+            order="F",
+            dtype=bool,
+        )
+        self.visibility_map = np.zeros(
+            (self.config.map_width, self.config.map_height),
+            order="F",
+            dtype=bool,
+        )
+        self.play_window = PlayWindow(
+            25,
+            0,
+            self.config.map_width,
+            self.config.map_height,
+            self.cm,
+            self.visibility_map,
+            self.memory_map,
+            self.config,
+        )
+
+        anchor = VerticalAnchor(1, 1)
+        anchor.add_element(
+            Label(
+                1,
+                1,
+                f"@ {self.config.character_name}_______________",
+            )
+        )
+        anchor.add_element(HealthBar(1, 0))
+        anchor.add_element(Thwackometer(1, 0))
+        anchor.add_element(SpeedLabel(1, 0))
+        anchor.add_element(CalendarLabel(1, 0))
+        anchor.add_element(GoldLabel(1, 0))
+        anchor.add_element(AbilityLabel(1, 0))
+        anchor.add_space(1)
+
+        anchor.add_element(VillageNameLabel(1, 6))
+        anchor.add_element(Label(1, 7, "Peasants"))
+        anchor.add_element(PeasantBar(1, 8))
+        anchor.add_element(HordeStatusLabel(1, 9))
+        anchor.add_element(HordelingBar(1, 10))
+        anchor.add_element(MessageBox(1, 11, 23, 16, self.messages))
+        anchor.add_space(16)
+
+        anchor.add_element(HelpTab(1, 27))
+
+        self.add_gui_element(anchor)
+        self.add_gui_element(self.play_window)
         self.cm.add(LoadClasses(entity=self.player))
 
         if self.from_file:
@@ -168,7 +175,7 @@ class DefendScene(GameScene):
 
         """
         self.message(message)
-        self.add_gui_element(PopupMessage(message))
+        self.add_gui_element(PopupMessage(message, self.config))
 
     @timed(100, __name__)
     def update(self):
