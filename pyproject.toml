@@ -7,7 +7,7 @@ license = "MIT"
 packages = [{include = "*"}]
 
 [tool.poetry.dependencies]
-python = ">=3.8.1,<3.11"
+python = ">=3.8.1,<3.12"
 altgraph = "0.17.2"
 cffi = ">=1.16.0"
 dice = "3.1.2"
@@ -62,4 +62,3 @@ ensure_newline_before_comments = true
 combine_as_imports = true
 known_first_party = ["horderl"]
 src_paths = ["horderl"]
-

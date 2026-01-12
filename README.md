@@ -11,7 +11,7 @@ Oh No! It's THE HORDE! combines traditional roguelike gameplay with tower defens
 
 ### Steps to Set Up with Poetry
 
-1. Install Python 3.8.1-3.10.x. The game requires Python >=3.8.1,<3.11.
+1. Install Python 3.8.1-3.11.x. The game requires Python >=3.8.1,<3.12.
 2. Install Poetry by following the instructions at [https://python-poetry.org/docs/#installation](https://python-poetry.org/docs/#installation).
 3. Install the dependencies:
 
