@@ -1,3 +1,4 @@
+import json
 import os
 import struct
 import sys
@@ -39,6 +40,7 @@ def _default_option_values() -> Dict[str, Any]:
         "torch-radius": -1,
         "music-enabled": True,
         "world_seed": "RANDOM",
+        "color-palette": "default",
         "color_background": "000000",
         "color_grass": "1f240a",
         "color_wall_tree": "39571c",
@@ -73,6 +75,7 @@ class Config:
     torch_radius: int = -1
     music_enabled: bool = True
     world_seed: str = "RANDOM"
+    color_palette: str | None = "default"
 
     color_background: tuple[int, int, int] = field(
         default_factory=lambda: from_hex("000000")
@@ -214,6 +217,7 @@ _OPTIONS_FIELD_MAP = {
     "torch-radius": "torch_radius",
     "music-enabled": "music_enabled",
     "world_seed": "world_seed",
+    "color-palette": "color_palette",
     "color_background": "color_background",
     "color_grass": "color_grass",
     "color_wall_tree": "color_wall_tree",
@@ -255,6 +259,7 @@ def _validate_types(values: Dict[str, Any]) -> None:
         "torch_radius": int,
         "music_enabled": bool,
         "world_seed": str,
+        "color_palette": str,
         "font": str,
         "screen_width": int,
         "screen_height": int,
@@ -294,6 +299,51 @@ def _parse_color(value: Any) -> Any:
     if isinstance(value, list):
         return tuple(value)
     return value
+
+
+def _normalize_palette_key(key: str) -> str | None:
+    normalized = key.replace("-", "_")
+    if normalized in _COLOR_FIELDS:
+        return normalized
+    if not normalized.startswith("color_"):
+        candidate = f"color_{normalized}"
+        if candidate in _COLOR_FIELDS:
+            return candidate
+    return None
+
+
+def _resolve_palette_path(palette_name: str) -> str:
+    if os.path.isfile(palette_name):
+        return palette_name
+    filename = palette_name
+    if not filename.endswith(".json"):
+        filename = f"{filename}.json"
+    return resource_path(os.path.join("resources", "colors", filename))
+
+
+def _load_palette(palette_name: str) -> Dict[str, Any]:
+    palette_path = _resolve_palette_path(palette_name)
+    if not os.path.exists(palette_path):
+        raise FileNotFoundError(
+            f"Color palette not found: {palette_name} ({palette_path})"
+        )
+    with open(palette_path, encoding="utf-8") as palette_file:
+        palette_data = json.load(palette_file)
+    if not isinstance(palette_data, dict):
+        raise ValueError("Palette data must be a JSON object")
+    if isinstance(palette_data.get("colors"), dict):
+        palette_data = palette_data["colors"]
+    if not isinstance(palette_data, dict):
+        raise ValueError("Palette colors must be a JSON object")
+    palette_colors = {}
+    for key, value in palette_data.items():
+        normalized_key = _normalize_palette_key(key)
+        if normalized_key is None:
+            continue
+        palette_colors[normalized_key] = _parse_color(value)
+    if not palette_colors:
+        raise ValueError(f"Palette {palette_name} did not define any colors")
+    return palette_colors
 
 
 def _ensure_options_file(
@@ -336,6 +386,18 @@ def load_config(
     }
 
     normalized = _normalize_options(merged)
+    palette_name = normalized.get("color_palette")
+    if palette_name and palette_name != "default":
+        explicit_color_overrides = set()
+        for source in (option_data, overrides):
+            for key in _normalize_options(source or {}).keys():
+                normalized_key = key.replace("-", "_")
+                if normalized_key in _COLOR_FIELDS:
+                    explicit_color_overrides.add(normalized_key)
+        palette_colors = _load_palette(palette_name)
+        for key, value in palette_colors.items():
+            if key not in explicit_color_overrides:
+                normalized[key] = value
     normalized = {
         key: _parse_color(value) if key in _COLOR_FIELDS else value
         for key, value in normalized.items()

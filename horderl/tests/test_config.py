@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 yaml = pytest.importorskip("yaml")
@@ -60,3 +62,24 @@ def test_load_config_accepts_color_list(tmp_path):
     config = load_config(str(options_path), overrides={})
 
     assert config.color_background == (1, 2, 3)
+
+
+def test_load_config_applies_color_palette(tmp_path):
+    options_path = tmp_path / "options.yaml"
+    palette_path = tmp_path / "palette.json"
+    palette_path.write_text(
+        json.dumps(
+            {
+                "color_background": "ffffff",
+                "grass": [1, 2, 3],
+            }
+        )
+    )
+    options_path.write_text(
+        yaml.safe_dump({"color-palette": str(palette_path)})
+    )
+
+    config = load_config(str(options_path), overrides={})
+
+    assert config.color_background == (255, 255, 255)
+    assert config.color_grass == (1, 2, 3)
