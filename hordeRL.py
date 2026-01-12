@@ -84,14 +84,41 @@ def cli():
     parser.add_argument(
         "-l",
         "--log",
+        dest="log_level",
         choices=["INFO", "WARNING", "CRITICAL", "ERROR", "DEBUG"],
-        default="INFO",
+        default=None,
     )
     parser.add_argument(
         "-t",
         "--terminal_log",
         action="store_true",
         help="log events to terminal instead of file",
+    )
+    parser.add_argument(
+        "--log-environment",
+        dest="log_environment",
+        choices=["development", "test", "production"],
+        default=None,
+        help="override the logging environment",
+    )
+    parser.add_argument(
+        "--log-dir",
+        dest="log_dir",
+        default=None,
+        help="override the directory for log files",
+    )
+    parser.add_argument(
+        "--log-file",
+        dest="log_file",
+        default=None,
+        help="override the log file name (set empty to disable file logging)",
+    )
+    parser.add_argument(
+        "--log-console",
+        dest="log_console_enabled",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="enable or disable console logging",
     )
     args = parser.parse_args()
     config = load_config(
@@ -105,31 +132,31 @@ def cli():
             "autosave_enabled": args.autosave_enabled,
             "music_enabled": args.music_enabled,
             "color_palette": args.color_palette,
+            "log_environment": args.log_environment,
+            "log_level": args.log_level,
+            "log_dir": args.log_dir,
+            "log_file": args.log_file if args.log_file != "" else None,
+            "log_console_enabled": args.log_console_enabled,
         },
     )
     load_locale(config.locale)
 
+    if args.terminal_log:
+        config.log_console_enabled = True
+        config.log_file = None
+
     # Convert string log level to logging constant
-    log_level = getattr(logging, args.log)
+    log_level = getattr(logging, config.log_level)
 
     # Configure logging based on arguments
-    if args.terminal_log:
-        # Terminal-only logging (disable file logging)
-        configure_logging(
-            environment="development",
-            console_level=log_level,
-            log_dir=os.path.dirname(os.path.abspath(__file__)),
-            log_file=None,
-        )
-    else:
-        # Both terminal and file logging
-        configure_logging(
-            environment="development",
-            console_level=log_level,
-            file_level=log_level,
-            log_dir=os.path.dirname(os.path.abspath(__file__)),
-            log_file=".log",
-        )
+    configure_logging(
+        environment=config.log_environment,
+        console_level=log_level,
+        file_level=log_level,
+        log_dir=config.log_dir or os.path.dirname(os.path.abspath(__file__)),
+        log_file=config.log_file,
+        console_enabled=config.log_console_enabled,
+    )
 
     if args.prof:
         pr = cProfile.Profile()

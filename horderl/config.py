@@ -44,6 +44,11 @@ def _default_option_values() -> Dict[str, Any]:
         "music-enabled": True,
         "world_seed": "RANDOM",
         "color-palette": "default",
+        "log-environment": "development",
+        "log-level": "INFO",
+        "log-dir": "logs",
+        "log-file": "horderl.log",
+        "log-console-enabled": False,
         "config_version": CONFIG_VERSION,
     }
 
@@ -137,6 +142,11 @@ class Config:
     fov_algo: str = "BASIC"
     fov_light_walls: bool = True
     spawn_frequency: int = 15
+    log_environment: str = "development"
+    log_level: str = "INFO"
+    log_dir: str = "logs"
+    log_file: str | None = "horderl.log"
+    log_console_enabled: bool = False
     config_version: int = CONFIG_VERSION
 
     def __post_init__(self) -> None:
@@ -202,6 +212,11 @@ _OPTIONS_FIELD_MAP = {
     "music-enabled": "music_enabled",
     "world_seed": "world_seed",
     "color-palette": "color_palette",
+    "log-environment": "log_environment",
+    "log-level": "log_level",
+    "log-dir": "log_dir",
+    "log-file": "log_file",
+    "log-console-enabled": "log_console_enabled",
     "config_version": "config_version",
 }
 
@@ -240,6 +255,11 @@ def _validate_types(values: Dict[str, Any]) -> None:
         "fov_algo": str,
         "fov_light_walls": bool,
         "spawn_frequency": int,
+        "log_environment": str,
+        "log_level": str,
+        "log_dir": str,
+        "log_file": (str, type(None)),
+        "log_console_enabled": bool,
         "config_version": int,
     }
     for color_field in _COLOR_FIELDS:

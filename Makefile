@@ -24,7 +24,7 @@ debug:
 	poetry run python hordeRL.py --log DEBUG --terminal_log
 
 run:
-	poetry run python hordeRL.py --termina
+	poetry run python hordeRL.py
 
 clean:
 	rm -rf .pytest_cache .mypy_cache .ruff_cache .coverage coverage.xml \

@@ -80,5 +80,7 @@
   "ability.place_knight": "Place Knight",
   "ability.thwack": "Thwack",
   "ability.fast_forward": "Fast Forward",
-  "ability.build_wall": "Build Wall"
+  "ability.build_wall": "Build Wall",
+  "color_palette": "Color palette",
+  "colors": "Colors"
 }
