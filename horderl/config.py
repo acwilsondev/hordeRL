@@ -41,25 +41,6 @@ def _default_option_values() -> Dict[str, Any]:
         "music-enabled": True,
         "world_seed": "RANDOM",
         "color-palette": "default",
-        "color_background": "000000",
-        "color_grass": "1f240a",
-        "color_wall_tree": "39571c",
-        "color_normal_tree": "a58c27",
-        "color_gold": "efac28",
-        "color_white": "efd8a1",
-        "color_peasant": "ab5c1c",
-        "color_shadow": "183f39",
-        "color_fire": "ef692f",
-        "color_straw": "efb775",
-        "color_dirt": "a56243",
-        "color_wood": "773421",
-        "color_meat": "684c3c",
-        "color_stone": "927e6a",
-        "color_water": "276468",
-        "color_fresh_blood": "ef3a0c",
-        "color_light_water": "3c9f9c",
-        "color_hordeling": "9b1a0a",
-        "color_blood": "550f0a",
         "config_version": CONFIG_VERSION,
     }
 
@@ -218,25 +199,6 @@ _OPTIONS_FIELD_MAP = {
     "music-enabled": "music_enabled",
     "world_seed": "world_seed",
     "color-palette": "color_palette",
-    "color_background": "color_background",
-    "color_grass": "color_grass",
-    "color_wall_tree": "color_wall_tree",
-    "color_normal_tree": "color_normal_tree",
-    "color_gold": "color_gold",
-    "color_white": "color_white",
-    "color_peasant": "color_peasant",
-    "color_shadow": "color_shadow",
-    "color_fire": "color_fire",
-    "color_straw": "color_straw",
-    "color_dirt": "color_dirt",
-    "color_wood": "color_wood",
-    "color_meat": "color_meat",
-    "color_stone": "color_stone",
-    "color_water": "color_water",
-    "color_fresh_blood": "color_fresh_blood",
-    "color_light_water": "color_light_water",
-    "color_hordeling": "color_hordeling",
-    "color_blood": "color_blood",
     "config_version": "config_version",
 }
 
@@ -312,6 +274,10 @@ def _normalize_palette_key(key: str) -> str | None:
     return None
 
 
+def _is_color_override_key(key: str) -> bool:
+    return key.replace("-", "_") in _COLOR_FIELDS
+
+
 def _resolve_palette_path(palette_name: str) -> str:
     if os.path.isfile(palette_name):
         return palette_name
@@ -379,6 +345,19 @@ def load_config(
     else:
         option_data = _ensure_options_file(options_path, defaults)
 
+    if option_data:
+        option_data = {
+            key: value
+            for key, value in option_data.items()
+            if not _is_color_override_key(key)
+        }
+    if overrides:
+        overrides = {
+            key: value
+            for key, value in overrides.items()
+            if not _is_color_override_key(key)
+        }
+
     merged = {
         **defaults,
         **option_data,
@@ -388,16 +367,9 @@ def load_config(
     normalized = _normalize_options(merged)
     palette_name = normalized.get("color_palette")
     if palette_name and palette_name != "default":
-        explicit_color_overrides = set()
-        for source in (option_data, overrides):
-            for key in _normalize_options(source or {}).keys():
-                normalized_key = key.replace("-", "_")
-                if normalized_key in _COLOR_FIELDS:
-                    explicit_color_overrides.add(normalized_key)
         palette_colors = _load_palette(palette_name)
         for key, value in palette_colors.items():
-            if key not in explicit_color_overrides:
-                normalized[key] = value
+            normalized[key] = value
     normalized = {
         key: _parse_color(value) if key in _COLOR_FIELDS else value
         for key, value in normalized.items()
