@@ -178,7 +178,7 @@ class DefendScene(GameScene):
         self.add_gui_element(PopupMessage(message, self.config))
 
     @timed(100, __name__)
-    def update(self):
+    def update(self, dt: float):
         """
         Main update method called each frame to progress the game state.
 

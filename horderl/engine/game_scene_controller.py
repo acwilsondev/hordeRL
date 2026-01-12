@@ -1,3 +1,4 @@
+from time import perf_counter
 from typing import List
 
 from tcod import libtcodpy as tcd
@@ -180,9 +181,13 @@ class GameSceneController:
             "Starting game scene controller main loop",
             extra={"action": "start", "stack_size": len(self._scene_stack)},
         )
+        last_frame_time = perf_counter()
         while self._scene_stack:
             current_scene = self._scene_stack[-1]
             scene_name = current_scene.__class__.__name__
+            now = perf_counter()
+            dt = now - last_frame_time
+            last_frame_time = now
 
             self.logger.debug(
                 f"Processing frame for scene: {scene_name}",
@@ -193,7 +198,7 @@ class GameSceneController:
                 },
             )
 
-            current_scene.before_update()
-            current_scene.update()
-            current_scene.render()
+            current_scene.before_update(dt)
+            current_scene.update(dt)
+            current_scene.render(dt)
             tcd.console_flush()
