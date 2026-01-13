@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from math import sqrt
 
 from horderl import palettes
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.i18n import t
 
 from ...content.attacks import thwack_animation, thwack_dizzy_animation

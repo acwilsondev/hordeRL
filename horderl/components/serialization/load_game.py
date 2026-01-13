@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from horderl import palettes
 from horderl.engine import core
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.i18n import t
 
 

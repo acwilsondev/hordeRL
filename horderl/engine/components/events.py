@@ -2,7 +2,7 @@ from abc import abstractmethod
 from dataclasses import dataclass
 
 from horderl.engine import GameScene
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.core import log_debug
 
 

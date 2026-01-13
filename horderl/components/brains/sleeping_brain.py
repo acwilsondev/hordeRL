@@ -6,7 +6,7 @@ from horderl.components.events.peasant_events import PeasantDied
 from horderl.components.stomach import Stomach
 from horderl.content.states import sleep_animation
 from horderl.engine import constants, core
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.core import log_debug
 
 

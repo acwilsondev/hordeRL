@@ -3,7 +3,7 @@ from typing import List
 
 from horderl.components import Appearance
 from horderl.components.events.delete_event import Delete
-from horderl.engine.components.real_time_actor import RealTimeActor
+from horderl.components.actors.real_time_actor import RealTimeActor
 
 
 @dataclass

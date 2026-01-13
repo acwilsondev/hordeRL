@@ -1,7 +1,7 @@
 from abc import ABC
 from dataclasses import dataclass
 
-from horderl.engine.components.actor import Actor
+from horderl.components.actors.actor import Actor
 from horderl.engine.constants import PRIORITY_MEDIUM
 
 

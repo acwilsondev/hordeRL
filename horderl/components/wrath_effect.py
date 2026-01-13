@@ -1,7 +1,7 @@
 import logging
 from dataclasses import dataclass
 
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 
 from ..components.actors.hordeling_spawner import HordelingSpawner
 from ..components.events.die_events import Die

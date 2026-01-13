@@ -6,7 +6,7 @@ from horderl.components.actions.attack_action import AttackAction
 from horderl.components.events.die_events import Die
 from horderl.content.explosion import make_explosion
 from horderl.content.states import character_animation
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.utilities import get_3_by_3_square
 
 

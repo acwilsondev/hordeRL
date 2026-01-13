@@ -10,7 +10,7 @@ from horderl.content.spawners.hordeling_spawner_spawner import (
     hordeling_spawner,
 )
 from horderl.engine import core
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.i18n import t
 
 MAX_HOUR = 23

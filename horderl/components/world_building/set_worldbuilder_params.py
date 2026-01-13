@@ -9,7 +9,7 @@ from horderl.components.world_building.world_parameters import (
     get_tundra_params,
 )
 from horderl.engine import core
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.i18n import t
 
 from ...content.world_builder import make_world_build

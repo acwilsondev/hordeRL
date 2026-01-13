@@ -11,7 +11,7 @@ from horderl.components.events.die_events import Die
 from horderl.components.sellable import Sellable
 from horderl.content.terrain.dirt import make_dirt
 from horderl.engine import core
-from horderl.engine.components.energy_actor import EnergyActor
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
 from horderl.engine.types import EntityId
 
