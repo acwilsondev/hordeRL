@@ -148,6 +148,26 @@ python hordeRL.py --log DEBUG --terminal_log --prof
 - `--terminal_log` outputs logs to the terminal
 - `--prof` enables profiling to identify performance bottlenecks
 
+## FAQ
+
+1. I get an error when I try to install dependencies.
+
+```sh
+~/projects/hordeRL
+❯ poetry install
+
+Current Python version (3.10.19) is not allowed by the project (>=3.11,<3.12).
+Please change python executable via the "env use" command.
+
+~/projects/hordeRL
+❯ poetry env use 3.11
+
+Could not find the python executable 3.11
+```
+
+You need to install the required Python version to your system.
+
+
 ## Release Process
 
 1. Update version numbers in `pyproject.toml`
