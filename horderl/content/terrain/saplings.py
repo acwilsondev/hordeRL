@@ -6,9 +6,9 @@ from horderl.components import Appearance, Attributes
 from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.faction import Faction
 from horderl.components.material import Material
+from engine.components import Coordinates
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.season_reset_listeners.grow_in_spring import (
-from engine.components import Coordinates
     GrowIntoTree,
 )
 from horderl.components.sellable import Sellable

@@ -1,11 +1,11 @@
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
 from horderl.components import Appearance, Attributes
 from horderl.components.attacks.standard_attack import StandardAttack
 from horderl.components.brains.stationary_attack_actor import (
-from engine.components import Coordinates
     StationaryAttackActor,
 )
 from horderl.components.death_listeners.npc_corpse import Corpse
