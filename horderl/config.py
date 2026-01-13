@@ -360,8 +360,8 @@ def load_config(
 
     overrides = overrides or {}
     defaults = _default_option_values()
-    strip_color_overrides = (
-        lambda data: {
+    strip_color_overrides = lambda data: (
+        {
             key: value
             for key, value in data.items()
             if not _is_color_override_key(key)

@@ -36,9 +36,7 @@ class LoadMenuScene(GameScene):
         return
 
     def build_menu(self):
-        files = [
-            file for file in os.listdir(".") if file.endswith(".world")
-        ]
+        files = [file for file in os.listdir(".") if file.endswith(".world")]
 
         return EasyMenu(
             t("menu.load_prompt"),
