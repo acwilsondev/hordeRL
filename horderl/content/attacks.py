@@ -1,12 +1,12 @@
 from horderl.engine.components.entity import Entity
 
+from .. import palettes
 from ..components import Appearance, Coordinates
 from ..components.animation_effects.path import AnimationPath
 from ..components.events.delete_event import Delete
 from ..components.path_node import create_path
 from ..components.relationships.owner import Owner
 from ..engine import core
-from .. import palettes
 from ..engine.constants import PRIORITY_HIGH
 
 

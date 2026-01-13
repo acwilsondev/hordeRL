@@ -1,5 +1,6 @@
 import random
 
+from horderl import palettes
 from horderl.components import Appearance, Coordinates
 from horderl.components.death_listeners.drop_gold import DropGold
 from horderl.components.diggable import Diggable
@@ -7,7 +8,6 @@ from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.states.move_cost_affectors import DifficultTerrain
 from horderl.engine import core
-from horderl import palettes
 from horderl.engine.components.component import Component
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_LOWEST

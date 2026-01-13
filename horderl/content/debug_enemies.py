@@ -1,5 +1,6 @@
 from horderl.engine.components.entity import Entity
 
+from .. import palettes
 from ..components import Appearance, Attributes, Coordinates
 from ..components.attacks.attack import Attack
 from ..components.death_listeners.drop_gold import DropGold
@@ -8,7 +9,6 @@ from ..components.faction import Faction
 from ..components.material import Material
 from ..components.tags.hordeling_tag import HordelingTag
 from ..engine import core
-from .. import palettes
 from ..engine.constants import PRIORITY_MEDIUM
 
 

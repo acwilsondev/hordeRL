@@ -1,8 +1,8 @@
 import random
 from dataclasses import dataclass
 
-from horderl.components import Appearance
 from horderl import palettes
+from horderl.components import Appearance
 from horderl.engine.components.real_time_actor import RealTimeActor
 
 

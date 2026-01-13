@@ -1,8 +1,8 @@
 import textwrap
 from typing import Callable, Optional
 
-from ..engine import core
 from .. import palettes
+from ..engine import core
 from ..gui.gui_element import GuiElement
 from ..i18n import t
 

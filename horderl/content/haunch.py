@@ -1,6 +1,7 @@
 from horderl.engine.components.component import Component
 from horderl.engine.components.entity import Entity
 
+from .. import palettes
 from ..components import Appearance, Attributes, Coordinates, target_value
 from ..components.faction import Faction
 from ..components.season_reset_listeners.die_on_season_reset import (
@@ -8,7 +9,6 @@ from ..components.season_reset_listeners.die_on_season_reset import (
 )
 from ..components.target_value import TargetValue
 from ..engine import core
-from .. import palettes
 from ..engine.constants import PRIORITY_LOW
 
 haunch_description = "A savory haunch. Hordelings find this highly desirable."

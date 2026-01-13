@@ -1,9 +1,9 @@
 from horderl.engine.components.entity import Entity
 
+from .. import palettes
 from ..components import Appearance, Coordinates
 from ..components.animation_effects.float import AnimationFloat
 from ..engine import core
-from .. import palettes
 from ..engine.constants import PRIORITY_HIGH
 
 
