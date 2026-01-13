@@ -4,8 +4,8 @@ import tcod
 import tcod.event
 
 from .. import palettes
-from ..engine import core
-from ..engine.ui.gui_element import GuiElement
+from engine import core
+from engine.ui.gui_element import GuiElement
 from ..i18n import t
 
 

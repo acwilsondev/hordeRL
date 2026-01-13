@@ -1,5 +1,5 @@
 from .. import palettes
-from ..engine.ui.gui_element import GuiElement
+from engine.ui.gui_element import GuiElement
 from ..i18n import t
 
 

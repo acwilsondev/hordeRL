@@ -3,8 +3,8 @@ from engine.components.entity import Entity
 from .. import palettes
 from ..components import Appearance, Coordinates
 from ..components.animation_effects.float import AnimationFloat
-from ..engine import core
-from ..engine.constants import PRIORITY_HIGH
+from engine import core
+from engine.constants import PRIORITY_HIGH
 
 
 def floaty_animation(x, y, symbol, color, name):

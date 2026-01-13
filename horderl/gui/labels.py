@@ -6,8 +6,8 @@ from ..components.actors.calendar_actor import Calendar
 from ..components.states.move_cost_affectors import Haste, Hindered
 from ..components.world_building.world_parameters import WorldParameters
 from ..constants import PLAYER_ID
-from ..engine import core
-from ..engine.ui.gui_element import GuiElement
+from engine import core
+from engine.ui.gui_element import GuiElement
 from ..i18n import t
 
 

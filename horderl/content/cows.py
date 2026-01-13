@@ -9,8 +9,8 @@ from ..components.edible import Edible
 from ..components.faction import Faction
 from ..components.target_value import TargetValue
 from ..components.tax_value import TaxValue
-from ..engine import core
-from ..engine.constants import PRIORITY_MEDIUM
+from engine import core
+from engine.constants import PRIORITY_MEDIUM
 
 cows_description = "A cow, happily feasting on grass."
 

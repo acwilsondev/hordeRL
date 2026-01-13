@@ -2,7 +2,7 @@ import logging
 from dataclasses import dataclass
 
 from ..components.events.die_events import DeathListener
-from ..engine import constants
+from engine import constants
 
 
 @dataclass

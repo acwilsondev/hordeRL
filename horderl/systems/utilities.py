@@ -3,8 +3,8 @@ from ..components.actors.actor import Actor
 from ..components.events.turn_event import TurnEvent
 from ..components.faction import Faction
 from ..components.material import Material
-from ..engine.component_manager import ComponentManager
-from ..engine.core import log_debug
+from engine.component_manager import ComponentManager
+from engine.core import log_debug
 
 
 def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:

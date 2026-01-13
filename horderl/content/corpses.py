@@ -6,8 +6,8 @@ from .. import palettes
 from ..components import Appearance, Coordinates
 from ..components.events.delete_event import Delete
 from ..components.tags.corpse_tag import CorpseTag
-from ..engine import core
-from ..engine.constants import PRIORITY_LOW
+from engine import core
+from engine.constants import PRIORITY_LOW
 
 
 def make_corpse(

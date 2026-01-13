@@ -4,7 +4,7 @@ from typing import Tuple
 
 from engine.components.component import Component
 
-from ..engine.constants import PRIORITY_MEDIUM
+from engine.constants import PRIORITY_MEDIUM
 
 
 @dataclass

@@ -6,7 +6,7 @@ from ..components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
 from ..components.world_building.world_parameters import WorldParameters
-from ..engine import core
+from engine import core
 
 
 @dataclass

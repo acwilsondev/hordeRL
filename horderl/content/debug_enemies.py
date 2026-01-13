@@ -8,8 +8,8 @@ from ..components.death_listeners.npc_corpse import Corpse
 from ..components.faction import Faction
 from ..components.material import Material
 from ..components.tags.hordeling_tag import HordelingTag
-from ..engine import core
-from ..engine.constants import PRIORITY_MEDIUM
+from engine import core
+from engine.constants import PRIORITY_MEDIUM
 
 
 def make_debug_hordeling(x, y):

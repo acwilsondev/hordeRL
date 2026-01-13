@@ -2,8 +2,8 @@ from engine.components.entity import Entity
 
 from .. import palettes
 from ..components import Appearance, Coordinates
-from ..engine import core
-from ..engine.constants import PRIORITY_HIGH
+from engine import core
+from engine.constants import PRIORITY_HIGH
 
 
 def make_breadcrumb(x, y):

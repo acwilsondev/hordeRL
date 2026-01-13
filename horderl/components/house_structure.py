@@ -3,7 +3,7 @@ from typing import List
 
 from engine.components.component import Component
 
-from ..engine.types import EntityId
+from engine.types import EntityId
 
 
 @dataclass

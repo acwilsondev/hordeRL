@@ -7,9 +7,9 @@ from tcod import console
 
 from .. import palettes
 from ..components import Appearance, Coordinates
-from ..engine.component_manager import ComponentManager
-from ..engine.core import timed
-from ..engine.ui.gui_element import GuiElement
+from engine.component_manager import ComponentManager
+from engine.core import timed
+from engine.ui.gui_element import GuiElement
 
 
 class PlayWindow(GuiElement):

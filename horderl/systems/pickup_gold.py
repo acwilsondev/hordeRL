@@ -1,7 +1,7 @@
 from ..components import Coordinates
 from ..components.pickup_gold import GoldPickup
 from ..constants import PLAYER_ID
-from ..engine.core import log_debug
+from engine.core import log_debug
 
 
 def run(scene):
