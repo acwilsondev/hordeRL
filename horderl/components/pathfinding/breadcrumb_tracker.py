@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Tuple
 
-from horderl.engine.components.component import Component
+from engine.components.component import Component
 
 from ...content.breadcrumb import make_breadcrumb
 

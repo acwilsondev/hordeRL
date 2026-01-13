@@ -4,7 +4,7 @@ from horderl.components.brains.ability_actors.place_thing_actor import (
     PlaceThingActor,
 )
 from horderl.content.farmsteads.defensive_walls import make_stone_wall
-from horderl.engine.components.component import Component
+from engine.components.component import Component
 
 
 @dataclass

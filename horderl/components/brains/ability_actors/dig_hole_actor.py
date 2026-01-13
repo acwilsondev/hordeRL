@@ -12,8 +12,8 @@ from horderl.components.enums import Intention
 from horderl.components.events.die_events import Die
 from horderl.content.terrain.dirt import make_dirt
 from horderl.content.terrain.hole import make_hole
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
+from engine import core
+from engine.components.entity import Entity
 
 
 @dataclass

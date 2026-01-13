@@ -2,9 +2,9 @@ from horderl import palettes
 from horderl.components import Appearance, Coordinates
 from horderl.components.material import Material
 from horderl.components.movement.die_on_enter import DieOnEnter
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_LOWEST
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOWEST
 
 
 def make_flower(x, y, color):

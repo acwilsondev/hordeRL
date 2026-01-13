@@ -5,9 +5,9 @@ from horderl.components.animation_effects.reset_owner_animation import (
 )
 from horderl.components.events.delete_event import Delete
 from horderl.components.relationships.owner import Owner
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_HIGH
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_HIGH
 
 description = (
     "The farmer swings their tool. Being untrained in the ways of farmery, you"

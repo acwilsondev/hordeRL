@@ -9,7 +9,7 @@ from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
 from horderl.content.states import confused_animation
-from horderl.engine import core
+from engine import core
 
 
 @dataclass

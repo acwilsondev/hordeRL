@@ -6,7 +6,7 @@ from horderl.components.pathfinding.simplex_cost_mapper import (
     SimplexCostMapper,
 )
 from horderl.components.world_building.world_parameters import WorldParameters
-from horderl.engine import core
+from engine import core
 
 from ...content.terrain.water import make_water
 

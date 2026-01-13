@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.brains.painters.painter_brain import PainterBrain
 from horderl.content.enemies.juvenile import make_juvenile
-from horderl.engine import constants
+from engine import constants
 
 
 @dataclass

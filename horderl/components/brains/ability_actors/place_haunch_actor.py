@@ -4,7 +4,7 @@ from horderl.components.brains.ability_actors.place_thing_actor import (
     PlaceThingActor,
 )
 from horderl.content.haunch import make_haunch
-from horderl.engine.types import Entity
+from engine.types import Entity
 
 
 @dataclass

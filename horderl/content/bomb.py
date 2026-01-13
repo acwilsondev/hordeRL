@@ -1,7 +1,7 @@
 from typing import List
 
-from horderl.engine.components.component import Component
-from horderl.engine.components.entity import Entity
+from engine.components.component import Component
+from engine.components.entity import Entity
 
 from .. import palettes
 from ..components import Appearance, Coordinates

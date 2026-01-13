@@ -10,8 +10,8 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
 )
 from horderl.components.tags.hordeling_tag import HordelingTag
 from horderl.content.attacks import stab
-from horderl.engine import constants
-from horderl.engine.core import log_debug
+from engine import constants
+from engine.core import log_debug
 
 
 @dataclass

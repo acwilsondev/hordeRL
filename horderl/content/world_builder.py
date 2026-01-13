@@ -12,8 +12,8 @@ from horderl.components.world_building.place_river import PlaceRiver
 from horderl.components.world_building.place_roads import PlaceRoads
 from horderl.components.world_building.place_rocks import PlaceRocks
 from horderl.components.world_building.set_world_name import SetWorldName
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
+from engine import core
+from engine.components.entity import Entity
 
 
 def make_world_build():

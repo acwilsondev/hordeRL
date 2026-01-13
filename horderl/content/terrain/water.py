@@ -13,9 +13,9 @@ from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.states.move_cost_affectors import DifficultTerrain
 from horderl.components.tags.ice_tag import IceTag
 from horderl.components.tags.water_tag import WaterTag
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_LOWEST
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOWEST
 
 
 def make_water(x, y, rapidness=5000):

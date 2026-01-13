@@ -4,9 +4,9 @@ from horderl import palettes
 from horderl.components import Appearance, Coordinates
 from horderl.components.relationships.resident import Resident
 from horderl.components.season_reset_listeners.rebuilder import Rebuilder
-from horderl.engine.components.component import Component
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_MEDIUM
+from engine.components.component import Component
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
 
 description = "Kinda creepy to be looking in this person's house, no?"
 

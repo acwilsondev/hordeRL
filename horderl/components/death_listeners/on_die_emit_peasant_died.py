@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from horderl.components.events.die_events import DeathListener
 from horderl.components.events.peasant_events import PeasantDied
-from horderl.engine import core
+from engine import core
 
 
 @dataclass

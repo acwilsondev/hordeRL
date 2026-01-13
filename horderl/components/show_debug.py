@@ -2,7 +2,7 @@ import logging
 from dataclasses import dataclass
 
 from horderl.components.actors.energy_actor import EnergyActor
-from horderl.engine.components.entity import Entity
+from engine.components.entity import Entity
 
 from ..components import Attributes, Coordinates, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility

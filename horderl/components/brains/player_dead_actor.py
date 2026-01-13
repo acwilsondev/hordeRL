@@ -6,7 +6,7 @@ from horderl.components.ability_tracker import AbilityTracker
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.content.states import confused_animation
-from horderl.engine import core
+from engine import core
 from horderl.i18n import t
 
 

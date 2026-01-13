@@ -16,7 +16,7 @@ Key features include:
 
 from time import perf_counter_ns
 
-from horderl.engine.logging import get_logger
+from engine.logging import get_logger
 
 
 def time_ms():

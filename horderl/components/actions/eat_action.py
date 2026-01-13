@@ -4,8 +4,8 @@ from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.events.die_events import Die
 from horderl.components.stomach import Stomach
 from horderl.components.tags.peasant_tag import PeasantTag
-from horderl.engine import constants
-from horderl.engine.components.entity import Entity
+from engine import constants
+from engine.components.entity import Entity
 
 
 @dataclass

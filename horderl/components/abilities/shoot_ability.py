@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from horderl.engine.utilities import is_visible
+from engine.utilities import is_visible
 
 from ...content.states import confused_animation
 from .. import Coordinates

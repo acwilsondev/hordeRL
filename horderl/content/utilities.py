@@ -1,4 +1,4 @@
-from horderl.engine.components.entity import Entity
+from engine.components.entity import Entity
 
 from ..components.actors.calendar_actor import Calendar
 from ..components.announce_game_start import AnnounceGameStart

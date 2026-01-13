@@ -8,7 +8,7 @@ from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.pathfinding.cost_mapper import CostMapper
-from horderl.engine.core import log_debug
+from engine.core import log_debug
 
 
 @dataclass

@@ -14,9 +14,9 @@ from horderl.components.pathfinding.target_evaluation.ally_target_evaluator impo
 )
 from horderl.components.sellable import Sellable
 from horderl.components.tax_value import TaxValue
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_MEDIUM
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
 
 
 def make_knight(x, y):

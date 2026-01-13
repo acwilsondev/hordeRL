@@ -9,7 +9,7 @@ from horderl.components.world_building.world_parameters import (
     get_swamp_params,
     get_tundra_params,
 )
-from horderl.engine import core
+from engine import core
 from horderl.i18n import t
 
 from ...content.world_builder import make_world_build

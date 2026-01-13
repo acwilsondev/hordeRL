@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Callable
 
-from horderl.engine.core import log_debug
+from engine.core import log_debug
 
 from ..abilities.ability import Ability
 from ..animation_effects.blinker import AnimationBlinker

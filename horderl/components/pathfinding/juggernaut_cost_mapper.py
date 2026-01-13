@@ -1,6 +1,6 @@
 import numpy as np
 
-from horderl.engine.components.entity import Entity
+from engine.components.entity import Entity
 
 from .. import Attributes, Coordinates
 from ..material import Material

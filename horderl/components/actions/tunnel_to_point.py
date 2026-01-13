@@ -4,7 +4,7 @@ from typing import Tuple
 from horderl.components import Coordinates
 from horderl.components.actors.energy_actor import EnergyActor
 from horderl.content.terrain.hole import make_hole
-from horderl.engine import constants
+from engine import constants
 
 
 @dataclass

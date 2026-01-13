@@ -18,9 +18,9 @@ from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.sellable import Sellable
 from horderl.components.tags.tree_tag import TreeTag
 from horderl.components.tree_cut_on_die import TreeCutOnDeath
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_MEDIUM
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
 
 wall_tree_description = (
     "This hardy species of Toshim tree towers over the village. "

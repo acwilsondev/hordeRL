@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from horderl.components import Coordinates
 from horderl.components.events.die_events import DeathListener
 from horderl.content.getables.fallen_log import make_fallen_log
-from horderl.engine.logging import get_logger
+from engine.logging import get_logger
 
 
 @dataclass

@@ -2,7 +2,7 @@ import sys
 from collections import OrderedDict
 
 from horderl import palettes
-from horderl.engine import GameScene
+from engine import GameScene
 from horderl.gui.easy_menu import EasyMenu
 from horderl.gui.labels import Label
 

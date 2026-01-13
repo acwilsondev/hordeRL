@@ -10,7 +10,7 @@ from horderl.components.world_beauty import WorldBeauty
 from horderl.content.spawners.hordeling_spawner_spawner import (
     hordeling_spawner,
 )
-from horderl.engine import core
+from engine import core
 from horderl.i18n import t
 
 MAX_HOUR = 23

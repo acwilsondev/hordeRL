@@ -1,4 +1,4 @@
-from horderl.engine.components.entity import Entity
+from engine.components.entity import Entity
 
 from .. import palettes
 from ..components import Appearance, Attributes, Coordinates

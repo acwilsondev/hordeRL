@@ -5,7 +5,7 @@ from horderl.components import Coordinates
 from horderl.components.events.build_world_events import BuildWorldListener
 from horderl.components.house_structure import HouseStructure
 from horderl.components.tags.town_center_flag import TownCenterFlag
-from horderl.engine.utilities import get_3_by_3_box, get_3_by_3_square
+from engine.utilities import get_3_by_3_box, get_3_by_3_square
 
 from ...content.terrain.roads import connect_point_to_road_network, make_road
 

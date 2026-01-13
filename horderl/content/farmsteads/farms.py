@@ -2,9 +2,9 @@ from horderl import palettes
 from horderl.components import Appearance, Coordinates
 from horderl.components.attack_start_listeners.grow_crops import GrowCrops
 from horderl.components.relationships.farmed_by import FarmedBy
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_LOW
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOW
 
 description = (
     "A field, turned for planting. By the end of Spring and Summer, the"

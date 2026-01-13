@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from horderl.components.events.die_events import DeathListener
 from horderl.components.house_structure import HouseStructure
-from horderl.engine import constants
+from engine import constants
 
 
 @dataclass
