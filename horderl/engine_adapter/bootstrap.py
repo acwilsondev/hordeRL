@@ -17,7 +17,9 @@ def build_game_controller(config) -> GameSceneController:
         font_path=config.font,
     )
     ui_context = GuiAdapter(gui, popup_factory=PopupMessage)
-    game = GameSceneController(t("game.title"), config, gui, ui_context, TRACKS)
+    game = GameSceneController(
+        t("game.title"), config, gui, ui_context, TRACKS
+    )
     game.push_scene(get_start_menu())
     return game
 

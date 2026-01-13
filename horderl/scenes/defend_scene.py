@@ -2,15 +2,6 @@ from typing import Tuple
 
 import numpy as np
 
-from horderl.engine_adapter import (
-    ComponentManager,
-    GameScene,
-    LoadClasses,
-    Message,
-    VerticalAnchor,
-    core,
-    timed,
-)
 from horderl import palettes
 from horderl.components.events.start_game_events import StartGame
 from horderl.components.population import Population
@@ -25,6 +16,15 @@ from horderl.constants import PLAYER_ID
 from horderl.content.physics_controller import make_physics_controller
 from horderl.content.tax_handler import make_tax_handler
 from horderl.content.utilities import make_calendar
+from horderl.engine_adapter import (
+    ComponentManager,
+    GameScene,
+    LoadClasses,
+    Message,
+    VerticalAnchor,
+    core,
+    timed,
+)
 from horderl.gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
 from horderl.gui.help_tab import HelpTab
 from horderl.gui.labels import (
