@@ -28,7 +28,7 @@ class QuitScene(GameScene):
         """
         super().__init__()
 
-    def update(self, dt: float):
+    def update(self, dt_ms: int):
         """
         Perform the scene's update logic, which exits the game.
 

@@ -30,7 +30,7 @@ class GuiElement:
 
         """
 
-    def update(self, scene, dt: float) -> None:
+    def update(self, scene, dt_ms: int) -> None:
         pass
 
     def render(self, panel: "tcod.console.Console") -> None:

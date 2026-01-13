@@ -121,7 +121,7 @@ class GameScene:
         """
         pass
 
-    def before_update(self, dt: float):
+    def before_update(self, dt_ms: int):
         """
         Lifecycle hook called at the beginning of each frame before the update.
 
@@ -133,12 +133,12 @@ class GameScene:
         This method is called once per frame, before the update() method.
 
         Args:
-            dt (float): Elapsed time in seconds since the last frame.
+            dt_ms (int): Elapsed time in milliseconds since the last frame.
 
         """
         pass
 
-    def update(self, dt: float):
+    def update(self, dt_ms: int):
         """
         Lifecycle hook for the main game logic update, called once per frame.
 
@@ -152,12 +152,12 @@ class GameScene:
         It's called once per frame after before_update() and before render().
 
         Args:
-            dt (float): Elapsed time in seconds since the last frame.
+            dt_ms (int): Elapsed time in milliseconds since the last frame.
 
         """
         pass
 
-    def render(self, dt: float):
+    def render(self, dt_ms: int):
         """
         Lifecycle hook for rendering the scene, called once per frame.
 
@@ -172,7 +172,7 @@ class GameScene:
         Override this method if you need custom rendering behavior beyond GUI elements.
 
         Args:
-            dt (float): Elapsed time in seconds since the last frame.
+            dt_ms (int): Elapsed time in milliseconds since the last frame.
 
         """
         if self.ui_context is None:
@@ -180,7 +180,7 @@ class GameScene:
         self.ui_context.clear_root()
         self.logger.debug(f"Rendering {len(self.gui_elements)} GUI elements")
         for element in self.gui_elements:
-            element.update(self, dt)
+            element.update(self, dt_ms)
         self.gui_elements = [
             element for element in self.gui_elements if not element.is_closed
         ]

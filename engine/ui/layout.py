@@ -17,9 +17,9 @@ class VerticalAnchor(GuiElement):
     def add_space(self, n):
         self.next_row += n
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         for element in self.elements:
-            element.update(scene, dt)
+            element.update(scene, dt_ms)
 
     def render(self, panel):
         for element in self.elements:

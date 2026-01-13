@@ -27,7 +27,7 @@ class Menu(GuiElement):
         self.page = 0
         self.modal = True
 
-    def update(self, scene, dt: float) -> None:
+    def update(self, scene, dt_ms: int) -> None:
         key_event = core.get_key_event()
         if key_event is None:
             return

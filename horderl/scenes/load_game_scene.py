@@ -27,7 +27,7 @@ class LoadMenuScene(GameScene):
         self.add_gui_element(self.title_label)
         self.add_gui_element(self.build_menu())
 
-    def update(self, dt: float):
+    def update(self, dt_ms: int):
         """
         Update hook for the load menu scene.
 

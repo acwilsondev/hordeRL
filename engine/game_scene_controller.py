@@ -190,7 +190,7 @@ class GameSceneController:
             current_scene = self._scene_stack[-1]
             scene_name = current_scene.__class__.__name__
             now = perf_counter()
-            dt = now - last_frame_time
+            dt_ms = int((now - last_frame_time) * 1000)
             last_frame_time = now
 
             self.logger.debug(
@@ -202,7 +202,7 @@ class GameSceneController:
                 },
             )
 
-            current_scene.before_update(dt)
-            current_scene.update(dt)
-            current_scene.render(dt)
+            current_scene.before_update(dt_ms)
+            current_scene.update(dt_ms)
+            current_scene.render(dt_ms)
             tcd.console_flush()

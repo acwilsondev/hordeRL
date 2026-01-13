@@ -43,7 +43,7 @@ class NavigationMenuScene(GameScene):
         self.options = option_scene_map
         self.title_label = None
 
-    def update(self, dt: float):
+    def update(self, dt_ms: int):
         """
         Update hook for the navigation scene.
 

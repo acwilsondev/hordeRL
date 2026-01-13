@@ -21,7 +21,7 @@ class HelpDialogue(GuiElement):
     def _current_message(self):
         return f"{self.messages[self.index]} [ENTER]"
 
-    def update(self, scene, dt: float) -> None:
+    def update(self, scene, dt_ms: int) -> None:
         import tcod.event
 
         key_event = core.get_key_event()

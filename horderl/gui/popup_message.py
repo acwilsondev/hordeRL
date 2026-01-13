@@ -18,8 +18,8 @@ class PopupMessage(GuiElement):
         )
         self.modal = True
 
-    def update(self, scene, dt: float) -> None:
-        self.menu.update(scene, dt)
+    def update(self, scene, dt_ms: int) -> None:
+        self.menu.update(scene, dt_ms)
         if self.menu.is_closed:
             self.close()
 
