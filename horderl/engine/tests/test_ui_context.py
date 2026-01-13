@@ -44,7 +44,8 @@ class TestGuiAdapter(unittest.TestCase):
     def setUp(self) -> None:
         self.gui = DummyGui()
         self.adapter = GuiAdapter(
-            self.gui, popup_factory=lambda message, config: DummyPopup(message, config)
+            self.gui,
+            popup_factory=lambda message, config: DummyPopup(message, config),
         )
 
     def test_clear_root(self) -> None:

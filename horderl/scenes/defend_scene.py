@@ -21,6 +21,7 @@ from horderl.engine.component_manager import ComponentManager
 from horderl.engine.components.class_register import LoadClasses
 from horderl.engine.core import timed
 from horderl.engine.message import Message
+from horderl.engine.ui.layout import VerticalAnchor
 from horderl.gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer
 from horderl.gui.help_tab import HelpTab
 from horderl.gui.labels import (
@@ -35,7 +36,6 @@ from horderl.gui.labels import (
 from horderl.gui.message_box import MessageBox
 from horderl.gui.play_window import PlayWindow
 from horderl.gui.popup_message import PopupMessage
-from horderl.engine.ui.layout import VerticalAnchor
 from horderl.systems import act, control_turns, move
 
 

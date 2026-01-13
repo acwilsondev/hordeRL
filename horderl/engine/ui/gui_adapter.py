@@ -27,5 +27,7 @@ class GuiAdapter:
 
     def create_popup(self, message: str, config: Any) -> Any:
         if self._popup_factory is None:
-            raise ValueError("GuiAdapter requires a popup_factory to create popups.")
+            raise ValueError(
+                "GuiAdapter requires a popup_factory to create popups."
+            )
         return self._popup_factory(message, config)
