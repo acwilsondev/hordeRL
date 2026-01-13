@@ -1,5 +1,5 @@
 from time import perf_counter
-from typing import Any, List
+from typing import Any, List, Mapping
 
 from tcod import libtcodpy as tcd
 
@@ -32,7 +32,12 @@ class GameSceneController:
 
     @log_debug(__name__)
     def __init__(
-        self, title: str, config: Any, gui: Any, ui_context: UiContext
+        self,
+        title: str,
+        config: Any,
+        gui: Any,
+        ui_context: UiContext,
+        tracks: Mapping[str, str],
     ):
         """
         Initialize a new GameSceneController instance.
@@ -46,6 +51,7 @@ class GameSceneController:
             config (Any): Configuration object provided by the project layer.
             gui (Any): Pre-constructed GUI or renderer instance.
             ui_context (UiContext): Adapter for UI rendering and popups.
+            tracks (Mapping[str, str]): Project-provided registry of audio tracks.
 
         Attributes:
             title (str): The game window title.
@@ -61,7 +67,7 @@ class GameSceneController:
         self.gui = gui
         self.ui_context = ui_context
         self.cm = ComponentManager()
-        self.sound = DefaultSoundController()
+        self.sound = DefaultSoundController(tracks)
         self._scene_stack: List[GameScene] = []
         self.logger = get_logger(__name__)
         self.logger.debug(

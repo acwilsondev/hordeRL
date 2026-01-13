@@ -1,12 +1,15 @@
+from typing import Mapping
+
 from horderl.engine.logging import get_logger
 from horderl.engine.sound.sound_controller import SoundController
 
 
 class DefaultSoundController(SoundController):
-    def __init__(self):
+    def __init__(self, tracks: Mapping[str, str]):
         self.logger = get_logger(
             __name__, {"component": "DefaultSoundController"}
         )
+        self.tracks = dict(tracks)
         self.logger.debug(
             "Sound system initialized in disabled mode",
             extra={
@@ -21,10 +24,3 @@ class DefaultSoundController(SoundController):
             f"Ignoring request to play track",
             extra={"track": track, "action": "play", "status": "skipped"},
         )
-
-
-tracks = {
-    "theme": "./resources/theme.ogg",
-    "town": "./resources/town.ogg",
-    "battle": "./resources/battle.ogg",
-}
