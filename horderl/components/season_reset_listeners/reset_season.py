@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
+from engine.components.events import Event
 from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
-from horderl.engine.components.events import Event
 from horderl.i18n import t
 
 

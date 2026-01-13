@@ -1,4 +1,4 @@
-from horderl.engine.types import ComponentType
+from engine.types import ComponentType
 
 
 def of_type(t: ComponentType, scene):

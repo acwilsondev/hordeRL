@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from typing import List
 
-from horderl.engine.components.component import Component
-
-from ..engine.types import EntityId
+from engine.components.component import Component
+from engine.types import EntityId
 
 
 @dataclass

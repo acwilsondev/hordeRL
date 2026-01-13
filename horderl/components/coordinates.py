@@ -2,9 +2,8 @@ import math
 from dataclasses import dataclass
 from typing import Tuple
 
-from horderl.engine.components.component import Component
-
-from ..engine.constants import PRIORITY_MEDIUM
+from engine.components.component import Component
+from engine.constants import PRIORITY_MEDIUM
 
 
 @dataclass

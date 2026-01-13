@@ -12,6 +12,10 @@ elements that players need to protect to succeed.
 
 from typing import List, Tuple
 
+from engine import core
+from engine.components.component import Component
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOW
 from horderl import palettes
 from horderl.components import (
     Appearance,
@@ -26,10 +30,6 @@ from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.components.tags.crop_info import CropInfo
 from horderl.components.target_value import TargetValue
 from horderl.components.tax_value import TaxValue
-from horderl.engine import core
-from horderl.engine.components.component import Component
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_LOW
 
 crops_description = (
     "A valuable crop. They're easy pickens for the hordelings, but they will"

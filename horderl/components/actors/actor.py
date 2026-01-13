@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
+from engine.components.component import Component
 from horderl.components.enums import Intention
-from horderl.engine.components.component import Component
 
 
 class Actor(Component, ABC):

@@ -1,3 +1,6 @@
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
 from horderl.components import Appearance, Attributes, Coordinates
 from horderl.components.death_listeners.npc_corpse import Corpse
@@ -6,9 +9,6 @@ from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.sellable import Sellable
 from horderl.components.structure import Structure
-from horderl.engine import core
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_MEDIUM
 
 
 def make_fence(x, y):

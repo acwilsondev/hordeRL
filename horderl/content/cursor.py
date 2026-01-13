@@ -1,9 +1,9 @@
-from horderl.engine.components.entity import Entity
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_HIGH
 
 from .. import palettes
 from ..components import Appearance, Coordinates
-from ..engine import core
-from ..engine.constants import PRIORITY_HIGH
 
 
 def make_cursor(x, y):

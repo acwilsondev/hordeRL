@@ -1,14 +1,14 @@
 import random
 
+from engine import core
+from engine.components.component import Component
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
 from horderl.components import Appearance, Coordinates
 from horderl.components.diggable import Diggable
 from horderl.components.material import Material
 from horderl.components.season_reset_listeners.grow_grass import GrowGrass
-from horderl.engine import core
-from horderl.engine.components.component import Component
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_LOWEST
 
 
 def make_dirt(x, y):

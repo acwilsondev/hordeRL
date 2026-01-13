@@ -2,10 +2,10 @@ from dataclasses import dataclass
 
 import tcod
 
+from engine import core
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.events.attack_started_events import AttackStartListener
-from horderl.engine import core
 
 
 @dataclass

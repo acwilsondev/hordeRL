@@ -5,12 +5,12 @@ import cProfile
 import logging
 import os
 
+from engine.game_scene_controller import GameSceneController
+from engine.logging import configure_logging
+from engine.ui.gui import Gui
+from engine.ui.gui_adapter import GuiAdapter
 from horderl import palettes
 from horderl.config import get_relative_path, load_config
-from horderl.engine.game_scene_controller import GameSceneController
-from horderl.engine.logging import configure_logging
-from horderl.engine.ui.gui import Gui
-from horderl.engine.ui.gui_adapter import GuiAdapter
 from horderl.gui.popup_message import PopupMessage
 from horderl.i18n import load_locale, t
 from horderl.resources.audio import TRACKS

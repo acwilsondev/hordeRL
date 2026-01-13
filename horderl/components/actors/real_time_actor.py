@@ -1,10 +1,10 @@
 from abc import ABC
 from dataclasses import dataclass
 
+from engine import core
+from engine.constants import PRIORITY_MEDIUM
 from horderl.components.actors.actor import Actor
 from horderl.components.enums import ControlMode, Intention
-from horderl.engine import core
-from horderl.engine.constants import PRIORITY_MEDIUM
 
 
 @dataclass

@@ -1,5 +1,10 @@
 from typing import List
 
+from engine import core
+from engine.components.component import Component
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
+from engine.types import EntityId
 from horderl import palettes
 from horderl.components import Appearance, Attributes, Coordinates
 from horderl.components.brains.peasant_actor import PeasantActor
@@ -19,11 +24,6 @@ from horderl.components.pathfinding.peasant_cost_mapper import (
 from horderl.components.relationships.residence import Residence
 from horderl.components.tags.peasant_tag import PeasantTag
 from horderl.components.target_value import PEASANT, TargetValue
-from horderl.engine import core
-from horderl.engine.components.component import Component
-from horderl.engine.components.entity import Entity
-from horderl.engine.constants import PRIORITY_MEDIUM
-from horderl.engine.types import EntityId
 
 peasant_description = (
     "A peasant, tasked with working the fields. "

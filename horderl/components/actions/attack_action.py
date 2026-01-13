@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import List
 
+from engine import constants
+from engine.components.entity import Entity
 from horderl.components import Attributes, Coordinates
 from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.attacks.attack_effects.attack_effect import (
@@ -12,8 +14,6 @@ from horderl.components.events.die_events import Die
 from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.owner import Owner
 from horderl.content.states import help_animation
-from horderl.engine import constants
-from horderl.engine.components.entity import Entity
 from horderl.i18n import t
 
 

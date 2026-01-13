@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from horderl.engine import constants
-from horderl.engine.components.component import Component
+from engine import constants
+from engine.components.component import Component
 
 
 @dataclass

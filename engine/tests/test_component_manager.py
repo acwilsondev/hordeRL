@@ -5,8 +5,8 @@ import pytest
 pytest.importorskip("tcod")
 from dataclasses import dataclass
 
-from horderl.engine.component_manager import ComponentManager
-from horderl.engine.components.component import Component
+from engine.component_manager import ComponentManager
+from engine.components.component import Component
 
 
 class TestComponentManager(unittest.TestCase):

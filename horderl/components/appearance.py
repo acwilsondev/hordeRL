@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from enum import Enum
 
+from engine.components.component import Component
 from horderl import palettes
-from horderl.engine.components.component import Component
 
 
 @dataclass

@@ -1,7 +1,7 @@
 from typing import Mapping
 
-from horderl.engine.logging import get_logger
-from horderl.engine.sound.sound_controller import SoundController
+from engine.logging import get_logger
+from engine.sound.sound_controller import SoundController
 
 
 class DefaultSoundController(SoundController):

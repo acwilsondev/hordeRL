@@ -1,6 +1,7 @@
 import random
 from dataclasses import dataclass
 
+from engine.utilities import get_3_by_3_box
 from horderl.components import Coordinates
 from horderl.components.brains.ability_actors.place_thing_actor import (
     is_buildable,
@@ -11,7 +12,6 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
 from horderl.components.tags.tree_tag import TreeTag
 from horderl.components.weather.weather import Weather
 from horderl.content.terrain.saplings import make_sapling
-from horderl.engine.utilities import get_3_by_3_box
 
 
 @dataclass

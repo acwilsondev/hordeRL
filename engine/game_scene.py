@@ -1,10 +1,10 @@
 from typing import Any, final
 
-from horderl.engine import serialization
-from horderl.engine.component_manager import ComponentManager
-from horderl.engine.logging import get_logger
-from horderl.engine.sound.sound_controller import SoundController
-from horderl.engine.ui_context import UiContext
+from engine import serialization
+from engine.component_manager import ComponentManager
+from engine.logging import get_logger
+from engine.sound.sound_controller import SoundController
+from engine.ui_context import UiContext
 
 
 class GameScene:

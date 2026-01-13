@@ -1,7 +1,7 @@
 import math
 from itertools import product
 
-from ..components import Coordinates
+from horderl.components.coordinates import Coordinates
 
 
 def clamp(number: int, min: int, max: int):

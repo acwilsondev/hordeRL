@@ -1,6 +1,6 @@
 import unittest
 
-from horderl.engine.ui.gui_adapter import GuiAdapter
+from engine.ui.gui_adapter import GuiAdapter
 
 
 class DummyRoot:

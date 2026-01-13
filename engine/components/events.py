@@ -1,9 +1,9 @@
 from abc import abstractmethod
 from dataclasses import dataclass
 
+from engine import GameScene
+from engine.core import log_debug
 from horderl.components.actors.energy_actor import EnergyActor
-from horderl.engine import GameScene
-from horderl.engine.core import log_debug
 
 
 @dataclass

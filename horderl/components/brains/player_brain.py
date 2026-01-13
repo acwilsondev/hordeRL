@@ -2,12 +2,12 @@ from dataclasses import dataclass
 
 import tcod
 
+from engine import core
 from horderl.components.ability_tracker import AbilityTracker
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.events.quit_game_events import QuitGame
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
-from horderl.engine import core
 
 
 @dataclass
