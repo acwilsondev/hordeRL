@@ -4,7 +4,6 @@ from dataclasses import dataclass
 from overrides import override
 
 from engine import core
-from engine.components import Actor
 from engine.components.updateable import Updateable
 from engine.game_scene import GameScene
 
