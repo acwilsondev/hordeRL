@@ -1,6 +1,6 @@
 from dataclasses import dataclass
+from engine.components import Coordinates
 
-from horderl.components import Coordinates
 from horderl.components.brains.peasant_actor import PeasantActor
 from horderl.components.events.attack_started_events import AttackStartListener
 from horderl.components.house_structure import HouseStructure

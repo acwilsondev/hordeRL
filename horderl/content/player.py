@@ -1,7 +1,8 @@
 from engine.components.entity import Entity
+from engine.components import Coordinates
 
 from .. import palettes
-from ..components import Appearance, Attributes, Coordinates, Senses
+from ..components import Appearance, Attributes, Senses
 from ..components.abilities.build_fence_ability import BuildFenceAbility
 from ..components.abilities.build_spikes_ability import BuildSpikesAbility
 from ..components.abilities.build_wall_ability import BuildWallAbility

@@ -1,8 +1,8 @@
 from engine.component_manager import ComponentManager
 from engine.core import log_debug
+from engine.components import Coordinates
 
-from ..components import Coordinates
-from ..components.actors.actor import Actor
+from engine.components import Actor
 from ..components.events.turn_event import TurnEvent
 from ..components.faction import Faction
 from ..components.material import Material

@@ -1,7 +1,7 @@
 import numpy as np
 import tcod
+from engine.components import Coordinates
 
-from .. import Coordinates
 
 
 def get_new_target(scene, cost_map, start, entity_values) -> int:

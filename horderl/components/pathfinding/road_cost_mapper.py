@@ -1,6 +1,7 @@
 import numpy as np
+from engine.components import Coordinates
 
-from .. import Attributes, Coordinates
+from .. import Attributes
 from ..pathfinding.cost_mapper import CostMapper
 from ..tags.water_tag import WaterTag
 

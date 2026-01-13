@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from engine.components import Coordinates
 
 import tcod
 
 from engine import constants, core
-from horderl.components import Coordinates
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 

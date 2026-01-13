@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from engine.utilities import is_visible
 
 from ...content.states import confused_animation
-from .. import Coordinates
+from engine.components import Coordinates
 from ..animation_effects.blinker import AnimationBlinker
 from ..brains.ability_actors.ranged_attack_actor import RangedAttackActor
 from ..season_reset_listeners.seasonal_actor import SeasonResetListener
@@ -27,7 +27,9 @@ class ShootAbility(SeasonResetListener, Ability):
         hordelings = [
             e
             for e in scene.cm.get(HordelingTag)
-            if is_visible(scene, e.entity)
+            if is_visible(
+                scene, scene.cm.get_one(Coordinates, entity=e.entity)
+            )
         ]
         if not hordelings:
             self._handle_confused(scene)

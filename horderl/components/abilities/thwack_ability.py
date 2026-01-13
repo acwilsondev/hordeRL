@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from math import sqrt
+from engine.components import Coordinates
 
 from horderl import palettes
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 from horderl.i18n import t
 
 from ...content.attacks import thwack_animation, thwack_dizzy_animation
 from ...systems.utilities import get_enemies_in_range
-from .. import Coordinates
 from ..actions.attack_action import AttackAction
 from ..animation_effects.blinker import AnimationBlinker
 from ..brains.brain import Brain

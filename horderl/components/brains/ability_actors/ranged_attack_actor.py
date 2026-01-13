@@ -5,7 +5,7 @@ import tcod
 from engine import constants, core
 from engine.utilities import is_visible
 from horderl.components.actions.attack_action import AttackAction
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import Coordinates, EnergyActor
 from horderl.components.animation_effects.blinker import AnimationBlinker
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
@@ -67,7 +67,11 @@ class RangedAttackActor(Brain):
         current_target = scene.cm.get_one(HordelingTag, entity=self.target)
         all_enemies = scene.cm.get(HordelingTag)
         visible_enemies = [
-            e for e in all_enemies if is_visible(scene, e.entity)
+            e
+            for e in all_enemies
+            if is_visible(
+                scene, scene.cm.get_one(Coordinates, entity=e.entity)
+            )
         ]
         enemies = sorted(visible_enemies, key=lambda x: x.id)
 

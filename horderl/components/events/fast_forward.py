@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from engine import core
 from engine.core import log_debug
 from horderl.components.actors.calendar_actor import Calendar
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 from horderl.components.events.new_day_event import DayBegan
 
 

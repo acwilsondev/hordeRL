@@ -1,6 +1,6 @@
 import numpy as np
+from engine.components import Coordinates
 
-from .. import Coordinates
 from ..movement.drain_on_enter import DrainOnEnter
 from ..pathfinder_cost import PathfinderCost
 from ..pathfinding.cost_mapper import CostMapper

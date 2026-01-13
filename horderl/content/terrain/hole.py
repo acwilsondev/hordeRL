@@ -2,13 +2,14 @@ from engine import core
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
-from horderl.components import Appearance, Coordinates
+from horderl.components import Appearance
 from horderl.components.diggable import Diggable
 from horderl.components.events.hole_dug_events import HoleDug
 from horderl.components.floodable import Floodable
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.states.move_cost_affectors import DifficultTerrain
+from engine.components import Coordinates
 
 
 def make_hole(x, y):

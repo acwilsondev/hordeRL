@@ -1,5 +1,6 @@
 import random
 from itertools import product
+from engine.components import Coordinates
 
 import numpy as np
 import tcod
@@ -10,7 +11,7 @@ from engine.core import timed
 from engine.ui.gui_element import GuiElement
 
 from .. import palettes
-from ..components import Appearance, Coordinates
+from ..components import Appearance
 
 
 class PlayWindow(GuiElement):

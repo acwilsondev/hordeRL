@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from engine import core
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 
 from ..weather.weather import Weather
 

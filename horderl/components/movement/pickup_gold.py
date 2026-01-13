@@ -1,6 +1,6 @@
 from horderl import palettes
+from engine.components import Coordinates
 
-from .. import Coordinates
 from ..events.step_event import StepListener
 from ..pickup_gold import GoldPickup
 

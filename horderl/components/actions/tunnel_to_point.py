@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Tuple
+from engine.components import Coordinates
 
 from engine import constants
-from horderl.components import Coordinates
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 from horderl.content.terrain.hole import make_hole
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 import tcod
+from engine.components import Coordinates
 
-from .. import Coordinates
 from ..events.attack_started_events import AttackStartListener
 from ..events.start_game_events import GameStartListener
 from ..events.step_event import StepListener

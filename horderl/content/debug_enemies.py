@@ -1,9 +1,10 @@
 from engine import core
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
+from engine.components import Coordinates
 
 from .. import palettes
-from ..components import Appearance, Attributes, Coordinates
+from ..components import Appearance, Attributes
 from ..components.attacks.attack import Attack
 from ..components.death_listeners.drop_gold import DropGold
 from ..components.death_listeners.npc_corpse import Corpse

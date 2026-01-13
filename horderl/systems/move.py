@@ -3,10 +3,10 @@ from typing import Tuple
 
 from .. import palettes
 from ..components import Senses
-from ..components.actors.actor import Actor
+from engine.components import Actor
 from ..components.attacks.attack import Attack
 from ..components.brains.brain import Brain
-from ..components.coordinates import Coordinates
+from engine.components import Coordinates
 from ..components.enums import Intention
 from ..components.events.dally_event import DallyEvent
 from ..components.events.step_event import StepEvent

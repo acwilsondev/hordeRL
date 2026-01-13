@@ -1,8 +1,8 @@
 import random
 from dataclasses import dataclass
+from engine.components import Coordinates
 
 from engine.utilities import get_3_by_3_box
-from horderl.components import Coordinates
 from horderl.components.brains.ability_actors.place_thing_actor import (
     is_buildable,
 )

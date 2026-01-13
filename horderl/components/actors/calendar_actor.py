@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from engine import core
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 from horderl.components.actors.hordeling_spawner import HordelingSpawner
 from horderl.components.events.attack_started_events import AttackStarted
 from horderl.components.events.new_day_event import DayBegan

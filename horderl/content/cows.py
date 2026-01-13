@@ -1,4 +1,5 @@
 from typing import List
+from engine.components import Coordinates
 
 from engine import core
 from engine.components.component import Component
@@ -6,7 +7,7 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 
 from .. import palettes
-from ..components import Appearance, Attributes, Coordinates, target_value
+from ..components import Appearance, Attributes, target_value
 from ..components.edible import Edible
 from ..components.faction import Faction
 from ..components.target_value import TargetValue

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
+from engine.components import Coordinates
 
 from ...content.cursor import make_cursor
-from .. import Coordinates
 from ..brains.ability_actors.look_cursor_controller import LookCursorController
 from .ability import Ability
 

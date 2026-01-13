@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Tuple
+from engine.components import Coordinates
 
 from engine import core
 from horderl import palettes
-from horderl.components import Coordinates
 from horderl.components.actors.calendar_actor import Calendar
 from horderl.components.events.attack_started_events import AttackStartListener
 from horderl.components.relationships.farmed_by import FarmedBy

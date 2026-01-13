@@ -1,6 +1,6 @@
 from dataclasses import dataclass
+from engine.components import Coordinates
 
-from horderl.components import Coordinates
 from horderl.components.attacks.attack_effects.attack_effect import (
     AttackEffect,
 )

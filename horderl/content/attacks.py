@@ -1,9 +1,10 @@
 from engine import core
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_HIGH
+from engine.components import Coordinates
 
 from .. import palettes
-from ..components import Appearance, Coordinates
+from ..components import Appearance
 from ..components.animation_effects.path import AnimationPath
 from ..components.events.delete_event import Delete
 from ..components.path_node import create_path

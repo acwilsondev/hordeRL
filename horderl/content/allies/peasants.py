@@ -1,4 +1,5 @@
 from typing import List
+from engine.components import Coordinates
 
 from engine import core
 from engine.components.component import Component
@@ -6,7 +7,7 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from engine.types import EntityId
 from horderl import palettes
-from horderl.components import Appearance, Attributes, Coordinates
+from horderl.components import Appearance, Attributes
 from horderl.components.brains.peasant_actor import PeasantActor
 from horderl.components.cry_for_help import CryForHelp
 from horderl.components.death_listeners.npc_corpse import Corpse

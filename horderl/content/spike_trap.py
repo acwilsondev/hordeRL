@@ -1,9 +1,10 @@
 from engine import core
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST
+from engine.components import Coordinates
 
 from .. import palettes
-from ..components import Appearance, Coordinates
+from ..components import Appearance
 from ..components.die_on_attack_finished import DieOnAttackFinished
 from ..components.diggable import Diggable
 from ..components.material import Material

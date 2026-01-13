@@ -1,4 +1,5 @@
 from typing import List
+from engine.components import Coordinates
 
 from engine import core
 from engine.components.component import Component
@@ -6,7 +7,7 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOW
 
 from .. import palettes
-from ..components import Appearance, Coordinates
+from ..components import Appearance
 from ..components.actors.bomb_actor import BombActor
 
 bomb_description = "An explosive bomb! Watch out!"
