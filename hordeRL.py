@@ -12,6 +12,7 @@ from horderl.engine.logging import configure_logging
 from horderl.gui.gui import Gui
 from horderl.gui.gui_adapter import GuiAdapter
 from horderl.i18n import load_locale, t
+from horderl.resources.audio import TRACKS
 from horderl.scenes.start_menu import get_start_menu
 
 
@@ -24,7 +25,9 @@ def main(config):
         font_path=config.font,
     )
     ui_context = GuiAdapter(gui)
-    game = GameSceneController(t("game.title"), config, gui, ui_context)
+    game = GameSceneController(
+        t("game.title"), config, gui, ui_context, TRACKS
+    )
     game.push_scene(get_start_menu())
     game.start()
 
