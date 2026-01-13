@@ -2,12 +2,15 @@ from typing import Tuple
 
 import numpy as np
 
-from engine import GameScene, core
-from engine.component_manager import ComponentManager
-from engine.components.class_register import LoadClasses
-from engine.core import timed
-from engine.message import Message
-from engine.ui.layout import VerticalAnchor
+from horderl.engine_adapter import (
+    ComponentManager,
+    GameScene,
+    LoadClasses,
+    Message,
+    VerticalAnchor,
+    core,
+    timed,
+)
 from horderl import palettes
 from horderl.components.events.start_game_events import StartGame
 from horderl.components.population import Population

@@ -5,10 +5,12 @@ import numpy as np
 import tcod
 from tcod import console
 
-from engine.component_manager import ComponentManager
-from engine.components import Coordinates
-from engine.core import timed
-from engine.ui.gui_element import GuiElement
+from horderl.engine_adapter import (
+    ComponentManager,
+    Coordinates,
+    GuiElement,
+    timed,
+)
 
 from .. import palettes
 from ..components import Appearance

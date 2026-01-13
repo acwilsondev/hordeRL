@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from engine.ui.gui_element import GuiElement
+from horderl.engine_adapter import GuiElement
 
 from ..gui.easy_menu import EasyMenu
 
