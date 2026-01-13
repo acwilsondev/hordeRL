@@ -31,7 +31,9 @@ class GameSceneController:
     """
 
     @log_debug(__name__)
-    def __init__(self, title: str, config: Any, gui: Any, ui_context: UiContext):
+    def __init__(
+        self, title: str, config: Any, gui: Any, ui_context: UiContext
+    ):
         """
         Initialize a new GameSceneController instance.
 

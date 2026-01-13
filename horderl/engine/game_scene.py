@@ -65,7 +65,9 @@ class GameScene:
                 f" {element.__class__.__name__}"
             )
             if self.ui_context is None:
-                raise RuntimeError("UI context is not configured for this scene.")
+                raise RuntimeError(
+                    "UI context is not configured for this scene."
+                )
             self.ui_context.render_single_shot(element)
         else:
             self.logger.debug(
@@ -87,7 +89,9 @@ class GameScene:
         self.logger.info(f"Displaying popup message: {message}")
         if self.ui_context is None:
             raise RuntimeError("UI context is not configured for this scene.")
-        self.add_gui_element(self.ui_context.create_popup(message, self.config))
+        self.add_gui_element(
+            self.ui_context.create_popup(message, self.config)
+        )
 
     # Scene Lifecycle Hooks
     # - on_load
