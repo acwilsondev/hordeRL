@@ -3,10 +3,13 @@ from engine.components import Coordinates
 from engine.components.component import Component
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOW
+from horderl.components.relationships.owner import Owner
 
 from .. import palettes
 from ..components import Appearance
-from ..components.animation_effects.step_animation import StepAnimation
+from ..components.animation_controllers.sequence_animation_controller import (
+    SequenceAnimationController,
+)
 
 
 def make_explosion(x, y):
@@ -25,9 +28,9 @@ def make_explosion(x, y):
             color=palettes.WHITE,
             bg_color=palettes.BACKGROUND,
         ),
-        StepAnimation(
+        SequenceAnimationController(
             entity=entity_id,
-            steps=[(palettes.GOLD, "*"), (palettes.FRESH_BLOOD, "*")],
+            sequence=[(palettes.GOLD, "*"), (palettes.FRESH_BLOOD, "*")],
         ),
     ]
     return entity_id, components

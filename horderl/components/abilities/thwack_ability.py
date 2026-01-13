@@ -8,7 +8,9 @@ from horderl.i18n import t
 from ...content.attacks import thwack_animation, thwack_dizzy_animation
 from ...systems.utilities import get_enemies_in_range
 from ..actions.attack_action import AttackAction
-from ..animation_effects.blinker import AnimationBlinker
+from ..animation_controllers.blinker_animation_controller import (
+    BlinkerAnimationController,
+)
 from ..brains.brain import Brain
 from ..brains.dizzy_brain import DizzyBrain
 from .ability import Ability
@@ -71,7 +73,7 @@ class ThwackAbility(Ability, EnergyActor):
         brain = scene.cm.get_one(Brain, entity=self.entity)
         brain.swap(scene, DizzyBrain(entity=self.entity))
         scene.cm.add(
-            AnimationBlinker(
+            BlinkerAnimationController(
                 entity=self.entity,
                 new_symbol="?",
                 new_color=palettes.LIGHT_WATER,

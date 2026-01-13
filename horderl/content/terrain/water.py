@@ -6,8 +6,8 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
 from horderl.components import Appearance
-from horderl.components.animation_effects.randomized_blinker import (
-    RandomizedBlinker,
+from horderl.components.animation_controllers.randomized_blinker_animation_controller import (
+    RandomizedBlinkerAnimationController,
 )
 from horderl.components.diggable import Diggable
 from horderl.components.flooder import Flooder
@@ -38,7 +38,7 @@ def make_water(x, y, rapidness=5000):
             Diggable(entity=entity_id),
             Flooder(entity=entity_id),
             PathfinderCost(entity=entity_id, cost=10),
-            RandomizedBlinker(
+            RandomizedBlinkerAnimationController(
                 entity=entity_id,
                 new_symbol="~",
                 new_color=palettes.WATER,
@@ -76,7 +76,7 @@ def make_swampy_water(x, y, rapidness):
             Diggable(entity=entity_id),
             Flooder(entity=entity_id),
             PathfinderCost(entity=entity_id, cost=10),
-            RandomizedBlinker(
+            RandomizedBlinkerAnimationController(
                 entity=entity_id,
                 new_symbol="~",
                 new_color=palettes.GRASS,
@@ -111,7 +111,7 @@ def freeze(scene, eid):
         Flooder,
         DifficultTerrain,
         PathfinderCost,
-        RandomizedBlinker,
+        RandomizedBlinkerAnimationController,
         DrainOnEnter,
     ]:
         component = scene.cm.get_one(component_type, entity=eid)

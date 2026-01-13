@@ -5,7 +5,9 @@ from typing import Callable
 from engine.core import log_debug
 
 from ..abilities.ability import Ability
-from ..animation_effects.blinker import AnimationBlinker
+from ..animation_controllers.blinker_animation_controller import (
+    BlinkerAnimationController,
+)
 
 
 @dataclass
@@ -15,7 +17,7 @@ class ControlModeAbility(Ability, ABC):
         sym, color = self.get_anim()
         mode = self.get_mode()
         new_controller = mode(entity=self.entity, old_brain=dispatcher)
-        blinker = AnimationBlinker(
+        blinker = BlinkerAnimationController(
             entity=self.entity, new_symbol=sym, new_color=color
         )
         scene.cm.stash_component(dispatcher)

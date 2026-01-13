@@ -6,7 +6,9 @@ from engine import constants, core
 from engine.components import Coordinates, EnergyActor
 from engine.utilities import is_visible
 from horderl.components.actions.attack_action import AttackAction
-from horderl.components.animation_effects.blinker import AnimationBlinker
+from horderl.components.animation_controllers.blinker_animation_controller import (
+    BlinkerAnimationController,
+)
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.tags.hordeling_tag import HordelingTag
@@ -49,7 +51,9 @@ class RangedAttackActor(Brain):
 
     def back_out(self, scene):
         old_actor = scene.cm.unstash_component(self.old_brain)
-        blinker = scene.cm.get_one(AnimationBlinker, entity=self.target)
+        blinker = scene.cm.get_one(
+            BlinkerAnimationController, entity=self.target
+        )
         blinker.stop(scene)
         scene.cm.delete_component(blinker)
         scene.cm.delete_component(self)
@@ -57,10 +61,12 @@ class RangedAttackActor(Brain):
 
     def _next_enemy(self, scene):
         next_enemy = self._get_next_enemy(scene)
-        old_blinker = scene.cm.get_one(AnimationBlinker, entity=self.target)
+        old_blinker = scene.cm.get_one(
+            BlinkerAnimationController, entity=self.target
+        )
         old_blinker.stop(scene)
         scene.cm.delete_component(old_blinker)
-        scene.cm.add(AnimationBlinker(entity=next_enemy))
+        scene.cm.add(BlinkerAnimationController(entity=next_enemy))
         self.target = next_enemy
 
     def _get_next_enemy(self, scene):

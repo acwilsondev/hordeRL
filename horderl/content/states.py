@@ -5,7 +5,9 @@ from engine.constants import PRIORITY_HIGH
 
 from .. import palettes
 from ..components import Appearance
-from ..components.animation_effects.float import AnimationFloat
+from ..components.animation_controllers.float_animation_controller import (
+    FloatAnimationController,
+)
 
 
 def floaty_animation(x, y, symbol, color, name):
@@ -28,7 +30,7 @@ def floaty_animation(x, y, symbol, color, name):
                 priority=PRIORITY_HIGH,
                 buildable=True,
             ),
-            AnimationFloat(entity=entity_id, duration=5),
+            FloatAnimationController(entity=entity_id, duration=5),
         ],
     )
 

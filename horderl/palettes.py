@@ -19,9 +19,8 @@ WATER = (0, 0, 0)
 FRESH_BLOOD = (0, 0, 0)
 LIGHT_WATER = (0, 0, 0)
 HORDELING = (0, 0, 0)
-# (54, 23, 12),
 BLOOD = (0, 0, 0)
-# (48, 15, 10)
+DEBUG = (255, 0, 255)
 
 
 def apply_config(config: Any) -> None:

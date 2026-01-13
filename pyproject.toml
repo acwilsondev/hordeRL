@@ -20,6 +20,7 @@ setuptools = "70.0.0"
 PyYAML = "6.0.2"
 tracery = "0.1.1"
 tcod = { version = ">=11.18.0", source = "pypi" }
+overrides = "^7.7.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.3.0"

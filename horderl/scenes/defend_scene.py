@@ -2,6 +2,7 @@ from typing import Tuple
 
 import numpy as np
 
+from engine.components.updateable import Updateable
 from horderl import palettes
 from horderl.components.events.start_game_events import StartGame
 from horderl.components.population import Population
@@ -200,9 +201,22 @@ class DefendScene(GameScene):
         """
         if self.has_modal_gui():
             return
+
+        # modern updateable flow
+        # TODO: We'll eventually replace the legacy systems with this modern approach and move this
+        #  into the engine. The DefendScene is currently defined here, but it *should* be defined
+        # as an Updeatable object that performs all initialization it needs to, which is a typical
+        # game engine pattern.
+        self.logger.debug("==== Beginning DefendScene update at dt=%s", dt)
+        for updateable in self.cm.get(Updateable):
+            self.logger.debug("Updating Updateable: %s", updateable)
+            updateable.update(self, dt)
+
+        # legacy systems
         act.run(self)
         move.run(self)
         control_turns.run(self)
+        self.logger.debug("==== Completed DefendScene update at dt=%s", dt)
 
     def message(self, text: str, color: Tuple[int, int, int] = palettes.MEAT):
         """

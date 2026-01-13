@@ -4,7 +4,7 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_HIGH
 from horderl import palettes
 from horderl.components import Appearance
-from horderl.components.animation_effects.reset_owner_animation import (
+from horderl.components.animation_controllers.reset_owner_animation import (
     ResetOwnerAnimation,
 )
 from horderl.components.events.delete_event import Delete
