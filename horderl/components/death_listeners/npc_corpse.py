@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
+from horderl import palettes
 from horderl.components import Coordinates
 from horderl.components.events.die_events import DeathListener
 from horderl.content import corpses
-from horderl.engine import palettes
 from horderl.engine.components.entity import Entity
 
 

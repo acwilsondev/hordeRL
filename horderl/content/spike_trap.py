@@ -1,12 +1,13 @@
 from horderl.engine.components.entity import Entity
 
+from .. import palettes
 from ..components import Appearance, Coordinates
 from ..components.die_on_attack_finished import DieOnAttackFinished
 from ..components.diggable import Diggable
 from ..components.material import Material
 from ..components.movement.drain_on_enter import DrainOnEnter
 from ..components.states.move_cost_affectors import DifficultTerrain
-from ..engine import core, palettes
+from ..engine import core
 from ..engine.constants import PRIORITY_LOWEST
 
 

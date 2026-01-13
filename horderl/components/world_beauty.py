@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 
+from .. import palettes
 from ..components.events.tree_cut_event import TreeCutListener
 from ..components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
 from ..components.world_building.world_parameters import WorldParameters
-from ..engine import core, palettes
+from ..engine import core
 
 
 @dataclass

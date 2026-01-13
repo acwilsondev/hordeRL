@@ -3,9 +3,10 @@ from typing import List
 from horderl.engine.components.component import Component
 from horderl.engine.components.entity import Entity
 
+from .. import palettes
 from ..components import Appearance, Coordinates
 from ..components.actors.bomb_actor import BombActor
-from ..engine import core, palettes
+from ..engine import core
 from ..engine.constants import PRIORITY_LOW
 
 bomb_description = "An explosive bomb! Watch out!"

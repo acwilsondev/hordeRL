@@ -1,7 +1,7 @@
 import time
 
+from .. import palettes
 from ..components import Coordinates
-from ..engine import palettes
 from ..gui.gui_element import GuiElement
 from ..gui.labels import Label
 

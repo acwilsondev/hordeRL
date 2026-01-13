@@ -2,6 +2,7 @@ import random
 from dataclasses import dataclass
 from typing import Optional
 
+from horderl import palettes
 from horderl.components import Coordinates
 from horderl.components.actions.attack_action import AttackAction
 from horderl.components.actions.eat_action import EatAction
@@ -26,7 +27,7 @@ from horderl.components.pathfinding.target_evaluation.target_evaluator import (
 from horderl.components.pathfinding.target_selection import get_new_target
 from horderl.content.attacks import stab
 from horderl.content.terrain import roads
-from horderl.engine import constants, palettes, utilities
+from horderl.engine import constants, utilities
 from horderl.engine.core import log_debug
 
 

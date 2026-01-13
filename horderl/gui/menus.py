@@ -3,7 +3,8 @@ import textwrap
 import tcod
 import tcod.event
 
-from ..engine import core, palettes
+from .. import palettes
+from ..engine import core
 from ..gui.gui_element import GuiElement
 from ..i18n import t
 

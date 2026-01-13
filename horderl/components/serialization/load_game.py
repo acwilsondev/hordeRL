@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-from horderl.engine import core, palettes
+from horderl import palettes
+from horderl.engine import core
 from horderl.engine.components.energy_actor import EnergyActor
 from horderl.i18n import t
 

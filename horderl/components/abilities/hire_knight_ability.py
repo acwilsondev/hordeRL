@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Callable
 
-from horderl.engine import palettes
+from horderl import palettes
 
 from ..brains.ability_actors.hire_knight_brain import HireKnightActor
 from .control_mode_ability import ControlModeAbility

@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
+from horderl import palettes
 from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
 from horderl.components.tags.crop_info import CropInfo
-from horderl.engine import palettes
 
 
 @dataclass

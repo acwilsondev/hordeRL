@@ -5,8 +5,8 @@ import numpy as np
 import tcod
 from tcod import console
 
+from .. import palettes
 from ..components import Appearance, Coordinates
-from ..engine import palettes
 from ..engine.component_manager import ComponentManager
 from ..engine.core import timed
 from ..gui.gui_element import GuiElement

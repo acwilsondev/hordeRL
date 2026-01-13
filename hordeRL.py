@@ -5,8 +5,8 @@ import cProfile
 import logging
 import os
 
+from horderl import palettes
 from horderl.config import get_relative_path, load_config
-from horderl.engine import palettes
 from horderl.engine.game_scene_controller import GameSceneController
 from horderl.engine.logging import configure_logging
 from horderl.gui.gui import Gui

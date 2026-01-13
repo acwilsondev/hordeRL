@@ -1,5 +1,6 @@
 from horderl.engine.components.entity import Entity
 
+from .. import palettes
 from ..components import Appearance, Attributes, Coordinates, Senses
 from ..components.abilities.build_fence_ability import BuildFenceAbility
 from ..components.abilities.build_spikes_ability import BuildSpikesAbility
@@ -34,7 +35,7 @@ from ..components.season_reset_listeners.save_on_season import (
     SaveOnSeasonReset,
 )
 from ..components.target_value import PLAYER, TargetValue
-from ..engine import PLAYER_ID, palettes
+from ..engine import PLAYER_ID
 
 
 def make_player(x, y, config):

@@ -1,3 +1,4 @@
+from horderl import palettes
 from horderl.components import Appearance, Attributes, Coordinates
 from horderl.components.attacks.standard_attack import StandardAttack
 from horderl.components.brains.stationary_attack_actor import (
@@ -13,7 +14,7 @@ from horderl.components.pathfinding.target_evaluation.ally_target_evaluator impo
 )
 from horderl.components.sellable import Sellable
 from horderl.components.tax_value import TaxValue
-from horderl.engine import core, palettes
+from horderl.engine import core
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 

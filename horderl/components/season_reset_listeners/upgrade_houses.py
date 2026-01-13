@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from random import choice
 
+from horderl import palettes
 from horderl.components import Appearance, Attributes
 from horderl.components.abilities.build_wall_ability import BuildWallAbility
 from horderl.components.death_listeners.npc_corpse import Corpse
@@ -8,7 +9,6 @@ from horderl.components.house_structure import HouseStructure
 from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
-from horderl.engine import palettes
 
 
 @dataclass

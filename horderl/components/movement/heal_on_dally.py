@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from horderl.engine import palettes
+from horderl import palettes
 
 from .. import Attributes
 from ..events.attack_started_events import AttackStartListener
