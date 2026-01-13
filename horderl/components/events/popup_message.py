@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from horderl.components.actors.real_time_actor import RealTimeActor
+from horderl.components.animation_controllers.real_time_actor import RealTimeActor
 
 
 @dataclass

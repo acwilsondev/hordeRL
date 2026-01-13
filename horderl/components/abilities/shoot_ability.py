@@ -4,7 +4,7 @@ from engine.components import Coordinates
 from engine.utilities import is_visible
 
 from ...content.states import confused_animation
-from ..animation_effects.blinker import AnimationBlinker
+from ..animation_controllers.blinker_animation_controller import BlinkerAnimationController
 from ..brains.ability_actors.ranged_attack_actor import RangedAttackActor
 from ..season_reset_listeners.seasonal_actor import SeasonResetListener
 from ..tags.hordeling_tag import HordelingTag
@@ -44,10 +44,10 @@ class ShootAbility(SeasonResetListener, Ability):
             target=target.entity,
             shoot_ability=self.id,
         )
-        blinker = AnimationBlinker(entity=target.entity)
+        blinker = BlinkerAnimationController(entity=target.entity)
         scene.cm.stash_component(dispatcher)
         scene.cm.add(new_controller, blinker)
-        # todo why are we removing gold in the ability? You may have declined to shoot.
+        # TODO why are we removing gold in the ability? You may have declined to shoot.
         scene.gold -= 5
 
     def _handle_confused(self, scene):

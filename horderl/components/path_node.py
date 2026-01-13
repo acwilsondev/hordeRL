@@ -10,7 +10,8 @@ class PathNode(Component):
     y: int = 0
 
 
-def create_path(entity, path):
+def create_path(entity, path: list[tuple[int, int]]) -> list[PathNode]:
+    """Create PathNode components for the given path."""
     return [
         PathNode(entity=entity, step=step, x=location[0], y=location[1])
         for step, location in enumerate(path)

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from engine import GameScene, constants
 from engine.components import EnergyActor
 
-from ..animation_effects.blinker import AnimationBlinker
+from ..animation_controllers.blinker_animation_controller import BlinkerAnimationController
 
 
 @dataclass
@@ -23,8 +23,8 @@ class Brain(EnergyActor, ABC):
     def back_out(self, scene):
         self._on_back_out(scene)
         old_actor = scene.cm.unstash_component(self.old_brain)
-        # todo not sure if this is a great place for this
-        blinker = scene.cm.get_one(AnimationBlinker, entity=self.entity)
+        # TODO not sure if this is a great place for this
+        blinker = scene.cm.get_one(BlinkerAnimationController, entity=self.entity)
         if blinker:
             blinker.stop(scene)
             scene.cm.delete_component(blinker)
