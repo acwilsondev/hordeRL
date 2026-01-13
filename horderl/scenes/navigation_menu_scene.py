@@ -1,8 +1,8 @@
 import sys
 from collections import OrderedDict
 
-from engine import GameScene
 from horderl import palettes
+from horderl.engine_adapter import GameScene
 from horderl.gui.easy_menu import EasyMenu
 from horderl.gui.labels import Label
 

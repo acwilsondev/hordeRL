@@ -3,8 +3,7 @@ import textwrap
 import tcod
 import tcod.event
 
-from engine import core
-from engine.ui.gui_element import GuiElement
+from horderl.engine_adapter import GuiElement, core
 
 from .. import palettes
 from ..i18n import t

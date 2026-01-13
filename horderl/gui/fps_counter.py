@@ -1,6 +1,6 @@
 import time
 
-from engine.ui.gui_element import GuiElement
+from horderl.engine_adapter import GuiElement
 
 from .. import palettes
 from ..gui.labels import Label

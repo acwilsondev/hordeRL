@@ -1,7 +1,6 @@
 import time
 
-from engine.components import Coordinates
-from engine.ui.gui_element import GuiElement
+from horderl.engine_adapter import Coordinates, GuiElement
 
 from .. import palettes
 from ..gui.labels import Label

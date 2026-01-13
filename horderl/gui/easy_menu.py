@@ -1,8 +1,7 @@
 import textwrap
 from typing import Callable, Optional
 
-from engine import core
-from engine.ui.gui_element import GuiElement
+from horderl.engine_adapter import GuiElement, core
 
 from .. import palettes
 from ..i18n import t

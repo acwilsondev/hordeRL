@@ -1,6 +1,6 @@
 import sys
 
-from engine import GameScene
+from horderl.engine_adapter import GameScene
 
 
 class QuitScene(GameScene):

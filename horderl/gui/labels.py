@@ -1,7 +1,6 @@
 import tcod
 
-from engine import core
-from engine.ui.gui_element import GuiElement
+from horderl.engine_adapter import GuiElement, core
 
 from .. import palettes
 from ..components.ability_tracker import AbilityTracker
