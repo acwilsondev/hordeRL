@@ -39,7 +39,7 @@ class EasyMenu(GuiElement):
         self.page = 0
         self.modal = True
 
-    def update(self, scene, dt: float) -> None:
+    def update(self, scene, dt_ms: int) -> None:
         import tcod.event
 
         key_event = core.get_key_event()

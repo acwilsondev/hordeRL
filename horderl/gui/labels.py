@@ -38,7 +38,7 @@ class GoldLabel(GuiElement):
         super().__init__(x, y, name="gold-label")
         self.value = "0c"
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         self.value = f"{scene.gold}c"
 
     def render(self, panel):
@@ -63,7 +63,7 @@ class CalendarLabel(GuiElement):
         super().__init__(x, y, name="calendar-label")
         self.value = "#problem#"
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         calendar = scene.cm.get_one(Calendar, entity=core.get_id("calendar"))
         timecode = calendar.get_timecode()
         self.value = f"{timecode}"
@@ -86,7 +86,7 @@ class HordeStatusLabel(GuiElement):
         super().__init__(x, y, name="calendar-label")
         self.value = "#problem#"
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         calendar = scene.cm.get_one(Calendar, entity=core.get_id("calendar"))
         if calendar:
             self.value = calendar.status
@@ -109,7 +109,7 @@ class SpeedLabel(GuiElement):
         super().__init__(x, y, name="hindered-label")
         self.value = "#problem#"
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         hindered = scene.cm.get_one(Hindered, entity=PLAYER_ID)
         haste = scene.cm.get_one(Haste, entity=PLAYER_ID)
         if hindered:
@@ -146,7 +146,7 @@ class AbilityLabel(GuiElement):
             bg=palettes.BACKGROUND,
         )
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         ability_tracker = scene.cm.get(AbilityTracker)
         if ability_tracker:
             ability_tracker = ability_tracker[0]
@@ -170,7 +170,7 @@ class VillageNameLabel(GuiElement):
             bg=palettes.BACKGROUND,
         )
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         params = scene.cm.get(WorldParameters)
         if params:
             params = params[0]

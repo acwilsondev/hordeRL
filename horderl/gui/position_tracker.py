@@ -17,7 +17,7 @@ class PositionTracker(GuiElement):
         self.entity = entity
         self.label = Label(x, y, "", fg=palettes.GOLD)
 
-    def update(self, scene, dt: float):
+    def update(self, scene, dt_ms: int):
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         if coords:
             self.label.value = f"({coords.x}, {coords.y})"

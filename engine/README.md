@@ -42,9 +42,9 @@ protocol and pass that implementation into the controller.
 `GameScene` defines the scene lifecycle hooks in the following order:
 
 1. `on_load()`
-2. `before_update(dt)`
-3. `update(dt)`
-4. `render(dt)`
+2. `before_update(dt_ms)`
+3. `update(dt_ms)`
+4. `render(dt_ms)`
 5. `on_unload()`
 
 Only override lifecycle hooks (`on_load`, `before_update`, `update`, `render`,
