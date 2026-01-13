@@ -1,8 +1,8 @@
 import random
 from dataclasses import dataclass
 
-from horderl.engine import core
 from horderl.components.actors.energy_actor import EnergyActor
+from horderl.engine import core
 
 from ..events.new_day_event import DayBeganListener
 from ..events.start_game_events import GameStartListener

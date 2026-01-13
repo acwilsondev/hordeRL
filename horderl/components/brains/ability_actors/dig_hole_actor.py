@@ -5,6 +5,7 @@ import tcod
 
 from horderl import palettes
 from horderl.components import Coordinates
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.diggable import Diggable
 from horderl.components.enums import Intention
@@ -12,7 +13,6 @@ from horderl.components.events.die_events import Die
 from horderl.content.terrain.dirt import make_dirt
 from horderl.content.terrain.hole import make_hole
 from horderl.engine import core
-from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
 
 

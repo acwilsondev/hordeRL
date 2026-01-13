@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import List
 
 from horderl.components import Attributes, Coordinates
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.attacks.attack_effects.attack_effect import (
     AttackEffect,
 )
@@ -12,7 +13,6 @@ from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.owner import Owner
 from horderl.content.states import help_animation
 from horderl.engine import constants
-from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
 from horderl.i18n import t
 

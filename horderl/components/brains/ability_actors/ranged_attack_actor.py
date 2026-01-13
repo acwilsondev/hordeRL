@@ -3,12 +3,12 @@ from dataclasses import dataclass
 import tcod
 
 from horderl.components.actions.attack_action import AttackAction
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.animation_effects.blinker import AnimationBlinker
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.tags.hordeling_tag import HordelingTag
 from horderl.engine import constants, core
-from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.utilities import is_visible
 
 

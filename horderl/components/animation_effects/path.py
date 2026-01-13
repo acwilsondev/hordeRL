@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.components.path_node import PathNode
 from horderl.components.actors.real_time_actor import RealTimeActor
+from horderl.components.path_node import PathNode
 
 
 @dataclass

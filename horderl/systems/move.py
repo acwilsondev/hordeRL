@@ -3,6 +3,7 @@ from typing import Tuple
 
 from .. import palettes
 from ..components import Senses
+from ..components.actors.actor import Actor
 from ..components.attacks.attack import Attack
 from ..components.brains.brain import Brain
 from ..components.coordinates import Coordinates
@@ -18,7 +19,6 @@ from ..components.states.move_cost_affectors import (
     Haste,
     Hindered,
 )
-from ..components.actors.actor import Actor
 from ..i18n import t
 from ..systems.utilities import get_blocking_object
 
