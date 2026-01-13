@@ -1,11 +1,11 @@
 import random
 
 from engine import core
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
-from horderl.components import Appearance, Attributes, Coordinates
-from horderl.components.actors.energy_actor import EnergyActor
+from horderl.components import Appearance, Attributes
 from horderl.components.attacks.standard_attack import StandardAttack
 from horderl.components.brains.default_active_actor import DefaultActiveActor
 from horderl.components.death_listeners.drop_gold import DropGold

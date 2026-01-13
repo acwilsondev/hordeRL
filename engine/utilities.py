@@ -1,7 +1,7 @@
 import math
 from itertools import product
 
-from horderl.components.coordinates import Coordinates
+from engine.components import Coordinates
 
 
 def clamp(number: int, min: int, max: int):
@@ -53,8 +53,7 @@ def get_box(start_loc, end_loc):
     return tiles
 
 
-def is_visible(scene, entity: int):
-    coords = scene.cm.get_one(Coordinates, entity=entity)
+def is_visible(scene, coords: Coordinates):
     return coords and scene.visibility_map[coords.x, coords.y]
 
 

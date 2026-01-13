@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import List
 
+from engine.components import Coordinates, EnergyActor
 from engine.utilities import get_3_by_3_square
-from horderl.components import Attributes, Coordinates
+from horderl.components import Attributes
 from horderl.components.actions.attack_action import AttackAction
-from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.events.die_events import Die
 from horderl.content.explosion import make_explosion
 from horderl.content.states import character_animation

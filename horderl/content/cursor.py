@@ -1,9 +1,10 @@
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_HIGH
 
 from .. import palettes
-from ..components import Appearance, Coordinates
+from ..components import Appearance
 
 
 def make_cursor(x, y):

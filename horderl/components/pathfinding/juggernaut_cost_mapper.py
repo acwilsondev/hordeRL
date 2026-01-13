@@ -1,8 +1,9 @@
 import numpy as np
 
+from engine.components import Coordinates
 from engine.components.entity import Entity
 
-from .. import Attributes, Coordinates
+from .. import Attributes
 from ..material import Material
 from .cost_mapper import CostMapper
 

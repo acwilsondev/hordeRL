@@ -1,8 +1,9 @@
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
-from horderl.components import Appearance, Coordinates
+from horderl.components import Appearance
 from horderl.components.diggable import Diggable
 from horderl.components.events.hole_dug_events import HoleDug
 from horderl.components.floodable import Floodable

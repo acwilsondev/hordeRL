@@ -1,10 +1,11 @@
 import random
 
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
-from horderl.components import Appearance, Coordinates
+from horderl.components import Appearance
 from horderl.components.animation_effects.randomized_blinker import (
     RandomizedBlinker,
 )

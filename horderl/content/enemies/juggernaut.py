@@ -1,11 +1,11 @@
 import random
 
 from engine import core
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
-from horderl.components import Appearance, Attributes, Coordinates
-from horderl.components.actors.energy_actor import EnergyActor
+from horderl.components import Appearance, Attributes
 from horderl.components.attacks.attack_effects.knockback_attack import (
     KnockbackAttack,
 )

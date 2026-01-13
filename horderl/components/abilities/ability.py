@@ -2,11 +2,11 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine import constants
+from engine.components import Coordinates
 from engine.components.component import Component
 from horderl.i18n import t
 
 from ...content.states import no_money_animation
-from .. import Coordinates
 from ..enums import Intention
 
 

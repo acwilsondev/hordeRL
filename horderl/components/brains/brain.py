@@ -2,7 +2,7 @@ from abc import ABC
 from dataclasses import dataclass
 
 from engine import GameScene, constants
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 
 from ..animation_effects.blinker import AnimationBlinker
 

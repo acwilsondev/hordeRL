@@ -1,3 +1,5 @@
+from engine.components import Coordinates
+
 """
 This module defines tree entities that can be placed in the game world.
 
@@ -10,7 +12,7 @@ from engine import core
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
-from horderl.components import Appearance, Attributes, Coordinates
+from horderl.components import Appearance, Attributes
 from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.death_listeners.terrain_changes_on_death import (
     TerrainChangedOnDeath,

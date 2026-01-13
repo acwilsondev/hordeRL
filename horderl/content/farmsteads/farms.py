@@ -1,8 +1,9 @@
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOW
 from horderl import palettes
-from horderl.components import Appearance, Coordinates
+from horderl.components import Appearance
 from horderl.components.attack_start_listeners.grow_crops import GrowCrops
 from horderl.components.relationships.farmed_by import FarmedBy
 

@@ -4,10 +4,9 @@ from typing import List
 import tcod
 
 from engine import core
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
 from horderl import palettes
-from horderl.components import Coordinates
-from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.diggable import Diggable
 from horderl.components.enums import Intention

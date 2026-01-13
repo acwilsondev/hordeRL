@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from engine import constants
+from engine.components import Coordinates
 from engine.core import log_debug
-from horderl.components import Coordinates
 from horderl.components.actions.attack_action import AttackAction
 from horderl.components.attacks.attack import Attack
 from horderl.components.brains.brain import Brain

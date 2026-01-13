@@ -30,7 +30,7 @@ DEFAULT_FILE_LEVEL = {
 def configure_logging(
     environment: str = "development",
     log_dir: str = "logs",
-    log_file: str = "horderl.log",
+    log_file: str = "engine.log",
     console_level: Optional[int] = None,
     file_level: Optional[int] = None,
     capture_warnings: bool = True,

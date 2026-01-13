@@ -6,11 +6,12 @@ import tcod
 from tcod import console
 
 from engine.component_manager import ComponentManager
+from engine.components import Coordinates
 from engine.core import timed
 from engine.ui.gui_element import GuiElement
 
 from .. import palettes
-from ..components import Appearance, Coordinates
+from ..components import Appearance
 
 
 class PlayWindow(GuiElement):

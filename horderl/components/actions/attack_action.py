@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from typing import List
 
 from engine import constants
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
-from horderl.components import Attributes, Coordinates
-from horderl.components.actors.energy_actor import EnergyActor
+from horderl.components import Attributes
 from horderl.components.attacks.attack_effects.attack_effect import (
     AttackEffect,
 )

@@ -3,9 +3,9 @@ from dataclasses import dataclass
 from typing import Optional
 
 from engine import constants, utilities
+from engine.components import Coordinates
 from engine.core import log_debug
 from horderl import palettes
-from horderl.components import Coordinates
 from horderl.components.actions.attack_action import AttackAction
 from horderl.components.actions.eat_action import EatAction
 from horderl.components.actions.tunnel_to_point import TunnelToPoint

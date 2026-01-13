@@ -2,7 +2,7 @@ import random
 from dataclasses import dataclass
 
 from engine import core
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 from horderl.components.world_building.world_parameters import (
     get_forest_params,
     get_mountain_params,

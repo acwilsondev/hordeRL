@@ -1,8 +1,9 @@
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOW
 from horderl import palettes
-from horderl.components import Appearance, Coordinates
+from horderl.components import Appearance
 from horderl.components.material import Material
 from horderl.components.pickup_gold import GoldPickup
 

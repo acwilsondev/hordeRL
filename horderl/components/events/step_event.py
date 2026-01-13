@@ -3,9 +3,9 @@ from dataclasses import dataclass
 from typing import Tuple
 
 from engine import GameScene, constants
+from engine.components import Coordinates
 from engine.components.component import Component
 from engine.components.events import Event
-from horderl.components import Coordinates
 
 
 @dataclass

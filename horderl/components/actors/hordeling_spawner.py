@@ -1,7 +1,7 @@
 import random
 from dataclasses import dataclass
 
-from horderl.components.actors.energy_actor import EnergyActor
+from engine.components import EnergyActor
 from horderl.content.enemies.juggernaut import make_juggernaut
 from horderl.content.enemies.juvenile import make_juvenile
 from horderl.content.enemies.pirhana import make_pirhana

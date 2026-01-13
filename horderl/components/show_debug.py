@@ -1,10 +1,10 @@
 import logging
 from dataclasses import dataclass
 
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
-from horderl.components.actors.energy_actor import EnergyActor
 
-from ..components import Attributes, Coordinates, Senses
+from ..components import Attributes, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility
 from ..components.brains.brain import Brain
 from ..components.brains.default_active_actor import DefaultActiveActor

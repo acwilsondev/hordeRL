@@ -1,11 +1,12 @@
 import random
 
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOW
 
 from .. import palettes
-from ..components import Appearance, Coordinates
+from ..components import Appearance
 from ..components.events.delete_event import Delete
 from ..components.tags.corpse_tag import CorpseTag
 
