@@ -8,15 +8,17 @@ from horderl.components.relationships.owner import Owner
 from horderl.components.structure import Structure
 from horderl.engine import core
 from horderl import palettes
+from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
-from horderl.engine.types import Entity, EntityId
+from horderl.engine.types import Entity as EntityType
+from horderl.engine.types import EntityId
 
 description = (
     "A wall, made of a light, grassy material. Be wary, it's highly flammable."
 )
 
 
-def make_wall(root_id, x, y, piece="um") -> Entity:
+def make_wall(root_id, x, y, piece="um") -> EntityType:
     entity_id: EntityId = core.get_id()
     glyph = piece_map[piece]
 
