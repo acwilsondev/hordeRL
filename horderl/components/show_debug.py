@@ -76,7 +76,7 @@ class ShowDebug(EnergyActor):
             scene: The current game scene containing the GUI and component manager.
 
         """
-        scene.gui.add_element(
+        scene.add_gui_element(
             EasyMenu(
                 "Debug Options",
                 {
@@ -127,7 +127,7 @@ def get_examine_game_objects(scene):
         entities = scene.cm.get(Entity)
         entities = [e for e in entities if not e.static]
         entities = sorted(entities, key=lambda e: e.id)
-        scene.gui.add_element(
+        scene.add_gui_element(
             EasyMenu(
                 "Examine which?",
                 {
@@ -326,7 +326,7 @@ def get_teleport_to(scene):
         entities = scene.cm.get(Entity)
         entities = [e for e in entities if not e.static]
         entities = sorted(entities, key=lambda e: e.id)
-        scene.gui.add_element(
+        scene.add_gui_element(
             EasyMenu(
                 "Teleport to which entity?",
                 {
@@ -422,7 +422,7 @@ def get_activate_ability(scene):
             get_toggle_masonry(scene)
         )
 
-        scene.gui.add_element(
+        scene.add_gui_element(
             EasyMenu(
                 "Toggle which ability?",
                 ability_map,
@@ -486,7 +486,7 @@ def get_pathfinding_for(scene):
         actors = scene.cm.get(DefaultActiveActor)
         entities = [scene.cm.get_one(Entity, entity=e.entity) for e in actors]
         entities = sorted(entities, key=lambda e: e.id)
-        scene.gui.add_element(
+        scene.add_gui_element(
             EasyMenu(
                 "Toggle pathfinding for which?",
                 {

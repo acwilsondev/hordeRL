@@ -22,7 +22,7 @@ class EasyMenu(GuiElement):
         return_only=False,
         on_escape=None,
     ):
-        super().__init__(0, 0, single_shot=True)
+        super().__init__(0, 0)
         self.header = header
         self.option_map = options
         self.options = [o for o in options.keys()]
@@ -36,61 +36,69 @@ class EasyMenu(GuiElement):
         if len(self.pages) == 0:
             self.pages.append([])
         self.on_escape: Optional[Callable] = on_escape
+        self.page = 0
+        self.modal = True
+
+    def update(self, scene, dt: float) -> None:
+        import tcod.event
+
+        key_event = core.get_key_event()
+        if key_event is None:
+            return
+
+        key_sym = int(key_event.sym)
+        has_next = self.page + 1 < len(self.pages)
+        has_previous = self.page > 0
+
+        if key_sym == tcod.event.KeySym.RETURN:
+            self.close()
+            return
+        if self.on_escape and key_sym == tcod.event.KeySym.ESCAPE:
+            self.on_escape()
+            self.close()
+            return
+        if self.return_only:
+            return
+        if (
+            key_sym == tcod.event.KeySym.RIGHT
+            or key_sym == tcod.event.KeySym.n
+        ) and has_next:
+            self.page += 1
+            return
+        if (
+            key_sym == tcod.event.KeySym.LEFT
+            or key_sym == tcod.event.KeySym.p
+        ) and has_previous:
+            self.page -= 1
+            return
+
+        index = key_sym - ord("a")
+
+        # adjust index for the correct page
+        index += self.page * 10
+
+        if 0 <= index < len(self.options):
+            option_at_index = self.options[index]
+            callback = self.option_map.get(
+                option_at_index,
+                lambda: print(t("menu.nav.no_option")),
+            )
+            callback()
+            self.close()
 
     def render(self, panel):
         """
-        Draw a menu to the screen and return the user's option.
+        Draw a menu to the screen.
         """
+        self.draw_menu(
+            panel,
+            self.pages[self.page],
+            has_next=self.page + 1 < len(self.pages),
+            has_previous=self.page > 0,
+        )
+
+    def draw_menu(self, root, options, has_next=False, has_previous=False):
         import tcod
-        import tcod.event
-
-        page = 0
-        index = None
-        while index is None:
-            has_next = page + 1 < len(self.pages)
-            has_previous = page > 0
-            key_event = self.show_and_get_input(
-                panel,
-                self.pages[page],
-                has_next=has_next,
-                has_previous=has_previous,
-            )
-            key_sym = int(key_event.sym)
-            if (
-                key_sym == tcod.event.KeySym.RIGHT
-                or key_sym == tcod.event.KeySym.n
-            ) and has_next:
-                page += 1
-            elif (
-                key_sym == tcod.event.KeySym.LEFT
-                or key_sym == tcod.event.KeySym.p
-            ) and has_previous:
-                page -= 1
-            elif key_sym == tcod.event.KeySym.RETURN:
-                return
-            elif self.on_escape and key_sym == tcod.event.KeySym.ESCAPE:
-                self.on_escape()
-                return
-            else:
-                index = key_sym - ord("a")
-
-                # adjust index for the correct page
-                index += page * 10
-
-                if 0 <= index < len(self.options):
-                    option_at_index = self.options[index]
-                    callback = self.option_map.get(
-                        option_at_index,
-                        lambda: print(t("menu.nav.no_option")),
-                    )
-                    callback()
-
-    def show_and_get_input(
-        self, root, options, has_next=False, has_previous=False
-    ):
-        import tcod
-        from tcod import libtcodpy
-        from tcod.event_constants import K_RETURN
 
         lines = textwrap.wrap(
             self.header,
@@ -158,12 +166,3 @@ class EasyMenu(GuiElement):
         x = self.config.screen_width // 2 - self.width // 2
         y = self.config.screen_height // 2 - height // 2
         window.blit(root, x, y, width=self.width, height=height)
-
-        libtcodpy.console_flush()
-
-        key_event = core.wait_for_char()
-        if self.return_only:
-            while key_event is None or int(key_event.sym) != K_RETURN:
-                key_event = core.wait_for_char()
-
-        return key_event

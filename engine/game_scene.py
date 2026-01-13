@@ -75,6 +75,12 @@ class GameScene:
             )
             self.gui_elements.append(element)
 
+    def has_modal_gui(self) -> bool:
+        return any(
+            element.modal and not element.is_closed
+            for element in self.gui_elements
+        )
+
     def popup_message(self, message: str):
         """
         Display a popup message to the user.
@@ -175,6 +181,9 @@ class GameScene:
         self.logger.debug(f"Rendering {len(self.gui_elements)} GUI elements")
         for element in self.gui_elements:
             element.update(self, dt)
+        self.gui_elements = [
+            element for element in self.gui_elements if not element.is_closed
+        ]
         for element in self.gui_elements:
             self.ui_context.render_element(element)
 

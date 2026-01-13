@@ -29,7 +29,7 @@ def get_settings(scene, factory):
 class SelectBiome(EnergyActor):
     def act(self, scene):
         self._log_info(f"setting worldbuilder params")
-        scene.gui.add_element(
+        scene.add_gui_element(
             EasyMenu(
                 t("menu.biome.title"),
                 {

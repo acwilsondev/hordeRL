@@ -15,7 +15,7 @@ class Menu(GuiElement):
     """
 
     def __init__(self, header, options, width, callback, config):
-        super().__init__(0, 0, single_shot=True)
+        super().__init__(0, 0)
         self.header = header
         self.options = options
         self.width = width
@@ -24,49 +24,57 @@ class Menu(GuiElement):
         self.pages = [options[i : i + 10] for i in range(0, len(options), 10)]
         if len(self.pages) == 0:
             self.pages.append([])
+        self.page = 0
+        self.modal = True
+
+    def update(self, scene, dt: float) -> None:
+        key_event = core.get_key_event()
+        if key_event is None:
+            return
+
+        key_sym = key_event.sym
+        has_next = self.page + 1 < len(self.pages)
+        has_previous = self.page > 0
+        if (
+            key_sym is tcod.event.KeySym.RIGHT or key_sym is tcod.event.K_n
+        ) and has_next:
+            self.page += 1
+            return
+        if (
+            key_sym is tcod.event.KeySym.LEFT
+            or key_sym is tcod.event.KeySym.p
+        ) and has_previous:
+            self.page -= 1
+            return
+        if key_sym is tcod.event.KeySym.RETURN:
+            self.close()
+            return
+
+        index = key_sym - ord("a")
+
+        # adjust index for the correct page
+        index += self.page * 10
+
+        if 0 <= index < len(self.options) and self.callback:
+            self.callback(index)
+            self.close()
+            return
+        if self.callback:
+            self.callback(None)
+            self.close()
 
     def render(self, panel):
         """
-        Draw a menu to the screen and return the user's option.
+        Draw a menu to the screen.
         """
-        page = 0
-        index = None
-        while not index:
-            has_next = page + 1 < len(self.pages)
-            has_previous = page > 0
-            key_event = self.show_and_get_input(
-                panel,
-                self.pages[page],
-                has_next=has_next,
-                has_previous=has_previous,
-            )
-            key_sym = key_event.sym
-            if (
-                key_sym is tcod.event.KeySym.RIGHT or key_sym is tcod.event.K_n
-            ) and has_next:
-                page += 1
-            elif (
-                key_sym is tcod.event.KeySym.LEFT
-                or key_sym is tcod.event.KeySym.p
-            ) and has_previous:
-                page -= 1
-            elif key_sym is tcod.event.KeySym.RETURN:
-                return
-            else:
-                index = key_sym - ord("a")
+        self.draw_menu(
+            panel,
+            self.pages[self.page],
+            has_next=self.page + 1 < len(self.pages),
+            has_previous=self.page > 0,
+        )
 
-                # adjust index for the correct page
-                index += page * 10
-
-                if 0 <= index < len(self.options) and self.callback:
-                    self.callback(index)
-                    return
-                if self.callback:
-                    self.callback(None)
-
-    def show_and_get_input(
-        self, root, options, has_next=False, has_previous=False
-    ):
+    def draw_menu(self, root, options, has_next=False, has_previous=False):
         lines = [
             "\n".join(
                 textwrap.wrap(
@@ -114,7 +122,3 @@ class Menu(GuiElement):
         x = self.config.screen_width // 2 - self.width // 2
         y = self.config.screen_height // 2 - height // 2
         window.blit(root, x, y, width=self.width, height=height)
-        tcod.console_flush()
-
-        key_event = core.wait_for_char()
-        return key_event

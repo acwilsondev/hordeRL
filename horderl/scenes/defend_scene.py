@@ -198,6 +198,8 @@ class DefendScene(GameScene):
         maintaining game logic consistency.
 
         """
+        if self.has_modal_gui():
+            return
         act.run(self)
         move.run(self)
         control_turns.run(self)

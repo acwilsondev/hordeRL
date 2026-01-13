@@ -43,54 +43,14 @@ class NavigationMenuScene(GameScene):
         self.options = option_scene_map
         self.title_label = None
 
-    def before_update(self, dt: float):
-        """
-        Pre-render GUI elements before the menu is displayed.
-
-        This method ensures that all GUI elements (like the title) are rendered before
-        the interactive menu is shown. This is important because the EasyMenu component
-        will pause execution while waiting for player input, and we want the title and
-        other elements to be visible during this time.
-
-        The method captures the controller's GUI context and triggers a render pass
-        before the update cycle continues.
-
-        """
-        # pre-render the gui elements so that they show up before menu pauses
-        # execution
-        self.gui = self.controller.gui
-        self.render(dt)
-
     def update(self, dt: float):
         """
-        Show the interactive menu and wait for player selection.
+        Update hook for the navigation scene.
 
-        This method creates and displays an EasyMenu component populated with
-        the options provided during initialization. Each menu option is linked
-        to a callback function that will push the corresponding scene onto
-        the controller's scene stack when selected.
-
-        The menu is configured to:
-        - Display in a centered position (y=24)
-        - Show a background
-        - Exit the game when the Escape key is pressed
-
-        The method blocks until the player makes a selection or exits.
-
+        The menu is handled as a persistent GUI element, so no per-frame setup is
+        required here.
         """
-        self.add_gui_element(
-            EasyMenu(
-                "",
-                {
-                    link[0]: self.get_push_scene(link[1])
-                    for link in self.options.items()
-                },
-                24,
-                self.config,
-                hide_background=False,
-                on_escape=lambda: sys.exit(0),
-            )
-        )
+        return
 
     def get_push_scene(self, scene):
         """
@@ -130,4 +90,17 @@ class NavigationMenuScene(GameScene):
             center_x, center_y, self.title, fg=palettes.FRESH_BLOOD
         )
         self.add_gui_element(self.title_label)
+        self.add_gui_element(
+            EasyMenu(
+                "",
+                {
+                    link[0]: self.get_push_scene(link[1])
+                    for link in self.options.items()
+                },
+                24,
+                self.config,
+                hide_background=False,
+                on_escape=lambda: sys.exit(0),
+            )
+        )
         self.sound.play("theme")
