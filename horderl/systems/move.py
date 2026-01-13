@@ -168,21 +168,23 @@ def move(scene, entity: int, vector: Tuple[int, int]):
 
 
 def _apply_post_move_factors(coords, entity, scene):
-    difficult_terrain: bool = any(
-        scene.cm.get_one(DifficultTerrain, entity=coord.entity) is not None
+    coords_entities = [
+        coord.entity
         for coord in scene.cm.get(Coordinates)
-        if (coord.x == coords.x and coord.y == coords.y)
+        if coord.x == coords.x and coord.y == coords.y
+    ]
+    difficult_terrain = any(
+        scene.cm.get_one(DifficultTerrain, entity=coord_entity) is not None
+        for coord_entity in coords_entities
     )
-
-    if entity == scene.player:
-        # Only the player should be hasty
-        easy_terrain: bool = any(
-            scene.cm.get_one(EasyTerrain, entity=coord.entity) is not None
-            for coord in scene.cm.get(Coordinates)
-            if (coord.x == coords.x and coord.y == coords.y)
+    easy_terrain = (
+        any(
+            scene.cm.get_one(EasyTerrain, entity=coord_entity) is not None
+            for coord_entity in coords_entities
         )
-    else:
-        easy_terrain = False
+        if entity == scene.player
+        else False
+    )
 
     haste = scene.cm.get_one(Haste, entity=entity)
     if not easy_terrain and haste:
