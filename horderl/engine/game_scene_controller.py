@@ -1,16 +1,14 @@
 from time import perf_counter
-from typing import List
+from typing import Any, List
 
 from tcod import libtcodpy as tcd
 
-from horderl.config import Config
-
-from ..engine import GameScene, palettes
+from ..engine import GameScene
 from ..engine.component_manager import ComponentManager
 from ..engine.core import log_debug
 from ..engine.logging import get_logger
 from ..engine.sound.default_sound_controller import DefaultSoundController
-from ..gui.gui import Gui
+from ..engine.ui_context import UiContext
 
 
 class GameSceneController:
@@ -33,20 +31,23 @@ class GameSceneController:
     """
 
     @log_debug(__name__)
-    def __init__(self, title: str, config: Config):
+    def __init__(self, title: str, config: Any, gui: Any, ui_context: UiContext):
         """
         Initialize a new GameSceneController instance.
 
         Creates a new controller with an empty scene stack and initializes
-        all required subsystems (GUI, component manager, sound).
+        all required subsystems (component manager, sound).
 
         Args:
             title (str): The title of the game window that will be displayed
                          in the window caption/title bar.
+            config (Any): Configuration object provided by the project layer.
+            gui (Any): Pre-constructed GUI or renderer instance.
+            ui_context (UiContext): Adapter for UI rendering and popups.
 
         Attributes:
             title (str): The game window title.
-            gui (Gui): The graphical user interface manager for rendering.
+            gui (Any): The graphical user interface manager for rendering.
             cm (ComponentManager): Manages game components and their interactions.
             sound (DefaultSoundController): Controls game audio.
             _scene_stack (List[GameScene]): Stack of active game scenes with the
@@ -55,13 +56,8 @@ class GameSceneController:
         """
         self.title: str = title
         self.config = config
-        palettes.apply_config(config)
-        self.gui: Gui = Gui(
-            config.screen_width,
-            config.screen_height,
-            title=self.title,
-            font_path=config.font,
-        )
+        self.gui = gui
+        self.ui_context = ui_context
         self.cm = ComponentManager()
         self.sound = DefaultSoundController()
         self._scene_stack: List[GameScene] = []
@@ -88,7 +84,7 @@ class GameSceneController:
             scene (GameScene): The scene instance to push onto the stack and activate.
 
         """
-        scene.load(self, self.cm, self.gui, self.sound)
+        scene.load(self, self.cm, self.gui, self.sound, self.ui_context)
         for gui_element in scene.gui_elements:
             gui_element.on_load()
         self._scene_stack.append(scene)

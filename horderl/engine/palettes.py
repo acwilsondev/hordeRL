@@ -1,5 +1,5 @@
 # Shamelessly stolen: https://lospec.com/palette-list/fantasy-24
-from horderl.config import Config
+from typing import Any
 
 BACKGROUND = (0, 0, 0)
 GRASS = (0, 0, 0)
@@ -24,7 +24,7 @@ BLOOD = (0, 0, 0)
 # (48, 15, 10)
 
 
-def apply_config(config: Config) -> None:
+def apply_config(config: Any) -> None:
     global BACKGROUND
     global GRASS
     global WALL_TREE
@@ -64,6 +64,3 @@ def apply_config(config: Config) -> None:
     LIGHT_WATER = config.color_light_water
     HORDELING = config.color_hordeling
     BLOOD = config.color_blood
-
-
-apply_config(Config())
