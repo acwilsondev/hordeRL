@@ -4,7 +4,6 @@ from dataclasses import dataclass
 from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
 
-from .. import engine
 from ..components import Attributes, Coordinates, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility
 from ..components.brains.brain import Brain
@@ -17,6 +16,7 @@ from ..components.events.die_events import Die
 from ..components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from ..components.serialization.save_game import SaveGame
 from ..components.wrath_effect import WrathEffect
+from ..constants import PLAYER_ID
 from ..content.cursor import make_cursor
 from ..content.farmsteads.houses import place_farmstead
 from ..content.terrain.roads import connect_point_to_road_network
@@ -198,9 +198,7 @@ def get_heal(scene):
     """
 
     def out_fn():
-        health = scene.cm.get_one(
-            Attributes, entity=engine.constants.PLAYER_ID
-        )
+        health = scene.cm.get_one(Attributes, entity=PLAYER_ID)
         if health:
             health.hp = health.max_hp
 
@@ -364,14 +362,10 @@ def get_teleport_to_entity(scene, entity):
     def out_fn():
         target_coords = scene.cm.get_one(Coordinates, entity=entity)
         if target_coords:
-            player_coords = scene.cm.get_one(
-                Coordinates, entity=engine.constants.PLAYER_ID
-            )
+            player_coords = scene.cm.get_one(Coordinates, entity=PLAYER_ID)
             player_coords.x = target_coords.x
             player_coords.y = target_coords.y
-            senses = scene.cm.get_one(
-                Senses, entity=engine.constants.PLAYER_ID
-            )
+            senses = scene.cm.get_one(Senses, entity=PLAYER_ID)
             senses.dirty = True
 
     return out_fn

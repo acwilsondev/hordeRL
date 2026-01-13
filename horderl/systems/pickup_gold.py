@@ -1,6 +1,6 @@
 from ..components import Coordinates
 from ..components.pickup_gold import GoldPickup
-from ..engine import PLAYER_ID
+from ..constants import PLAYER_ID
 from ..engine.core import log_debug
 
 

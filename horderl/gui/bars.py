@@ -6,7 +6,8 @@ from ..components.abilities.thwack_ability import ThwackAbility
 from ..components.brains.dizzy_brain import DizzyBrain
 from ..components.population import Population
 from ..components.tags.hordeling_tag import HordelingTag
-from ..engine import PLAYER_ID, core
+from ..constants import PLAYER_ID
+from ..engine import core
 from ..gui.gui_element import GuiElement
 
 
