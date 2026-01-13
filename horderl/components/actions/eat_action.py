@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from engine import constants
-from engine.components.entity import Entity
 from engine.components import EnergyActor
+from engine.components.entity import Entity
 from horderl.components.events.die_events import Die
 from horderl.components.stomach import Stomach
 from horderl.components.tags.peasant_tag import PeasantTag

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from engine.components import Coordinates
 
 from ...content.cursor import make_cursor

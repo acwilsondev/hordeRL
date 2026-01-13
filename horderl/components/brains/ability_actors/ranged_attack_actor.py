@@ -3,9 +3,9 @@ from dataclasses import dataclass
 import tcod
 
 from engine import constants, core
+from engine.components import Coordinates, EnergyActor
 from engine.utilities import is_visible
 from horderl.components.actions.attack_action import AttackAction
-from engine.components import Coordinates, EnergyActor
 from horderl.components.animation_effects.blinker import AnimationBlinker
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention

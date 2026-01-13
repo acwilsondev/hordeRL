@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.components.relationships.resident import Resident

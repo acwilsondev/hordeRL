@@ -1,4 +1,5 @@
 import numpy as np
+
 from engine.components import Coordinates
 
 from .. import Attributes

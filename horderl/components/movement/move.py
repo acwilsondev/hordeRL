@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from engine.components.component import Component
 from engine.components import EnergyActor
+from engine.components.component import Component
 
 
 @dataclass

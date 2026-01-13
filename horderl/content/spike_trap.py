@@ -1,7 +1,7 @@
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST
-from engine.components import Coordinates
 
 from .. import palettes
 from ..components import Appearance

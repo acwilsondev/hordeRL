@@ -1,7 +1,7 @@
 import random
-from engine.components import Coordinates
 
 from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes

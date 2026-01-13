@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )

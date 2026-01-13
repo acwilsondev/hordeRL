@@ -1,5 +1,5 @@
-from horderl import palettes
 from engine.components import Coordinates
+from horderl import palettes
 
 from ..events.step_event import StepListener
 from ..pickup_gold import GoldPickup

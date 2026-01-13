@@ -1,6 +1,6 @@
 import time
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from engine.ui.gui_element import GuiElement
 
 from .. import palettes

@@ -1,8 +1,7 @@
 from dataclasses import dataclass
-from engine.components import Coordinates
 
 from engine import core
-from engine.components import EnergyActor
+from engine.components import Coordinates, EnergyActor
 
 from ..components.events.hole_dug_events import HoleDugListener
 from ..components.floodable import Floodable

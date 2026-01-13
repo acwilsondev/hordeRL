@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from random import choice
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from horderl.components.brains.peasant_actor import PeasantActor
 from horderl.components.events.start_game_events import GameStartListener
 from horderl.components.relationships.farmed_by import FarmedBy

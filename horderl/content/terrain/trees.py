@@ -1,4 +1,5 @@
 from engine.components import Coordinates
+
 """
 This module defines tree entities that can be placed in the game world.
 

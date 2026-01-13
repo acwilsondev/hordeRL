@@ -1,11 +1,10 @@
 from dataclasses import dataclass
 from typing import List
-from engine.components import Coordinates
 
 from engine import constants
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
 from horderl.components import Attributes
-from engine.components import EnergyActor
 from horderl.components.attacks.attack_effects.attack_effect import (
     AttackEffect,
 )

@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from math import sqrt
-from engine.components import Coordinates
 
+from engine.components import Coordinates, EnergyActor
 from horderl import palettes
-from engine.components import EnergyActor
 from horderl.i18n import t
 
 from ...content.attacks import thwack_animation, thwack_dizzy_animation

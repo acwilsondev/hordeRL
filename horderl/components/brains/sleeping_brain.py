@@ -1,9 +1,8 @@
 from dataclasses import dataclass
-from engine.components import Coordinates
 
 from engine import constants, core
+from engine.components import Coordinates, EnergyActor
 from engine.core import log_debug
-from engine.components import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.events.peasant_events import PeasantDied
 from horderl.components.stomach import Stomach

@@ -1,11 +1,10 @@
 from dataclasses import dataclass
-from engine.components import Coordinates
 
 import tcod
 
 from engine import constants, core
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
-from engine.components import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 

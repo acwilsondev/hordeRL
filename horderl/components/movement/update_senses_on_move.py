@@ -1,5 +1,6 @@
 import numpy as np
 import tcod
+
 from engine.components import Coordinates
 
 from ..events.attack_started_events import AttackStartListener

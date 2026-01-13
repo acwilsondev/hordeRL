@@ -1,9 +1,9 @@
 from typing import Iterator, List, Tuple
-from engine.components import Coordinates
 
 import tcod.path
 
 from engine import core
+from engine.components import Coordinates
 from engine.components.component import Component
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST

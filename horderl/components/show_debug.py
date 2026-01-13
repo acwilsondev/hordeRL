@@ -1,9 +1,8 @@
 import logging
 from dataclasses import dataclass
-from engine.components import Coordinates
 
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
-from engine.components import EnergyActor
 
 from ..components import Attributes, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility

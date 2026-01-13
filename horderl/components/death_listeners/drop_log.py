@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from engine.logging import get_logger
 from horderl.components.events.die_events import DeathListener
 from horderl.content.getables.fallen_log import make_fallen_log

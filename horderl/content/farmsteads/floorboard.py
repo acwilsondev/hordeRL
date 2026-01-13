@@ -1,6 +1,6 @@
 from typing import List, Tuple
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from engine.components.component import Component
 from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM

@@ -2,8 +2,8 @@ from dataclasses import dataclass, field
 from typing import Dict
 
 from engine import core
-from horderl import palettes
 from engine.components import EnergyActor
+from horderl import palettes
 from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.i18n import t
 

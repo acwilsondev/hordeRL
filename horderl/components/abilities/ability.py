@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from engine.components import Coordinates
 
 from engine import constants
+from engine.components import Coordinates
 from engine.components.component import Component
 from horderl.i18n import t
 

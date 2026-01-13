@@ -1,9 +1,9 @@
 import logging
 import random
 from typing import Set
-from engine.components import Coordinates
 
 from engine import constants, core
+from engine.components import Coordinates
 from engine.types import ComplexEntity, EntityId
 from engine.utilities import get_3_by_3_square, get_box
 from horderl import palettes

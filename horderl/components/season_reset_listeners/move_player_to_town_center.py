@@ -1,7 +1,7 @@
+from engine.components import Coordinates
 from horderl.components.events.attack_started_events import AttackStartListener
 from horderl.components.events.start_game_events import GameStartListener
 from horderl.components.tags.town_center_flag import TownCenterFlag
-from engine.components import Coordinates
 
 
 class MovePlayerToTownCenter(GameStartListener, AttackStartListener):

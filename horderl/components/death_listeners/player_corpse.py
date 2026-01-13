@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from horderl import palettes
 from horderl.components.events.die_events import DeathListener
 from horderl.content import corpses, player_corpse

@@ -1,14 +1,13 @@
 from dataclasses import dataclass
 from typing import List
-from engine.components import Coordinates
 
 import tcod
 
 from engine import core
+from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
 from engine.types import EntityId
 from horderl import palettes
-from engine.components import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.events.die_events import Die

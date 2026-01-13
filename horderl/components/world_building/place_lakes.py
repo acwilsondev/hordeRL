@@ -1,8 +1,8 @@
 import random
 from dataclasses import dataclass
-from engine.components import Coordinates
 
 from engine import core
+from engine.components import Coordinates
 from engine.utilities import get_3_by_3_box
 from horderl.components.events.build_world_events import BuildWorldListener
 from horderl.components.world_building.world_parameters import WorldParameters

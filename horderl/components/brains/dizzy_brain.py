@@ -1,10 +1,10 @@
 import random
 from dataclasses import dataclass
-from engine.components import Coordinates
 
 import tcod
 
 from engine import core
+from engine.components import Coordinates
 from horderl.components.ability_tracker import AbilityTracker
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention

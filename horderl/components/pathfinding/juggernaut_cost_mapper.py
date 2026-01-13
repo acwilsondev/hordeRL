@@ -1,6 +1,6 @@
 import numpy as np
-from engine.components import Coordinates
 
+from engine.components import Coordinates
 from engine.components.entity import Entity
 
 from .. import Attributes
