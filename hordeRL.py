@@ -9,8 +9,9 @@ from horderl import palettes
 from horderl.config import get_relative_path, load_config
 from horderl.engine.game_scene_controller import GameSceneController
 from horderl.engine.logging import configure_logging
-from horderl.gui.gui import Gui
-from horderl.gui.gui_adapter import GuiAdapter
+from horderl.engine.ui.gui import Gui
+from horderl.engine.ui.gui_adapter import GuiAdapter
+from horderl.gui.popup_message import PopupMessage
 from horderl.i18n import load_locale, t
 from horderl.resources.audio import TRACKS
 from horderl.scenes.start_menu import get_start_menu
@@ -24,7 +25,7 @@ def main(config):
         title=t("game.title"),
         font_path=config.font,
     )
-    ui_context = GuiAdapter(gui)
+    ui_context = GuiAdapter(gui, popup_factory=PopupMessage)
     game = GameSceneController(
         t("game.title"), config, gui, ui_context, TRACKS
     )

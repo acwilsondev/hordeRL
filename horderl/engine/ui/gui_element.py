@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     import tcod
 
-from ..engine.core import get_id
+from ..core import get_id
 
 
 @dataclass

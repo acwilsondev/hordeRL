@@ -8,7 +8,7 @@ from ..components.population import Population
 from ..components.tags.hordeling_tag import HordelingTag
 from ..constants import PLAYER_ID
 from ..engine import core
-from ..gui.gui_element import GuiElement
+from ..engine.ui.gui_element import GuiElement
 
 
 @dataclass

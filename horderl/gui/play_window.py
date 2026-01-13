@@ -9,7 +9,7 @@ from .. import palettes
 from ..components import Appearance, Coordinates
 from ..engine.component_manager import ComponentManager
 from ..engine.core import timed
-from ..gui.gui_element import GuiElement
+from ..engine.ui.gui_element import GuiElement
 
 
 class PlayWindow(GuiElement):

@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from ..gui.gui_element import GuiElement
+from .gui_element import GuiElement
 
 
 @dataclass
