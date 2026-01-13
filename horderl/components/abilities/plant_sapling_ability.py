@@ -7,7 +7,7 @@ from horderl.components.abilities.control_mode_ability import (
 from horderl.components.brains.ability_actors.plant_sapling_actor import (
     PlaceSaplingActor,
 )
-from horderl.engine import palettes
+from horderl import palettes
 
 
 @dataclass

@@ -1,6 +1,7 @@
 import os
 
-from horderl.engine import GameScene, palettes
+from horderl.engine import GameScene
+from horderl import palettes
 from horderl.gui.easy_menu import EasyMenu
 from horderl.gui.labels import Label
 from horderl.i18n import t

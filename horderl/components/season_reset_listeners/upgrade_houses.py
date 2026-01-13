@@ -8,7 +8,7 @@ from horderl.components.house_structure import HouseStructure
 from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
-from horderl.engine import palettes
+from horderl import palettes
 
 
 @dataclass

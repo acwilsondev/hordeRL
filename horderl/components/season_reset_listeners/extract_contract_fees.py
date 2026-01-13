@@ -6,7 +6,7 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
     SeasonResetListener,
 )
 from horderl.components.tax_value import TaxValue
-from horderl.engine import palettes
+from horderl import palettes
 from horderl.i18n import t
 
 

@@ -7,7 +7,8 @@ from ..components.death_listeners.npc_corpse import Corpse
 from ..components.faction import Faction
 from ..components.material import Material
 from ..components.tags.hordeling_tag import HordelingTag
-from ..engine import core, palettes
+from ..engine import core
+from .. import palettes
 from ..engine.constants import PRIORITY_MEDIUM
 
 

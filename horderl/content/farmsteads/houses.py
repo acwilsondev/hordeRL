@@ -8,7 +8,8 @@ from horderl.content.allies.peasants import make_peasant
 from horderl.content.farmsteads.farms import make_farm_plot
 from horderl.content.farmsteads.floorboard import make_floorboard
 from horderl.content.farmsteads.walls import make_wall
-from horderl.engine import constants, core, palettes
+from horderl.engine import constants, core
+from horderl import palettes
 from horderl.engine.types import ComplexEntity, EntityId
 from horderl.engine.utilities import get_3_by_3_square, get_box
 

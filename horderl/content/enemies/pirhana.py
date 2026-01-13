@@ -16,7 +16,8 @@ from horderl.components.pathfinding.target_evaluation.high_crop_target_evaluator
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
-from horderl.engine import core, palettes
+from horderl.engine import core
+from horderl import palettes
 from horderl.engine.components.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM

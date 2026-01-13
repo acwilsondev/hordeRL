@@ -7,7 +7,8 @@ from horderl.components.season_reset_listeners.grow_in_spring import (
     GrowIntoTree,
 )
 from horderl.components.sellable import Sellable
-from horderl.engine import core, palettes
+from horderl.engine import core
+from horderl import palettes
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 

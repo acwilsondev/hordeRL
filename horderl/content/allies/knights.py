@@ -13,7 +13,8 @@ from horderl.components.pathfinding.target_evaluation.ally_target_evaluator impo
 )
 from horderl.components.sellable import Sellable
 from horderl.components.tax_value import TaxValue
-from horderl.engine import core, palettes
+from horderl.engine import core
+from horderl import palettes
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 

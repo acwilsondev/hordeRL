@@ -1,6 +1,6 @@
 import time
 
-from ..engine import palettes
+from .. import palettes
 from ..gui.gui_element import GuiElement
 from ..gui.labels import Label
 

@@ -12,7 +12,8 @@ from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.states.move_cost_affectors import DifficultTerrain
 from horderl.components.tags.ice_tag import IceTag
 from horderl.components.tags.water_tag import WaterTag
-from horderl.engine import core, palettes
+from horderl.engine import core
+from horderl import palettes
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_LOWEST
 

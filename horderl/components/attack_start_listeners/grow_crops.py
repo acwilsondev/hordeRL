@@ -7,7 +7,8 @@ from horderl.components.events.attack_started_events import AttackStartListener
 from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.components.tags.crop_info import CropInfo
 from horderl.content.farmsteads.crops import make_crops
-from horderl.engine import core, palettes
+from horderl.engine import core
+from horderl import palettes
 
 
 @dataclass

@@ -6,7 +6,8 @@ from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.relationships.owner import Owner
 from horderl.components.structure import Structure
-from horderl.engine import core, palettes, types
+from horderl.engine import core
+from horderl import palettes, types
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_MEDIUM
 from horderl.engine.types import EntityId

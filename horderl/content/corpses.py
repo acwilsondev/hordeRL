@@ -5,7 +5,8 @@ from horderl.engine.components.entity import Entity
 from ..components import Appearance, Coordinates
 from ..components.events.delete_event import Delete
 from ..components.tags.corpse_tag import CorpseTag
-from ..engine import core, palettes
+from ..engine import core
+from .. import palettes
 from ..engine.constants import PRIORITY_LOW
 
 

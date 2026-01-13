@@ -5,7 +5,8 @@ from horderl.engine.components.entity import Entity
 
 from ..components import Appearance, Coordinates
 from ..components.actors.bomb_actor import BombActor
-from ..engine import core, palettes
+from ..engine import core
+from .. import palettes
 from ..engine.constants import PRIORITY_LOW
 
 bomb_description = "An explosive bomb! Watch out!"

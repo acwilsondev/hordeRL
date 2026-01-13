@@ -14,7 +14,8 @@ from horderl.components.world_building.set_worldbuilder_params import (
 from horderl.content.physics_controller import make_physics_controller
 from horderl.content.tax_handler import make_tax_handler
 from horderl.content.utilities import make_calendar
-from horderl.engine import GameScene, core, palettes
+from horderl.engine import GameScene, core
+from horderl import palettes
 from horderl.engine.component_manager import ComponentManager
 from horderl.engine.components.class_register import LoadClasses
 from horderl.engine.constants import PLAYER_ID

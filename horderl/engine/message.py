@@ -1,10 +1,8 @@
 from dataclasses import dataclass
-from typing import Tuple
-
-from ..engine import palettes
+from typing import Optional, Tuple
 
 
 @dataclass
 class Message:
     text: str = ""
-    color: Tuple[int, int, int] = palettes.MEAT
+    color: Optional[Tuple[int, int, int]] = None

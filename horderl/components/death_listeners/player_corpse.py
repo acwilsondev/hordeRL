@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from horderl.components import Coordinates
 from horderl.components.events.die_events import DeathListener
 from horderl.content import corpses, player_corpse
-from horderl.engine import palettes
+from horderl import palettes
 
 
 @dataclass

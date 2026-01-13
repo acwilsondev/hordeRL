@@ -1,8 +1,8 @@
 import textwrap
 from typing import Callable, Optional
 
-from .. import engine
-from ..engine import core, palettes
+from ..engine import core
+from .. import palettes
 from ..gui.gui_element import GuiElement
 from ..i18n import t
 
@@ -151,7 +151,7 @@ class EasyMenu(GuiElement):
                 self.config.screen_width,
                 self.config.screen_height,
                 0,
-                bg=engine.palettes.BACKGROUND,
+                bg=palettes.BACKGROUND,
             )
             background.blit(root)
 

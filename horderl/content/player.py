@@ -34,7 +34,8 @@ from ..components.season_reset_listeners.save_on_season import (
     SaveOnSeasonReset,
 )
 from ..components.target_value import PLAYER, TargetValue
-from ..engine import PLAYER_ID, palettes
+from ..engine import PLAYER_ID
+from .. import palettes
 
 
 def make_player(x, y, config):

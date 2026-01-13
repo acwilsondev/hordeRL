@@ -1,4 +1,4 @@
-from horderl.engine import palettes
+from horderl import palettes
 
 from .. import Coordinates
 from ..events.step_event import StepListener

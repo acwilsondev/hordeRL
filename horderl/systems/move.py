@@ -17,7 +17,7 @@ from ..components.states.move_cost_affectors import (
     Haste,
     Hindered,
 )
-from ..engine import palettes
+from .. import palettes
 from ..engine.components.actor import Actor
 from ..i18n import t
 from ..systems.utilities import get_blocking_object

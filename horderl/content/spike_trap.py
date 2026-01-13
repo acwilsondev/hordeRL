@@ -6,7 +6,8 @@ from ..components.diggable import Diggable
 from ..components.material import Material
 from ..components.movement.drain_on_enter import DrainOnEnter
 from ..components.states.move_cost_affectors import DifficultTerrain
-from ..engine import core, palettes
+from ..engine import core
+from .. import palettes
 from ..engine.constants import PRIORITY_LOWEST
 
 

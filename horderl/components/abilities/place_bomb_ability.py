@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Callable
 
-from horderl.engine import palettes
+from horderl import palettes
 
 from ..brains.ability_actors.place_bomb_actor import PlaceBombActor
 from .control_mode_ability import ControlModeAbility

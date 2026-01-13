@@ -25,7 +25,8 @@ from horderl.components.relationships.farmed_by import FarmedBy
 from horderl.components.tags.crop_info import CropInfo
 from horderl.components.target_value import TargetValue
 from horderl.components.tax_value import TaxValue
-from horderl.engine import core, palettes
+from horderl.engine import core
+from horderl import palettes
 from horderl.engine.components.component import Component
 from horderl.engine.components.entity import Entity
 from horderl.engine.constants import PRIORITY_LOW

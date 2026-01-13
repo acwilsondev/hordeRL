@@ -3,7 +3,8 @@ from horderl.engine.components.entity import Entity
 
 from ..components import Appearance, Coordinates
 from ..components.animation_effects.step_animation import StepAnimation
-from ..engine import core, palettes
+from ..engine import core
+from .. import palettes
 from ..engine.constants import PRIORITY_LOW
 
 
