@@ -1,12 +1,10 @@
-from typing import final
+from typing import Any, final
 
 from horderl.engine import serialization
 from horderl.engine.component_manager import ComponentManager
 from horderl.engine.logging import get_logger
 from horderl.engine.sound.sound_controller import SoundController
-from horderl.gui.gui import Gui
-from horderl.gui.gui_element import GuiElement
-from horderl.gui.popup_message import PopupMessage
+from horderl.engine.ui_context import UiContext
 
 
 class GameScene:
@@ -43,11 +41,12 @@ class GameScene:
         self.cm: ComponentManager = ComponentManager()
         self.controller = None
         self.gui = None
+        self.ui_context: UiContext | None = None
         self.sound = None
         self.config = None
         self.logger = get_logger(f"{self.__class__.__name__}")
 
-    def add_gui_element(self, element: GuiElement):
+    def add_gui_element(self, element: Any):
         """
         Add a GUI element to the scene.
 
@@ -65,7 +64,11 @@ class GameScene:
                 "Rendering single-shot GUI element:"
                 f" {element.__class__.__name__}"
             )
-            element.render(self.gui.root)
+            if self.ui_context is None:
+                raise RuntimeError(
+                    "UI context is not configured for this scene."
+                )
+            self.ui_context.render_single_shot(element)
         else:
             self.logger.debug(
                 f"Adding persistent GUI element: {element.__class__.__name__}"
@@ -84,7 +87,11 @@ class GameScene:
 
         """
         self.logger.info(f"Displaying popup message: {message}")
-        self.add_gui_element(PopupMessage(message, self.config))
+        if self.ui_context is None:
+            raise RuntimeError("UI context is not configured for this scene.")
+        self.add_gui_element(
+            self.ui_context.create_popup(message, self.config)
+        )
 
     # Scene Lifecycle Hooks
     # - on_load
@@ -162,12 +169,14 @@ class GameScene:
             dt (float): Elapsed time in seconds since the last frame.
 
         """
-        self.gui.root.clear()
+        if self.ui_context is None:
+            raise RuntimeError("UI context is not configured for this scene.")
+        self.ui_context.clear_root()
         self.logger.debug(f"Rendering {len(self.gui_elements)} GUI elements")
         for element in self.gui_elements:
             element.update(self, dt)
         for element in self.gui_elements:
-            element.render(self.gui.root)
+            self.ui_context.render_element(element)
 
     def on_unload(self):
         """
@@ -190,8 +199,9 @@ class GameScene:
         self,
         controller: "GameSceneController",
         cm: ComponentManager,
-        gui: Gui,
+        gui: Any,
         sound: SoundController,
+        ui_context: UiContext,
     ):
         """
         Initialize the scene with required dependencies and trigger the on_load
@@ -207,8 +217,9 @@ class GameScene:
         Parameters:
             controller (GameSceneController): Reference to the scene controller managing this scene
             cm (ComponentManager): The component manager for entity-component access
-            gui (Gui): The GUI system for rendering interface elements
+            gui (Any): The GUI system for rendering interface elements
             sound (SoundController): The sound system for audio playback
+            ui_context (UiContext): Adapter for rendering and UI helpers
 
         """
         self.logger.info(f"Loading scene: {self.__class__.__name__}")
@@ -216,6 +227,7 @@ class GameScene:
         self.cm = cm
         self.gui = gui
         self.sound = sound
+        self.ui_context = ui_context
         self.config = controller.config
         self.logger.debug(f"Calling on_load() for {self.__class__.__name__}")
         self.on_load()

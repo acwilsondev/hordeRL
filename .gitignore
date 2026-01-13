@@ -114,3 +114,4 @@ savegame.dir
 .log
 options.yamllogs
 logs
+horderl/options.yaml

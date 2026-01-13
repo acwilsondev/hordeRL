@@ -14,13 +14,11 @@ class Label(GuiElement):
     Represent a text label.
     """
 
-    def __init__(
-        self, x, y, value, fg=palettes.WHITE, bg=palettes.BACKGROUND, name=None
-    ):
+    def __init__(self, x, y, value, fg=None, bg=None, name=None):
         super().__init__(x, y, name=name)
         self.value = value
-        self.fg = fg
-        self.bg = bg
+        self.fg = palettes.WHITE if fg is None else fg
+        self.bg = palettes.BACKGROUND if bg is None else bg
 
     def render(self, panel):
         """

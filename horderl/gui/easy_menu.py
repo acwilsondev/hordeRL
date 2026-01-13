@@ -2,8 +2,7 @@ import textwrap
 from typing import Callable, Optional
 
 from .. import engine
-from ..engine import core
-from ..engine.palettes import WHITE
+from ..engine import core, palettes
 from ..gui.gui_element import GuiElement
 from ..i18n import t
 
@@ -109,25 +108,35 @@ class EasyMenu(GuiElement):
         if has_previous:
             height += 1
         window = tcod.console.Console(self.width, height, order="F")
-        window.draw_rect(0, 0, self.width, height, 0, fg=WHITE, bg=None)
+        window.draw_rect(
+            0, 0, self.width, height, 0, fg=palettes.WHITE, bg=None
+        )
         for i, _ in enumerate(lines):
-            window.print(1, 0 + i, lines[i])
+            window.print(1, 0 + i, lines[i], fg=palettes.WHITE, bg=None)
 
         y = header_height
         letter_index = ord("a")
         for option_text in options:
             text = "(" + chr(letter_index) + ") " + option_text
-            window.print(0, y, text, bg=None)
+            window.print(0, y, text, fg=palettes.WHITE, bg=None)
             y += 1
             letter_index += 1
 
         # add nav
         if has_previous and not has_next:
-            window.print(0, y, t("menu.nav.previous"), bg=None)
+            window.print(
+                0, y, t("menu.nav.previous"), fg=palettes.WHITE, bg=None
+            )
         elif has_next and not has_previous:
-            window.print(0, y, t("menu.nav.next"), bg=None)
+            window.print(0, y, t("menu.nav.next"), fg=palettes.WHITE, bg=None)
         elif has_next and has_previous:
-            window.print(0, y, t("menu.nav.previous_next"), bg=None)
+            window.print(
+                0,
+                y,
+                t("menu.nav.previous_next"),
+                fg=palettes.WHITE,
+                bg=None,
+            )
 
         if self.hide_background:
             # Draw a blank screen
