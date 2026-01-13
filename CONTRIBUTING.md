@@ -6,7 +6,7 @@ Thank you for considering contributing to HordeRL! This document provides guidel
 
 ### Prerequisites
 
-- Python 3.8 or newer
+- Python 3.11 (up to 3.11.x)
 - [Poetry](https://python-poetry.org/docs/#installation) for dependency management
 
 ### Setting Up Your Development Environment
@@ -147,6 +147,26 @@ python hordeRL.py --log DEBUG --terminal_log --prof
 - `--log` sets the logging level (DEBUG, INFO, WARNING, ERROR)
 - `--terminal_log` outputs logs to the terminal
 - `--prof` enables profiling to identify performance bottlenecks
+
+## FAQ
+
+1. I get an error when I try to install dependencies.
+
+```sh
+~/projects/hordeRL
+❯ poetry install
+
+Current Python version (3.10.19) is not allowed by the project (>=3.11,<3.12).
+Please change python executable via the "env use" command.
+
+~/projects/hordeRL
+❯ poetry env use 3.11
+
+Could not find the python executable 3.11
+```
+
+You need to install the required Python version to your system.
+
 
 ## Release Process
 

@@ -112,4 +112,5 @@ savegame.dir
 
 *.world
 .log
-options.yaml
+options.yamllogs
+logs
