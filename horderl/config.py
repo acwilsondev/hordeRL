@@ -360,6 +360,15 @@ def load_config(
 
     overrides = overrides or {}
     defaults = _default_option_values()
+    strip_color_overrides = (
+        lambda data: {
+            key: value
+            for key, value in data.items()
+            if not _is_color_override_key(key)
+        }
+        if data
+        else {}
+    )
 
     if os.path.exists(options_path):
         with open(options_path, encoding="utf-8") as options_file:
@@ -369,18 +378,8 @@ def load_config(
     else:
         option_data = _ensure_options_file(options_path, defaults)
 
-    if option_data:
-        option_data = {
-            key: value
-            for key, value in option_data.items()
-            if not _is_color_override_key(key)
-        }
-    if overrides:
-        overrides = {
-            key: value
-            for key, value in overrides.items()
-            if not _is_color_override_key(key)
-        }
+    option_data = strip_color_overrides(option_data)
+    overrides = strip_color_overrides(overrides)
 
     merged = {
         **defaults,
@@ -390,7 +389,7 @@ def load_config(
 
     normalized = _normalize_options(merged)
     palette_name = normalized.get("color_palette")
-    if palette_name and palette_name != "default":
+    if palette_name not in (None, "default"):
         palette_path = _resolve_palette_path(palette_name)
         try:
             palette_colors = _load_palette(palette_name)

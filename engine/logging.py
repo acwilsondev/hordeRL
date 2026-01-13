@@ -72,25 +72,16 @@ def configure_logging(
             logger.propagate = True
 
     # Create formatters
+    base_format = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+    console_formatter = {"format": base_format}
+    file_formatter = {"format": base_format}
     if environment == "development":
-        console_formatter = {
-            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-            "datefmt": "%H:%M:%S",
-        }
-        file_formatter = {
-            "format": (
-                "%(asctime)s [%(levelname)s] %(name)s "
-                "(%(filename)s:%(lineno)d): %(message)s"
-            ),
-            "datefmt": "%Y-%m-%d %H:%M:%S",
-        }
-    else:  # production or test
-        console_formatter = {
-            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-        }
-        file_formatter = {
-            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-        }
+        console_formatter["datefmt"] = "%H:%M:%S"
+        file_formatter["format"] = (
+            "%(asctime)s [%(levelname)s] %(name)s "
+            "(%(filename)s:%(lineno)d): %(message)s"
+        )
+        file_formatter["datefmt"] = "%Y-%m-%d %H:%M:%S"
 
     log_file_path = None
     handlers: Dict[str, Dict[str, Any]] = {}

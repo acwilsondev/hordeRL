@@ -59,17 +59,19 @@ class EasyMenu(GuiElement):
             return
         if self.return_only:
             return
-        if (
-            key_sym == tcod.event.KeySym.RIGHT
-            or key_sym == tcod.event.KeySym.n
-        ) and has_next:
-            self.page += 1
-            return
-        if (
-            key_sym == tcod.event.KeySym.LEFT
-            or key_sym == tcod.event.KeySym.p
-        ) and has_previous:
-            self.page -= 1
+        nav_actions = {
+            tcod.event.KeySym.RIGHT: has_next,
+            tcod.event.KeySym.n: has_next,
+            tcod.event.KeySym.LEFT: has_previous,
+            tcod.event.KeySym.p: has_previous,
+        }
+        if nav_actions.get(key_sym, False):
+            delta = (
+                1
+                if key_sym in (tcod.event.KeySym.RIGHT, tcod.event.KeySym.n)
+                else -1
+            )
+            self.page += delta
             return
 
         index = key_sym - ord("a")
@@ -108,7 +110,7 @@ class EasyMenu(GuiElement):
         )
         header_height = len(lines)
 
-        if self.header == "":
+        if not self.header:
             header_height = 0
         height = len(options) + header_height
         if has_next:
@@ -131,20 +133,15 @@ class EasyMenu(GuiElement):
             letter_index += 1
 
         # add nav
-        if has_previous and not has_next:
-            window.print(
-                0, y, t("menu.nav.previous"), fg=palettes.WHITE, bg=None
-            )
-        elif has_next and not has_previous:
-            window.print(0, y, t("menu.nav.next"), fg=palettes.WHITE, bg=None)
-        elif has_next and has_previous:
-            window.print(
-                0,
-                y,
-                t("menu.nav.previous_next"),
-                fg=palettes.WHITE,
-                bg=None,
-            )
+        nav_text = None
+        if has_next and has_previous:
+            nav_text = t("menu.nav.previous_next")
+        elif has_previous:
+            nav_text = t("menu.nav.previous")
+        elif has_next:
+            nav_text = t("menu.nav.next")
+        if nav_text:
+            window.print(0, y, nav_text, fg=palettes.WHITE, bg=None)
 
         if self.hide_background:
             # Draw a blank screen

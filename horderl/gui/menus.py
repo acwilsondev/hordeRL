@@ -35,16 +35,19 @@ class Menu(GuiElement):
         key_sym = key_event.sym
         has_next = self.page + 1 < len(self.pages)
         has_previous = self.page > 0
-        if (
-            key_sym is tcod.event.KeySym.RIGHT or key_sym is tcod.event.K_n
-        ) and has_next:
-            self.page += 1
-            return
-        if (
-            key_sym is tcod.event.KeySym.LEFT
-            or key_sym is tcod.event.KeySym.p
-        ) and has_previous:
-            self.page -= 1
+        nav_actions = {
+            tcod.event.KeySym.RIGHT: has_next,
+            tcod.event.K_n: has_next,
+            tcod.event.KeySym.LEFT: has_previous,
+            tcod.event.KeySym.p: has_previous,
+        }
+        if nav_actions.get(key_sym, False):
+            delta = (
+                1
+                if key_sym in (tcod.event.KeySym.RIGHT, tcod.event.K_n)
+                else -1
+            )
+            self.page += delta
             return
         if key_sym is tcod.event.KeySym.RETURN:
             self.close()
@@ -89,7 +92,7 @@ class Menu(GuiElement):
         ]
         header_height = len(lines)
 
-        if self.header == "":
+        if not self.header:
             header_height = 0
         height = len(options) + header_height
         if has_next:
@@ -112,12 +115,15 @@ class Menu(GuiElement):
             letter_index += 1
 
         # add nav
-        if has_previous and not has_next:
-            window.print(0, y, t("menu.nav.previous"), bg=None)
-        elif has_next and not has_previous:
-            window.print(0, y, t("menu.nav.next"), bg=None)
-        elif has_next and has_previous:
-            window.print(0, y, t("menu.nav.previous_next"), bg=None)
+        nav_text = None
+        if has_next and has_previous:
+            nav_text = t("menu.nav.previous_next")
+        elif has_previous:
+            nav_text = t("menu.nav.previous")
+        elif has_next:
+            nav_text = t("menu.nav.next")
+        if nav_text:
+            window.print(0, y, nav_text, bg=None)
 
         x = self.config.screen_width // 2 - self.width // 2
         y = self.config.screen_height // 2 - height // 2
