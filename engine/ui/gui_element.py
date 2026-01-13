@@ -19,6 +19,8 @@ class GuiElement:
     id: int = field(default_factory=get_id)
     # if true, the GUI won't store this element, but will render it immediately
     single_shot: bool = False
+    modal: bool = False
+    is_closed: bool = False
 
     def on_load(self) -> None:
         """
@@ -33,3 +35,6 @@ class GuiElement:
 
     def render(self, panel: "tcod.console.Console") -> None:
         raise NotImplementedError("GuiElement must define render()")
+
+    def close(self) -> None:
+        self.is_closed = True

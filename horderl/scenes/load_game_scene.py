@@ -25,31 +25,27 @@ class LoadMenuScene(GameScene):
             center_x, center_y, self.title, fg=palettes.FRESH_BLOOD
         )
         self.add_gui_element(self.title_label)
-
-    def before_update(self, dt: float):
-        # pre-render the gui elements so that they show up before menu pauses
-        # execution
-        self.gui = self.controller.gui
-        self.render()
+        self.add_gui_element(self.build_menu())
 
     def update(self, dt: float):
         """
-        Show the menu and wait for player selection.
+        Update hook for the load menu scene.
+
+        Menu interaction is handled by the GUI element update cycle.
         """
-        files = []
+        return
 
-        for file in os.listdir("."):
-            if file.endswith(".world"):
-                files.append(file)
+    def build_menu(self):
+        files = [
+            file for file in os.listdir(".") if file.endswith(".world")
+        ]
 
-        self.gui.add_element(
-            EasyMenu(
-                t("menu.load_prompt"),
-                {world: self.get_world_loader(world) for world in files},
-                self.config.inventory_width,
-                self.config,
-                on_escape=self.pop(),
-            )
+        return EasyMenu(
+            t("menu.load_prompt"),
+            {world: self.get_world_loader(world) for world in files},
+            self.config.inventory_width,
+            self.config,
+            on_escape=lambda: self.pop(),
         )
 
     def get_world_loader(self, file_name):
