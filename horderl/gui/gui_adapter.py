@@ -17,7 +17,7 @@ class GuiAdapter:
         element.render(self._gui.root)
 
     def render_single_shot(self, element) -> None:
-        self._gui.add_element(element)
+        element.render(self._gui.root)
 
     def create_popup(self, message: str, config):
         return PopupMessage(message, config)
