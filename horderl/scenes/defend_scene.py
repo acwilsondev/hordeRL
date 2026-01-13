@@ -18,7 +18,7 @@ from horderl.content.utilities import make_calendar
 from horderl.engine import GameScene, core
 from horderl.engine.component_manager import ComponentManager
 from horderl.engine.components.class_register import LoadClasses
-from horderl.engine.constants import PLAYER_ID
+from horderl.constants import PLAYER_ID
 from horderl.engine.core import timed
 from horderl.engine.message import Message
 from horderl.gui.bars import HealthBar, HordelingBar, PeasantBar, Thwackometer

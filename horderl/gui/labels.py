@@ -5,7 +5,8 @@ from ..components.ability_tracker import AbilityTracker
 from ..components.actors.calendar_actor import Calendar
 from ..components.states.move_cost_affectors import Haste, Hindered
 from ..components.world_building.world_parameters import WorldParameters
-from ..engine import PLAYER_ID, core
+from ..constants import PLAYER_ID
+from ..engine import core
 from ..gui.gui_element import GuiElement
 from ..i18n import t
 

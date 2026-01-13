@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine.components.entity import Entity
 
-from .. import engine
+from ..constants import PLAYER_ID
 from ..components import Attributes, Coordinates, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility
 from ..components.brains.brain import Brain
@@ -198,9 +198,7 @@ def get_heal(scene):
     """
 
     def out_fn():
-        health = scene.cm.get_one(
-            Attributes, entity=engine.constants.PLAYER_ID
-        )
+        health = scene.cm.get_one(Attributes, entity=PLAYER_ID)
         if health:
             health.hp = health.max_hp
 
@@ -365,12 +363,12 @@ def get_teleport_to_entity(scene, entity):
         target_coords = scene.cm.get_one(Coordinates, entity=entity)
         if target_coords:
             player_coords = scene.cm.get_one(
-                Coordinates, entity=engine.constants.PLAYER_ID
+                Coordinates, entity=PLAYER_ID
             )
             player_coords.x = target_coords.x
             player_coords.y = target_coords.y
             senses = scene.cm.get_one(
-                Senses, entity=engine.constants.PLAYER_ID
+                Senses, entity=PLAYER_ID
             )
             senses.dirty = True
 
