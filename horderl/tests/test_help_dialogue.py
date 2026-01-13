@@ -2,8 +2,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from horderl.gui.help_dialogue import HelpDialogue
 from horderl.engine_adapter import core
+from horderl.gui.help_dialogue import HelpDialogue
 
 pytest.importorskip("tcod")
 import tcod.event
