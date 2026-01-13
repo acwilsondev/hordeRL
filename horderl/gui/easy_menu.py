@@ -3,7 +3,7 @@ from typing import Callable, Optional
 
 from .. import engine
 from ..engine import core
-from ..engine.palettes import WHITE
+from ..engine import palettes
 from ..gui.gui_element import GuiElement
 from ..i18n import t
 
@@ -109,7 +109,9 @@ class EasyMenu(GuiElement):
         if has_previous:
             height += 1
         window = tcod.console.Console(self.width, height, order="F")
-        window.draw_rect(0, 0, self.width, height, 0, fg=WHITE, bg=None)
+        window.draw_rect(
+            0, 0, self.width, height, 0, fg=palettes.WHITE, bg=None
+        )
         for i, _ in enumerate(lines):
             window.print(1, 0 + i, lines[i])
 
