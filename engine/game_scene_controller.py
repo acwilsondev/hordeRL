@@ -3,12 +3,12 @@ from typing import Any, List, Mapping
 
 from tcod import libtcodpy as tcd
 
-from ..engine import GameScene
-from ..engine.component_manager import ComponentManager
-from ..engine.core import log_debug
-from ..engine.logging import get_logger
-from ..engine.sound.default_sound_controller import DefaultSoundController
-from ..engine.ui_context import UiContext
+from engine import GameScene
+from engine.component_manager import ComponentManager
+from engine.core import log_debug
+from engine.logging import get_logger
+from engine.sound.default_sound_controller import DefaultSoundController
+from engine.ui_context import UiContext
 
 
 class GameSceneController:
