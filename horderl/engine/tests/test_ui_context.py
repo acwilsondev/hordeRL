@@ -1,7 +1,6 @@
 import unittest
 
-from horderl.gui.gui_adapter import GuiAdapter
-from horderl.gui.popup_message import PopupMessage
+from horderl.engine.ui.gui_adapter import GuiAdapter
 
 
 class DummyRoot:
@@ -35,10 +34,18 @@ class DummyConfig:
     inventory_width = 20
 
 
+class DummyPopup:
+    def __init__(self, message, config):
+        self.message = message
+        self.config = config
+
+
 class TestGuiAdapter(unittest.TestCase):
     def setUp(self) -> None:
         self.gui = DummyGui()
-        self.adapter = GuiAdapter(self.gui)
+        self.adapter = GuiAdapter(
+            self.gui, popup_factory=lambda message, config: DummyPopup(message, config)
+        )
 
     def test_clear_root(self) -> None:
         self.assertFalse(self.gui.root.cleared)
@@ -58,8 +65,8 @@ class TestGuiAdapter(unittest.TestCase):
 
     def test_create_popup(self) -> None:
         popup = self.adapter.create_popup("Hello", DummyConfig())
-        self.assertIsInstance(popup, PopupMessage)
-        self.assertEqual(popup.name, "Hello")
+        self.assertIsInstance(popup, DummyPopup)
+        self.assertEqual(popup.message, "Hello")
 
 
 if __name__ == "__main__":

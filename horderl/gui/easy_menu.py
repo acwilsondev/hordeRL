@@ -3,7 +3,7 @@ from typing import Callable, Optional
 
 from .. import palettes
 from ..engine import core
-from ..gui.gui_element import GuiElement
+from ..engine.ui.gui_element import GuiElement
 from ..i18n import t
 
 

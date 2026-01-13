@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from ..gui.easy_menu import EasyMenu
-from ..gui.gui_element import GuiElement
+from ..engine.ui.gui_element import GuiElement
 
 
 @dataclass

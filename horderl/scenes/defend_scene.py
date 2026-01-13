@@ -35,7 +35,7 @@ from horderl.gui.labels import (
 from horderl.gui.message_box import MessageBox
 from horderl.gui.play_window import PlayWindow
 from horderl.gui.popup_message import PopupMessage
-from horderl.gui.vertical_anchor import VerticalAnchor
+from horderl.engine.ui.layout import VerticalAnchor
 from horderl.systems import act, control_turns, move
 
 
