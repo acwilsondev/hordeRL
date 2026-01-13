@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Oh No! It's THE HORDE is a classic fantasy roguelike with tower defense elements."
 authors = ["Aaron Wilson <acwilsoncs@gmail.com>"]
 license = "MIT"
-packages = [{include = "*"}]
+packages = [
+    {include = "engine"},
+    {include = "horderl"},
+]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
@@ -17,9 +20,14 @@ pycparser = "2.21"
 pyparsing = "3.0.6"
 six = "1.16.0"
 setuptools = "70.0.0"
+tcod = { version = ">=11.18.0", source = "pypi" }
+
+[tool.poetry.group.game]
+optional = true
+
+[tool.poetry.group.game.dependencies]
 PyYAML = "6.0.2"
 tracery = "0.1.1"
-tcod = { version = ">=11.18.0", source = "pypi" }
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.3.0"
