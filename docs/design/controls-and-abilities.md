@@ -8,12 +8,6 @@
 - e: Next ability
 - Esc: Back
 
-## Controls (README Quick Reference)
-
-- Arrow keys: Move the player
-- Space: Attack
-- q: Quit the game
-
 ## Ability Roster (Localized Names)
 
 - Show Debug
