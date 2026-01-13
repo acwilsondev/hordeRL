@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from overrides import override
 
 from engine.components.animation_controller import AnimationController
@@ -26,7 +27,6 @@ class BlinkerAnimationController(AnimationController):
     _appearance: Appearance = None
     _logger = get_logger(__name__)
 
-
     # Stored original appearance to restore later
     _original_symbol: str = None
     _original_color: tuple = None
@@ -51,9 +51,7 @@ class BlinkerAnimationController(AnimationController):
         self._logger.debug("BlinkerAnimationController starting")
         if self._appearance is None:
 
-            self._appearance = scene.cm.get_one(
-                Appearance, entity=self.entity
-            )
+            self._appearance = scene.cm.get_one(Appearance, entity=self.entity)
 
         self._original_bg_color = self._appearance.bg_color
         self._original_color = self._appearance.color

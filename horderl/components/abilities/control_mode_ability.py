@@ -5,7 +5,9 @@ from typing import Callable
 from engine.core import log_debug
 
 from ..abilities.ability import Ability
-from ..animation_controllers.blinker_animation_controller import BlinkerAnimationController
+from ..animation_controllers.blinker_animation_controller import (
+    BlinkerAnimationController,
+)
 
 
 @dataclass

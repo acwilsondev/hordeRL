@@ -7,7 +7,9 @@ from horderl.components.relationships.owner import Owner
 
 from .. import palettes
 from ..components import Appearance
-from ..components.animation_controllers.sequence_animation_controller import SequenceAnimationController
+from ..components.animation_controllers.sequence_animation_controller import (
+    SequenceAnimationController,
+)
 
 
 def make_explosion(x, y):

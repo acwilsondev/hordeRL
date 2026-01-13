@@ -1,11 +1,12 @@
 import random
 from dataclasses import dataclass
-from engine.logging import get_logger
+
 from overrides import override
 
 from engine.components import Coordinates
 from engine.components.animation_controller import AnimationController
 from engine.game_scene import GameScene
+from engine.logging import get_logger
 
 
 @dataclass

@@ -1,10 +1,11 @@
 from dataclasses import dataclass
-from engine.logging import get_logger
+
 from overrides import override
 
 from engine.components import Coordinates
 from engine.components.animation_controller import AnimationController
 from engine.game_scene import GameScene
+from engine.logging import get_logger
 from horderl.components.path_node import PathNode
 
 
@@ -15,7 +16,7 @@ class PathAnimationController(AnimationController):
     # Usually for one-shot animations
     delete_on_complete: bool = True
 
-    _logger= get_logger(__name__)
+    _logger = get_logger(__name__)
     _coordinates: Coordinates = None  # coordinates component for the entity
     _current_step: int = 0  # step in the path
 

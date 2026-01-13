@@ -1,5 +1,6 @@
-from dataclasses import dataclass
 import random
+from dataclasses import dataclass
+
 from overrides import override
 
 from engine.components.animation_controller import AnimationController
@@ -52,15 +53,15 @@ class RandomizedBlinkerAnimationController(AnimationController):
             )
         self._is_on = not self._is_on
         # Randomize the timer delay for the next blink
-        self.timer_delay = random.randint(self.min_timer_delay, self.max_timer_delay)
+        self.timer_delay = random.randint(
+            self.min_timer_delay, self.max_timer_delay
+        )
 
     @override
     def on_start(self, scene: GameScene):
         self._logger.debug("BlinkerAnimationController starting")
         if self._appearance is None:
-            self._appearance = scene.cm.get_one(
-                Appearance, entity=self.entity
-            )
+            self._appearance = scene.cm.get_one(Appearance, entity=self.entity)
             if not self._appearance:
                 raise ValueError(
                     "RandomizedBlinkerAnimationController requires an Appearance component"

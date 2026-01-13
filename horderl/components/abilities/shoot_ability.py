@@ -4,7 +4,9 @@ from engine.components import Coordinates
 from engine.utilities import is_visible
 
 from ...content.states import confused_animation
-from ..animation_controllers.blinker_animation_controller import BlinkerAnimationController
+from ..animation_controllers.blinker_animation_controller import (
+    BlinkerAnimationController,
+)
 from ..brains.ability_actors.ranged_attack_actor import RangedAttackActor
 from ..season_reset_listeners.seasonal_actor import SeasonResetListener
 from ..tags.hordeling_tag import HordelingTag

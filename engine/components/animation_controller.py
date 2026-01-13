@@ -1,5 +1,6 @@
 from abc import ABC
 from dataclasses import dataclass
+
 from overrides import override
 
 from engine import core
@@ -36,7 +37,7 @@ class AnimationController(Updateable, ABC):
         if self.next_update > core.time_ms():
             # Not yet time for next update
             return
-        
+
         if not self.started:
             # in case we forgot to start
             self.started = True
