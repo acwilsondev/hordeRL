@@ -47,13 +47,19 @@ Available options (run `poetry run horderl --help` to see the full list):
 | `--debug` | Allow exceptions to crash the game (useful for development) |
 | `--options-path PATH` | Path to the options.yaml file (defaults to horderl/options.yaml and will be created if missing) |
 | `--character-name NAME` | Override the player character name |
+| `--locale LOCALE` | Override the locale code for translations |
 | `--seed SEED` | Override the world seed |
 | `--torch-radius INT` | Override the torch radius |
 | `--grass-density FLOAT` | Override the grass density |
 | `--autosave/--no-autosave` | Enable or disable autosave |
 | `--music/--no-music` | Enable or disable music |
+| `--color-palette NAME_OR_PATH` | Override the color palette name or path |
 | `-l, --log LEVEL` | Set logging level (INFO, WARNING, CRITICAL, ERROR, DEBUG) |
 | `-t, --terminal_log` | Display logs in the terminal instead of writing to .log file |
+| `--log-environment ENV` | Override the logging environment (development, test, production) |
+| `--log-dir PATH` | Override the directory for log files |
+| `--log-file NAME` | Override the log file name (set empty to disable file logging) |
+| `--log-console/--no-log-console` | Enable or disable console logging |
 
 Examples:
 
