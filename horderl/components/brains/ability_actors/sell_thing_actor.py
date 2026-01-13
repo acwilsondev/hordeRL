@@ -3,6 +3,9 @@ from typing import List
 
 import tcod
 
+from engine import core
+from engine.components.entity import Entity
+from engine.types import EntityId
 from horderl import palettes
 from horderl.components import Coordinates
 from horderl.components.actors.energy_actor import EnergyActor
@@ -11,9 +14,6 @@ from horderl.components.enums import Intention
 from horderl.components.events.die_events import Die
 from horderl.components.sellable import Sellable
 from horderl.content.terrain.dirt import make_dirt
-from engine import core
-from engine.components.entity import Entity
-from engine.types import EntityId
 
 
 @dataclass

@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
+from engine.logging import get_logger
 from horderl.components import Coordinates
 from horderl.components.events.die_events import DeathListener
 from horderl.content.getables.gold import make_gold_nugget
-from engine.logging import get_logger
 
 
 @dataclass

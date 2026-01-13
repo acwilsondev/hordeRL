@@ -1,12 +1,12 @@
 import random
 
+from engine import core
 from horderl.components.events.build_world_events import BuildWorldListener
 from horderl.components.pathfinding.pathfinder import Pathfinder
 from horderl.components.pathfinding.simplex_cost_mapper import (
     SimplexCostMapper,
 )
 from horderl.components.world_building.world_parameters import WorldParameters
-from engine import core
 
 from ...content.terrain.water import make_water
 

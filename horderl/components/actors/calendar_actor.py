@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from engine import core
 from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.actors.hordeling_spawner import HordelingSpawner
 from horderl.components.events.attack_started_events import AttackStarted
@@ -10,7 +11,6 @@ from horderl.components.world_beauty import WorldBeauty
 from horderl.content.spawners.hordeling_spawner_spawner import (
     hordeling_spawner,
 )
-from engine import core
 from horderl.i18n import t
 
 MAX_HOUR = 23

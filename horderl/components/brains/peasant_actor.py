@@ -2,13 +2,13 @@ import random
 from dataclasses import dataclass
 from enum import Enum
 
+from engine.core import log_debug
 from horderl.components import Coordinates
 from horderl.components.actors import STEP_VECTOR_MAP, STEPS
 from horderl.components.actors.energy_actor import EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.pathfinding.cost_mapper import CostMapper
-from engine.core import log_debug
 
 
 @dataclass

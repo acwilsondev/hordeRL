@@ -1,3 +1,5 @@
+from engine import core
+from engine.components.entity import Entity
 from horderl.components.events.build_world_events import BuildWorld
 from horderl.components.events.start_game_events import StartGame
 from horderl.components.world_building.add_player_step import AddPlayerStep
@@ -12,8 +14,6 @@ from horderl.components.world_building.place_river import PlaceRiver
 from horderl.components.world_building.place_roads import PlaceRoads
 from horderl.components.world_building.place_rocks import PlaceRocks
 from horderl.components.world_building.set_world_name import SetWorldName
-from engine import core
-from engine.components.entity import Entity
 
 
 def make_world_build():

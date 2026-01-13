@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from engine import core
 from horderl.components.actors.energy_actor import EnergyActor
 
 from ..components import Coordinates
@@ -9,7 +10,6 @@ from ..components.flooder import Flooder
 from ..components.tags.water_tag import WaterTag
 from ..components.world_building.world_parameters import WorldParameters
 from ..content.terrain.water import make_swampy_water, make_water
-from engine import core
 
 
 def _fill_hole(scene, hole, painter):

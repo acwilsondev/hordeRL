@@ -1,11 +1,11 @@
+from engine import core
 from engine.components.component import Component
 from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOW
 
 from .. import palettes
 from ..components import Appearance, Coordinates
 from ..components.animation_effects.step_animation import StepAnimation
-from engine import core
-from engine.constants import PRIORITY_LOW
 
 
 def make_explosion(x, y):

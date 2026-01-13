@@ -1,12 +1,12 @@
 from typing import List, Tuple
 
+from engine.components.component import Component
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
 from horderl.components import Appearance, Coordinates
 from horderl.components.relationships.resident import Resident
 from horderl.components.season_reset_listeners.rebuilder import Rebuilder
-from engine.components.component import Component
-from engine.components.entity import Entity
-from engine.constants import PRIORITY_MEDIUM
 
 description = "Kinda creepy to be looking in this person's house, no?"
 

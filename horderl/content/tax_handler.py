@@ -1,3 +1,4 @@
+from engine import core
 from engine.components.entity import Entity
 
 from ..components.season_reset_listeners.collect_taxes import CollectTaxes
@@ -7,7 +8,6 @@ from ..components.season_reset_listeners.collect_taxes_for_king import (
 from ..components.season_reset_listeners.extract_contract_fees import (
     ExtractContractFees,
 )
-from engine import core
 
 
 def make_tax_handler():

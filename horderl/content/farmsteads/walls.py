@@ -1,3 +1,7 @@
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
+from engine.types import Entity as EntityType, EntityId
 from horderl import palettes
 from horderl.components import Appearance, Attributes, Coordinates
 from horderl.components.death_listeners.npc_corpse import Corpse
@@ -7,10 +11,6 @@ from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.relationships.owner import Owner
 from horderl.components.structure import Structure
-from engine import core
-from engine.components.entity import Entity
-from engine.constants import PRIORITY_MEDIUM
-from engine.types import Entity as EntityType, EntityId
 
 description = (
     "A wall, made of a light, grassy material. Be wary, it's highly flammable."

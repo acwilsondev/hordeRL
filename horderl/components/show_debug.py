@@ -1,8 +1,8 @@
 import logging
 from dataclasses import dataclass
 
-from horderl.components.actors.energy_actor import EnergyActor
 from engine.components.entity import Entity
+from horderl.components.actors.energy_actor import EnergyActor
 
 from ..components import Attributes, Coordinates, Senses
 from ..components.abilities.build_wall_ability import BuildWallAbility

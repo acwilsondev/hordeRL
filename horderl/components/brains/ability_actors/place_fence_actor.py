@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from typing import List, Tuple
 
+from engine.components.component import Component
 from horderl.components.brains.ability_actors.place_thing_actor import (
     PlaceThingActor,
 )
 from horderl.content.farmsteads.defensive_walls import make_fence
-from engine.components.component import Component
 
 
 @dataclass

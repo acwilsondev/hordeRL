@@ -1,7 +1,8 @@
 import textwrap
 
-from .. import palettes
 from engine.ui.gui_element import GuiElement
+
+from .. import palettes
 
 
 class MessageBox(GuiElement):

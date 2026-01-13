@@ -1,10 +1,10 @@
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOW
 from horderl import palettes
 from horderl.components import Appearance, Coordinates
 from horderl.components.material import Material
 from horderl.components.pickup_gold import GoldPickup
-from engine import core
-from engine.components.entity import Entity
-from engine.constants import PRIORITY_LOW
 
 description = (
     "A gold nugget glimmers in the sun. Selling it will yield a fair bounty."

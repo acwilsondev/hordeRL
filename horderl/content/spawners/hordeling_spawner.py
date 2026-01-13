@@ -1,7 +1,7 @@
-from horderl.components import Coordinates
-from horderl.components.actors.hordeling_spawner import HordelingSpawner
 from engine import core
 from engine.components.entity import Entity
+from horderl.components import Coordinates
+from horderl.components.actors.hordeling_spawner import HordelingSpawner
 
 description = "How did you even see this?"
 

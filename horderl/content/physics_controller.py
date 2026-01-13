@@ -1,5 +1,6 @@
-from ..components.flood_nearby_holes import FloodHolesSystem
 from engine import core
+
+from ..components.flood_nearby_holes import FloodHolesSystem
 
 
 def make_physics_controller():

@@ -1,5 +1,8 @@
 import random
 
+from engine import core
+from engine.components.entity import Entity
+from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
 from horderl.components import Appearance, Attributes, Coordinates
 from horderl.components.actors.energy_actor import EnergyActor
@@ -22,9 +25,6 @@ from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
-from engine import core
-from engine.components.entity import Entity
-from engine.constants import PRIORITY_MEDIUM
 
 
 def make_juggernaut(x, y):

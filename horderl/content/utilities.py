@@ -1,3 +1,4 @@
+from engine import core
 from engine.components.entity import Entity
 
 from ..components.actors.calendar_actor import Calendar
@@ -16,7 +17,6 @@ from ..components.season_reset_listeners.upgrade_houses import UpgradeHouse
 from ..components.weather.freeze_water import FreezeWater
 from ..components.weather.snow_fall import SnowFall
 from ..components.weather.weather import Weather
-from engine import core
 
 
 def make_calendar():

@@ -1,5 +1,7 @@
+from engine import core
 from engine.components.component import Component
 from engine.components.entity import Entity
+from engine.constants import PRIORITY_LOW
 
 from .. import palettes
 from ..components import Appearance, Attributes, Coordinates, target_value
@@ -8,8 +10,6 @@ from ..components.season_reset_listeners.die_on_season_reset import (
     DieOnSeasonReset,
 )
 from ..components.target_value import TargetValue
-from engine import core
-from engine.constants import PRIORITY_LOW
 
 haunch_description = "A savory haunch. Hordelings find this highly desirable."
 

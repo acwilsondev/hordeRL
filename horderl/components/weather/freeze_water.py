@@ -1,8 +1,8 @@
 import random
 from dataclasses import dataclass
 
-from horderl.components.actors.energy_actor import EnergyActor
 from engine import core
+from horderl.components.actors.energy_actor import EnergyActor
 
 from ...content.terrain.water import freeze, thaw
 from ..events.attack_started_events import AttackStartListener

@@ -2,6 +2,9 @@ import logging
 import random
 from typing import Set
 
+from engine import constants, core
+from engine.types import ComplexEntity, EntityId
+from engine.utilities import get_3_by_3_square, get_box
 from horderl import palettes
 from horderl.components import Coordinates
 from horderl.components.house_structure import HouseStructure
@@ -9,9 +12,6 @@ from horderl.content.allies.peasants import make_peasant
 from horderl.content.farmsteads.farms import make_farm_plot
 from horderl.content.farmsteads.floorboard import make_floorboard
 from horderl.content.farmsteads.walls import make_wall
-from engine import constants, core
-from engine.types import ComplexEntity, EntityId
-from engine.utilities import get_3_by_3_square, get_box
 
 
 def place_farmstead(scene) -> EntityId:
