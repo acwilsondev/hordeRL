@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from overrides import override
@@ -60,6 +60,7 @@ class AnimationController(Updateable, ABC):
         if self.delete_on_complete:
             scene.cm.delete(self.entity)
 
+    @abstractmethod
     def animate(self, scene: GameScene, dt_ms: int):
         """Perform the animation effect. To be implemented by subclasses."""
         raise NotImplementedError(
