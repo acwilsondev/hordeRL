@@ -2,7 +2,7 @@ import random
 from dataclasses import dataclass
 
 from horderl.components import Coordinates
-from horderl.engine.components.real_time_actor import RealTimeActor
+from horderl.components.actors.real_time_actor import RealTimeActor
 
 
 @dataclass

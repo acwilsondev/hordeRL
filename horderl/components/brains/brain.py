@@ -1,8 +1,8 @@
 from abc import ABC
 from dataclasses import dataclass
 
+from horderl.components.actors.energy_actor import EnergyActor
 from horderl.engine import GameScene, constants
-from horderl.engine.components.energy_actor import EnergyActor
 
 from ..animation_effects.blinker import AnimationBlinker
 

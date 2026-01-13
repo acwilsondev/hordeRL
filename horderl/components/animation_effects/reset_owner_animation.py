@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from horderl.components.base_components.actor import Actor
+from horderl.components.actors.actor import Actor
 from horderl.components.events.delete_event import DeleteListener
 from horderl.components.relationships.owner import Owner
 
