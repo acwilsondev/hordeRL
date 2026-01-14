@@ -78,6 +78,20 @@ def cli():
         help="override the color palette name or path",
     )
     parser.add_argument(
+        "--screen-width",
+        dest="screen_width",
+        type=int,
+        default=None,
+        help="override the screen width in tiles",
+    )
+    parser.add_argument(
+        "--screen-height",
+        dest="screen_height",
+        type=int,
+        default=None,
+        help="override the screen height in tiles",
+    )
+    parser.add_argument(
         "-l",
         "--log",
         dest="log_level",
@@ -128,6 +142,8 @@ def cli():
             "autosave_enabled": args.autosave_enabled,
             "music_enabled": args.music_enabled,
             "color_palette": args.color_palette,
+            "screen_width": args.screen_width,
+            "screen_height": args.screen_height,
             "log_environment": args.log_environment,
             "log_level": args.log_level,
             "log_dir": args.log_dir,
