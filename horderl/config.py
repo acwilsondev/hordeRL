@@ -7,6 +7,8 @@ from dataclasses import dataclass, field, fields
 from typing import Any, Dict
 
 CONFIG_VERSION = 1
+MIN_SCREEN_TILES = 50
+MAX_SCREEN_TILES = 100
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +46,8 @@ def _default_option_values() -> Dict[str, Any]:
         "music-enabled": True,
         "world_seed": "RANDOM",
         "color-palette": "default",
+        "screen-width": 60,
+        "screen-height": 40,
         "log-environment": "development",
         "log-level": "INFO",
         "log-dir": "logs",
@@ -212,6 +216,8 @@ _OPTIONS_FIELD_MAP = {
     "music-enabled": "music_enabled",
     "world_seed": "world_seed",
     "color-palette": "color_palette",
+    "screen-width": "screen_width",
+    "screen-height": "screen_height",
     "log-environment": "log_environment",
     "log-level": "log_level",
     "log-dir": "log_dir",
@@ -275,6 +281,24 @@ def _validate_types(values: Dict[str, Any]) -> None:
             raise ValueError(
                 f"Invalid type for {field_name}: expected {expected}, got"
                 f" {type(value)}"
+            )
+
+
+def _validate_screen_dimensions(values: Dict[str, Any]) -> None:
+    # Enforce positive screen sizes and warn on temporary limits.
+    for dimension in ("screen_width", "screen_height"):
+        value = values.get(dimension)
+        if value is None:
+            continue
+        if value <= 0:
+            raise ValueError(f"{dimension} must be greater than 0, got {value}")
+        if value < MIN_SCREEN_TILES or value > MAX_SCREEN_TILES:
+            logger.warning(
+                "%s is outside the supported range (%d-%d): %d",
+                dimension,
+                MIN_SCREEN_TILES,
+                MAX_SCREEN_TILES,
+                value,
             )
 
 
@@ -410,5 +434,6 @@ def load_config(
     }
 
     _validate_types(normalized)
+    _validate_screen_dimensions(normalized)
 
     return Config(**normalized)

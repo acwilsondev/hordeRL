@@ -54,6 +54,8 @@ Available options (run `poetry run horderl --help` to see the full list):
 | `--autosave/--no-autosave` | Enable or disable autosave |
 | `--music/--no-music` | Enable or disable music |
 | `--color-palette NAME_OR_PATH` | Override the color palette name or path |
+| `--screen-width TILES` | Override the screen width in tiles (window size = tiles × tile size) |
+| `--screen-height TILES` | Override the screen height in tiles (window size = tiles × tile size) |
 | `-l, --log LEVEL` | Set logging level (INFO, WARNING, CRITICAL, ERROR, DEBUG) |
 | `-t, --terminal_log` | Display logs in the terminal instead of writing to .log file |
 | `--log-environment ENV` | Override the logging environment (development, test, production) |
