@@ -31,24 +31,25 @@
 - Component inventory document exists and is reviewed.
 - High-risk flows are identified with owners.
 
-## Phase 1: Flat component contract + event standardization
+## Phase 1: Flat component contract + boundaries
 
 **Purpose:** Create a stable, data-only component contract without changing behavior.
 
 **Work items**
 
 - Define a minimal `Component` base that supports:
-  - Identity and serialization metadata.
+  - Identity and serialization metadata (dataclass <-> dict stays intact).
   - Optional lifecycle hooks (with a plan to remove them later).
+- Document ID stability rules (creation, reassignment, and load semantics).
 - Write guidance for data-only component design (dataclasses preferred).
-- Standardize event flow:
-  - Event components are data-only.
-  - Systems consume and clear event components.
+- Confirm ownership boundaries:
+  - ECS and serialization do not directly depend on one another.
+  - The scene orchestrates creation, component assignment, and ser/de.
 
 **Exit criteria**
 
 - New components follow the flat contract.
-- Event components no longer require inheritance for behavior.
+- Behavior lives in systems; event components are optional, not required.
 
 ## Phase 2: System extraction for behavior-heavy components
 
@@ -67,7 +68,20 @@
 - Most gameplay behavior is system-driven.
 - Component inheritance tree is significantly reduced.
 
-## Phase 3: `esper` prototype and adapter layer
+## Phase 3: Project split decision
+
+**Purpose:** Decide when to pursue `esper` after the ECS cleanup stabilizes.
+
+**Work items**
+
+- Review Project A outcomes (flat components + system-first behavior).
+- Decide whether `esper` integration is still needed.
+
+**Exit criteria**
+
+- Decision documented: proceed with Project B or stay with the custom manager.
+
+## Phase 4: Project B (optional) `esper` adapter + slice
 
 **Purpose:** Validate whether `esper` can replace or wrap the component manager.
 
@@ -75,16 +89,16 @@
 
 - Implement a thin adapter around `esper.World` that exposes:
   - Component registration and query patterns used today.
-  - Serialization hooks needed for save/load.
+  - Lifecycle hooks needed by existing systems.
 - Port a small vertical slice (e.g., movement + a simple event flow).
-- Capture ergonomics and performance notes.
+- Capture ergonomics, serialization integration, and performance notes.
 
 **Exit criteria**
 
 - Prototype demonstrates feature parity for the slice.
 - Decision: adopt `esper` or keep custom component manager.
 
-## Phase 4: Migration to target ECS runtime
+## Phase 5: Migration to target ECS runtime (if adopting `esper`)
 
 **Purpose:** Move the core ECS runtime to the target design (esper or custom).
 
@@ -99,7 +113,7 @@
 - Target runtime is the default path.
 - Save/load tests pass for existing save files.
 
-## Phase 5: Cleanup and deprecation removal
+## Phase 6: Cleanup and deprecation removal
 
 **Purpose:** Remove legacy ECS constructs and simplify codebase.
 

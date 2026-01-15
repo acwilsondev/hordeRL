@@ -39,8 +39,8 @@ component model and make systems the primary place for behavior.
   optional lifecycle hooks.
 - **Concrete components are simple data carriers** with no inheritance chains.
   Prefer composition of multiple components over specialized subclasses.
-- **Event components are data-only.** Event processing moves to systems and
-  dispatchers instead of component subclasses.
+- **Behavior lives in systems, period.** Components are not allowed to carry
+  gameplay logic or callbacks.
 - **System registry defines behavior.** Systems are the primary place for
   iteration, validation, and updates.
 
@@ -63,38 +63,42 @@ provided we can integrate serialization and scene orchestration cleanly.
 
 ### Potential risks and gaps
 
-- **Serialization integration.** Current save/load workflows expect explicit
-  control over component registry and instantiation; we need to ensure `esper`
-  can provide the same or an adaptation layer can be built.
-- **Custom component hooks.** If we rely on component callbacks today, those would
-  need to move into systems or an adapter layer.
-- **Event handling model.** `esper` does not provide a first-class event bus; we
-  should define a consistent event system (e.g., event components + system that
-  drains them).
+- **Serialization integration boundaries.** ECS and serialization should not
+  depend on one another directly. The scene should own both and orchestrate
+  object creation, component assignment, and save/load flow.
+- **ID stability.** Components already serialize via dataclass <-> dict, so the
+  main risk is stable IDs across sessions and reassignment rules when loading.
+- **Event handling model.** We should question whether gameplay needs event
+  components at all, or whether system logic can express those flows without
+  event objects.
 - **Performance considerations.** The game is not currently performance-bound, but
   any heavy use of Python reflection in `esper` should be profiled once the
   migration is underway.
 
-## Integration approach (if we adopt `esper`)
+## Integration approach (two projects)
 
-1. **Introduce an adapter layer** in the engine core that wraps `esper.World` and
-   provides the current component manager API where needed.
-2. **Define a serialization contract** for components (data-only, ideally
-   dataclasses) so save/load stays deterministic.
-3. **Move behavior out of components** by migrating event listeners and actor
-   subclasses into systems.
-4. **Deprecate component inheritance** by creating data-only replacements and
-   migrating entity construction.
-5. **Remove the old component manager** once systems and entity creation are fully
-   migrated.
+**Project A: ECS cleanup (no `esper`)**
+
+1. **Define the flat component contract.** Keep dataclass-based serialization,
+   document ID stability rules, and remove behavioral inheritance.
+2. **Move behavior into systems.** Event listeners, actors, and callbacks become
+   systems. Systems can create entities and assign components via the scene.
+3. **Clarify ser/de ownership.** The scene coordinates both ECS and serialization,
+   typically via a dedicated ser/de system that creates objects and assigns
+   components during load.
+
+**Project B: `esper` integration (optional)**
+
+1. **Introduce an adapter layer** that wraps `esper.World` and provides the query
+   ergonomics and lifecycle hooks needed by existing systems.
+2. **Port a vertical slice** to validate save/load, entity creation, and system
+   ergonomics before committing to a full migration.
+3. **Remove the old component manager** once `esper` proves parity.
 
 ## Next steps
 
-- Prototype a thin `esper` adapter in a branch and validate:
-  - Component registration and queries.
-  - Save/load integration for a limited subset of components.
-  - Event dispatch via event components + system drain.
-- Inventory existing components and classify:
+- Start Project A by inventorying components and classifying:
   - Data-only (safe to migrate quickly).
   - Behavior-heavy (requires system extraction).
-- Decide go/no-go based on serialization and ergonomics after the prototype.
+- Capture ID stability rules and document ser/de responsibilities in the scene.
+- Decide whether to pursue Project B after Project A stabilizes.
