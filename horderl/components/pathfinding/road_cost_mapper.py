@@ -32,7 +32,12 @@ class RoadCostMapper(CostMapper):
         max_x, max_y = size
         for coord in scene.cm.get(Coordinates):
             # Some entities may live outside the map bounds; ignore them.
-            if coord.x < 0 or coord.x >= max_x or coord.y < 0 or coord.y >= max_y:
+            if (
+                coord.x < 0
+                or coord.x >= max_x
+                or coord.y < 0
+                or coord.y >= max_y
+            ):
                 continue
             if scene.cm.get_one(Attributes, entity=coord.entity):
                 cost[coord.x, coord.y] = 10000

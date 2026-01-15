@@ -291,7 +291,9 @@ def _validate_screen_dimensions(values: Dict[str, Any]) -> None:
         if value is None:
             continue
         if value <= 0:
-            raise ValueError(f"{dimension} must be greater than 0, got {value}")
+            raise ValueError(
+                f"{dimension} must be greater than 0, got {value}"
+            )
         if value < MIN_SCREEN_TILES or value > MAX_SCREEN_TILES:
             logger.warning(
                 "%s is outside the supported range (%d-%d): %d",
