@@ -5,7 +5,6 @@ from typing import Iterable, Optional, Tuple
 from engine import core
 from engine.components import Coordinates
 
-from horderl.components.events.hole_dug_events import HoleDug
 from horderl.components.flood_nearby_holes import FloodHolesState
 from horderl.components.floodable import Floodable
 from horderl.components.flooder import Flooder
@@ -31,39 +30,40 @@ def run(scene) -> None:
     states = scene.cm.get(FloodHolesState)
     if not states:
         return
+    
+    if len(states) > 1:
+        raise RuntimeError("Multiple FloodHolesState components found.")
 
-    if scene.cm.get(HoleDug):
-        for state in states:
-            state.is_active = True
+    state = states[0]
 
+
+
+    if not state.is_active:
+        return
+    
     now_ms = core.time_ms()
+
+    if state.next_step_time_ms and now_ms < state.next_step_time_ms:
+        return
+
     floodables = scene.cm.get(Floodable)
     flooders = scene.cm.get(Flooder)
 
-    for state in states:
-        if not state.is_active:
-            continue
-        if state.next_step_time_ms and now_ms < state.next_step_time_ms:
-            continue
+    if not floodables or not flooders:
+        return
 
-        if not floodables or not flooders:
-            state.is_active = False
-            continue
+    target = _select_flood_target(
+        scene, floodables, flooders, now_ms
+    )
 
-        target = _select_flood_target(
-            scene, floodables, flooders, now_ms
-        )
+    if target is None:
+        return
 
-        if target is None:
-            if not _has_adjacent_flooder(scene, floodables, flooders):
-                state.is_active = False
-            continue
-
-        floodable, flooder = target
-        painter = _select_painter(scene, flooder)
-        _fill_hole(scene, floodable.entity, painter)
-        flooder.next_flood_time_ms = now_ms + flooder.flood_interval_ms
-        state.next_step_time_ms = now_ms + state.step_delay_ms
+    floodable, flooder = target
+    painter = _select_painter(scene, flooder)
+    _fill_hole(scene, floodable.entity, painter)
+    flooder.next_flood_time_ms = now_ms + flooder.flood_interval_ms
+    state.next_step_time_ms = now_ms + state.step_delay_ms
 
 
 def _select_flood_target(

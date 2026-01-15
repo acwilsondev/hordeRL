@@ -9,6 +9,6 @@ class FloodHolesState(Component):
     Record flood-fill timing state for the flood holes system.
     """
 
-    is_active: bool = False
+    is_active: bool = True
     next_step_time_ms: int = 0
     step_delay_ms: int = 500
