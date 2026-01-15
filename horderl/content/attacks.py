@@ -5,8 +5,8 @@ from engine.constants import PRIORITY_HIGH
 
 from .. import palettes
 from ..components import Appearance
-from ..components.animation_controllers.path_animation_controller import (
-    PathAnimationController,
+from ..components.animation_definitions.path_animation_definition import (
+    PathAnimationDefinition,
 )
 from ..components.events.delete_event import Delete
 from ..components.path_node import create_path
@@ -27,7 +27,7 @@ def roundabout(owner, x, y):
                 buildable=True,
             ),
             Owner(entity=entity_id, owner=owner),
-            PathAnimationController(entity=entity_id),
+            PathAnimationDefinition(entity=entity_id),
             *create_path(
                 entity_id,
                 [

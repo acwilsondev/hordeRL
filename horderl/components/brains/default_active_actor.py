@@ -10,8 +10,8 @@ from horderl.components.actions.attack_action import AttackAction
 from horderl.components.actions.eat_action import EatAction
 from horderl.components.actions.tunnel_to_point import TunnelToPoint
 from horderl.components.actors import VECTOR_STEP_MAP
-from horderl.components.animation_controllers.blinker_animation_controller import (
-    BlinkerAnimationController,
+from horderl.components.animation_definitions.blinker_animation_definition import (
+    BlinkerAnimationDefinition,
 )
 from horderl.components.attacks.attack import Attack
 from horderl.components.brains.brain import Brain
@@ -182,7 +182,7 @@ class DefaultActiveActor(Brain):
         new_controller = SleepingBrain(
             entity=self.entity, old_brain=self.id, turns=sleep_for
         )
-        blinker = BlinkerAnimationController(
+        blinker = BlinkerAnimationDefinition(
             entity=self.entity,
             new_symbol="z",
             new_color=palettes.LIGHT_WATER,

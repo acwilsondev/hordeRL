@@ -41,6 +41,9 @@ from horderl.gui.message_box import MessageBox
 from horderl.gui.play_window import PlayWindow
 from horderl.gui.popup_message import PopupMessage
 from horderl.systems import act, control_turns, move
+from horderl.systems.animation_controller_system import (
+    run as run_animation_controllers,
+)
 
 
 class DefendScene(GameScene):
@@ -213,6 +216,7 @@ class DefendScene(GameScene):
             updateable.update(self, dt_ms)
 
         # legacy systems
+        run_animation_controllers(self, dt_ms)
         act.run(self)
         move.run(self)
         control_turns.run(self)

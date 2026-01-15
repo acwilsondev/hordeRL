@@ -4,8 +4,8 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_HIGH
 from horderl import palettes
 from horderl.components import Appearance
-from horderl.components.animation_controllers.reset_owner_animation import (
-    ResetOwnerAnimation,
+from horderl.components.animation_definitions.reset_owner_animation_definition import (
+    ResetOwnerAnimationDefinition,
 )
 from horderl.components.events.delete_event import Delete
 from horderl.components.relationships.owner import Owner
@@ -35,7 +35,7 @@ def farm_animation(owner, x, y):
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_HIGH),
             Owner(entity=entity_id, owner=owner),
-            ResetOwnerAnimation(entity=entity_id),
+            ResetOwnerAnimationDefinition(entity=entity_id),
             Delete(entity=entity_id, next_update=core.time_ms() + 300),
         ],
     )

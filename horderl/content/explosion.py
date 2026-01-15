@@ -7,8 +7,8 @@ from horderl.components.relationships.owner import Owner
 
 from .. import palettes
 from ..components import Appearance
-from ..components.animation_controllers.sequence_animation_controller import (
-    SequenceAnimationController,
+from ..components.animation_definitions.sequence_animation_definition import (
+    SequenceAnimationDefinition,
 )
 
 
@@ -28,7 +28,7 @@ def make_explosion(x, y):
             color=palettes.WHITE,
             bg_color=palettes.BACKGROUND,
         ),
-        SequenceAnimationController(
+        SequenceAnimationDefinition(
             entity=entity_id,
             sequence=[(palettes.GOLD, "*"), (palettes.FRESH_BLOOD, "*")],
         ),
