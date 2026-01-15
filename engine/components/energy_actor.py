@@ -1,4 +1,3 @@
-from abc import ABC
 from dataclasses import dataclass
 
 from engine.components.actor import Actor
@@ -6,7 +5,7 @@ from engine.constants import PRIORITY_MEDIUM
 
 
 @dataclass
-class EnergyActor(Actor, ABC):
+class EnergyActor(Actor):
     """
     Provides control and other 'mind' information.
     """
