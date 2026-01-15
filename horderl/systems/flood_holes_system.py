@@ -36,8 +36,6 @@ def run(scene) -> None:
 
     state = states[0]
 
-
-
     if not state.is_active:
         return
     
