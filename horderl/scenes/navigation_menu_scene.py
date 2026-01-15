@@ -42,15 +42,20 @@ class NavigationMenuScene(GameScene):
         self.title = title
         self.options = option_scene_map
         self.title_label = None
+        self.menu = None
 
     def update(self, dt_ms: int):
         """
         Update hook for the navigation scene.
 
-        The menu is handled as a persistent GUI element, so no per-frame setup is
-        required here.
+        Ensures the menu is present after returning from a child scene.
+
+        The menu is handled as a persistent GUI element, but selecting an option
+        closes it before pushing the next scene. When that child scene is popped,
+        the menu needs to be recreated.
         """
-        return
+        if self.menu is None or self.menu.is_closed:
+            self._build_menu()
 
     def get_push_scene(self, scene):
         """
@@ -90,17 +95,21 @@ class NavigationMenuScene(GameScene):
             center_x, center_y, self.title, fg=palettes.FRESH_BLOOD
         )
         self.add_gui_element(self.title_label)
-        self.add_gui_element(
-            EasyMenu(
-                "",
-                {
-                    link[0]: self.get_push_scene(link[1])
-                    for link in self.options.items()
-                },
-                24,
-                self.config,
-                hide_background=False,
-                on_escape=lambda: sys.exit(0),
-            )
-        )
+        self._build_menu()
         self.sound.play("theme")
+
+    def _build_menu(self) -> None:
+        # Menu selection closes the menu before pushing a new scene, so we keep a
+        # handle to recreate it when returning to this scene.
+        self.menu = EasyMenu(
+            "",
+            {
+                link[0]: self.get_push_scene(link[1])
+                for link in self.options.items()
+            },
+            24,
+            self.config,
+            hide_background=False,
+            on_escape=lambda: sys.exit(0),
+        )
+        self.add_gui_element(self.menu)
