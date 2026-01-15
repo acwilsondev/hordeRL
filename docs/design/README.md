@@ -9,6 +9,8 @@ existing gameplay details from across the repo and organize them into themed top
 - [Overview](overview.md)
 - [Gameplay Loop](gameplay-loop.md)
 - [Controls & Abilities](controls-and-abilities.md)
+- [ECS Redesign + Esper Evaluation](ecs-evaluation.md)
+- [ECS Migration Plan](ecs-migration-plan.md)
 - [Economy, Seasons, and Progression](economy-and-progression.md)
 - [World & Content Catalog](world-and-content.md)
 - [Legacy Notes](legacy-notes.md)
