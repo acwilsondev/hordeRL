@@ -37,9 +37,8 @@
 
 **Work items**
 
-- Define a minimal `Component` base that supports:
+- Define the component contract as plain `@dataclass` records:
   - Identity and serialization metadata (dataclass <-> dict stays intact).
-  - Optional lifecycle hooks (with a plan to remove them later).
 - Document ID stability rules (creation, reassignment, and load semantics).
 - Write guidance for data-only component design (dataclasses preferred).
 - Confirm ownership boundaries:

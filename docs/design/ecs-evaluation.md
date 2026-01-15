@@ -35,9 +35,9 @@ component model and make systems the primary place for behavior.
 
 ## Proposed flat component hierarchy
 
-- **One minimal base class** (`Component`) for serialization, identity, and
-  optional lifecycle hooks.
-- **Concrete components are simple data carriers** with no inheritance chains.
+- **No base class required.** Components can be plain `@dataclass` records with
+  no inheritance chains.
+- **Concrete components are simple data carriers.**
   Prefer composition of multiple components over specialized subclasses.
 - **Behavior lives in systems, period.** Components are not allowed to carry
   gameplay logic or callbacks.
