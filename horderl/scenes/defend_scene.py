@@ -44,6 +44,7 @@ from horderl.systems import act, control_turns, move
 from horderl.systems.animation_controller_system import (
     run as run_animation_controllers,
 )
+from horderl.systems.flood_holes_system import run as run_flood_holes
 
 
 class DefendScene(GameScene):
@@ -217,6 +218,7 @@ class DefendScene(GameScene):
 
         # legacy systems
         run_animation_controllers(self, dt_ms)
+        run_flood_holes(self)
         act.run(self)
         move.run(self)
         control_turns.run(self)
