@@ -1,7 +1,6 @@
 from engine import core
 from engine.component_manager import ComponentManager
 from engine.components import Coordinates
-
 from horderl.components.flood_nearby_holes import FloodHolesState
 from horderl.components.floodable import Floodable
 from horderl.components.flooder import Flooder

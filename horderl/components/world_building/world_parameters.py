@@ -24,6 +24,8 @@ def get_seed(config):
 
 @dataclass
 class WorldParameters(Component):
+    worldbuilding_done = False
+
     biome: str = "Plains"
 
     lakes: int = DEFAULT_LAKES
@@ -49,6 +51,8 @@ class WorldParameters(Component):
     world_name: str = ""
 
     world_seed: int | str = field(default_factory=time.time_ns)
+
+    flower_color = None
 
     def get_file_name(self):
         return self.world_name.replace(" ", "-")
