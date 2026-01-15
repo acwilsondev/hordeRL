@@ -78,7 +78,5 @@ def test_tunnel_to_point_system_moves_and_spawns_hole():
     coords = scene.cm.get_one(Coordinates, entity=digger_id)
     assert (coords.x, coords.y) == (3, 4)
     assert scene.cm.get(TunnelToPoint) == []
-    hole_entities = scene.cm.get(
-        Entity, query=lambda ent: ent.name == "hole"
-    )
+    hole_entities = scene.cm.get(Entity, query=lambda ent: ent.name == "hole")
     assert hole_entities

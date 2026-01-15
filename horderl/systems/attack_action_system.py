@@ -105,4 +105,6 @@ def _handle_entity_damage(
         target_attributes.hp = max(0, target_attributes.hp)
         if target_attributes.hp <= 0:
             action._log_info("applying Die effect")
-            scene.cm.add(Die(entity=target_attributes.entity, killer=action.entity))
+            scene.cm.add(
+                Die(entity=target_attributes.entity, killer=action.entity)
+            )

@@ -123,7 +123,9 @@ def test_sequence_animation_sets_appearance():
         timer_delay=0,
         sequence=[(palettes.GOLD, "*")],
     )
-    scene.cm.add(Entity(entity=entity_id, name="explosion"), appearance, animation)
+    scene.cm.add(
+        Entity(entity=entity_id, name="explosion"), appearance, animation
+    )
 
     run_animations(scene, 0)
 

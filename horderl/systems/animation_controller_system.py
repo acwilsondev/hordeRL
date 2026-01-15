@@ -4,7 +4,6 @@ from typing import Callable, Optional
 from engine import core
 from engine.components import Actor, Coordinates
 from engine.logging import get_logger
-
 from horderl.components import Appearance
 from horderl.components.animation_definitions import (
     BlinkerAnimationDefinition,
@@ -150,7 +149,9 @@ def _run_blinker(scene, dt_ms: int) -> None:
 
 
 def _run_randomized_blinker(scene, dt_ms: int) -> None:
-    def on_start(scene, animation: RandomizedBlinkerAnimationDefinition) -> None:
+    def on_start(
+        scene, animation: RandomizedBlinkerAnimationDefinition
+    ) -> None:
         appearance = _get_appearance(
             scene,
             animation.entity,
@@ -164,7 +165,9 @@ def _run_randomized_blinker(scene, dt_ms: int) -> None:
         animation.original_color = appearance.color
         animation.original_bg_color = appearance.bg_color
 
-    def on_step(scene, animation: RandomizedBlinkerAnimationDefinition) -> None:
+    def on_step(
+        scene, animation: RandomizedBlinkerAnimationDefinition
+    ) -> None:
         appearance = _get_appearance(
             scene,
             animation.entity,
@@ -191,7 +194,9 @@ def _run_randomized_blinker(scene, dt_ms: int) -> None:
             animation.max_timer_delay,
         )
 
-    def on_stop(scene, animation: RandomizedBlinkerAnimationDefinition) -> None:
+    def on_stop(
+        scene, animation: RandomizedBlinkerAnimationDefinition
+    ) -> None:
         appearance = _get_appearance(
             scene,
             animation.entity,
@@ -227,10 +232,7 @@ def _run_float(scene, dt_ms: int) -> None:
         coordinates.x += up_or_over[0]
         coordinates.y += up_or_over[1]
 
-        if (
-            coordinates.x >= scene.config.map_width
-            or coordinates.y <= 0
-        ):
+        if coordinates.x >= scene.config.map_width or coordinates.y <= 0:
             _stop_animation(scene, animation, on_stop)
             return
 
@@ -260,7 +262,9 @@ def _run_path(scene, dt_ms: int) -> None:
         path_nodes = scene.cm.get_all(PathNode, entity=animation.entity)
         try:
             next_node = next(
-                node for node in path_nodes if node.step == animation.current_step
+                node
+                for node in path_nodes
+                if node.step == animation.current_step
             )
         except StopIteration:
             _stop_animation(scene, animation, on_stop)
