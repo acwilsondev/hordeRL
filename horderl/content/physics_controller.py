@@ -1,6 +1,6 @@
 from engine import core
 
-from ..components.flood_nearby_holes import FloodHolesController
+from ..components.flood_nearby_holes import FloodHolesState
 
 
 def make_physics_controller():
@@ -9,6 +9,6 @@ def make_physics_controller():
     return (
         entity_id,
         [
-            FloodHolesController(entity=entity_id),
+            FloodHolesState(entity=entity_id),
         ],
     )
