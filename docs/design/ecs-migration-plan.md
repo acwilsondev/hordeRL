@@ -41,6 +41,7 @@ Done: [doc](./ecs-phase0-audit.md)
 
 - Define the component contract as plain `@dataclass` records:
   - Identity and serialization metadata (dataclass <-> dict stays intact).
+  - Reference: [ECS component contract](./ecs-component-contract.md).
 - Document ID stability rules (creation, reassignment, and load semantics).
 - Write guidance for data-only component design (dataclasses preferred).
 - Confirm ownership boundaries:
