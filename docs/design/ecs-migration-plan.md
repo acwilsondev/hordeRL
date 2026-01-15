@@ -7,7 +7,7 @@
 - Evaluate and optionally adopt `esper` with minimal disruption.
 - Preserve save/load integrity throughout the migration.
 
-## Phase 0: Baseline audit and constraints
+## DONE Phase 0: Baseline audit and constraints
 
 **Purpose:** Establish a shared understanding of current ECS usage and risk areas.
 
@@ -30,6 +30,8 @@
 
 - Component inventory document exists and is reviewed.
 - High-risk flows are identified with owners.
+
+Done: [doc](./ecs-phase0-audit.md)
 
 ## Phase 1: Flat component contract + boundaries
 
