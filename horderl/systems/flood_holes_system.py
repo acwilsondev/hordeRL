@@ -4,7 +4,6 @@ from typing import Iterable, Optional, Tuple
 
 from engine import core
 from engine.components import Coordinates
-
 from horderl.components.flood_nearby_holes import FloodHolesState
 from horderl.components.floodable import Floodable
 from horderl.components.flooder import Flooder
@@ -30,7 +29,7 @@ def run(scene) -> None:
     states = scene.cm.get(FloodHolesState)
     if not states:
         return
-    
+
     if len(states) > 1:
         raise RuntimeError("Multiple FloodHolesState components found.")
 
@@ -38,7 +37,7 @@ def run(scene) -> None:
 
     if not state.is_active:
         return
-    
+
     now_ms = core.time_ms()
 
     if state.next_step_time_ms and now_ms < state.next_step_time_ms:
@@ -50,9 +49,7 @@ def run(scene) -> None:
     if not floodables or not flooders:
         return
 
-    target = _select_flood_target(
-        scene, floodables, flooders, now_ms
-    )
+    target = _select_flood_target(scene, floodables, flooders, now_ms)
 
     if target is None:
         return
@@ -78,18 +75,6 @@ def _select_flood_target(
                 continue
             return floodable, flooder
     return None
-
-
-def _has_adjacent_flooder(
-    scene,
-    floodables: Iterable[Floodable],
-    flooders: Iterable[Flooder],
-) -> bool:
-    return any(
-        _is_adjacent(scene, floodable.entity, flooder.entity)
-        for floodable in floodables
-        for flooder in flooders
-    )
 
 
 def _select_painter(scene, flooder: Flooder):

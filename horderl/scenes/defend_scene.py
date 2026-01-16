@@ -10,9 +10,7 @@ from horderl.components.serialization.load_game import LoadGame
 from horderl.components.sound.battle_music import BattleMusic
 from horderl.components.sound.start_music import StartMusic
 from horderl.components.world_beauty import WorldBeauty
-from horderl.components.world_building.set_worldbuilder_params import (
-    SelectBiome,
-)
+from horderl.components.worldbuilding_control import WorldbuildingControl
 from horderl.constants import PLAYER_ID
 from horderl.content.physics_controller import make_physics_controller
 from horderl.content.tax_handler import make_tax_handler
@@ -44,6 +42,7 @@ from horderl.systems import act, control_turns, move
 from horderl.systems.animation_controller_system import (
     run as run_animation_controllers,
 )
+from horderl.systems.build_world_system import build_world_system
 from horderl.systems.flood_holes_system import run as run_flood_holes
 
 
@@ -162,7 +161,7 @@ class DefendScene(GameScene):
             self.cm.add(LoadGame(entity=self.player, file_name=self.from_file))
             self.cm.add(StartGame(entity=self.player))
         else:
-            self.cm.add(SelectBiome(entity=core.get_id("world")))
+            self.cm.add(WorldbuildingControl(entity=core.get_id("world")))
             self.cm.add(*make_tax_handler()[1])
             self.cm.add(*make_calendar()[1])
             self.cm.add(*make_physics_controller()[1])
@@ -212,6 +211,7 @@ class DefendScene(GameScene):
         # as an Updeatable object that performs all initialization it needs to, which is a typical
         # game engine pattern.
         self.logger.debug("==== Beginning DefendScene update at dt=%s", dt_ms)
+        build_world_system.run(self)  # only runs once due to component gates
         for updateable in self.cm.get(Updateable):
             self.logger.debug("Updating Updateable: %s", updateable)
             updateable.update(self, dt_ms)

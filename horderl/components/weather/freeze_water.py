@@ -6,7 +6,6 @@ from engine.components import EnergyActor
 
 from ...content.terrain.water import freeze, thaw
 from ..events.attack_started_events import AttackStartListener
-from ..events.hole_dug_events import HoleDug
 from ..season_reset_listeners.seasonal_actor import SeasonResetListener
 from ..tags.ice_tag import IceTag
 from ..tags.water_tag import WaterTag
@@ -62,4 +61,3 @@ class FreezeWater(EnergyActor, AttackStartListener, SeasonResetListener):
         to_thaw = ices[:n]
         for ice in to_thaw:
             thaw(scene, ice)
-        scene.cm.add(HoleDug(entity=self.entity))
