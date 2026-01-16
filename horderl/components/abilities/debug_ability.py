@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from ..abilities.ability import Ability
-from ..show_debug import WantsToShowDebug
+from ..wants_to_show_debug import WantsToShowDebug
 
 
 @dataclass
