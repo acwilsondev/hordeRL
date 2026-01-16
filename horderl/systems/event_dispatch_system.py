@@ -53,6 +53,7 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
 from horderl.components.serialization.save_game import SaveGame
 from horderl.i18n import t
 from horderl.scenes.start_menu import get_start_menu
+from horderl.systems.serialization_system import save_game
 
 
 @dataclass(frozen=True)
@@ -171,7 +172,7 @@ def _after_die(scene: GameScene, event: Die) -> None:
 
 def _after_quit_game(scene: GameScene, event: QuitGame) -> None:
     if scene.config.autosave_enabled:
-        SaveGame().act(scene)
+        save_game(scene, SaveGame(entity=scene.player))
     scene.pop()
     scene.controller.push_scene(get_start_menu())
 

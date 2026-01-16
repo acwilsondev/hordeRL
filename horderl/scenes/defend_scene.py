@@ -42,9 +42,13 @@ from horderl.systems import act, control_turns, move, update_senses_system
 from horderl.systems.animation_controller_system import (
     run as run_animation_controllers,
 )
+from horderl.systems.audio_system import run as run_audio_system
 from horderl.systems.build_world_system import build_world_system
 from horderl.systems.event_dispatch_system import run as run_event_dispatch
 from horderl.systems.flood_holes_system import run as run_flood_holes
+from horderl.systems.serialization_system import (
+    run as run_serialization_system,
+)
 
 
 class DefendScene(GameScene):
@@ -212,6 +216,7 @@ class DefendScene(GameScene):
         # as an Updeatable object that performs all initialization it needs to, which is a typical
         # game engine pattern.
         self.logger.debug("==== Beginning DefendScene update at dt=%s", dt_ms)
+        run_serialization_system(self)
         build_world_system.run(self)  # only runs once due to component gates
 
         world_building_control = self.cm.get_one(
@@ -228,6 +233,7 @@ class DefendScene(GameScene):
         # legacy systems
         run_animation_controllers(self, dt_ms)
         run_flood_holes(self)
+        run_audio_system(self)
         run_event_dispatch(self)
         act.run(self)
         move.run(self)
