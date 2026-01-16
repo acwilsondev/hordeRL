@@ -17,6 +17,5 @@ def get_actors(scene):
     return [
         actor
         for actor in scene.cm.get(Actor)
-        if actor.can_act()
-        and callable(getattr(actor, "act", None))
+        if actor.can_act() and callable(getattr(actor, "act", None))
     ]
