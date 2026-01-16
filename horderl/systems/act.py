@@ -1,4 +1,5 @@
 from engine.components import Actor
+from engine.components.events import Event
 
 from .attack_action_system import run as run_attack_actions
 from .eat_action_system import run as run_eat_actions
@@ -17,5 +18,7 @@ def get_actors(scene):
     return [
         actor
         for actor in scene.cm.get(Actor)
-        if actor.can_act() and callable(getattr(actor, "act", None))
+        if actor.can_act()
+        and callable(getattr(actor, "act", None))
+        and not isinstance(actor, Event)
     ]
