@@ -10,7 +10,7 @@ from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
 from horderl.components import Appearance
 from horderl.components.pathfinding.road_cost_mapper import RoadCostMapper
-from horderl.components.pathfinding.target_selection import get_new_target
+from horderl.systems.pathfinding.target_selection import get_new_target
 from horderl.components.states.move_cost_affectors import EasyTerrain
 from horderl.components.tags.road_marker import RoadMarker
 from horderl.components.tags.water_tag import WaterTag

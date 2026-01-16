@@ -28,7 +28,7 @@ from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
 )
-from horderl.components.pathfinding.target_selection import get_new_target
+from horderl.systems.pathfinding.target_selection import get_new_target
 from horderl.content.attacks import stab
 from horderl.content.terrain import roads
 
