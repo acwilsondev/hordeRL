@@ -11,6 +11,7 @@ class Delete(Component):
     """
 
     next_update: int = 0
+    energy: int = 0
 
 
 @dataclass
