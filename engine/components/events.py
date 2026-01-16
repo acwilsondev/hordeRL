@@ -2,17 +2,15 @@ from abc import abstractmethod
 from dataclasses import dataclass
 
 from engine import GameScene
-from engine.components import EnergyActor
+from engine.components.component import Component
 from engine.core import log_debug
 
 
 @dataclass
-class Event(EnergyActor):
+class Event(Component):
     """
     Define an event that notifies listeners.
     """
-
-    energy_cost: int = EnergyActor.INSTANT
 
     @log_debug(__name__)
     def act(self, scene: GameScene) -> None:
