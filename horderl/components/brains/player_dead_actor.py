@@ -8,6 +8,7 @@ from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.content.states import confused_animation
 from horderl.i18n import t
+from horderl.systems.ability_system import apply_ability
 
 
 @dataclass
@@ -30,7 +31,7 @@ class PlayerDeadBrain(Brain):
                 tracker.decrement(scene)
             elif intention is Intention.USE_ABILITY:
                 ability = tracker.get_current_ability(scene)
-                ability.apply(scene, self.id)
+                apply_ability(scene, self.id, ability)
             elif intention is None:
                 self._log_debug(f"found no useable intention")
                 scene.warn(t("warning.player_dead_no_action"))

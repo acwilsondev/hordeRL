@@ -8,6 +8,7 @@ from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.events.quit_game_events import QuitGame
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
+from horderl.systems.ability_system import apply_ability
 
 
 @dataclass
@@ -28,7 +29,7 @@ class PlayerBrain(Brain):
                 tracker.decrement(scene)
             elif intention == Intention.USE_ABILITY:
                 ability = tracker.get_current_ability(scene)
-                ability.apply(scene, self.id)
+                apply_ability(scene, self.id, ability)
             elif intention == Intention.SHOW_HELP:
                 scene.cm.add(ShowHelpDialogue(entity=self.entity))
             elif intention == Intention.BACK:
