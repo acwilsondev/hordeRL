@@ -1,13 +1,12 @@
 from dataclasses import dataclass
 
-from ..events.start_game_events import GameStartListener
-from ..season_reset_listeners.seasonal_actor import SeasonResetListener
+from engine.components.component import Component
 
 
 @dataclass
-class StartMusic(GameStartListener, SeasonResetListener):
-    def on_season_reset(self, scene, season):
-        scene.sound.play("town")
+class StartMusic(Component):
+    """
+    Configure the music track to play at game start or season reset.
+    """
 
-    def on_game_start(self, scene):
-        scene.sound.play("town")
+    track_id: str = "town"

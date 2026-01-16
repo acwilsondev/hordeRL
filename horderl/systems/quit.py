@@ -3,6 +3,7 @@ from engine.components import Actor
 from ..components.enums import Intention
 from ..components.serialization.save_game import SaveGame
 from ..scenes.start_menu import get_start_menu
+from ..systems.serialization_system import save_game
 
 
 def run(scene):
@@ -11,6 +12,6 @@ def run(scene):
     ]
     if quitters:
         if scene.config.autosave_enabled:
-            SaveGame().act(scene)
+            save_game(scene, SaveGame(entity=scene.player))
         scene.pop()
         scene.controller.push_scene(get_start_menu())
