@@ -1,6 +1,5 @@
 from engine.component_manager import ComponentManager
 from horderl.components.show_debug import ShowDebug
-from horderl.gui.easy_menu import EasyMenu
 from horderl.systems.debug_menu import run as run_debug_menu
 
 
@@ -27,5 +26,5 @@ def test_debug_menu_system_adds_menu_and_clears_component():
     run_debug_menu(scene)
 
     assert len(scene.gui_elements) == 1
-    assert isinstance(scene.gui_elements[0], EasyMenu)
+    assert scene.gui_elements[0].__class__.__name__ == "EasyMenu"
     assert scene.cm.get(ShowDebug) == []
