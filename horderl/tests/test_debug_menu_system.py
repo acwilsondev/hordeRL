@@ -1,5 +1,5 @@
 from engine.component_manager import ComponentManager
-from horderl.components.show_debug import ShowDebug
+from horderl.components.wants_to_show_debug import WantsToShowDebug
 from horderl.systems.debug_menu import run as run_debug_menu
 
 
@@ -21,10 +21,10 @@ class DummyScene:
 
 def test_debug_menu_system_adds_menu_and_clears_component():
     scene = DummyScene()
-    scene.cm.add(ShowDebug(entity=scene.player))
+    scene.cm.add(WantsToShowDebug(entity=scene.player))
 
     run_debug_menu(scene)
 
     assert len(scene.gui_elements) == 1
     assert scene.gui_elements[0].__class__.__name__ == "EasyMenu"
-    assert scene.cm.get(ShowDebug) == []
+    assert scene.cm.get(WantsToShowDebug) == []

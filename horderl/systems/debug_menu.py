@@ -7,6 +7,7 @@ functions used by the menu entries.
 
 import logging
 
+from engine import core
 from engine.components import Coordinates
 from engine.components.entity import Entity
 
@@ -21,7 +22,7 @@ from ..components.brains.painters.create_hordeling_actor import (
 from ..components.events.die_events import Die
 from ..components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from ..components.serialization.save_game import SaveGame
-from ..components.show_debug import ShowDebug
+from ..components.wants_to_show_debug import WantsToShowDebug
 from ..components.wrath_effect import WrathEffect
 from ..constants import PLAYER_ID
 from ..content.cursor import make_cursor
@@ -41,34 +42,46 @@ def run(scene) -> None:
         - Adds an EasyMenu GUI element for debugging.
         - Removes the ShowDebug component after processing.
     """
-    for debug_component in scene.cm.get(ShowDebug):
-        if not debug_component.can_act():
-            continue
-        scene.add_gui_element(
-            EasyMenu(
-                "Debug Options",
-                {
-                    "examine game objects": get_examine_game_objects(scene),
-                    "heal": get_heal(scene),
-                    "get rich": get_rich(scene),
-                    "place hordeling": get_painter(
-                        scene, PlaceHordelingController
-                    ),
-                    "place gold": get_painter(scene, PlaceGoldController),
-                    "wrath": get_wrath(scene, debug_component.entity),
-                    "suicide": get_suicide(scene),
-                    "teleport to": get_teleport_to(scene),
-                    "toggle ability": get_activate_ability(scene),
-                    "toggle pathing": get_pathfinding_for(scene),
-                    "spawn a home": get_spawn_home(scene),
-                    "quicksave": quick_save(scene),
-                },
-                scene.config.inventory_width,
-                scene.config,
-            )
+    debug_components = scene.cm.get(WantsToShowDebug)
+    if not debug_components:
+        # nothing to do
+        return
+
+    logger = core.get_logger(__name__)
+
+    debug_component = None
+    if len(debug_components) > 1:
+        logger.warning(
+            "Found more than one ShowDebug component, this should not ever happen."
         )
-        debug_component.pass_turn()
-        scene.cm.delete_component(debug_component)
+    debug_component = debug_components[0]
+
+    logger.info("Showing debug menu")
+    scene.add_gui_element(
+        EasyMenu(
+            "Debug Options",
+            {
+                "examine game objects": get_examine_game_objects(scene),
+                "heal": get_heal(scene),
+                "get rich": get_rich(scene),
+                "place hordeling": get_painter(
+                    scene, PlaceHordelingController
+                ),
+                "place gold": get_painter(scene, PlaceGoldController),
+                "wrath": get_wrath(scene, debug_component.entity),
+                "suicide": get_suicide(scene),
+                "teleport to": get_teleport_to(scene),
+                "toggle ability": get_activate_ability(scene),
+                "toggle pathing": get_pathfinding_for(scene),
+                "spawn a home": get_spawn_home(scene),
+                "quicksave": quick_save(scene),
+            },
+            scene.config.inventory_width,
+            scene.config,
+        )
+    )
+    scene.cm.delete_component(debug_component)
+    logger.debug("Done showing debug menu")
 
 
 # Entity Inspection Functions
