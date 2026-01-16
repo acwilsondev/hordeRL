@@ -7,6 +7,7 @@ from engine import constants, core
 from engine.components import Coordinates, EnergyActor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -34,7 +35,7 @@ class PainterBrain(Brain, ABC):
                 self._paint(scene)
             elif intention is Intention.BACK:
                 scene.cm.delete(self.cursor)
-                self.back_out(scene)
+                brain_stack.back_out(scene, self)
 
     def _paint(self, scene):
         coords = scene.cm.get_one(Coordinates, entity=self.cursor)

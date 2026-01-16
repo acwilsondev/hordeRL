@@ -13,6 +13,7 @@ from horderl.components.enums import Intention
 from horderl.components.events.die_events import Die
 from horderl.components.sellable import Sellable
 from horderl.content.terrain.dirt import make_dirt
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -32,7 +33,7 @@ class SellThingActor(Brain):
             }:
                 self._sell_thing(scene, intention)
             elif intention is Intention.BACK:
-                self.back_out(scene)
+                brain_stack.back_out(scene, self)
 
     def _sell_thing(self, scene, direction):
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
@@ -62,10 +63,10 @@ class SellThingActor(Brain):
             scene.gold += sellable.value
             dirt = make_dirt(hole_x, hole_y)
             scene.cm.add(*dirt[1])
-            old_actor = self.back_out(scene)
+            old_actor = brain_stack.back_out(scene, self)
             old_actor.pass_turn()
         else:
-            self.back_out(scene)
+            brain_stack.back_out(scene, self)
 
 
 def _get_sellables(scene, point) -> List[EntityId]:

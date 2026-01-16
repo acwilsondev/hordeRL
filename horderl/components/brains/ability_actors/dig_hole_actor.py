@@ -13,6 +13,7 @@ from horderl.components.enums import Intention
 from horderl.components.events.die_events import Die
 from horderl.content.terrain.dirt import make_dirt
 from horderl.content.terrain.hole import make_hole
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -32,7 +33,7 @@ class DigHoleActor(Brain):
             }:
                 self._dig_hole(scene, intention)
             elif intention is Intention.BACK:
-                self.back_out(scene)
+                brain_stack.back_out(scene, self)
 
     def _dig_hole(self, scene, direction):
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
@@ -45,7 +46,7 @@ class DigHoleActor(Brain):
             scene.message(
                 "You can't build outside of the town.", color=palettes.WHITE
             )
-            self.back_out(scene)
+            brain_stack.back_out(scene, self)
         elif _is_empty(scene, hole_x, hole_y):
             self._apply_dig_hole(hole_x, hole_y, scene)
         else:
@@ -65,17 +66,17 @@ class DigHoleActor(Brain):
 
                 dirt = make_dirt(hole_x, hole_y)
                 scene.cm.add(*dirt[1])
-                old_actor = self.back_out(scene)
+                old_actor = brain_stack.back_out(scene, self)
                 old_actor.pass_turn()
             else:
-                self.back_out(scene)
+                brain_stack.back_out(scene, self)
 
     def _apply_dig_hole(self, hole_x, hole_y, scene):
         scene.message("You dug a deep hole.")
         hole = make_hole(hole_x, hole_y)
         scene.cm.add(*hole[1])
         scene.gold -= 2
-        old_actor = self.back_out(scene)
+        old_actor = brain_stack.back_out(scene, self)
         old_actor.pass_turn()
 
 
