@@ -12,13 +12,14 @@ from horderl.components.brains.ability_actors.plant_sapling_actor import (
 
 @dataclass
 class PlantSaplingAbility(ControlModeAbility):
+    """
+    Describe the plant sapling ability configuration.
+    """
+
     ability_title: str = "Plant Saplings"
     ability_title_key: str = "ability.plant_saplings"
     unlock_cost: int = 100
     use_cost: int = 1
-
-    def get_mode(self) -> Callable:
-        return PlaceSaplingActor
-
-    def get_anim(self):
-        return "+", palettes.FOILAGE_C
+    mode_factory: Callable = PlaceSaplingActor
+    anim_symbol: str = "+"
+    anim_color: tuple = palettes.FOILAGE_C
