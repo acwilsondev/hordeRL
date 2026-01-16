@@ -43,6 +43,7 @@ from horderl.systems.animation_controller_system import (
     run as run_animation_controllers,
 )
 from horderl.systems.build_world_system import build_world_system
+from horderl.systems.event_dispatch_system import run as run_event_dispatch
 from horderl.systems.flood_holes_system import run as run_flood_holes
 
 
@@ -227,6 +228,7 @@ class DefendScene(GameScene):
         # legacy systems
         run_animation_controllers(self, dt_ms)
         run_flood_holes(self)
+        run_event_dispatch(self)
         act.run(self)
         move.run(self)
         update_senses_system.run(self)
