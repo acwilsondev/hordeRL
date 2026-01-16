@@ -9,6 +9,7 @@ from ..components.states.move_cost_affectors import Haste, Hindered
 from ..components.world_building.world_parameters import WorldParameters
 from ..constants import PLAYER_ID
 from ..i18n import t
+from ..systems.actor_system import get_timecode
 
 
 class Label(GuiElement):
@@ -65,7 +66,7 @@ class CalendarLabel(GuiElement):
 
     def update(self, scene, dt_ms: int):
         calendar = scene.cm.get_one(Calendar, entity=core.get_id("calendar"))
-        timecode = calendar.get_timecode()
+        timecode = get_timecode(calendar)
         self.value = f"{timecode}"
 
     def render(self, panel):

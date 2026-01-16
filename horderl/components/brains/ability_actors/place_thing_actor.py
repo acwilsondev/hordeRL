@@ -2,82 +2,23 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import List, Tuple
 
-import tcod
-
-from engine import constants, core
-from engine.components import Coordinates, EnergyActor
+from engine import constants
+from engine.components import EnergyActor
 from engine.components.component import Component
 from horderl.components.brains.brain import Brain
-from horderl.components.enums import Intention
-from horderl.systems import brain_stack
 
 
 @dataclass
 class PlaceThingActor(Brain, ABC):
+    """
+    Brain for placing buildable objects adjacent to the player.
+
+    Input handling is delegated to the brain system.
+    """
+
     energy_cost: int = EnergyActor.INSTANT
     gold_cost: int = constants.INVALID
-
-    def act(self, scene) -> None:
-        key_event = core.get_key_event()
-        if key_event:
-            key_event = key_event.sym
-            intention = KEY_ACTION_MAP.get(key_event, None)
-            if intention in {
-                Intention.STEP_NORTH,
-                Intention.STEP_EAST,
-                Intention.STEP_WEST,
-                Intention.STEP_SOUTH,
-            }:
-                self._place_thing(scene, intention)
-            elif intention is Intention.BACK:
-                brain_stack.back_out(scene, self)
 
     @abstractmethod
     def make_thing(self, x: int, y: int) -> Tuple[int, List[Component]]:
         raise NotImplementedError()
-
-    def _place_thing(self, scene, direction):
-        coords = scene.cm.get_one(Coordinates, entity=self.entity)
-        x = coords.x
-        y = coords.y
-        direction = STEP_VECTORS[direction]
-        thing_x = x + direction[0]
-        thing_y = y + direction[1]
-        if is_buildable(scene, thing_x, thing_y):
-            thing = self.make_thing(thing_x, thing_y)
-            scene.cm.add(*thing[1])
-            scene.gold -= self.gold_cost
-            old_actor = brain_stack.back_out(scene, self)
-            old_actor.pass_turn()
-        else:
-            brain_stack.back_out(scene, self)
-
-
-def is_buildable(scene, x, y):
-    target_coords = scene.cm.get(
-        Coordinates,
-        query=lambda coords: coords.x == x
-        and coords.y == y
-        and not coords.buildable,
-    )
-    return not target_coords
-
-
-KEY_ACTION_MAP = {
-    tcod.event.KeySym.UP: Intention.STEP_NORTH,
-    tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
-    tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
-    tcod.event.KeySym.LEFT: Intention.STEP_WEST,
-    tcod.event.KeySym.ESCAPE: Intention.BACK,
-}
-
-STEP_VECTORS = {
-    Intention.STEP_NORTH: (0, -1),
-    Intention.STEP_SOUTH: (0, 1),
-    Intention.STEP_EAST: (1, 0),
-    Intention.STEP_WEST: (-1, 0),
-    Intention.STEP_NORTH_EAST: (1, -1),
-    Intention.STEP_NORTH_WEST: (-1, -1),
-    Intention.STEP_SOUTH_EAST: (1, 1),
-    Intention.STEP_SOUTH_WEST: (-1, 1),
-}
