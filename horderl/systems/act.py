@@ -1,7 +1,7 @@
-from engine.components import Actor
-
 from .ability_system import run as run_ability_system
+from .actor_system import run as run_actor_system
 from .attack_action_system import run as run_attack_actions
+from .brain_system import run as run_brain_system
 from .debug_menu import run as run_debug_menu
 from .eat_action_system import run as run_eat_actions
 from .tunnel_to_point_system import run as run_tunnel_actions
@@ -13,13 +13,5 @@ def run(scene) -> None:
     run_eat_actions(scene)
     run_tunnel_actions(scene)
     run_debug_menu(scene)
-    for actor in get_actors(scene):
-        actor.act(scene)
-
-
-def get_actors(scene):
-    return [
-        actor
-        for actor in scene.cm.get(Actor)
-        if actor.can_act() and callable(getattr(actor, "act", None))
-    ]
+    run_brain_system(scene)
+    run_actor_system(scene)

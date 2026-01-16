@@ -3,6 +3,7 @@ from horderl.components.animation_definitions.blinker_animation_definition impor
     BlinkerAnimationDefinition,
 )
 from horderl.components.brains.brain import Brain
+from horderl.systems.brain_system import handle_back_out
 
 
 def swap(scene: GameScene, entity: int, new_brain: Brain) -> None:
@@ -55,10 +56,8 @@ def back_out(scene: GameScene, brain: Brain) -> Brain:
 
 
 def _run_back_out_hook(scene: GameScene, brain: Brain) -> None:
-    # Some brain subclasses define a private hook for back-out cleanup.
-    hook = getattr(brain, "_on_back_out", None)
-    if callable(hook):
-        hook(scene)
+    # Delegate back-out cleanup to the brain system for supported brains.
+    handle_back_out(scene, brain)
 
 
 def _cleanup_blinker(scene: GameScene, entity: int) -> None:
