@@ -10,6 +10,7 @@ from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
 from horderl.content.states import confused_animation
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -47,7 +48,9 @@ class DizzyBrain(Brain):
                 )
                 self._log_debug("taking a dizzy step")
                 continuing_actor = (
-                    self.back_out(scene) if self.turns <= 1 else self
+                    brain_stack.back_out(scene, self)
+                    if self.turns <= 1
+                    else self
                 )
                 self.turns -= 1
                 continuing_actor.intention = random.choice(STEPS)

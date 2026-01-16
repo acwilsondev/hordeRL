@@ -7,6 +7,7 @@ from horderl.components.brains.brain import Brain
 from horderl.components.events.peasant_events import PeasantDied
 from horderl.components.stomach import Stomach
 from horderl.content.states import sleep_animation
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -21,7 +22,7 @@ class SleepingBrain(Brain):
         scene.cm.add(*sleep_animation(coords.x, coords.y)[1])
         self.pass_turn()
         if self.turns <= 0:
-            self.back_out(scene)
+            brain_stack.back_out(scene, self)
         else:
             self.turns -= 1
 

@@ -7,6 +7,7 @@ from engine.components import Coordinates, EnergyActor
 from engine.components.entity import Entity
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -30,7 +31,7 @@ class LookCursorController(Brain):
                 self._handle_look(scene)
             elif intention is Intention.BACK:
                 scene.cm.delete(self.cursor)
-                self.back_out(scene)
+                brain_stack.back_out(scene, self)
 
     def _handle_look(self, scene):
         scene.message(self._get_description(scene))

@@ -6,12 +6,13 @@ from engine import core
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.events.attack_started_events import AttackStartListener
+from horderl.systems import brain_stack
 
 
 @dataclass
 class FastForwardBrain(Brain, AttackStartListener):
     def on_attack_start(self, scene):
-        self.back_out(scene)
+        brain_stack.back_out(scene, self)
 
     def act(self, scene):
         self.handle_key_event(scene, KEY_ACTION_MAP)
@@ -24,7 +25,7 @@ class FastForwardBrain(Brain, AttackStartListener):
             intention = action_map.get(key_code, None)
             self._log_debug(f"translated {key_event} -> {intention}")
             if intention == Intention.BACK:
-                self.back_out(scene)
+                brain_stack.back_out(scene, self)
                 return
         else:
             self.intention = Intention.DALLY

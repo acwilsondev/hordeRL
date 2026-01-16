@@ -9,6 +9,7 @@ from engine.components import Coordinates, EnergyActor
 from engine.components.component import Component
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -29,7 +30,7 @@ class PlaceThingActor(Brain, ABC):
             }:
                 self._place_thing(scene, intention)
             elif intention is Intention.BACK:
-                self.back_out(scene)
+                brain_stack.back_out(scene, self)
 
     @abstractmethod
     def make_thing(self, x: int, y: int) -> Tuple[int, List[Component]]:
@@ -46,10 +47,10 @@ class PlaceThingActor(Brain, ABC):
             thing = self.make_thing(thing_x, thing_y)
             scene.cm.add(*thing[1])
             scene.gold -= self.gold_cost
-            old_actor = self.back_out(scene)
+            old_actor = brain_stack.back_out(scene, self)
             old_actor.pass_turn()
         else:
-            self.back_out(scene)
+            brain_stack.back_out(scene, self)
 
 
 def is_buildable(scene, x, y):

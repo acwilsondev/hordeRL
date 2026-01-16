@@ -12,6 +12,7 @@ from horderl.components.animation_definitions.blinker_animation_definition impor
 from horderl.components.brains.brain import Brain
 from horderl.components.enums import Intention
 from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.systems import brain_stack
 
 
 @dataclass
@@ -38,7 +39,7 @@ class RangedAttackActor(Brain):
             }:
                 self._next_enemy(scene)
             elif intention is Intention.BACK:
-                self.back_out(scene)
+                self._exit(scene)
 
     def shoot(self, scene):
         attack = AttackAction(entity=self.entity, target=self.target, damage=1)
@@ -47,18 +48,17 @@ class RangedAttackActor(Brain):
         ability = scene.cm.get_component_by_id(self.shoot_ability)
         ability.count -= 1
 
-        self.back_out(scene)
+        self._exit(scene)
 
-    def back_out(self, scene):
-        old_actor = scene.cm.unstash_component(self.old_brain)
+    def _exit(self, scene) -> None:
+        # Ensure target highlighting is cleared before restoring the old brain.
         blinker = scene.cm.get_one(
             BlinkerAnimationDefinition, entity=self.target
         )
         if blinker:
             blinker.is_animating = False
             blinker.remove_on_stop = True
-        scene.cm.delete_component(self)
-        return old_actor
+        brain_stack.back_out(scene, self)
 
     def _next_enemy(self, scene):
         next_enemy = self._get_next_enemy(scene)
