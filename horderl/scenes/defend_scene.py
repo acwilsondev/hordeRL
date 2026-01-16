@@ -49,6 +49,7 @@ from horderl.systems.flood_holes_system import run as run_flood_holes
 from horderl.systems.serialization_system import (
     run as run_serialization_system,
 )
+from horderl.systems.weather_system import run as run_weather_system
 
 
 class DefendScene(GameScene):
@@ -234,6 +235,7 @@ class DefendScene(GameScene):
         run_animation_controllers(self, dt_ms)
         run_flood_holes(self)
         run_audio_system(self)
+        run_weather_system(self)
         run_event_dispatch(self)
         act.run(self)
         move.run(self)
