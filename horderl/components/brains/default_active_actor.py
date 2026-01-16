@@ -4,7 +4,7 @@ from typing import Optional
 
 from engine import constants, utilities
 from engine.components import Coordinates
-from engine.core import log_debug
+from engine.logging import get_logger
 from horderl import palettes
 from horderl.components.actions.attack_action import AttackAction
 from horderl.components.actions.eat_action import EatAction
@@ -35,11 +35,33 @@ from horderl.systems.pathfinding.target_selection import get_new_target
 
 @dataclass
 class DefaultActiveActor(Brain):
+    """
+    Brain that selects and pursues targets for active hostile actors.
+
+    Responsible for acquiring a target, deciding whether to eat or attack, and
+    moving toward the target using pathfinding or emergency tunneling.
+    """
+
     target: int = constants.INVALID
     cost_map = None
 
-    @log_debug(__name__)
     def act(self, scene):
+        """
+        Evaluate targets and perform a single action toward the best option.
+
+        Args:
+            scene: Active scene containing component manager and config.
+
+        Side Effects:
+            - Updates internal target state and intention.
+            - Enqueues actions or movement components.
+            - Consumes energy via pass_turn().
+        """
+        logger = get_logger(__name__)
+        logger.debug(
+            "Default active actor tick",
+            extra={"entity": self.entity, "target": self.target},
+        )
         self.cost_map = self.get_cost_map(scene)
 
         target_evaluator = scene.cm.get_one(
@@ -70,6 +92,15 @@ class DefaultActiveActor(Brain):
             self.move_towards_target(scene)
 
     def get_cost_map(self, scene):
+        """
+        Determine the cost map used for pathfinding.
+
+        Args:
+            scene: Active scene containing component manager.
+
+        Returns:
+            Any: Pathfinding cost map produced by a cost mapper.
+        """
         cost_mapper: Optional[CostMapper] = scene.cm.get_one(
             CostMapper, entity=self.entity
         )
@@ -80,6 +111,17 @@ class DefaultActiveActor(Brain):
             return NormalCostMapper(entity=self.entity).get_cost_map(scene)
 
     def move_towards_target(self, scene):
+        """
+        Move toward the current target or tunnel if no path exists.
+
+        Args:
+            scene: Active scene containing component manager and config.
+
+        Side Effects:
+            - Sets the actor intention for the next step.
+            - Adds tunneling actions or death events when blocked.
+            - Consumes energy via pass_turn().
+        """
         self._log_debug(f"stepping towards target {self.target}")
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         next_step_node = self.get_next_step(scene)
@@ -103,11 +145,31 @@ class DefaultActiveActor(Brain):
             self._log_debug(f"set intention {self.intention}")
 
     def should_eat(self, scene):
+        """
+        Decide whether the current target is edible.
+
+        Args:
+            scene: Active scene containing component manager.
+
+        Returns:
+            bool: True if the target has an Edible component.
+        """
         self._log_debug(f"checking for edibility of {self.target}")
         edible = scene.cm.get_one(Edible, entity=self.target)
         return edible is not None
 
     def eat_target(self, scene):
+        """
+        Trigger an eat action against the current target.
+
+        Args:
+            scene: Active scene containing component manager.
+
+        Side Effects:
+            - Adds an EatAction component.
+            - Transitions the actor into a sleeping brain state.
+            - Consumes energy via pass_turn().
+        """
         self._log_debug(f"eating target {self.target}")
         scene.cm.add(EatAction(entity=self.entity, target=self.target))
         edible = scene.cm.get_one(Edible, entity=self.target)
@@ -116,6 +178,16 @@ class DefaultActiveActor(Brain):
         self.pass_turn()
 
     def attack_target(self, scene):
+        """
+        Trigger an attack action against the current target.
+
+        Args:
+            scene: Active scene containing component manager.
+
+        Side Effects:
+            - Adds AttackAction and animation components.
+            - Consumes energy via pass_turn().
+        """
         self._log_debug(f"attacking target {self.target}")
 
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
@@ -133,13 +205,31 @@ class DefaultActiveActor(Brain):
         self.pass_turn()
 
     def is_target_in_range(self, scene) -> bool:
+        """
+        Check whether the target is within attack range.
+
+        Args:
+            scene: Active scene containing component manager.
+
+        Returns:
+            bool: True if the target is close enough to interact.
+        """
         coords = scene.cm.get_one(Coordinates, entity=self.entity)
         target = scene.cm.get_one(Coordinates, entity=self.target)
         return coords.distance_from(target) < 2
 
     def get_next_step(self, scene):
         """
-        Get the next step towards my target.
+        Calculate the next step on the path toward the target.
+
+        Args:
+            scene: Active scene containing component manager.
+
+        Returns:
+            tuple | None: Next path node coordinates, or None if no path exists.
+
+        Side Effects:
+            - Adds breadcrumb tracking components when available.
         """
         self_coords = scene.cm.get_one(Coordinates, entity=self.entity)
         target_coords = scene.cm.get_one(Coordinates, entity=self.target)
@@ -178,6 +268,17 @@ class DefaultActiveActor(Brain):
         return found
 
     def sleep(self, scene, sleep_for):
+        """
+        Transition this actor into a sleeping brain state.
+
+        Args:
+            scene: Active scene containing component manager.
+            sleep_for (int): Number of turns to sleep.
+
+        Side Effects:
+            - Stashes the current brain component.
+            - Adds a SleepingBrain and blinker animation.
+        """
         self._log_debug("falling asleep")
         new_controller = SleepingBrain(
             entity=self.entity, old_brain=self.id, turns=sleep_for
