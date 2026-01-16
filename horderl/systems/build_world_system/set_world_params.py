@@ -15,12 +15,28 @@ from ...gui.easy_menu import EasyMenu
 
 
 def set_world_params(scene):
+    """Prompt the player to select biome parameters for world generation.
+
+    Args:
+        scene: Active game scene used for component lookup and UI.
+
+    Returns:
+        None.
+
+    Side effects:
+        - Sets WorldbuildingControl selection state flags.
+        - Adds an EasyMenu GUI element to the scene.
+        - Logs selection prompts.
+    """
     logger = core.get_logger(__name__)
     logger.info(f"setting worldbuilder params")
 
     control = scene.cm.get_one(
         WorldbuildingControl, entity=core.get_id("world")
     )
+    if not control:
+        logger.warning("worldbuilding control missing; cannot set world parameters")
+        return
 
     control.world_parameters_selecting = True
 
