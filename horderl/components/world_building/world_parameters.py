@@ -24,7 +24,6 @@ def get_seed(config):
 
 @dataclass
 class WorldParameters(Component):
-    worldbuilding_done = False
 
     biome: str = "Plains"
 
@@ -58,11 +57,11 @@ class WorldParameters(Component):
         return self.world_name.replace(" ", "-")
 
 
-def get_plains_params(entity, config):
+def get_plains_params(entity, config) -> WorldParameters:
     return WorldParameters(entity=entity, world_seed=get_seed(config))
 
 
-def get_forest_params(entity, config):
+def get_forest_params(entity, config) -> WorldParameters:
     return WorldParameters(
         biome="Forest",
         entity=entity,
@@ -74,7 +73,7 @@ def get_forest_params(entity, config):
     )
 
 
-def get_mountain_params(entity, config):
+def get_mountain_params(entity, config) -> WorldParameters:
     return WorldParameters(
         entity=entity,
         biome="Mountain",
@@ -89,7 +88,7 @@ def get_mountain_params(entity, config):
     )
 
 
-def get_swamp_params(entity, config):
+def get_swamp_params(entity, config) -> WorldParameters:
     return WorldParameters(
         entity=entity,
         biome="Swamp",
@@ -104,7 +103,7 @@ def get_swamp_params(entity, config):
     )
 
 
-def get_tundra_params(entity, config):
+def get_tundra_params(entity, config) -> WorldParameters:
     return WorldParameters(
         entity=entity,
         biome="Tundra",
