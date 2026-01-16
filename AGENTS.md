@@ -96,6 +96,9 @@
 
 ## Committing
 
+- You may need to add ./engine to your path for tests to pass
+- Run make check before committing! This will automatically fix formatting and run tests and 
+  checks.
 - **Use Conventional Commits whenever possible.**
   - Format: `type(scope): short summary`
   - Examples:
@@ -104,7 +107,6 @@
     - `refactor(map): split tile rendering`
     - `test(engine): add timed actor tests`
     - `docs: update agent rules`
-
 - **Keep commits small and intention-revealing.**
   - One change theme per commit.
   - Avoid bundling drive-by refactors with behavior changes unless necessary.
