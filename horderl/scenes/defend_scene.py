@@ -38,7 +38,7 @@ from horderl.gui.labels import (
 from horderl.gui.message_box import MessageBox
 from horderl.gui.play_window import PlayWindow
 from horderl.gui.popup_message import PopupMessage
-from horderl.systems import act, control_turns, move
+from horderl.systems import act, control_turns, move, update_senses_system
 from horderl.systems.animation_controller_system import (
     run as run_animation_controllers,
 )
@@ -212,6 +212,14 @@ class DefendScene(GameScene):
         # game engine pattern.
         self.logger.debug("==== Beginning DefendScene update at dt=%s", dt_ms)
         build_world_system.run(self)  # only runs once due to component gates
+
+        world_building_control = self.cm.get_one(
+            WorldbuildingControl, entity=core.get_id("world")
+        )
+        if world_building_control:
+            # still building the world, nothing else to do
+            return
+
         for updateable in self.cm.get(Updateable):
             self.logger.debug("Updating Updateable: %s", updateable)
             updateable.update(self, dt_ms)
@@ -221,6 +229,7 @@ class DefendScene(GameScene):
         run_flood_holes(self)
         act.run(self)
         move.run(self)
+        update_senses_system.run(self)
         control_turns.run(self)
         self.logger.debug("==== Completed DefendScene update at dt=%s", dt_ms)
 

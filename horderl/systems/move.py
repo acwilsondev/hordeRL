@@ -2,6 +2,7 @@ import logging
 from typing import Tuple
 
 from engine.components import Actor, Coordinates
+from horderl.constants import PLAYER_ID
 
 from .. import palettes
 from ..components import Senses
@@ -40,7 +41,7 @@ def get_hostile(scene, entity, step_direction):
 
 def run(scene):
     for actor in get_actors_with_step_intention(scene):
-        logging.debug(f"Move System: moving {actor}")
+        logging.info(f"Move System: moving {actor}")
         entity = actor.entity
         actor = scene.cm.get_one(Brain, entity=entity)
 
@@ -140,7 +141,7 @@ def in_bounds(scene, point):
 
 
 def dirty_senses(scene, entity):
-    if entity == 0:
+    if entity == PLAYER_ID:
         senses = scene.cm.get_one(Senses, entity=0)
         if senses:
             senses.dirty = True
