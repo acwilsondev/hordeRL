@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 from engine import GameScene
 from engine.components.component import Component
-from engine.core import log_debug
+from engine.logging import get_logger
 
 
 @dataclass
@@ -12,7 +12,6 @@ class Event(Component):
     Define an event that notifies listeners.
     """
 
-    @log_debug(__name__)
     def act(self, scene: GameScene) -> None:
         """
         Dispatch the event to its listeners.
@@ -26,6 +25,14 @@ class Event(Component):
             - Executes before/after hooks on the event.
 
         """
+        logger = get_logger(__name__)
+        logger.debug(
+            "Dispatching event",
+            extra={
+                "event_type": type(self).__name__,
+                "entity": self.entity,
+            },
+        )
         dispatch_event(scene, self)
 
     @abstractmethod

@@ -1,6 +1,6 @@
 from engine.component_manager import ComponentManager
 from engine.components import Actor, Coordinates
-from engine.core import log_debug
+from engine.logging import get_logger
 
 from ..components.events.turn_event import TurnEvent
 from ..components.faction import Faction
@@ -8,6 +8,17 @@ from ..components.material import Material
 
 
 def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:
+    """
+    Find the first blocking material at the given coordinates.
+
+    Args:
+        cm (ComponentManager): Component manager to query.
+        x (int): X coordinate to inspect.
+        y (int): Y coordinate to inspect.
+
+    Returns:
+        int | None: Entity id for the blocking material, or None if none exists.
+    """
     materials_at_coords = filter(
         lambda material: material and material.blocks,
         iter(
@@ -21,20 +32,54 @@ def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:
     return blocking_material.entity if blocking_material else None
 
 
-@log_debug(__name__)
 def retract_turn(scene, entity: int):
+    """
+    Remove a pending TurnEvent for an entity, if present.
+
+    Args:
+        scene: Active scene containing component manager.
+        entity (int): Entity id whose TurnEvent should be removed.
+
+    Side Effects:
+        - Deletes a TurnEvent component from the component manager.
+    """
+    logger = get_logger(__name__)
+    logger.debug(
+        "Retracting turn event",
+        extra={"entity": entity},
+    )
     turn = scene.cm.get_one(TurnEvent, entity=entity)
     if turn:
         scene.cm.delete_component(turn)
 
 
 def get_actors_with_intention(scene, intention):
+    """
+    Yield actors matching a specific intention.
+
+    Args:
+        scene: Active scene containing component manager.
+        intention: Intention value to match.
+
+    Yields:
+        Actor: Actor components with the matching intention.
+    """
     for actor in scene.cm.get(Actor):
         if actor.intention is intention:
             yield actor
 
 
 def get_enemies(scene, entity):
+    """
+    Get entities that are in a different faction than the provided entity.
+
+    Args:
+        scene: Active scene containing component manager.
+        entity (int): Entity id to compare factions against.
+
+    Returns:
+        list[int]: Entity ids considered enemies.
+    """
     entity_faction = scene.cm.get_one(Faction, entity=entity)
     if not entity_faction:
         # entities without a faction cannot have enemies
@@ -47,6 +92,18 @@ def get_enemies(scene, entity):
 
 
 def get_enemies_in_range(scene, entity, min_range=0, max_range=1000):
+    """
+    Return enemy entities within the specified distance range.
+
+    Args:
+        scene: Active scene containing component manager.
+        entity (int): Entity id used as the distance origin.
+        min_range (int): Minimum inclusive range.
+        max_range (int): Maximum inclusive range.
+
+    Returns:
+        list[int]: Enemy entity ids within the distance range.
+    """
     coords = scene.cm.get_one(Coordinates, entity)
 
     # get coordinates for each enemy
