@@ -1,10 +1,7 @@
 from engine import core
 from engine.game_scene import GameScene
-from horderl.components.system_control_options import SystemControlOptions
+from horderl.components.worldbuilding_control import WorldbuildingControl
 from horderl.content.player import make_player
-from horderl.systems.build_world_system.mark_world_build_complete import (
-    mark_world_build_complete,
-)
 from horderl.systems.build_world_system.place_flowers import place_flowers
 from horderl.systems.build_world_system.place_lakes import place_lakes
 from horderl.systems.build_world_system.place_peasants import place_peasants
@@ -17,25 +14,36 @@ from horderl.systems.build_world_system.set_world_params import set_world_params
 
 def run(scene: GameScene) -> None:
     """Build the world according to the WorldParameters settings."""
+    logger = core.get_logger(__name__)
 
-    options = scene.cm.get_one(SystemControlOptions, entity=core.get_id("world"))
-    if options.worldbuilding_done:
-        # we've already done worldbuilding
+    worldbuilding_control = scene.cm.get_one(WorldbuildingControl, entity=core.get_id("world"))
+    if not worldbuilding_control:
+        # we aleady built the world, nothing to do
+        return
+    
+    # the first thing we need to do is prompt the user for biome selection
+    if worldbuilding_control.world_parameters_selecting:
+        # we can't move forward until the user has selected a biome
+        return
+    if worldbuilding_control.world_parameters_selected:
+        # remove the worldbuilding control component, we are done with it
+        logger.info("building world with selected parameters")
+        _add_player(scene)
+        place_lakes(scene)
+        place_river(scene)
+        place_peasants(scene)
+        place_roads(scene)
+        place_trees(scene)
+        place_rocks(scene)
+        place_flowers(scene)
+        scene.cm.delete_component(worldbuilding_control)
+        logger.info("world build complete")
         return
 
-    logger = core.get_logger(__name__)
-    logger.info(f"building world...")
+    # otherwise, we need to prompt the user to select a biome
+    logger.info("prompting user to select world parameters")
     set_world_params(scene)
-    _add_player(scene)
-    place_lakes(scene)
-    place_river(scene)
-    place_peasants(scene)
-    place_roads(scene)
-    place_trees(scene)
-    place_rocks(scene)
-    place_flowers(scene)
-    mark_world_build_complete(scene)
-    logger.info(f"world build complete.")
+
 
 
 def _add_player(scene: GameScene) -> None:

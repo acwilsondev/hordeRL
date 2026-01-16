@@ -8,6 +8,7 @@ from horderl.components.world_building.world_parameters import (
     get_swamp_params,
     get_tundra_params,
 )
+from horderl.components.worldbuilding_control import WorldbuildingControl
 from horderl.i18n import t
 
 from ...gui.easy_menu import EasyMenu
@@ -17,17 +18,11 @@ def set_world_params(scene):
     logger = core.get_logger(__name__)
     logger.info(f"setting worldbuilder params")
 
-    options = scene.cm.get_one(
-        "SystemControlOptions", entity=core.get_id("world")
+    control = scene.cm.get_one(
+        WorldbuildingControl, entity=core.get_id("world")
     )
 
-    if options.world_parameters_selecting or options.world_parameters_selected:
-        logger.info(
-            "world parameters already selected or in the process of selecting"
-        )
-        return
-
-    options.world_parameters_selecting = True
+    control.world_parameters_selecting = True
 
     scene.add_gui_element(
         EasyMenu(
@@ -63,12 +58,12 @@ def _get_settings(scene, factory):
         scene.cm.add(params)
         logger = core.get_logger(__name__)
 
-        system_controller = scene.cm.get_one(
-            "SystemControlOptions", entity=core.get_id("system_controller")
+        control = scene.cm.get_one(
+            WorldbuildingControl, entity=core.get_id("world")
         )
 
-        system_controller.world_parameters_selecting = False
-        system_controller.world_parameters_selected = True
+        control.world_parameters_selecting = False
+        control.world_parameters_selected = True
 
         logger.info(f"world parameters set: {params}")
 

@@ -1,5 +1,6 @@
 from typing import Tuple
 
+from horderl.components.worldbuilding_control import WorldbuildingControl
 import numpy as np
 
 from engine.components.updateable import Updateable
@@ -160,6 +161,7 @@ class DefendScene(GameScene):
             self.cm.add(LoadGame(entity=self.player, file_name=self.from_file))
             self.cm.add(StartGame(entity=self.player))
         else:
+            self.cm.add(WorldbuildingControl(entity=core.get_id("world")))
             self.cm.add(*make_tax_handler()[1])
             self.cm.add(*make_calendar()[1])
             self.cm.add(*make_physics_controller()[1])
