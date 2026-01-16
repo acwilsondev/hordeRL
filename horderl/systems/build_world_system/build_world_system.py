@@ -9,18 +9,34 @@ from horderl.systems.build_world_system.place_river import place_river
 from horderl.systems.build_world_system.place_roads import place_roads
 from horderl.systems.build_world_system.place_rocks import place_rocks
 from horderl.systems.build_world_system.place_trees import place_trees
-from horderl.systems.build_world_system.set_world_params import set_world_params
+from horderl.systems.build_world_system.set_world_params import (
+    set_world_params,
+)
 
 
 def run(scene: GameScene) -> None:
-    """Build the world according to the WorldParameters settings."""
+    """Build the world according to the WorldParameters settings.
+
+    Args:
+        scene: Active game scene with worldbuilding components.
+
+    Returns:
+        None.
+
+    Side effects:
+        - Adds entities/components for terrain, NPCs, and player.
+        - Removes the WorldbuildingControl component once complete.
+        - Logs worldbuilding progress.
+    """
     logger = core.get_logger(__name__)
 
-    worldbuilding_control = scene.cm.get_one(WorldbuildingControl, entity=core.get_id("world"))
+    worldbuilding_control = scene.cm.get_one(
+        WorldbuildingControl, entity=core.get_id("world")
+    )
     if not worldbuilding_control:
-        # we aleady built the world, nothing to do
+        # we already built the world, nothing to do
         return
-    
+
     # the first thing we need to do is prompt the user for biome selection
     if worldbuilding_control.world_parameters_selecting:
         # we can't move forward until the user has selected a biome
@@ -45,9 +61,8 @@ def run(scene: GameScene) -> None:
     set_world_params(scene)
 
 
-
 def _add_player(scene: GameScene) -> None:
-    # Add the player to the center of the map
+    # Add the player to the center of the map.
     logger = core.get_logger(__name__)
     logger.info(f"adding player to map")
     player = make_player(

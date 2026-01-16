@@ -1,6 +1,5 @@
 from typing import Tuple
 
-from horderl.components.worldbuilding_control import WorldbuildingControl
 import numpy as np
 
 from engine.components.updateable import Updateable
@@ -11,6 +10,7 @@ from horderl.components.serialization.load_game import LoadGame
 from horderl.components.sound.battle_music import BattleMusic
 from horderl.components.sound.start_music import StartMusic
 from horderl.components.world_beauty import WorldBeauty
+from horderl.components.worldbuilding_control import WorldbuildingControl
 from horderl.constants import PLAYER_ID
 from horderl.content.physics_controller import make_physics_controller
 from horderl.content.tax_handler import make_tax_handler

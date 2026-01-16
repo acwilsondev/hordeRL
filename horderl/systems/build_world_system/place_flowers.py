@@ -32,6 +32,7 @@ def place_flowers(scene):
         _add_flower_field(scene, x, y)
     logger.info(f"flower fields placed.")
 
+
 def _add_flower_field(scene, x: int, y: int) -> None:
     world_settings = scene.cm.get_one(
         WorldParameters, entity=core.get_id("world")
