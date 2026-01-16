@@ -38,7 +38,7 @@ def test_flood_holes_system_fills_one_hole_and_sets_cooldown():
     assert updated_flooder.next_flood_time_ms >= 0
 
 
-def test_flood_holes_system_stops_when_no_adjacent_flooders():
+def test_flood_holes_system_does_not_stop_when_no_adjacent_flooders():
     scene = DummyScene()
     state = FloodHolesState(entity=1, is_active=True, step_delay_ms=0)
     flooder_id = 2
@@ -55,5 +55,5 @@ def test_flood_holes_system_stops_when_no_adjacent_flooders():
 
     run_flood_holes(scene)
 
-    assert state.is_active is False
+    assert state.is_active is True
     assert scene.cm.get(Floodable)

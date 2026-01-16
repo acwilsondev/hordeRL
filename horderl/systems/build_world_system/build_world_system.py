@@ -9,7 +9,9 @@ from horderl.systems.build_world_system.place_river import place_river
 from horderl.systems.build_world_system.place_roads import place_roads
 from horderl.systems.build_world_system.place_rocks import place_rocks
 from horderl.systems.build_world_system.place_trees import place_trees
-from horderl.systems.build_world_system.set_world_params import set_world_params
+from horderl.systems.build_world_system.set_world_params import (
+    set_world_params,
+)
 
 
 def run(scene: GameScene) -> None:
@@ -28,11 +30,13 @@ def run(scene: GameScene) -> None:
     """
     logger = core.get_logger(__name__)
 
-    worldbuilding_control = scene.cm.get_one(WorldbuildingControl, entity=core.get_id("world"))
+    worldbuilding_control = scene.cm.get_one(
+        WorldbuildingControl, entity=core.get_id("world")
+    )
     if not worldbuilding_control:
         # we already built the world, nothing to do
         return
-    
+
     # the first thing we need to do is prompt the user for biome selection
     if worldbuilding_control.world_parameters_selecting:
         # we can't move forward until the user has selected a biome
@@ -55,7 +59,6 @@ def run(scene: GameScene) -> None:
     # otherwise, we need to prompt the user to select a biome
     logger.info("prompting user to select world parameters")
     set_world_params(scene)
-
 
 
 def _add_player(scene: GameScene) -> None:

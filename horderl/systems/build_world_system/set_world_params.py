@@ -35,7 +35,9 @@ def set_world_params(scene):
         WorldbuildingControl, entity=core.get_id("world")
     )
     if not control:
-        logger.warning("worldbuilding control missing; cannot set world parameters")
+        logger.warning(
+            "worldbuilding control missing; cannot set world parameters"
+        )
         return
 
     control.world_parameters_selecting = True
