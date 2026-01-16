@@ -1,7 +1,14 @@
-import logging
-from dataclasses import dataclass
+"""
+Debug menu system and helper actions.
 
-from engine.components import Coordinates, EnergyActor
+This system constructs the EasyMenu for debug tooling and provides the callback
+functions used by the menu entries.
+"""
+
+import logging
+
+from engine import core
+from engine.components import Coordinates
 from engine.components.entity import Entity
 
 from ..components import Attributes, Senses
@@ -15,6 +22,7 @@ from ..components.brains.painters.create_hordeling_actor import (
 from ..components.events.die_events import Die
 from ..components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from ..components.serialization.save_game import SaveGame
+from ..components.wants_to_show_debug import WantsToShowDebug
 from ..components.wrath_effect import WrathEffect
 from ..constants import PLAYER_ID
 from ..content.cursor import make_cursor
@@ -22,84 +30,58 @@ from ..content.farmsteads.houses import place_farmstead
 from ..content.terrain.roads import connect_point_to_road_network
 from ..gui.easy_menu import EasyMenu
 
-"""
-This module provides debugging tools and a debug menu system for the game.
 
-It contains a ShowDebug component that creates a menu with various debug options
-for testing, development, and debugging purposes. The module also includes all the
-individual debug functions that can be used to modify game state, inspect entities,
-manipulate the player character, and test various game systems.
-
-NOTE: These functions are intended for development use only and should not be
-accessible in production builds.
-"""
-
-
-@dataclass
-class ShowDebug(EnergyActor):
+def run(scene) -> None:
     """
-    A debug menu component that provides access to various debugging tools and options.
+    Process ShowDebug components and display the debug menu.
 
-    This component inherits from EnergyActor and consumes zero energy (INSTANT) when activated,
-    making it suitable for debug operations that shouldn't affect game balance. When activated,
-    it displays a menu with various debug options that allow developers to:
+    Args:
+        scene: The current game scene containing the GUI and component manager.
 
-    - Examine game objects and their components
-    - Manipulate player attributes (health, gold)
-    - Place entities in the world (hordelings, gold)
-    - Test special effects (wrath)
-    - Manipulate the player (teleport, suicide)
-    - Toggle gameplay abilities (masonry)
-    - Visualize pathfinding
-    - Generate content (farmsteads)
-    - Save game state
-
-    The component self-destructs after displaying the menu to avoid multiple instances.
-
-    Attributes:
-        energy_cost (int): The energy cost for activating this component, set to
-                          INSTANT (zero) to avoid affecting gameplay timing.
-
+    Side effects:
+        - Adds an EasyMenu GUI element for debugging.
+        - Removes the ShowDebug component after processing.
     """
+    debug_components = scene.cm.get(WantsToShowDebug)
+    if not debug_components:
+        # nothing to do
+        return
 
-    energy_cost: int = EnergyActor.INSTANT
+    logger = core.get_logger(__name__)
 
-    def act(self, scene):
-        """
-        Display the debug menu and remove this component from the entity.
-
-        This method creates an EasyMenu with various debug options and adds it to the
-        scene's GUI. Each menu option is linked to a specific debug function. After
-        displaying the menu, the component removes itself from the component manager.
-
-        Args:
-            scene: The current game scene containing the GUI and component manager.
-
-        """
-        scene.add_gui_element(
-            EasyMenu(
-                "Debug Options",
-                {
-                    "examine game objects": get_examine_game_objects(scene),
-                    "heal": get_heal(scene),
-                    "get rich": get_rich(scene),
-                    "place hordeling": get_painter(
-                        scene, PlaceHordelingController
-                    ),
-                    "place gold": get_painter(scene, PlaceGoldController),
-                    "wrath": get_wrath(scene, self.entity),
-                    "suicide": get_suicide(scene),
-                    "teleport to": get_teleport_to(scene),
-                    "toggle ability": get_toggle_masonry(scene),
-                    "toggle pathing": get_pathfinding_for(scene),
-                    "spawn a home": get_spawn_home(scene),
-                    "quicksave": quick_save(scene),
-                },
-                scene.config.inventory_width,
-                scene.config,
-            )
+    debug_component = None
+    if len(debug_components) > 1:
+        logger.warning(
+            "Found more than one ShowDebug component, this should not ever happen."
         )
-        scene.cm.delete_component(self)
+    debug_component = debug_components[0]
+
+    logger.info("Showing debug menu")
+    scene.add_gui_element(
+        EasyMenu(
+            "Debug Options",
+            {
+                "examine game objects": get_examine_game_objects(scene),
+                "heal": get_heal(scene),
+                "get rich": get_rich(scene),
+                "place hordeling": get_painter(
+                    scene, PlaceHordelingController
+                ),
+                "place gold": get_painter(scene, PlaceGoldController),
+                "wrath": get_wrath(scene, debug_component.entity),
+                "suicide": get_suicide(scene),
+                "teleport to": get_teleport_to(scene),
+                "toggle ability": get_activate_ability(scene),
+                "toggle pathing": get_pathfinding_for(scene),
+                "spawn a home": get_spawn_home(scene),
+                "quicksave": quick_save(scene),
+            },
+            scene.config.inventory_width,
+            scene.config,
+        )
+    )
+    scene.cm.delete_component(debug_component)
+    logger.debug("Done showing debug menu")
 
 
 # Entity Inspection Functions
@@ -237,27 +219,6 @@ def get_painter(scene, painter):
         scene.cm.add(new_controller)
 
     return out_fn
-
-
-def place_gold(scene):
-    """
-    Create a function that switches player control to gold placement mode.
-
-    This debug function is a specific implementation of the get_painter function
-    that uses the PlaceGoldController. It's maintained for backward compatibility
-    but has the same functionality as get_painter(scene, PlaceGoldController).
-
-    Args:
-        scene: The current game scene containing the component manager.
-
-    Returns:
-        function: A callback function that activates gold placement mode when invoked.
-
-    """
-
-    def out_fn():
-        coords = scene.cm.get_one(Coordinates, entity=scene.player)
-        cursor = make_cursor(coords.x, coords.y)
 
 
 def get_rich(scene):

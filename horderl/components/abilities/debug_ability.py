@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from ..abilities.ability import Ability
-from ..show_debug import ShowDebug
+from ..show_debug import WantsToShowDebug
 
 
 @dataclass
@@ -12,4 +12,4 @@ class DebugAbility(Ability):
     use_cost: int = 0
 
     def use(self, scene, dispatcher):
-        scene.cm.add(ShowDebug(entity=self.entity))
+        scene.cm.add(WantsToShowDebug(entity=self.entity))
