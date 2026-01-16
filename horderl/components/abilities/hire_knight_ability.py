@@ -1,9 +1,7 @@
 from dataclasses import dataclass
-from typing import Callable
 
 from horderl import palettes
 
-from ..brains.ability_actors.hire_knight_brain import HireKnightActor
 from .control_mode_ability import ControlModeAbility
 
 
@@ -17,6 +15,6 @@ class HireKnightAbility(ControlModeAbility):
     ability_title_key: str = "ability.place_knight"
     unlock_cost: int = 250
     use_cost: int = 100
-    mode_factory: Callable = HireKnightActor
+    control_mode_key: str = "hire_knight"
     anim_symbol: str = "K"
     anim_color: tuple = palettes.STONE

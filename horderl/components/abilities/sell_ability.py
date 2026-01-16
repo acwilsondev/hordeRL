@@ -1,9 +1,7 @@
 from dataclasses import dataclass
-from typing import Callable
 
 from horderl import palettes
 
-from ..brains.ability_actors.sell_thing_actor import SellThingActor
 from .control_mode_ability import ControlModeAbility
 
 
@@ -17,6 +15,6 @@ class SellAbility(ControlModeAbility):
     ability_title_key: str = "ability.sell"
     unlock_cost: int = 0
     use_cost: int = 0
-    mode_factory: Callable = SellThingActor
+    control_mode_key: str = "sell"
     anim_symbol: str = "$"
     anim_color: tuple = palettes.GOLD

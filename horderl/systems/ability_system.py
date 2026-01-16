@@ -20,12 +20,43 @@ from horderl.components.actions.attack_action import AttackAction
 from horderl.components.animation_definitions.blinker_animation_definition import (
     BlinkerAnimationDefinition,
 )
+from horderl.components.brains.ability_actors.dig_hole_actor import (
+    DigHoleActor,
+)
+from horderl.components.brains.ability_actors.hire_knight_brain import (
+    HireKnightActor,
+)
 from horderl.components.brains.ability_actors.look_cursor_controller import (
     LookCursorController,
+)
+from horderl.components.brains.ability_actors.place_bomb_actor import (
+    PlaceBombActor,
+)
+from horderl.components.brains.ability_actors.place_cow_actor import (
+    PlaceCowActor,
+)
+from horderl.components.brains.ability_actors.place_fence_actor import (
+    PlaceFenceActor,
+)
+from horderl.components.brains.ability_actors.place_haunch_actor import (
+    PlaceHaunchActor,
+)
+from horderl.components.brains.ability_actors.place_spikes_actor import (
+    PlaceSpikesActor,
+)
+from horderl.components.brains.ability_actors.place_stone_wall_actor import (
+    PlaceStoneWallActor,
+)
+from horderl.components.brains.ability_actors.plant_sapling_actor import (
+    PlaceSaplingActor,
 )
 from horderl.components.brains.ability_actors.ranged_attack_actor import (
     RangedAttackActor,
 )
+from horderl.components.brains.ability_actors.sell_thing_actor import (
+    SellThingActor,
+)
+from horderl.components.brains.fast_forward_actor import FastForwardBrain
 from horderl.components.tags.hordeling_tag import HordelingTag
 from horderl.components.wants_to_show_debug import WantsToShowDebug
 from horderl.content.attacks import thwack_animation, thwack_dizzy_animation
@@ -38,6 +69,19 @@ from horderl.systems.utilities import get_enemies_in_range
 AbilityHandler = Callable[[object, int, Ability], None]
 
 _ABILITY_HANDLERS: dict[type[Ability], AbilityHandler] = {}
+_CONTROL_MODE_ACTORS: dict[str, type] = {
+    "dig_hole": DigHoleActor,
+    "fast_forward": FastForwardBrain,
+    "hire_knight": HireKnightActor,
+    "place_bomb": PlaceBombActor,
+    "place_cow": PlaceCowActor,
+    "place_fence": PlaceFenceActor,
+    "place_haunch": PlaceHaunchActor,
+    "place_sapling": PlaceSaplingActor,
+    "place_spikes": PlaceSpikesActor,
+    "place_stone_wall": PlaceStoneWallActor,
+    "sell": SellThingActor,
+}
 
 
 def run(scene) -> None:
@@ -109,9 +153,18 @@ def _apply_control_mode(
             "dispatcher": dispatcher_id,
         },
     )
-    if ability.mode_factory is None:
+    mode_factory = _CONTROL_MODE_ACTORS.get(ability.control_mode_key)
+    if mode_factory is None:
+        logger.warning(
+            "Unknown control mode key",
+            extra={
+                "entity": ability.entity,
+                "ability": type(ability).__name__,
+                "control_mode_key": ability.control_mode_key,
+            },
+        )
         return
-    new_controller = ability.mode_factory(
+    new_controller = mode_factory(
         entity=ability.entity, old_brain=dispatcher_id
     )
     blinker = BlinkerAnimationDefinition(

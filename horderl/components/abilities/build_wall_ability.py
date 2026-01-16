@@ -1,10 +1,8 @@
 from dataclasses import dataclass
-from typing import Callable
 
 from horderl import palettes
 
 from ..abilities.control_mode_ability import ControlModeAbility
-from ..brains.ability_actors.place_stone_wall_actor import PlaceStoneWallActor
 
 
 @dataclass
@@ -17,6 +15,6 @@ class BuildWallAbility(ControlModeAbility):
     ability_title_key: str = "ability.build_wall"
     unlock_cost: int = 100
     use_cost: int = 10
-    mode_factory: Callable = PlaceStoneWallActor
+    control_mode_key: str = "place_stone_wall"
     anim_symbol: str = "o"
     anim_color: tuple = palettes.STONE

@@ -1,3 +1,4 @@
+from engine import serialization
 from engine.component_manager import ComponentManager
 from engine.components import Coordinates
 from engine.components.entity import Entity
@@ -67,3 +68,21 @@ def test_run_recharges_thwack_ability() -> None:
     assert ability.count == 2
     assert ability.is_recharging is True
     assert ability.energy < 0
+
+
+def test_control_mode_ability_serializes(tmp_path) -> None:
+    scene = DummyScene()
+    ability = BuildWallAbility(entity=42)
+    scene.cm.add(ability)
+    save_path = tmp_path / "save.json"
+
+    serialization.save(scene.cm.get_serial_form(), save_path)
+
+    loaded = serialization.load(save_path)
+    loaded_ability = next(
+        comp
+        for comp in loaded["active_components"].values()
+        if isinstance(comp, BuildWallAbility)
+    )
+
+    assert loaded_ability.control_mode_key == "place_stone_wall"

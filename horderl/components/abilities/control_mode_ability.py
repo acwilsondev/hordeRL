@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Callable
 
 from ..abilities.ability import Ability
 
@@ -10,6 +9,6 @@ class ControlModeAbility(Ability):
     Describe a control-mode ability that swaps the active controller.
     """
 
-    mode_factory: Callable | None = None
+    control_mode_key: str = ""
     anim_symbol: str = ""
     anim_color: tuple | None = None

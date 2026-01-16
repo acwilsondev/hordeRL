@@ -1,9 +1,7 @@
 from dataclasses import dataclass
-from typing import Callable
 
 from horderl import palettes
 
-from ..brains.fast_forward_actor import FastForwardBrain
 from .control_mode_ability import ControlModeAbility
 
 
@@ -17,6 +15,6 @@ class FastForwardAbility(ControlModeAbility):
     ability_title_key: str = "ability.fast_forward"
     unlock_cost: int = 0
     use_cost: int = 0
-    mode_factory: Callable = FastForwardBrain
+    control_mode_key: str = "fast_forward"
     anim_symbol: str = ">"
     anim_color: tuple = palettes.LIGHT_WATER
