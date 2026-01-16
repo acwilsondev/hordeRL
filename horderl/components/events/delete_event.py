@@ -2,26 +2,15 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
-from engine.components.events import Event
 
 
 @dataclass
-class Delete(Event):
+class Delete(Component):
     """
     Add this to an entity to have it delete itself after some time.
     """
 
     next_update: int = 0
-
-    def listener_type(self):
-        return DeleteListener
-
-    def notify(self, scene, listener):
-        if listener.entity == self.entity:
-            listener.on_delete(scene)
-
-    def _after_notify(self, scene):
-        scene.cm.delete(self.entity)
 
 
 @dataclass

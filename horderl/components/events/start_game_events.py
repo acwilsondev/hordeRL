@@ -2,11 +2,10 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
-from engine.components.events import Event
 
 
 @dataclass
-class StartGame(Event):
+class StartGame(Component):
     """
     Event triggered when a new game starts.
 
@@ -19,37 +18,6 @@ class StartGame(Event):
     leaving specific initialization details to the listener components.
 
     """
-
-    def listener_type(self):
-        """
-        Return the type of listener that should be notified of this event.
-
-        This method identifies which listener components should receive
-        notifications when this event is dispatched. For the StartGame event,
-        this returns the GameStartListener class.
-
-        Returns:
-            GameStartListener: The class (not an instance) of the listener
-                              components that should be notified of this event.
-
-        """
-        return GameStartListener
-
-    def notify(self, scene, listener):
-        """
-        Notify a listener component of the StartGame event.
-
-        This method is called for each GameStartListener component registered
-        in the scene when the StartGame event is dispatched. It triggers the
-        on_game_start method on the listener, passing the current scene as
-        an argument.
-
-        Args:
-            scene (GameScene): The current game scene containing the game state.
-            listener (GameStartListener): The listener component to notify.
-
-        """
-        listener.on_game_start(scene)
 
 
 class GameStartListener(Component, ABC):

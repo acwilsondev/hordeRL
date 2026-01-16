@@ -3,22 +3,15 @@ from dataclasses import dataclass
 
 from engine import constants
 from engine.components.component import Component
-from engine.components.events import Event
 
 
 @dataclass
-class Die(Event):
+class Die(Component):
+    """
+    Emitted when an entity has died.
+    """
+
     killer: int = constants.INVALID
-
-    def listener_type(self):
-        return DeathListener
-
-    def notify(self, scene, listener):
-        if listener.entity == self.entity:
-            listener.on_die(scene)
-
-    def _after_notify(self, scene):
-        scene.cm.delete(self.entity)
 
 
 class DeathListener(Component, ABC):
