@@ -2,7 +2,6 @@ from typing import Tuple
 
 import numpy as np
 
-from engine.components.updateable import Updateable
 from horderl import palettes
 from horderl.components.events.start_game_events import StartGame
 from horderl.components.population import Population
@@ -219,10 +218,6 @@ class DefendScene(GameScene):
         if world_building_control:
             # still building the world, nothing else to do
             return
-
-        for updateable in self.cm.get(Updateable):
-            self.logger.debug("Updating Updateable: %s", updateable)
-            updateable.update(self, dt_ms)
 
         # legacy systems
         run_animation_controllers(self, dt_ms)
