@@ -44,6 +44,7 @@ from horderl.systems.animation_controller_system import (
 )
 from horderl.systems.audio_system import run as run_audio_system
 from horderl.systems.build_world_system import build_world_system
+from horderl.systems.death_listener_system import run as run_death_listeners
 from horderl.systems.event_dispatch_system import run as run_event_dispatch
 from horderl.systems.flood_holes_system import run as run_flood_holes
 from horderl.systems.serialization_system import (
@@ -236,6 +237,7 @@ class DefendScene(GameScene):
         run_flood_holes(self)
         run_audio_system(self)
         run_weather_system(self)
+        run_death_listeners(self)
         run_event_dispatch(self)
         act.run(self)
         move.run(self)

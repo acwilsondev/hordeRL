@@ -1,16 +1,11 @@
 from dataclasses import dataclass
 
-from horderl.components.events.die_events import DeathListener
-from horderl.components.events.terrain_changed_event import TerrainChangedEvent
+from engine.components.component import Component
 
 
 @dataclass
-class TerrainChangedOnDeath(DeathListener):
+class TerrainChangedOnDeath(Component):
     """
     This entity is a part of the terrain and should notify anything that cares about
     terrain when it dies.
     """
-
-    def on_die(self, scene):
-        self._log_info("triggering, emitting TerrainChangedEvent")
-        scene.cm.add(TerrainChangedEvent(entity=scene.player))

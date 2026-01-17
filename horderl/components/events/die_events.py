@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine import constants
@@ -12,13 +11,3 @@ class Die(Component):
     """
 
     killer: int = constants.INVALID
-
-
-class DeathListener(Component, ABC):
-    """
-    Called when the entity dies.
-    """
-
-    @abstractmethod
-    def on_die(self, scene):
-        raise NotImplementedError()
