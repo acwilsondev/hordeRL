@@ -9,10 +9,6 @@ from ..components.events.attack_started_events import AttackStartListener
 class AbilityTracker(AttackStartListener):
     current_ability: int = 0
 
-    def on_attack_start(self, scene):
-        self._log_debug("resetting ability to 0")
-        self.current_ability = 0
-
     def get_current_ability(self, scene):
         abilities = scene.cm.get_all(Ability, entity=self.entity)
         if not abilities:

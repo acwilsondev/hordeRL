@@ -1,17 +1,12 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
 
 
-class AttackStartListener(Component, ABC):
+class AttackStartListener(Component):
     """
-    Define a step to take when an attack starts.
+    Marker component for attack start listeners.
     """
-
-    @abstractmethod
-    def on_attack_start(self, scene):
-        raise NotImplementedError()
 
 
 @dataclass

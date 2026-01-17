@@ -12,7 +12,4 @@ class FastForwardBrain(Brain, AttackStartListener):
     This brain defers logic to brain systems and only stores state.
     """
 
-    def on_attack_start(self, scene):
-        from horderl.systems.brain_system import on_fast_forward_attack_start
-
-        on_fast_forward_attack_start(scene, self)
+    """Data-only marker for fast-forward behavior at attack start."""

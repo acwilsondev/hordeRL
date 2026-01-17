@@ -16,14 +16,6 @@ from ..weather.weather import Weather
 class FreezeWater(EnergyActor, AttackStartListener, SeasonResetListener):
     energy_cost: int = EnergyActor.HALF_HOUR
 
-    def on_attack_start(self, scene):
-        self._log_debug(f"pausing freezing")
-        self.is_recharging = False
-
-    def on_season_reset(self, scene, season):
-        self._log_debug(f"unpausing freezing")
-        self.is_recharging = True
-
     def act(self, scene) -> None:
         weather = scene.cm.get_one(Weather, entity=core.get_id("calendar"))
 
