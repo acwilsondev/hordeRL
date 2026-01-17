@@ -10,7 +10,7 @@ from horderl.components.events.attack_events import (
     AttackFinished,
     OnAttackFinishedListener,
 )
-from horderl.components.events.dally_event import DallyEvent, DallyListener
+from horderl.components.events.dally_event import DallyEvent
 from horderl.components.events.delete_event import Delete, DeleteListener
 from horderl.components.events.die_events import Die
 from horderl.components.events.new_day_event import DayBegan, DayBeganListener
@@ -32,7 +32,6 @@ from horderl.components.events.step_event import (
     EnterEvent,
     EnterListener,
     StepEvent,
-    StepListener,
 )
 from horderl.components.events.terrain_changed_event import (
     TerrainChangedEvent,
@@ -55,6 +54,7 @@ class EventDispatchRule:
     notify: Optional[Callable[[GameScene, Component, Component], None]]
     after_notify: Optional[Callable[[GameScene, Component], None]] = None
     after_remove: Optional[Callable[[GameScene, Component], None]] = None
+    consume: bool = True
 
 
 def _notify_attack_finished(
@@ -63,12 +63,6 @@ def _notify_attack_finished(
     listener: OnAttackFinishedListener,
 ) -> None:
     listener.on_attack_finished(scene, event.entity)
-
-
-def _notify_dally(
-    scene: GameScene, event: DallyEvent, listener: DallyListener
-) -> None:
-    listener.on_dally(scene)
 
 
 def _notify_day_began(
@@ -82,13 +76,6 @@ def _notify_delete(
 ) -> None:
     if listener.entity == event.entity:
         listener.on_delete(scene)
-
-
-def _notify_enter(
-    scene: GameScene, event: EnterEvent, listener: EnterListener
-) -> None:
-    if listener.entity == event.entered:
-        listener.on_enter(scene, event.entity)
 
 
 def _notify_peasant_added(
@@ -113,13 +100,6 @@ def _notify_start_game(
     scene: GameScene, event: StartGame, listener: GameStartListener
 ) -> None:
     listener.on_game_start(scene)
-
-
-def _notify_step_event(
-    scene: GameScene, event: StepEvent, listener: StepListener
-) -> None:
-    if listener.entity == event.entity:
-        listener.on_step(scene, event.new_location)
 
 
 def _notify_terrain_changed(
@@ -170,7 +150,7 @@ EVENT_LISTENERS: Dict[Type[Component], EventDispatchRule] = {
         listener_type=OnAttackFinishedListener, notify=_notify_attack_finished
     ),
     DallyEvent: EventDispatchRule(
-        listener_type=DallyListener, notify=_notify_dally
+        listener_type=None, notify=None, consume=False
     ),
     DayBegan: EventDispatchRule(
         listener_type=DayBeganListener, notify=_notify_day_began
@@ -186,7 +166,7 @@ EVENT_LISTENERS: Dict[Type[Component], EventDispatchRule] = {
         after_notify=_after_die,
     ),
     EnterEvent: EventDispatchRule(
-        listener_type=EnterListener, notify=_notify_enter
+        listener_type=None, notify=None, consume=False
     ),
     PeasantAdded: EventDispatchRule(
         listener_type=PeasantAddedListener, notify=_notify_peasant_added
@@ -203,9 +183,10 @@ EVENT_LISTENERS: Dict[Type[Component], EventDispatchRule] = {
         listener_type=GameStartListener, notify=_notify_start_game
     ),
     StepEvent: EventDispatchRule(
-        listener_type=StepListener,
-        notify=_notify_step_event,
+        listener_type=None,
+        notify=None,
         after_notify=_after_step_event,
+        consume=False,
     ),
     TerrainChangedEvent: EventDispatchRule(
         listener_type=TerrainChangedListener,
@@ -225,9 +206,10 @@ def _dispatch_event(
             rule.notify(scene, event, listener)
     if rule.after_notify:
         rule.after_notify(scene, event)
-    scene.cm.delete_component(event)
-    if rule.after_remove:
-        rule.after_remove(scene, event)
+    if rule.consume:
+        scene.cm.delete_component(event)
+        if rule.after_remove:
+            rule.after_remove(scene, event)
 
 
 def run(scene: GameScene) -> None:
@@ -239,7 +221,8 @@ def run(scene: GameScene) -> None:
 
     Side Effects:
         - Notifies event listeners.
-        - Removes dispatched event components from the component manager.
+        - Removes dispatched event components from the component manager,
+          except for movement events that are handled elsewhere.
 
     """
     for event_type, rule in EVENT_LISTENERS.items():

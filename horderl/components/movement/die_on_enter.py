@@ -1,15 +1,10 @@
 from dataclasses import dataclass
 
-from horderl.components.events.die_events import Die
 from horderl.components.events.step_event import EnterListener
 
 
 @dataclass
 class DieOnEnter(EnterListener):
     """
-    Whenever the owning entity is stepped on, it dies.
+    Data-only configuration for dying when stepped on.
     """
-
-    def on_enter(self, scene, stepper):
-        self._log_debug(f"entity stepped on")
-        scene.cm.add(Die(entity=self.entity, killer=stepper))
