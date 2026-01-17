@@ -1,55 +1,18 @@
-import random
 from dataclasses import dataclass
 
-from engine import core
 from engine.components import EnergyActor
 
-from ...content.terrain.water import freeze, thaw
 from ..events.attack_started_events import AttackStartListener
 from ..season_reset_listeners.seasonal_actor import SeasonResetListener
-from ..tags.ice_tag import IceTag
-from ..tags.water_tag import WaterTag
-from ..weather.weather import Weather
 
 
 @dataclass
 class FreezeWater(EnergyActor, AttackStartListener, SeasonResetListener):
+    """
+    Data-only marker for freezing/thawing water based on weather state.
+
+    This component stores timing configuration and is interpreted by
+    ``horderl.systems.weather_system``.
+    """
+
     energy_cost: int = EnergyActor.HALF_HOUR
-
-    def act(self, scene) -> None:
-        weather = scene.cm.get_one(Weather, entity=core.get_id("calendar"))
-
-        if not weather:
-            return
-
-        if weather.temperature < 0:
-            self.freeze_n(scene, max(weather.temperature * -1, 5))
-        else:
-            self.thaw_n(scene, max(weather.temperature, 5))
-        self.pass_turn()
-
-    def freeze_n(self, scene, n):
-        self._log_debug(f"freezing {n}")
-        waters = scene.cm.get(WaterTag, project=lambda wt: wt.entity)
-        if not waters:
-            return
-
-        n = min(n, len(waters))
-        random.shuffle(waters)
-
-        to_freeze = waters[:n]
-        for water in to_freeze:
-            freeze(scene, water)
-
-    def thaw_n(self, scene, n):
-        self._log_debug(f"thawing {n}")
-        ices = scene.cm.get(IceTag, project=lambda it: it.entity)
-        if not ices:
-            return
-
-        n = min(n, len(ices))
-        random.shuffle(ices)
-
-        to_thaw = ices[:n]
-        for ice in to_thaw:
-            thaw(scene, ice)

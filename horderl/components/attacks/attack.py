@@ -1,13 +1,14 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
 
 
 @dataclass
-class Attack(Component, ABC):
-    damage: int = 1
+class Attack(Component):
+    """
+    Data-only base component for attacks.
 
-    @abstractmethod
-    def apply_attack(self, scene, target):
-        raise NotImplementedError("Attack must use subclass")
+    Systems interpret subclasses to queue attack actions and animations.
+    """
+
+    damage: int = 1

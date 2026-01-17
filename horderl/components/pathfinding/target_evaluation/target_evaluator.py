@@ -1,11 +1,12 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
 
 
 @dataclass
-class TargetEvaluator(Component, ABC):
-    @abstractmethod
-    def get_targets(self, scene):
-        pass
+class TargetEvaluator(Component):
+    """
+    Data-only base component for pathfinding target evaluation.
+
+    Systems interpret concrete subclasses to list candidate targets.
+    """

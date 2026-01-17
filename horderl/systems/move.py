@@ -21,6 +21,7 @@ from ..components.states.move_cost_affectors import (
     Hindered,
 )
 from ..i18n import t
+from ..systems.attack_action_system import apply_attack
 from ..systems.utilities import get_blocking_object
 
 
@@ -72,7 +73,7 @@ def run(scene):
             entity_attack: Attack = scene.cm.get_one(Attack, entity=entity)
             if entity_attack:
                 hostile: int = get_hostile(scene, entity, step_direction)
-                entity_attack.apply_attack(scene, hostile)
+                apply_attack(scene, entity_attack, hostile)
             actor.pass_turn()
             actor.intention = Intention.NONE
         else:

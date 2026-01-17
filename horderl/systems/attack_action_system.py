@@ -4,14 +4,18 @@ from engine.components import Coordinates
 from engine.components.entity import Entity
 from horderl.components import Attributes
 from horderl.components.actions.attack_action import AttackAction
+from horderl.components.attacks.attack import Attack
 from horderl.components.attacks.attack_effects.attack_effect import (
     AttackEffect,
 )
+from horderl.components.attacks.siege_attack import SiegeAttack
 from horderl.components.cry_for_help import CryForHelp
 from horderl.components.events.attack_events import AttackFinished
 from horderl.components.events.die_events import Die
 from horderl.components.house_structure import HouseStructure
 from horderl.components.relationships.owner import Owner
+from horderl.components.structure import Structure
+from horderl.content.attacks import stab
 from horderl.content.states import help_animation
 from horderl.i18n import t
 
@@ -23,7 +27,12 @@ def run(scene) -> None:
     Args:
         scene: Active game scene.
 
-    Side effects:
+    Components Consumed:
+        - AttackAction for queued attacks.
+        - AttackEffect for attacker-specific effects.
+        - Attributes, Owner, HouseStructure, CryForHelp for damage resolution.
+
+    Side Effects:
         - Applies damage or effects to targets.
         - Emits AttackFinished events.
         - Removes AttackAction components after execution.
@@ -41,7 +50,7 @@ def execute(scene, action: AttackAction) -> None:
         scene: Active game scene.
         action: The attack action data component.
 
-    Side effects:
+    Side Effects:
         - Modifies entity health.
         - Adds events and animations.
         - Deletes AttackAction components.
@@ -86,6 +95,46 @@ def execute(scene, action: AttackAction) -> None:
 
     scene.cm.delete_components(AttackAction)
     scene.cm.add(AttackFinished(entity=action.entity))
+
+
+def apply_attack(scene, attack: Attack, target: int) -> None:
+    """
+    Queue attack actions and animations for a configured attack component.
+
+    Args:
+        scene: Active game scene.
+        attack: Attack component describing damage and flags.
+        target: Target entity identifier.
+
+    Components Consumed:
+        - Attack (StandardAttack/SiegeAttack) on the attacker.
+        - Coordinates for attacker and target entities.
+        - Structure for determining siege damage bonuses.
+
+    Side Effects:
+        - Adds AttackAction components and attack animations.
+    """
+    if isinstance(attack, SiegeAttack):
+        damage = _get_siege_damage(scene, attack, target)
+    else:
+        damage = attack.damage
+    _queue_attack(scene, attack.entity, target, damage)
+
+
+def _queue_attack(scene, attacker: int, target: int, damage: int) -> None:
+    # Uses stab animation for melee attacks.
+    scene.cm.add(AttackAction(entity=attacker, target=target, damage=damage))
+    target_coords = scene.cm.get_one(Coordinates, target)
+    if target_coords:
+        scene.cm.add(*stab(attacker, target_coords.x, target_coords.y)[1])
+
+
+def _get_siege_damage(scene, attack: SiegeAttack, target: int) -> int:
+    # Structures take bonus damage; others take base damage.
+    structure = scene.cm.get_one(Structure, entity=target)
+    if structure:
+        return attack.damage * attack.structure_multiplier
+    return attack.damage
 
 
 def _handle_house_damage(
