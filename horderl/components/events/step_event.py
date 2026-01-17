@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Tuple
 
@@ -15,14 +14,12 @@ class StepEvent(Component):
     new_location: Tuple[int, int] = (-1, -1)
 
 
-class StepListener(Component, ABC):
+class StepListener(Component):
     """
-    Trigger when the owning entity takes a step.
+    Marker component for entities that react to step events.
     """
 
-    @abstractmethod
-    def on_step(self, scene, point):
-        raise NotImplementedError()
+    pass
 
 
 @dataclass
@@ -34,11 +31,9 @@ class EnterEvent(Component):
     entered: int = constants.INVALID
 
 
-class EnterListener(Component, ABC):
+class EnterListener(Component):
     """
-    Trigger when an entity steps on the owning entity.
+    Marker component for entities that react to enter events.
     """
 
-    @abstractmethod
-    def on_enter(self, scene, stepper):
-        raise NotImplementedError()
+    pass
