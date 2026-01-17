@@ -35,13 +35,3 @@ class WorldBeauty(TreeCutListener, SeasonResetListener):
                 f"decreased wrath {self.spirits_wrath} and attitude"
                 f" {self.spirits_attitude}"
             )
-
-    def on_season_reset(self, scene, season):
-        if season == "Spring":
-            self._log_info(f"relationship with the spirits improved")
-            self.spirits_attitude += 1
-            self.spirits_wrath -= 1
-            self._log_info(
-                f"improved wrath {self.spirits_wrath} and attitude"
-                f" {self.spirits_attitude}"
-            )

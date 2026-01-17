@@ -22,9 +22,3 @@ class HealOnDally(DallyListener, AttackStartListener, SeasonResetListener):
                 scene.message(
                     "You rest and your wounds heal.", color=palettes.WHITE
                 )
-
-    def on_season_reset(self, scene, season):
-        self.count = 0
-
-    def on_attack_start(self, scene):
-        self.count = 0

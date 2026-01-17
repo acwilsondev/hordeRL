@@ -7,6 +7,4 @@ from horderl.components.season_reset_listeners.seasonal_actor import (
 
 @dataclass
 class GrowGrass(SeasonResetListener):
-    def on_season_reset(self, scene, season):
-        if season in {"Spring", "Summer"}:
-            scene.cm.delete(self.entity)
+    """Data-only marker for grass growth on season reset."""

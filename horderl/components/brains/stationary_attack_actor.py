@@ -18,13 +18,3 @@ class StationaryAttackActor(Brain, SeasonResetListener, AttackStartListener):
     cost_map = None
     root_x: int = constants.INVALID
     root_y: int = constants.INVALID
-
-    def on_season_reset(self, scene, season):
-        from horderl.systems.brain_system import on_stationary_season_reset
-
-        on_stationary_season_reset(scene, self, season)
-
-    def on_attack_start(self, scene):
-        from horderl.systems.brain_system import on_stationary_attack_start
-
-        on_stationary_attack_start(scene, self)

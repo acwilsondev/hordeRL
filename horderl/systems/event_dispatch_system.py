@@ -10,10 +10,6 @@ from horderl.components.events.attack_events import (
     AttackFinished,
     OnAttackFinishedListener,
 )
-from horderl.components.events.attack_started_events import (
-    AttackStarted,
-    AttackStartListener,
-)
 from horderl.components.events.dally_event import DallyEvent, DallyListener
 from horderl.components.events.delete_event import Delete, DeleteListener
 from horderl.components.events.die_events import Die
@@ -46,12 +42,7 @@ from horderl.components.events.tree_cut_event import (
     TreeCutEvent,
     TreeCutListener,
 )
-from horderl.components.season_reset_listeners.reset_season import ResetSeason
-from horderl.components.season_reset_listeners.seasonal_actor import (
-    SeasonResetListener,
-)
 from horderl.components.serialization.save_game import SaveGame
-from horderl.i18n import t
 from horderl.scenes.start_menu import get_start_menu
 from horderl.systems.serialization_system import save_game
 
@@ -72,12 +63,6 @@ def _notify_attack_finished(
     listener: OnAttackFinishedListener,
 ) -> None:
     listener.on_attack_finished(scene, event.entity)
-
-
-def _notify_attack_started(
-    scene: GameScene, event: AttackStarted, listener: AttackStartListener
-) -> None:
-    listener.on_attack_start(scene)
 
 
 def _notify_dally(
@@ -124,12 +109,6 @@ def _notify_quit_game(
     listener.on_quit_game(scene)
 
 
-def _notify_season_reset(
-    scene: GameScene, event: ResetSeason, listener: SeasonResetListener
-) -> None:
-    listener.on_season_reset(scene, event.season)
-
-
 def _notify_start_game(
     scene: GameScene, event: StartGame, listener: GameStartListener
 ) -> None:
@@ -172,15 +151,6 @@ def _after_quit_game(scene: GameScene, event: QuitGame) -> None:
     scene.controller.push_scene(get_start_menu())
 
 
-def _after_season_reset(scene: GameScene, event: ResetSeason) -> None:
-    scene.message(
-        t(
-            "message.season_begin",
-            season=t(f"season.{event.season.lower()}"),
-        )
-    )
-
-
 def _after_step_event(scene: GameScene, event: StepEvent) -> None:
     # emit entered events
     this_coords = scene.cm.get_one(Coordinates, entity=event.entity)
@@ -198,9 +168,6 @@ def _after_step_event(scene: GameScene, event: StepEvent) -> None:
 EVENT_LISTENERS: Dict[Type[Component], EventDispatchRule] = {
     AttackFinished: EventDispatchRule(
         listener_type=OnAttackFinishedListener, notify=_notify_attack_finished
-    ),
-    AttackStarted: EventDispatchRule(
-        listener_type=AttackStartListener, notify=_notify_attack_started
     ),
     DallyEvent: EventDispatchRule(
         listener_type=DallyListener, notify=_notify_dally
@@ -231,11 +198,6 @@ EVENT_LISTENERS: Dict[Type[Component], EventDispatchRule] = {
         listener_type=QuitGameListener,
         notify=_notify_quit_game,
         after_remove=_after_quit_game,
-    ),
-    ResetSeason: EventDispatchRule(
-        listener_type=SeasonResetListener,
-        notify=_notify_season_reset,
-        after_notify=_after_season_reset,
     ),
     StartGame: EventDispatchRule(
         listener_type=GameStartListener, notify=_notify_start_game
