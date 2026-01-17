@@ -55,7 +55,6 @@ from horderl.components.events.quit_game_events import QuitGame
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
 from horderl.components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from horderl.components.pathfinding.cost_mapper import CostMapper
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
 from horderl.components.pathfinding.pathfinder import Pathfinder
 from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
     HordelingTargetEvaluator,
@@ -71,7 +70,11 @@ from horderl.content.states import confused_animation, sleep_animation
 from horderl.content.terrain import roads
 from horderl.content.terrain.dirt import make_dirt
 from horderl.content.terrain.hole import make_hole
-from horderl.systems.pathfinding.target_selection import get_new_target
+from horderl.systems.pathfinding.target_selection import (
+    get_cost_map,
+    get_new_target,
+    get_target_values,
+)
 
 BRAIN_HANDLERS = (
     (LookCursorController, "run_look_cursor_controller"),
@@ -166,7 +169,7 @@ def run_default_active_actor(scene, brain: DefaultActiveActor) -> None:
         brain._log_warning("missing target evaluator")
         target_evaluator = HordelingTargetEvaluator()
 
-    entity_values = target_evaluator.get_targets(scene)
+    entity_values = get_target_values(scene, target_evaluator)
 
     if not entity_values:
         brain.pass_turn()
@@ -576,9 +579,7 @@ def _get_cost_map(scene, brain: DefaultActiveActor):
     cost_mapper: Optional[CostMapper] = scene.cm.get_one(
         CostMapper, entity=brain.entity
     )
-    if cost_mapper:
-        return cost_mapper.get_cost_map(scene)
-    return NormalCostMapper(entity=brain.entity).get_cost_map(scene)
+    return get_cost_map(scene, cost_mapper)
 
 
 def _move_towards_target(scene, brain: DefaultActiveActor) -> None:
@@ -752,7 +753,7 @@ def _wander(scene, brain: PeasantActor) -> None:
 def _get_possible_steps(scene, brain: PeasantActor):
     """# Filters out steps outside map bounds."""
     cost_mapper = scene.cm.get_one(CostMapper, entity=brain.entity)
-    cost_map = cost_mapper.get_cost_map(scene)
+    cost_map = get_cost_map(scene, cost_mapper)
     coords = scene.cm.get_one(Coordinates, entity=brain.entity)
     step_costs = []
     for step in STEPS:
