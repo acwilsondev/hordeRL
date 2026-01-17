@@ -16,7 +16,7 @@ from horderl.components.events.attack_started_events import (
 )
 from horderl.components.events.dally_event import DallyEvent, DallyListener
 from horderl.components.events.delete_event import Delete, DeleteListener
-from horderl.components.events.die_events import DeathListener, Die
+from horderl.components.events.die_events import Die
 from horderl.components.events.new_day_event import DayBegan, DayBeganListener
 from horderl.components.events.peasant_events import (
     PeasantAdded,
@@ -60,8 +60,8 @@ from horderl.systems.serialization_system import save_game
 class EventDispatchRule:
     """Define how to route an event to its listeners and follow-up actions."""
 
-    listener_type: Type[Component]
-    notify: Callable[[GameScene, Component, Component], None]
+    listener_type: Optional[Type[Component]]
+    notify: Optional[Callable[[GameScene, Component, Component], None]]
     after_notify: Optional[Callable[[GameScene, Component], None]] = None
     after_remove: Optional[Callable[[GameScene, Component], None]] = None
 
@@ -97,11 +97,6 @@ def _notify_delete(
 ) -> None:
     if listener.entity == event.entity:
         listener.on_delete(scene)
-
-
-def _notify_die(scene: GameScene, event: Die, listener: DeathListener) -> None:
-    if listener.entity == event.entity:
-        listener.on_die(scene)
 
 
 def _notify_enter(
@@ -219,8 +214,8 @@ EVENT_LISTENERS: Dict[Type[Component], EventDispatchRule] = {
         after_notify=_after_delete,
     ),
     Die: EventDispatchRule(
-        listener_type=DeathListener,
-        notify=_notify_die,
+        listener_type=None,
+        notify=None,
         after_notify=_after_die,
     ),
     EnterEvent: EventDispatchRule(
@@ -263,8 +258,9 @@ EVENT_LISTENERS: Dict[Type[Component], EventDispatchRule] = {
 def _dispatch_event(
     scene: GameScene, event: Component, rule: EventDispatchRule
 ) -> None:
-    for listener in scene.cm.get(rule.listener_type):
-        rule.notify(scene, event, listener)
+    if rule.listener_type and rule.notify:
+        for listener in scene.cm.get(rule.listener_type):
+            rule.notify(scene, event, listener)
     if rule.after_notify:
         rule.after_notify(scene, event)
     scene.cm.delete_component(event)

@@ -1,25 +1,25 @@
-import logging
 from dataclasses import dataclass
 
 from engine import constants
-
-from ..components.events.die_events import DeathListener
+from engine.components.component import Component
 
 
 @dataclass
-class Stomach(DeathListener):
+class Stomach(Component):
+    """Track an entity stored inside another entity."""
+
     contents: int = constants.INVALID
 
-    def on_die(self, scene):
-        self._log_debug(f"on_die triggered, dumping contents")
-        if self.contents == constants.INVALID:
-            logging.debug(f"EID#{self.entity}::Stomach nothing to dump")
-            return
-
-        self._log_debug(f"dumping {self.contents}")
-        scene.cm.unstash_entity(self.contents)
-
     def clear(self, scene):
+        """
+        Drop the currently stored entity from the component manager stash.
+
+        Args:
+            scene: Scene providing the component manager used to drop the stash.
+
+        Side Effects:
+            - Removes the stashed entity and resets stored contents to INVALID.
+        """
         if self.contents == constants.INVALID:
             return
 
