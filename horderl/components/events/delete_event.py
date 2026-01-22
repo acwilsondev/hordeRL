@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
@@ -15,11 +14,7 @@ class Delete(Component):
 
 
 @dataclass
-class DeleteListener(Component, ABC):
+class DeleteListener(Component):
     """
     A world building step.
     """
-
-    @abstractmethod
-    def on_delete(self, scene):
-        raise NotImplementedError()

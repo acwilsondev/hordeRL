@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
@@ -12,11 +11,7 @@ class AttackFinished(Component):
 
 
 @dataclass
-class OnAttackFinishedListener(Component, ABC):
+class OnAttackFinishedListener(Component):
     """
     Respond to completed attacks.
     """
-
-    @abstractmethod
-    def on_attack_finished(self, scene, caller):
-        raise NotImplementedError()

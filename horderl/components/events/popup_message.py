@@ -1,16 +1,11 @@
 from dataclasses import dataclass
 
-from horderl.components.animation_controllers.real_time_actor import (
-    RealTimeActor,
-)
+from engine.components.component import Component
 
 
 @dataclass
-class PopupMessage(RealTimeActor):
-    timer_delay: int = RealTimeActor.REAL_TIME
-    message: str = ""
+class PopupMessage(Component):
+    """Event requesting a popup message."""
 
-    def act(self, scene):
-        if self.next_update:
-            scene.popup_message(self.message)
-            scene.cm.delete_component(self)
+    next_update: int = 0
+    message: str = ""
