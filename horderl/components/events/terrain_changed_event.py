@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
@@ -11,11 +10,8 @@ class TerrainChangedEvent(Component):
     """
 
 
-class TerrainChangedListener(Component, ABC):
+@dataclass
+class TerrainChangedListener(Component):
     """
     Respond to terrain changes.
     """
-
-    @abstractmethod
-    def on_terrain_changed(self, scene):
-        raise NotImplementedError()

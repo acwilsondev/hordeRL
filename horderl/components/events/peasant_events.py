@@ -1,18 +1,13 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
 
 
 @dataclass
-class PeasantAddedListener(Component, ABC):
+class PeasantAddedListener(Component):
     """
     Respond to peasants moving in.
     """
-
-    @abstractmethod
-    def on_peasant_added(self, scene):
-        raise NotImplementedError()
 
 
 @dataclass
@@ -23,14 +18,10 @@ class PeasantAdded(Component):
 
 
 @dataclass
-class PeasantDiedListener(Component, ABC):
+class PeasantDiedListener(Component):
     """
     Respond to peasant death events.
     """
-
-    @abstractmethod
-    def on_peasant_died(self, scene):
-        raise NotImplementedError()
 
 
 @dataclass

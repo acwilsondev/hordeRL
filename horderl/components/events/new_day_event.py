@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
@@ -14,11 +13,7 @@ class DayBegan(Component):
 
 
 @dataclass
-class DayBeganListener(Component, ABC):
+class DayBeganListener(Component):
     """
     A world building step.
     """
-
-    @abstractmethod
-    def on_new_day(self, scene, day):
-        raise NotImplementedError()

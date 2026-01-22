@@ -1,5 +1,4 @@
 import sys
-from dataclasses import dataclass, field
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -8,11 +7,9 @@ if str(ROOT) not in sys.path:
 
 from engine.component_manager import ComponentManager
 from engine.components.component import Component
-from horderl.components.events.start_game_events import (
-    GameStartListener,
-    StartGame,
-)
-from horderl.systems.event_dispatch_system import run as run_event_dispatch
+from horderl.components.die_on_attack_finished import DieOnAttackFinished
+from horderl.components.events.attack_events import AttackFinished
+from horderl.systems.event_system import run as run_event_system
 
 
 class DummyScene:
@@ -23,24 +20,13 @@ class DummyScene:
         self.cm = ComponentManager()
 
 
-@dataclass
-class RecordedListener(GameStartListener):
-    """Listener that records event notifications for verification."""
-
-    notifications: list[bool] = field(default_factory=list)
-
-    def on_game_start(self, scene) -> None:
-        """Record the game start notification for assertions."""
-        self.notifications.append(True)
-
-
-def test_event_dispatch_system_notifies_listeners_and_removes_event():
+def test_event_system_routes_attack_finished_events():
     scene = DummyScene()
-    listener = RecordedListener(entity=1)
-    event = StartGame(entity=2)
+    listener = DieOnAttackFinished(entity=1)
+    event = AttackFinished(entity=1)
     scene.cm.add(listener, event)
 
-    run_event_dispatch(scene)
+    run_event_system(scene)
 
-    assert listener.notifications == [True]
-    assert scene.cm.get(StartGame) == []
+    assert scene.cm.get(DieOnAttackFinished) == []
+    assert scene.cm.get(AttackFinished) == []

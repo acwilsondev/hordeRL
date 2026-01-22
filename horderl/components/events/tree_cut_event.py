@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
@@ -11,11 +10,8 @@ class TreeCutEvent(Component):
     """
 
 
-class TreeCutListener(Component, ABC):
+@dataclass
+class TreeCutListener(Component):
     """
     Respond to tree cut events.
     """
-
-    @abstractmethod
-    def on_tree_cut(self, scene):
-        raise NotImplementedError()

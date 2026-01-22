@@ -1,18 +1,13 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
 
 
 @dataclass
-class QuitGameListener(Component, ABC):
+class QuitGameListener(Component):
     """
     Respond to a request to quit the game.
     """
-
-    @abstractmethod
-    def on_quit_game(self, scene):
-        raise NotImplementedError("Must inherit listener")
 
 
 @dataclass
