@@ -9,6 +9,7 @@ from ..components.states.move_cost_affectors import Haste, Hindered
 from ..components.world_building.world_parameters import WorldParameters
 from ..constants import PLAYER_ID
 from ..i18n import t
+from ..systems.abilities import ability_selection_system
 from ..systems.actor_system import get_timecode
 
 
@@ -151,7 +152,9 @@ class AbilityLabel(GuiElement):
         ability_tracker = scene.cm.get(AbilityTracker)
         if ability_tracker:
             ability_tracker = ability_tracker[0]
-            ability = ability_tracker.get_current_ability(scene)
+            ability = ability_selection_system.get_current_ability(
+                scene, ability_tracker
+            )
             self.value = f"{ability.ability_title} - {ability.use_cost}c"
         else:
             self.value = t("label.loading")

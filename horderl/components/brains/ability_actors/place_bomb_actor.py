@@ -1,15 +1,13 @@
 from dataclasses import dataclass
 
-from engine.types import Entity
 from horderl.components.brains.ability_actors.place_thing_actor import (
     PlaceThingActor,
 )
-from horderl.content.bomb import make_bomb
 
 
 @dataclass
 class PlaceBombActor(PlaceThingActor):
-    gold_cost: int = 10
+    """Command component for placing bomb entities."""
 
-    def make_thing(self, x: int, y: int) -> Entity:
-        return make_bomb(x, y)
+    gold_cost: int = 10
+    spawn_key: str = "bomb"
