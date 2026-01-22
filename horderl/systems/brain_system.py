@@ -55,7 +55,6 @@ from horderl.components.events.quit_game_events import QuitGame
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
 from horderl.components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from horderl.components.pathfinding.cost_mapper import CostMapper
-from horderl.components.pathfinding.pathfinder import Pathfinder
 from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
     HordelingTargetEvaluator,
 )
@@ -74,6 +73,7 @@ from horderl.systems.abilities import (
     ability_selection_system,
     placement_system,
 )
+from horderl.systems.pathfinding import get_path
 from horderl.systems.pathfinding.target_selection import (
     get_cost_map,
     get_new_target,
@@ -659,7 +659,7 @@ def _get_next_step(scene, brain: DefaultActiveActor):
     """# Pathfinding uses breadcrumb tracking when available."""
     self_coords = scene.cm.get_one(Coordinates, entity=brain.entity)
     target_coords = scene.cm.get_one(Coordinates, entity=brain.target)
-    path = Pathfinder().get_path(
+    path = get_path(
         brain.cost_map, self_coords.position, target_coords.position
     )
 

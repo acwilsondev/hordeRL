@@ -9,8 +9,8 @@ from ..components.animation_definitions.path_animation_definition import (
     PathAnimationDefinition,
 )
 from ..components.events.delete_event import Delete
-from ..components.path_node import create_path
 from ..components.relationships.owner import Owner
+from ..systems.pathfinding import create_path_nodes
 
 
 def roundabout(owner, x, y):
@@ -28,7 +28,7 @@ def roundabout(owner, x, y):
             ),
             Owner(entity=entity_id, owner=owner),
             PathAnimationDefinition(entity=entity_id),
-            *create_path(
+            *create_path_nodes(
                 entity_id,
                 [
                     (x + 1, y - 1),
