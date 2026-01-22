@@ -70,6 +70,10 @@ from horderl.content.states import confused_animation, sleep_animation
 from horderl.content.terrain import roads
 from horderl.content.terrain.dirt import make_dirt
 from horderl.content.terrain.hole import make_hole
+from horderl.systems.abilities import (
+    ability_selection_system,
+    placement_system,
+)
 from horderl.systems.pathfinding.target_selection import (
     get_cost_map,
     get_new_target,
@@ -783,11 +787,13 @@ def _handle_player_input(scene, brain: PlayerBrain, action_map) -> None:
 
         tracker = scene.cm.get_one(AbilityTracker, entity=brain.entity)
         if intention == Intention.NEXT_ABILITY:
-            tracker.increment(scene)
+            ability_selection_system.increment(scene, tracker)
         elif intention == Intention.PREVIOUS_ABILITY:
-            tracker.decrement(scene)
+            ability_selection_system.decrement(scene, tracker)
         elif intention == Intention.USE_ABILITY:
-            ability = tracker.get_current_ability(scene)
+            ability = ability_selection_system.get_current_ability(
+                scene, tracker
+            )
             from horderl.systems.ability_system import apply_ability
 
             apply_ability(scene, brain.id, ability)
@@ -817,11 +823,13 @@ def _handle_dizzy_input(scene, brain: DizzyBrain, action_map) -> None:
 
         tracker = scene.cm.get_one(AbilityTracker, entity=brain.entity)
         if intention == Intention.NEXT_ABILITY:
-            tracker.increment(scene)
+            ability_selection_system.increment(scene, tracker)
         elif intention == Intention.PREVIOUS_ABILITY:
-            tracker.decrement(scene)
+            ability_selection_system.decrement(scene, tracker)
         elif intention == Intention.USE_ABILITY:
-            ability = tracker.get_current_ability(scene)
+            ability = ability_selection_system.get_current_ability(
+                scene, tracker
+            )
             from horderl.systems.ability_system import apply_ability
 
             apply_ability(scene, brain.id, ability)
@@ -880,11 +888,13 @@ def _handle_player_dead_input(
 
         tracker = scene.cm.get_one(AbilityTracker, entity=brain.entity)
         if intention is Intention.NEXT_ABILITY:
-            tracker.increment(scene)
+            ability_selection_system.increment(scene, tracker)
         elif intention is Intention.PREVIOUS_ABILITY:
-            tracker.decrement(scene)
+            ability_selection_system.decrement(scene, tracker)
         elif intention is Intention.USE_ABILITY:
-            ability = tracker.get_current_ability(scene)
+            ability = ability_selection_system.get_current_ability(
+                scene, tracker
+            )
             from horderl.systems.ability_system import apply_ability
 
             apply_ability(scene, brain.id, ability)
@@ -950,8 +960,7 @@ def _place_thing(scene, brain: PlaceThingActor, direction: Intention) -> None:
     thing_x = coords.x + direction[0]
     thing_y = coords.y + direction[1]
     if is_buildable(scene, thing_x, thing_y):
-        thing = brain.make_thing(thing_x, thing_y)
-        scene.cm.add(*thing[1])
+        placement_system.place(scene, brain, thing_x, thing_y)
         scene.gold -= brain.gold_cost
         from horderl.systems import brain_stack
 

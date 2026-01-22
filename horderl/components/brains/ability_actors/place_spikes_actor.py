@@ -1,16 +1,13 @@
 from dataclasses import dataclass
-from typing import List, Tuple
 
-from engine.components.component import Component
 from horderl.components.brains.ability_actors.place_thing_actor import (
     PlaceThingActor,
 )
-from horderl.content.spike_trap import make_spike_trap
 
 
 @dataclass
 class PlaceSpikesActor(PlaceThingActor):
-    gold_cost: int = 5
+    """Command component for placing spike trap entities."""
 
-    def make_thing(self, x: int, y: int) -> Tuple[int, List[Component]]:
-        return make_spike_trap(x, y)
+    gold_cost: int = 5
+    spawn_key: str = "spike_trap"

@@ -1,15 +1,12 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import List, Tuple
 
 from engine import constants
 from engine.components import EnergyActor
-from engine.components.component import Component
 from horderl.components.brains.brain import Brain
 
 
 @dataclass
-class PlaceThingActor(Brain, ABC):
+class PlaceThingActor(Brain):
     """
     Brain for placing buildable objects adjacent to the player.
 
@@ -18,7 +15,4 @@ class PlaceThingActor(Brain, ABC):
 
     energy_cost: int = EnergyActor.INSTANT
     gold_cost: int = constants.INVALID
-
-    @abstractmethod
-    def make_thing(self, x: int, y: int) -> Tuple[int, List[Component]]:
-        raise NotImplementedError()
+    spawn_key: str = ""
