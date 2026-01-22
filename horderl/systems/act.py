@@ -5,6 +5,7 @@ from .brain_system import run as run_brain_system
 from .debug_menu import run as run_debug_menu
 from .eat_action_system import run as run_eat_actions
 from .tunnel_to_point_system import run as run_tunnel_actions
+from .wrath_system import run as run_wrath_system
 
 
 def run(scene) -> None:
@@ -14,4 +15,5 @@ def run(scene) -> None:
     run_tunnel_actions(scene)
     run_debug_menu(scene)
     run_brain_system(scene)
+    run_wrath_system(scene)
     run_actor_system(scene)

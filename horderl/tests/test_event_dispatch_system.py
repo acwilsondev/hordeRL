@@ -6,9 +6,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from engine.component_manager import ComponentManager
-from engine.components.component import Component
 from horderl.components.die_on_attack_finished import DieOnAttackFinished
 from horderl.components.events.attack_events import AttackFinished
+from horderl.systems.die_on_attack_finished_system import (
+    run as run_die_on_attack_finished_system,
+)
 from horderl.systems.event_system import run as run_event_system
 
 
@@ -26,6 +28,7 @@ def test_event_system_routes_attack_finished_events():
     event = AttackFinished(entity=1)
     scene.cm.add(listener, event)
 
+    run_die_on_attack_finished_system(scene)
     run_event_system(scene)
 
     assert scene.cm.get(DieOnAttackFinished) == []

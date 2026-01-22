@@ -46,17 +46,22 @@ from horderl.systems.attack_start_system import run as run_attack_start_system
 from horderl.systems.audio_system import run as run_audio_system
 from horderl.systems.build_world_system import build_world_system
 from horderl.systems.death_listener_system import run as run_death_listeners
+from horderl.systems.die_on_attack_finished_system import (
+    run as run_die_on_attack_finished_system,
+)
 from horderl.systems.event_system import run as run_event_system
 from horderl.systems.flood_holes_system import run as run_flood_holes
 from horderl.systems.movement_event_system import (
     run as run_movement_event_system,
 )
+from horderl.systems.population_system import run as run_population_system
 from horderl.systems.season_reset_system import run as run_season_reset_system
 from horderl.systems.serialization_system import (
     run as run_serialization_system,
 )
 from horderl.systems.start_game_system import run as run_start_game_system
 from horderl.systems.weather_system import run as run_weather_system
+from horderl.systems.world_beauty_system import run as run_world_beauty_system
 
 
 class DefendScene(GameScene):
@@ -247,6 +252,9 @@ class DefendScene(GameScene):
         run_start_game_system(self)
         run_season_reset_system(self)
         run_attack_start_system(self)
+        run_population_system(self)
+        run_world_beauty_system(self)
+        run_die_on_attack_finished_system(self)
         run_event_system(self)
         run_movement_event_system(self)
         act.run(self)
