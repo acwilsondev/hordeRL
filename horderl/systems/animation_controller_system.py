@@ -16,6 +16,7 @@ from horderl.components.animation_definitions import (
 from horderl.components.events.delete_event import Delete
 from horderl.components.path_node import PathNode
 from horderl.components.relationships.owner import Owner
+from horderl.systems.rendering.appearance_helpers import update_appearance
 
 logger = get_logger(__name__)
 
@@ -115,13 +116,15 @@ def _run_blinker(scene, dt_ms: int) -> None:
             _stop_animation(scene, animation, on_stop)
             return
         if animation.is_on:
-            appearance.set_appearance(
+            update_appearance(
+                appearance,
                 animation.new_symbol,
                 animation.new_color,
                 animation.new_bg_color,
             )
         else:
-            appearance.set_appearance(
+            update_appearance(
+                appearance,
                 animation.original_symbol,
                 animation.original_color,
                 animation.original_bg_color,
@@ -138,7 +141,8 @@ def _run_blinker(scene, dt_ms: int) -> None:
             return
         if animation.original_symbol is None:
             return
-        appearance.set_appearance(
+        update_appearance(
+            appearance,
             animation.original_symbol,
             animation.original_color,
             animation.original_bg_color,
@@ -177,13 +181,15 @@ def _run_randomized_blinker(scene, dt_ms: int) -> None:
             _stop_animation(scene, animation, on_stop)
             return
         if animation.is_on:
-            appearance.set_appearance(
+            update_appearance(
+                appearance,
                 animation.new_symbol,
                 animation.new_color,
                 animation.new_bg_color,
             )
         else:
-            appearance.set_appearance(
+            update_appearance(
+                appearance,
                 animation.original_symbol,
                 animation.original_color,
                 animation.original_bg_color,
@@ -206,7 +212,8 @@ def _run_randomized_blinker(scene, dt_ms: int) -> None:
             return
         if animation.original_symbol is None:
             return
-        appearance.set_appearance(
+        update_appearance(
+            appearance,
             animation.original_symbol,
             animation.original_color,
             animation.original_bg_color,

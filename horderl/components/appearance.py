@@ -1,8 +1,12 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import Tuple, Union
 
 from engine.components.component import Component
 from horderl import palettes
+
+Color = Tuple[int, int, int]
+PaletteColor = Union[Color, str]
 
 
 @dataclass
@@ -17,17 +21,6 @@ class Appearance(Component):
         STEALTHY = "STEALTHY"
 
     symbol: str = " "
-    color: tuple = palettes.WHITE
-    bg_color: tuple = palettes.BACKGROUND
+    color: PaletteColor = palettes.WHITE
+    bg_color: PaletteColor = palettes.BACKGROUND
     render_mode: RenderMode = RenderMode.NORMAL
-
-    def to_tile(self):
-        """
-        Return the Appearance in the tcod Tile format.
-        """
-        return (ord(self.symbol), (*self.color, 255), (*self.bg_color, 255))
-
-    def set_appearance(self, symbol, fg, bg):
-        self.symbol = symbol
-        self.color = fg
-        self.bg_color = bg
