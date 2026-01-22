@@ -1,15 +1,15 @@
 import random
 
 from engine import core
-from horderl.components.world_building.world_parameters import (
+from horderl.components.worldbuilding_control import WorldbuildingControl
+from horderl.i18n import t
+from horderl.systems.world_building.params_factory import (
     get_forest_params,
     get_mountain_params,
     get_plains_params,
     get_swamp_params,
     get_tundra_params,
 )
-from horderl.components.worldbuilding_control import WorldbuildingControl
-from horderl.i18n import t
 
 from ...gui.easy_menu import EasyMenu
 

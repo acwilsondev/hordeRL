@@ -16,14 +16,9 @@ DEFAULT_RIVER_RAPIDS: int = 3000
 DEFAULT_TREE_CUT_ANGER: int = 1
 
 
-def get_seed(config):
-    return (
-        time.time_ns() if config.world_seed == "RANDOM" else config.world_seed
-    )
-
-
 @dataclass
 class WorldParameters(Component):
+    """Data container describing parameters for world generation."""
 
     biome: str = "Plains"
 
@@ -53,66 +48,6 @@ class WorldParameters(Component):
 
     flower_color = None
 
-    def get_file_name(self):
+    def get_file_name(self) -> str:
+        """Return a file-friendly world name derived from the title."""
         return self.world_name.replace(" ", "-")
-
-
-def get_plains_params(entity, config) -> WorldParameters:
-    return WorldParameters(entity=entity, world_seed=get_seed(config))
-
-
-def get_forest_params(entity, config) -> WorldParameters:
-    return WorldParameters(
-        biome="Forest",
-        entity=entity,
-        world_seed=get_seed(config),
-        copse=DEFAULT_COPSE * 20,
-        flower_fields=DEFAULT_FLOWERS // 2,
-        flower_proliferation=DEFAULT_FLOWER_PROLIFERATION / 2,
-        tree_cut_anger=DEFAULT_TREE_CUT_ANGER * 2,
-    )
-
-
-def get_mountain_params(entity, config) -> WorldParameters:
-    return WorldParameters(
-        entity=entity,
-        biome="Mountain",
-        world_seed=get_seed(config),
-        copse=DEFAULT_COPSE // 2,
-        copse_proliferation=DEFAULT_COPSE_PROLIFERATION / 2,
-        rock_fields=DEFAULT_ROCKS * 40,
-        rocks_proliferation=DEFAULT_ROCKS_PROLIFERATION * 2,
-        lakes=0,
-        temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER - 5,
-        river_rapids=DEFAULT_RIVER_RAPIDS // 5,
-    )
-
-
-def get_swamp_params(entity, config) -> WorldParameters:
-    return WorldParameters(
-        entity=entity,
-        biome="Swamp",
-        world_seed=get_seed(config),
-        copse=DEFAULT_COPSE * 10,
-        copse_proliferation=DEFAULT_COPSE_PROLIFERATION / 2,
-        lakes=DEFAULT_LAKES * 100,
-        lake_proliferation=DEFAULT_LAKE_PROLIFERATION / 2,
-        rocks_proliferation=0,
-        temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER + 5,
-        is_water_swampy=True,
-    )
-
-
-def get_tundra_params(entity, config) -> WorldParameters:
-    return WorldParameters(
-        entity=entity,
-        biome="Tundra",
-        world_seed=get_seed(config),
-        copse=0,
-        rock_fields=DEFAULT_ROCKS * 10,
-        rocks_proliferation=DEFAULT_ROCKS_PROLIFERATION * 2,
-        lakes=DEFAULT_LAKES * 100,
-        lake_proliferation=DEFAULT_LAKE_PROLIFERATION / 2,
-        temperature_modifier=DEFAULT_TEMPERATURE_MODIFIER - 20,
-        is_water_swampy=True,
-    )
