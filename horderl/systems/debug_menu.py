@@ -19,6 +19,7 @@ from ..components.brains.painters.create_gold_actor import PlaceGoldController
 from ..components.brains.painters.create_hordeling_actor import (
     PlaceHordelingController,
 )
+from ..components.events.breadcrumb_events import BreadcrumbsCleared
 from ..components.events.die_events import Die
 from ..components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from ..components.serialization.save_game import SaveGame
@@ -484,6 +485,11 @@ def get_show_pathing(scene, entity):
     def out_fn():
         tracker = scene.cm.get_one(BreadcrumbTracker, entity=entity)
         if tracker:
+            scene.cm.add(
+                BreadcrumbsCleared(
+                    entity=entity, breadcrumb_ids=list(tracker.breadcrumbs)
+                )
+            )
             scene.cm.delete_component(tracker)
         else:
             scene.cm.add(BreadcrumbTracker(entity=entity))
