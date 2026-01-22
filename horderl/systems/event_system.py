@@ -9,25 +9,13 @@ from engine import GameScene, core
 from engine.components import Coordinates
 from engine.components.component import Component
 from engine.logging import get_logger
-from horderl import palettes
 from horderl.components.actors.calendar_actor import Calendar
 from horderl.components.announce_game_start import AnnounceGameStart
-from horderl.components.die_on_attack_finished import DieOnAttackFinished
-from horderl.components.events.attack_events import (
-    AttackFinished,
-    OnAttackFinishedListener,
-)
 from horderl.components.events.dally_event import DallyEvent
 from horderl.components.events.delete_event import Delete, DeleteListener
 from horderl.components.events.die_events import Die
 from horderl.components.events.fast_forward import FastForward
 from horderl.components.events.new_day_event import DayBegan, DayBeganListener
-from horderl.components.events.peasant_events import (
-    PeasantAdded,
-    PeasantAddedListener,
-    PeasantDied,
-    PeasantDiedListener,
-)
 from horderl.components.events.popup_message import PopupMessage
 from horderl.components.events.quit_game_events import (
     QuitGame,
@@ -47,18 +35,11 @@ from horderl.components.events.terrain_changed_event import (
     TerrainChangedEvent,
     TerrainChangedListener,
 )
-from horderl.components.events.tree_cut_event import (
-    TreeCutEvent,
-    TreeCutListener,
-)
-from horderl.components.population import Population
 from horderl.components.season_reset_listeners.grow_in_spring import (
     GrowIntoTree,
 )
 from horderl.components.serialization.save_game import SaveGame
 from horderl.components.weather.weather import Weather
-from horderl.components.world_beauty import WorldBeauty
-from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.content.terrain.trees import make_tree
 from horderl.gui.help_dialogue import HelpDialogue
 from horderl.i18n import t
@@ -131,13 +112,6 @@ def _handle_show_help_dialogue(
     scene.add_gui_element(HelpDialogue(messages, scene.config))
 
 
-def _notify_attack_finished(
-    scene: GameScene, event: AttackFinished, listener: DieOnAttackFinished
-) -> None:
-    if event.entity == listener.entity:
-        scene.cm.add(Die(entity=listener.entity))
-
-
 def _notify_day_began(
     scene: GameScene, event: DayBegan, listener: GrowIntoTree
 ) -> None:
@@ -161,23 +135,6 @@ def _notify_day_began(
         scene.cm.add(*make_tree(x, y)[1])
 
 
-def _notify_peasant_added(
-    scene: GameScene, event: PeasantAdded, listener: Population
-) -> None:
-    listener._log_info("population increased")
-    listener.population += 1
-
-
-def _notify_peasant_died(
-    scene: GameScene, event: PeasantDied, listener: Population
-) -> None:
-    listener._log_info("population decreased")
-    listener.population -= 1
-    if listener.population <= 0:
-        scene.popup_message(t("message.peasants_dead"))
-        scene.pop()
-
-
 def _notify_start_game(
     scene: GameScene, event: StartGame, listener: AnnounceGameStart
 ) -> None:
@@ -185,29 +142,6 @@ def _notify_start_game(
     scene.message(t("message.start.horde"))
     scene.message(t("message.start.help"))
     scene.cm.delete_component(listener)
-
-
-def _notify_tree_cut(
-    scene: GameScene, event: TreeCutEvent, listener: WorldBeauty
-) -> None:
-    listener._log_info("detected tree cut")
-    listener.trees_cut += 1
-    if not listener.trees_cut % listener.spirits_attitude:
-        scene.message(
-            "The spirits grow angrier with your cutting.",
-            color=palettes.BLOOD,
-        )
-        world_params = scene.cm.get_one(
-            WorldParameters, entity=core.get_id("world")
-        )
-        listener.spirits_wrath += 1
-        listener.spirits_attitude = max(
-            1, listener.spirits_attitude - world_params.tree_cut_anger
-        )
-        listener._log_info(
-            f"decreased wrath {listener.spirits_wrath} and attitude"
-            f" {listener.spirits_attitude}"
-        )
 
 
 def _after_delete(scene: GameScene, event: Delete) -> None:
@@ -240,10 +174,6 @@ def _after_step_event(scene: GameScene, event: StepEvent) -> None:
 
 
 EVENT_RULES: Dict[Type[Component], EventDispatchRule] = {
-    AttackFinished: EventDispatchRule(
-        listener_type=OnAttackFinishedListener,
-        listener_handlers={DieOnAttackFinished: _notify_attack_finished},
-    ),
     DallyEvent: EventDispatchRule(listener_type=None, consume=False),
     DayBegan: EventDispatchRule(
         listener_type=DayBeganListener,
@@ -259,14 +189,6 @@ EVENT_RULES: Dict[Type[Component], EventDispatchRule] = {
     ),
     EnterEvent: EventDispatchRule(listener_type=None, consume=False),
     FastForward: EventDispatchRule(handle_event=_handle_fast_forward),
-    PeasantAdded: EventDispatchRule(
-        listener_type=PeasantAddedListener,
-        listener_handlers={Population: _notify_peasant_added},
-    ),
-    PeasantDied: EventDispatchRule(
-        listener_type=PeasantDiedListener,
-        listener_handlers={Population: _notify_peasant_died},
-    ),
     PopupMessage: EventDispatchRule(
         handle_event=_handle_popup_message, consume=False
     ),
@@ -288,10 +210,6 @@ EVENT_RULES: Dict[Type[Component], EventDispatchRule] = {
     ),
     TerrainChangedEvent: EventDispatchRule(
         listener_type=TerrainChangedListener
-    ),
-    TreeCutEvent: EventDispatchRule(
-        listener_type=TreeCutListener,
-        listener_handlers={WorldBeauty: _notify_tree_cut},
     ),
 }
 

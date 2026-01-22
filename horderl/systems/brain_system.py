@@ -75,6 +75,7 @@ from horderl.systems.pathfinding.target_selection import (
     get_new_target,
     get_target_values,
 )
+from horderl.systems.stomach_system import clear_stomach
 
 BRAIN_HANDLERS = (
     (LookCursorController, "run_look_cursor_controller"),
@@ -1178,7 +1179,7 @@ def _handle_sleeping_back_out(scene, brain: SleepingBrain) -> None:
             brain._log_debug("digested the peasant")
             scene.warn("A peasant has been lost!")
             scene.cm.add(PeasantDied(entity=core.get_id("world")))
-        stomach.clear(scene)
+        clear_stomach(scene, stomach)
 
 
 DIZZY_STEPS = [

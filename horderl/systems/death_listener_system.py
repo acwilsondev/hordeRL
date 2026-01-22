@@ -27,6 +27,7 @@ from horderl.components.tree_cut_on_die import TreeCutOnDeath
 from horderl.content import corpses, player_corpse
 from horderl.content.getables.fallen_log import make_fallen_log
 from horderl.content.getables.gold import make_gold_nugget
+from horderl.systems.stomach_system import dump_stomach
 
 
 def _drop_gold(scene: GameScene, entity: int) -> None:
@@ -119,11 +120,7 @@ def _emit_peasant_died(scene: GameScene, entity: int) -> None:
 def _dump_stomach(scene: GameScene, entity: int) -> None:
     for listener in scene.cm.get_all(Stomach, entity=entity):
         listener._log_debug("on_die triggered, dumping contents")
-        if listener.contents == constants.INVALID:
-            listener._log_debug("nothing to dump")
-            continue
-        listener._log_debug(f"dumping {listener.contents}")
-        scene.cm.unstash_entity(listener.contents)
+        dump_stomach(scene, listener)
 
 
 def _emit_tree_cut(scene: GameScene, entity: int) -> None:
