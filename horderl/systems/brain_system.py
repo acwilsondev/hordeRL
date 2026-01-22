@@ -74,6 +74,7 @@ from horderl.systems.abilities import (
     ability_selection_system,
     placement_system,
 )
+from horderl.systems.debug import painter_system
 from horderl.systems.pathfinding import get_path
 from horderl.systems.pathfinding.target_selection import (
     get_cost_map,
@@ -922,9 +923,8 @@ def _move_cursor(scene, brain, intention: Intention) -> None:
 
 
 def _paint(scene, brain: PainterBrain) -> None:
-    """# Painter brains delegate object creation to paint_one."""
-    coords = scene.cm.get_one(Coordinates, entity=brain.cursor)
-    scene.cm.add(*brain.paint_one(scene, coords.position))
+    """# Painter brains delegate placement to the painter system."""
+    painter_system.paint_at_cursor(scene, brain)
 
 
 def _handle_look(scene, brain: LookCursorController) -> None:
