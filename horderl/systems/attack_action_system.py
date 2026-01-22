@@ -8,6 +8,9 @@ from horderl.components.attacks.attack import Attack
 from horderl.components.attacks.attack_effects.attack_effect import (
     AttackEffect,
 )
+from horderl.components.attacks.attack_effects.attack_effect_resolution import (
+    AttackEffectResolution,
+)
 from horderl.components.attacks.siege_attack import SiegeAttack
 from horderl.components.cry_for_help import CryForHelp
 from horderl.components.events.attack_events import AttackFinished
@@ -33,7 +36,7 @@ def run(scene) -> None:
         - Attributes, Owner, HouseStructure, CryForHelp for damage resolution.
 
     Side Effects:
-        - Applies damage or effects to targets.
+        - Applies damage and enqueues attack effects for resolution.
         - Emits AttackFinished events.
         - Removes AttackAction components after execution.
     """
@@ -84,7 +87,15 @@ def execute(scene, action: AttackAction) -> None:
             AttackEffect, entity=action.entity
         )
         for attack_effect in attack_effects:
-            attack_effect.apply(scene, action.entity, action.target)
+            scene.cm.add(
+                AttackEffectResolution(
+                    entity=action.entity,
+                    source=action.entity,
+                    target=action.target,
+                    effect_type=attack_effect.effect_type,
+                    parameters=attack_effect.parameters,
+                )
+            )
         _handle_entity_damage(scene, action, action.target, action.damage)
 
     cry_for_help = scene.cm.get_one(CryForHelp, entity=action.target)
