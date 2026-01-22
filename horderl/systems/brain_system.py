@@ -49,6 +49,7 @@ from horderl.components.brains.stationary_attack_actor import (
 from horderl.components.diggable import Diggable
 from horderl.components.edible import Edible
 from horderl.components.enums import Intention
+from horderl.components.events.breadcrumb_events import BreadcrumbsRequested
 from horderl.components.events.die_events import Die
 from horderl.components.events.peasant_events import PeasantDied
 from horderl.components.events.quit_game_events import QuitGame
@@ -667,7 +668,9 @@ def _get_next_step(scene, brain: DefaultActiveActor):
         BreadcrumbTracker, entity=brain.entity
     )
     if breadcrumb_tracker:
-        breadcrumb_tracker.add_breadcrumbs(scene, path)
+        scene.cm.add(
+            BreadcrumbsRequested(entity=brain.entity, path=list(path))
+        )
 
     path = [p for p in path]
 
