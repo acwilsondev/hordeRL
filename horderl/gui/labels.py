@@ -5,7 +5,10 @@ from horderl.engine_adapter import GuiElement, core
 from .. import palettes
 from ..components.ability_tracker import AbilityTracker
 from ..components.actors.calendar_actor import Calendar
-from ..components.states.move_cost_affectors import Haste, Hindered
+from ..components.states.move_cost_affectors import (
+    MoveCostAffector,
+    MoveCostAffectorType,
+)
 from ..components.world_building.world_parameters import WorldParameters
 from ..constants import PLAYER_ID
 from ..i18n import t
@@ -112,8 +115,12 @@ class SpeedLabel(GuiElement):
         self.value = "#problem#"
 
     def update(self, scene, dt_ms: int):
-        hindered = scene.cm.get_one(Hindered, entity=PLAYER_ID)
-        haste = scene.cm.get_one(Haste, entity=PLAYER_ID)
+        hindered = _get_move_cost_affector(
+            scene, PLAYER_ID, MoveCostAffectorType.HINDERED
+        )
+        haste = _get_move_cost_affector(
+            scene, PLAYER_ID, MoveCostAffectorType.HASTE
+        )
         if hindered:
             self.value = t("label.hindered")
         elif haste:
@@ -181,3 +188,16 @@ class VillageNameLabel(GuiElement):
             self.value = f"{params.world_name}"
         else:
             self.value = t("label.loading")
+
+
+def _get_move_cost_affector(scene, entity, affector_type):
+    return next(
+        iter(
+            scene.cm.get(
+                MoveCostAffector,
+                query=lambda affector: affector.entity == entity
+                and affector.affector_type == affector_type,
+            )
+        ),
+        None,
+    )

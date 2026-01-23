@@ -11,7 +11,10 @@ from horderl.components.death_listeners.drop_gold import DropGold
 from horderl.components.diggable import Diggable
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.states.move_cost_affectors import DifficultTerrain
+from horderl.components.states.move_cost_affectors import (
+    MoveCostAffector,
+    MoveCostAffectorType,
+)
 
 
 def make_rock(x, y):
@@ -29,7 +32,10 @@ def make_rock(x, y):
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
             Material(entity=entity_id, blocks=False, blocks_sight=False),
-            DifficultTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.DIFFICULT_TERRAIN,
+            ),
             Diggable(entity=entity_id),
             PathfinderCost(entity=entity_id, cost=4),
         ],

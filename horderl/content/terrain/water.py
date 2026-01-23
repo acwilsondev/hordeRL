@@ -14,7 +14,10 @@ from horderl.components.flooder import Flooder
 from horderl.components.material import Material
 from horderl.components.movement.drain_on_enter import DrainOnEnter
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.states.move_cost_affectors import DifficultTerrain
+from horderl.components.states.move_cost_affectors import (
+    MoveCostAffector,
+    MoveCostAffectorType,
+)
 from horderl.components.tags.ice_tag import IceTag
 from horderl.components.tags.water_tag import WaterTag
 
@@ -34,7 +37,10 @@ def make_water(x, y, rapidness=5000):
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
             Material(entity=entity_id, blocks=False, blocks_sight=False),
-            DifficultTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.DIFFICULT_TERRAIN,
+            ),
             Diggable(entity=entity_id),
             Flooder(entity=entity_id),
             PathfinderCost(entity=entity_id, cost=10),
@@ -72,7 +78,10 @@ def make_swampy_water(x, y, rapidness):
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
             Material(entity=entity_id, blocks=False, blocks_sight=False),
-            DifficultTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.DIFFICULT_TERRAIN,
+            ),
             Diggable(entity=entity_id),
             Flooder(entity=entity_id),
             PathfinderCost(entity=entity_id, cost=10),
@@ -109,7 +118,7 @@ def freeze(scene, eid):
     for component_type in [
         WaterTag,
         Flooder,
-        DifficultTerrain,
+        MoveCostAffector,
         PathfinderCost,
         RandomizedBlinkerAnimationDefinition,
         DrainOnEnter,

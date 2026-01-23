@@ -15,10 +15,8 @@ from ..components.faction import Faction
 from ..components.material import Material
 from ..components.movement.move import Move
 from ..components.states.move_cost_affectors import (
-    DifficultTerrain,
-    EasyTerrain,
-    Haste,
-    Hindered,
+    MoveCostAffector,
+    MoveCostAffectorType,
 )
 from ..i18n import t
 from ..systems.attack_action_system import apply_attack
@@ -63,7 +61,9 @@ def run(scene):
             move(scene, entity, step_direction)
             dirty_senses(scene, entity)
             move_component = scene.cm.get_one(Move, entity=entity)
-            if scene.cm.get_one(Haste, entity=entity):
+            if _get_move_cost_affector(
+                scene, entity, MoveCostAffectorType.HASTE
+            ):
                 energy = move_component.energy_cost // 2
             else:
                 energy = move_component.energy_cost
@@ -156,7 +156,9 @@ def move(scene, entity: int, vector: Tuple[int, int]):
     and no validation occurs herein (except possibly to avoid crashes).
 
     """
-    swamped = scene.cm.get_one(Hindered, entity=entity)
+    swamped = _get_move_cost_affector(
+        scene, entity, MoveCostAffectorType.HINDERED
+    )
 
     if swamped:
         scene.cm.delete_component(swamped)
@@ -176,28 +178,55 @@ def _apply_post_move_factors(coords, entity, scene):
         if coord.x == coords.x and coord.y == coords.y
     ]
     difficult_terrain = any(
-        scene.cm.get_one(DifficultTerrain, entity=coord_entity) is not None
+        _get_move_cost_affector(
+            scene, coord_entity, MoveCostAffectorType.DIFFICULT_TERRAIN
+        )
+        is not None
         for coord_entity in coords_entities
     )
     easy_terrain = (
         any(
-            scene.cm.get_one(EasyTerrain, entity=coord_entity) is not None
+            _get_move_cost_affector(
+                scene, coord_entity, MoveCostAffectorType.EASY_TERRAIN
+            )
+            is not None
             for coord_entity in coords_entities
         )
         if entity == scene.player
         else False
     )
 
-    haste = scene.cm.get_one(Haste, entity=entity)
+    haste = _get_move_cost_affector(scene, entity, MoveCostAffectorType.HASTE)
     if not easy_terrain and haste:
         scene.cm.delete_component(haste)
 
     if easy_terrain and not haste:
-        scene.cm.add(Haste(entity=entity))
+        scene.cm.add(
+            MoveCostAffector(
+                entity=entity, affector_type=MoveCostAffectorType.HASTE
+            )
+        )
     elif difficult_terrain and not easy_terrain:
         if entity == scene.player:
             scene.message(t("message.stumble"))
-        scene.cm.add(Hindered(entity=entity))
+        scene.cm.add(
+            MoveCostAffector(
+                entity=entity, affector_type=MoveCostAffectorType.HINDERED
+            )
+        )
+
+
+def _get_move_cost_affector(scene, entity, affector_type):
+    return next(
+        iter(
+            scene.cm.get(
+                MoveCostAffector,
+                query=lambda affector: affector.entity == entity
+                and affector.affector_type == affector_type,
+            )
+        ),
+        None,
+    )
 
 
 def move_coords(coords: Coordinates, vector: Tuple[int, int]):
