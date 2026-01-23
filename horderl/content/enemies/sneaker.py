@@ -14,13 +14,13 @@ from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.stealthy_cost_map import StealthyCostMapper
-from horderl.components.pathfinding.target_evaluation.target_evaluator import (
-    TargetEvaluator,
-    TargetEvaluatorType,
 from horderl.components.pathfinding.cost_mapper import (
     CostMapper,
     CostMapperType,
+)
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag

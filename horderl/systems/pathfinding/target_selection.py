@@ -18,15 +18,6 @@ from horderl.components.pathfinding.cost_mapper import (
     CostMapper,
     CostMapperType,
 )
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.peasant_cost_mapper import (
-    PeasantCostMapper,
-)
-from horderl.components.pathfinding.road_cost_mapper import RoadCostMapper
-from horderl.components.pathfinding.simplex_cost_mapper import (
-    SimplexCostMapper,
-)
-from horderl.components.pathfinding.stealthy_cost_map import StealthyCostMapper
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
     TargetEvaluatorType,
