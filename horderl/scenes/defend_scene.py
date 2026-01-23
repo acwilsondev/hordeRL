@@ -10,6 +10,7 @@ from horderl.components.serialization.load_game import LoadGame
 from horderl.components.sound.battle_music import BattleMusic
 from horderl.components.sound.start_music import StartMusic
 from horderl.components.world_beauty import WorldBeauty
+from horderl.components.world_turns import WorldTurns
 from horderl.components.worldbuilding_control import WorldbuildingControl
 from horderl.constants import PLAYER_ID
 from horderl.content.physics_controller import make_physics_controller
@@ -187,6 +188,7 @@ class DefendScene(GameScene):
             self.cm.add(BattleMusic(entity=self.player))
             self.cm.add(WorldBeauty(entity=core.get_id("world")))
             self.cm.add(Population(entity=core.get_id("world")))
+            self.cm.add(WorldTurns(entity=core.get_id("world")))
 
     def popup_message(self, message: str):
         """

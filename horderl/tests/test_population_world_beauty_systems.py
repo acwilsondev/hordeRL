@@ -5,6 +5,7 @@ from horderl.components.events.tree_cut_event import TreeCutEvent
 from horderl.components.population import Population
 from horderl.components.world_beauty import WorldBeauty
 from horderl.components.world_building.world_parameters import WorldParameters
+from horderl.components.world_turns import WorldTurns
 from horderl.systems.population_system import run as run_population_system
 from horderl.systems.world_beauty_system import run as run_world_beauty_system
 
@@ -69,3 +70,9 @@ def test_world_beauty_system_reacts_to_tree_cut():
     assert listener.spirits_attitude == 1
     assert scene.messages
     assert scene.cm.get(TreeCutEvent) == []
+
+
+def test_world_turns_defaults_to_zero():
+    world_turns = WorldTurns(entity=core.get_id("world"))
+
+    assert world_turns.current_turn == 0
