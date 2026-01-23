@@ -8,10 +8,8 @@ from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.season_reset_listeners.grow_in_spring import (
-    make_grow_into_tree,
-)
 from horderl.components.sellable import Sellable
+from horderl.systems.utilities import make_grow_into_tree
 
 
 def make_sapling(x, y):

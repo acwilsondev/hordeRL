@@ -1,3 +1,5 @@
+import random
+
 from engine.component_manager import ComponentManager
 from engine.components import Actor, Coordinates
 from engine.logging import get_logger
@@ -5,6 +7,7 @@ from engine.logging import get_logger
 from ..components.events.turn_event import TurnEvent
 from ..components.faction import Faction
 from ..components.material import Material
+from ..components.season_reset_listeners.grow_in_spring import GrowIntoTree
 
 
 def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:
@@ -116,3 +119,19 @@ def get_enemies_in_range(scene, entity, min_range=0, max_range=1000):
         for enemy_coord in enemy_coords
         if min_range <= enemy_coord.distance_from(coords) <= max_range
     ]
+
+
+def make_grow_into_tree(entity: int) -> GrowIntoTree:
+    """
+    Create a GrowIntoTree component with a randomized grow timer.
+
+    Args:
+        entity (int): Entity ID that will own the component.
+
+    Returns:
+        GrowIntoTree: Component with time_to_grow initialized.
+
+    Side Effects:
+        - None.
+    """
+    return GrowIntoTree(entity=entity, time_to_grow=random.randint(1200, 3600))
