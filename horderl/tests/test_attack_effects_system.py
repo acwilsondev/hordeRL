@@ -1,6 +1,9 @@
 from engine.component_manager import ComponentManager
 from engine.components import Coordinates
 from engine.components.entity import Entity
+from horderl.components.attacks.attack_effects.attack_effect import (
+    AttackEffectType,
+)
 from horderl.components.attacks.attack_effects.attack_effect_resolution import (
     AttackEffectResolution,
 )
@@ -25,7 +28,7 @@ def test_attack_effects_system_applies_knockback():
             entity=source_id,
             source=source_id,
             target=target_id,
-            effect_type="knockback",
+            effect_type=AttackEffectType.KNOCKBACK,
             parameters={"distance": 2},
         ),
     )

@@ -6,8 +6,9 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
 from horderl.components import Appearance, Attributes
-from horderl.components.attacks.attack_effects.knockback_attack import (
-    KnockbackAttack,
+from horderl.components.attacks.attack_effects.attack_effect import (
+    AttackEffect,
+    AttackEffectType,
 )
 from horderl.components.attacks.siege_attack import SiegeAttack
 from horderl.components.brains.default_active_actor import DefaultActiveActor
@@ -53,7 +54,11 @@ def make_juggernaut(x, y):
         Material(entity=entity_id, blocks=True, blocks_sight=False),
         Tag(entity=entity_id, tag_type=TagType.HORDELING),
         Move(entity=entity_id, energy_cost=EnergyActor.VERY_SLOW),
-        KnockbackAttack(entity=entity_id),
+        AttackEffect(
+            entity=entity_id,
+            effect_type=AttackEffectType.KNOCKBACK,
+            parameters={"distance": 1},
+        ),
         PathfinderCost(entity=entity_id, cost=5),
         TargetEvaluator(
             entity=entity_id,
