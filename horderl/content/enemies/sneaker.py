@@ -18,6 +18,9 @@ from horderl.components.pathfinding.stealthy_cost_map import StealthyCostMapper
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
     TargetEvaluatorType,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
@@ -47,7 +50,7 @@ def make_sneaker(x, y):
         HordelingTag(entity=entity_id),
         Move(entity=entity_id),
         PathfinderCost(entity=entity_id, cost=5),
-        StealthyCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.STEALTHY),
         Stomach(entity=entity_id),
         TargetEvaluator(
             entity=entity_id,

@@ -19,6 +19,9 @@ from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
     TargetEvaluatorType,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
@@ -33,7 +36,7 @@ def make_pirhana(x, y):
         Faction(entity=entity_id, faction=Faction.Options.MONSTER),
         Corpse(entity=entity_id),
         DefaultActiveActor(entity=entity_id),
-        NormalCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.NORMAL),
         Appearance(
             entity=entity_id,
             symbol="v",

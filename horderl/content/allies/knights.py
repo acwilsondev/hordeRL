@@ -16,6 +16,9 @@ from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
     TargetEvaluatorType,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
 from horderl.components.sellable import Sellable
 from horderl.components.tax_value import TaxValue
@@ -30,7 +33,7 @@ def make_knight(x, y):
         Faction(entity=entity_id, faction=Faction.Options.PEASANT),
         Corpse(entity=entity_id),
         StationaryAttackActor(entity=entity_id, root_x=x, root_y=y),
-        NormalCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.NORMAL),
         Appearance(
             entity=entity_id,
             symbol="K",
