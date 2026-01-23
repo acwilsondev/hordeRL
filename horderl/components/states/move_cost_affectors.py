@@ -1,23 +1,24 @@
 from dataclasses import dataclass
+from enum import Enum
 
 from engine.components.component import Component
 
 
-@dataclass
-class Hindered(Component):
-    pass
+class MoveCostAffectorType(Enum):
+    """
+    Represent categories of movement cost or speed modifiers.
+    """
+
+    HINDERED = "hindered"
+    DIFFICULT_TERRAIN = "difficult_terrain"
+    HASTE = "haste"
+    EASY_TERRAIN = "easy_terrain"
 
 
-@dataclass
-class DifficultTerrain(Component):
-    pass
+@dataclass(kw_only=True)
+class MoveCostAffector(Component):
+    """
+    Store a movement cost modifier for an entity or terrain tile.
+    """
 
-
-@dataclass
-class Haste(Component):
-    pass
-
-
-@dataclass
-class EasyTerrain(Component):
-    pass
+    affector_type: MoveCostAffectorType

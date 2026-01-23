@@ -8,7 +8,10 @@ from horderl.components.diggable import Diggable
 from horderl.components.floodable import Floodable
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.states.move_cost_affectors import DifficultTerrain
+from horderl.components.states.move_cost_affectors import (
+    MoveCostAffector,
+    MoveCostAffectorType,
+)
 
 
 def make_hole(x, y):
@@ -27,7 +30,10 @@ def make_hole(x, y):
             Material(entity=entity_id, blocks=False, blocks_sight=False),
             Diggable(entity=entity_id),
             Floodable(entity=entity_id),
-            DifficultTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.DIFFICULT_TERRAIN,
+            ),
             PathfinderCost(entity=entity_id, cost=4),
         ],
     )

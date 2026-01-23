@@ -10,7 +10,10 @@ from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
 from horderl.components import Appearance
 from horderl.components.pathfinding.road_cost_mapper import RoadCostMapper
-from horderl.components.states.move_cost_affectors import EasyTerrain
+from horderl.components.states.move_cost_affectors import (
+    MoveCostAffector,
+    MoveCostAffectorType,
+)
 from horderl.components.tags.road_marker import RoadMarker
 from horderl.components.tags.water_tag import WaterTag
 from horderl.systems.pathfinding.target_selection import (
@@ -32,7 +35,10 @@ def make_road(x, y):
                 bg_color=palettes.BACKGROUND,
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
-            EasyTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.EASY_TERRAIN,
+            ),
             RoadMarker(entity=entity_id),
         ],
     )
@@ -52,7 +58,10 @@ def make_bridge(x, y):
                 bg_color=palettes.BACKGROUND,
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
-            EasyTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.EASY_TERRAIN,
+            ),
             RoadMarker(entity=entity_id),
         ],
     )
