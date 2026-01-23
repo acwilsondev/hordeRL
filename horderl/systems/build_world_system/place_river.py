@@ -1,8 +1,9 @@
 import random
 
 from engine import core
-from horderl.components.pathfinding.simplex_cost_mapper import (
-    SimplexCostMapper,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
 from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.systems.pathfinding import get_path
@@ -15,7 +16,7 @@ def place_river(scene):
     """Place a river in the world according to WorldParameters."""
     logger = core.get_logger(__name__)
     logger.info("placing river")
-    cost = get_cost_map(scene, SimplexCostMapper())
+    cost = get_cost_map(scene, CostMapper(mapper_type=CostMapperType.SIMPLEX))
     start = (random.randint(2, scene.config.map_width - 3), 0)
     end = (
         random.randint(2, scene.config.map_width - 3),

@@ -14,19 +14,10 @@ from horderl.components import Attributes
 from horderl.components.material import Material
 from horderl.components.movement.drain_on_enter import DrainOnEnter
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.cost_mapper import CostMapper
-from horderl.components.pathfinding.juggernaut_cost_mapper import (
-    StraightLineCostMapper,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.peasant_cost_mapper import (
-    PeasantCostMapper,
-)
-from horderl.components.pathfinding.road_cost_mapper import RoadCostMapper
-from horderl.components.pathfinding.simplex_cost_mapper import (
-    SimplexCostMapper,
-)
-from horderl.components.pathfinding.stealthy_cost_map import StealthyCostMapper
 from horderl.components.pathfinding.target_evaluation.ally_target_evaluator import (
     AllyTargetEvaluator,
 )
@@ -57,33 +48,33 @@ def get_cost_map(scene, cost_mapper: CostMapper | None) -> np.ndarray:
         numpy.ndarray: Cost grid for pathfinding decisions.
 
     Components Consumed:
-        - CostMapper subclasses such as NormalCostMapper or RoadCostMapper.
+        - CostMapper configured with a CostMapperType.
         - Coordinates, PathfinderCost, DrainOnEnter, Attributes, WaterTag,
           Material, Entity (depending on mapper type).
 
     Side Effects:
         None.
     """
-    mapper = cost_mapper or NormalCostMapper()
+    mapper = cost_mapper or CostMapper(mapper_type=CostMapperType.NORMAL)
     return _build_cost_map(scene, mapper)
 
 
 def _build_cost_map(scene, cost_mapper: CostMapper) -> np.ndarray:
     # Assumes the mapper instance indicates the mapping strategy.
-    if isinstance(cost_mapper, NormalCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.NORMAL:
         return _build_normal_cost_map(scene)
-    if isinstance(cost_mapper, StealthyCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.STEALTHY:
         return _build_stealthy_cost_map(scene)
-    if isinstance(cost_mapper, PeasantCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.PEASANT:
         return _build_peasant_cost_map(scene)
-    if isinstance(cost_mapper, RoadCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.ROAD:
         return _build_road_cost_map(scene)
-    if isinstance(cost_mapper, SimplexCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.SIMPLEX:
         return _build_simplex_cost_map(scene)
-    if isinstance(cost_mapper, StraightLineCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.STRAIGHT_LINE:
         return _build_straight_line_cost_map(scene)
     raise ValueError(
-        f"Unsupported cost mapper type: {type(cost_mapper).__name__}"
+        f"Unsupported cost mapper type: {cost_mapper.mapper_type}"
     )
 
 

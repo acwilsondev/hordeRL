@@ -12,7 +12,10 @@ from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
+)
 from horderl.components.pathfinding.target_evaluation.ally_target_evaluator import (
     AllyTargetEvaluator,
 )
@@ -29,7 +32,7 @@ def make_knight(x, y):
         Faction(entity=entity_id, faction=Faction.Options.PEASANT),
         Corpse(entity=entity_id),
         StationaryAttackActor(entity=entity_id, root_x=x, root_y=y),
-        NormalCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.NORMAL),
         Appearance(
             entity=entity_id,
             symbol="K",
