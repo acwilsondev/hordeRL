@@ -92,7 +92,8 @@ def _handle_fast_forward(scene: GameScene, event: FastForward) -> None:
     calendar = scene.cm.get_one(Calendar, entity=core.get_id("calendar"))
     if calendar:
         calendar.day = 30
-        calendar.energy = 0
+        calendar.next_turn_to_act = calendar.current_turn
+        calendar.energy = calendar.current_turn - calendar.next_turn_to_act
         scene.cm.add(DayBegan(entity=core.get_id("calendar"), day=30))
 
 
