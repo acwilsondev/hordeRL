@@ -21,6 +21,7 @@ from horderl.components.structure import Structure
 from horderl.content.attacks import stab
 from horderl.content.states import help_animation
 from horderl.i18n import t
+from horderl.systems.house_structure_system import get_house_structure_tiles
 
 
 def run(scene) -> None:
@@ -152,7 +153,7 @@ def _handle_house_damage(
     scene, action: AttackAction, house_structure, damage: int
 ) -> None:
     # Assumes house_structure entities are valid combat targets.
-    for entity in house_structure.get_all():
+    for entity in get_house_structure_tiles(house_structure):
         _handle_entity_damage(scene, action, entity, damage)
 
 
