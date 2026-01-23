@@ -6,7 +6,7 @@ from engine import GameScene
 from engine.logging import get_logger
 from horderl.components.actors.hordeling_spawner import HordelingSpawner
 from horderl.components.events.die_events import Die
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.wrath_effect import WrathEffect
 
 
@@ -20,7 +20,12 @@ def _trigger_wrath(scene: GameScene, effect: WrathEffect) -> None:
         scene.cm.delete(spawner.entity)
 
     effect._log_info("Obliterating hordelings")
-    hordelings = [h.entity for h in scene.cm.get(HordelingTag)]
+    hordelings = [
+        tag.entity
+        for tag in scene.cm.get(
+            Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+        )
+    ]
     for hordeling in hordelings:
         scene.cm.add(Die(entity=hordeling, killer=scene.player))
     scene.cm.delete_component(effect)

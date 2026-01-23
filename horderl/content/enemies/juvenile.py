@@ -23,7 +23,7 @@ from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 
 
 def make_juvenile(x, y):
@@ -45,7 +45,7 @@ def make_juvenile(x, y):
         Attributes(entity=entity_id, hp=1, max_hp=1),
         StandardAttack(entity=entity_id, damage=1),
         Material(entity=entity_id, blocks=True, blocks_sight=False),
-        HordelingTag(entity=entity_id),
+        Tag(entity=entity_id, tag_type=TagType.HORDELING),
         Move(entity=entity_id),
         PathfinderCost(entity=entity_id, cost=5),
         Stomach(entity=entity_id),

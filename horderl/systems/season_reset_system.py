@@ -79,8 +79,7 @@ from horderl.components.season_reset_listeners.upgrade_houses import (
 )
 from horderl.components.serialization.save_game import SaveGame
 from horderl.components.tags.crop_info import CropInfo
-from horderl.components.tags.peasant_tag import PeasantTag
-from horderl.components.tags.tree_tag import TreeTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.tax_value import TaxValue
 from horderl.components.weather.freeze_water import FreezeWater
 from horderl.components.weather.weather import Weather
@@ -268,7 +267,9 @@ def _reset_heal_counter(listener: HealOnDally) -> None:
 
 
 def _move_peasants_out(scene: GameScene, season: str) -> None:
-    peasants = scene.cm.get(PeasantTag)
+    peasants = scene.cm.get(
+        Tag, query=lambda tag: tag.tag_type == TagType.PEASANT
+    )
     for peasant in peasants:
         farm_plots = scene.cm.get(
             FarmedBy,
@@ -300,10 +301,12 @@ def _rebuild_house(scene: GameScene, listener: Rebuilder) -> None:
             scene.cm.delete(listener.entity)
 
 
-def _get_living_residents(scene: GameScene, house_id: int) -> List[PeasantTag]:
+def _get_living_residents(scene: GameScene, house_id: int) -> List[Tag]:
     resident: Resident = scene.cm.get_one(Resident, entity=house_id)
-    peasants: List[PeasantTag] = scene.cm.get(
-        PeasantTag, query=lambda pt: pt.entity == resident.resident
+    peasants: List[Tag] = scene.cm.get(
+        Tag,
+        query=lambda tag: tag.tag_type == TagType.PEASANT
+        and tag.entity == resident.resident,
     )
     return peasants
 
@@ -399,7 +402,9 @@ def _spawn_saplings(
 
     tree_coords = [
         scene.cm.get_one(Coordinates, entity=tt.entity)
-        for tt in scene.cm.get(TreeTag)
+        for tt in scene.cm.get(
+            Tag, query=lambda tag: tag.tag_type == TagType.TREE
+        )
         if random.randint(0, 500) < weather.seasonal_norm
     ]
 

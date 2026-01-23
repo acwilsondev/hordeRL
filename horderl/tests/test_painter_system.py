@@ -14,7 +14,7 @@ from horderl.components.brains.painters.create_hordeling_actor import (
     PlaceHordelingController,
 )
 from horderl.components.pickup_gold import GoldPickup
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.content.cursor import make_cursor
 from horderl.systems.debug import painter_system
 
@@ -48,7 +48,9 @@ def test_painter_system_spawns_hordeling_at_cursor():
 
     painter_system.paint_at_cursor(scene, painter)
 
-    hordeling_tags = scene.cm.get(HordelingTag)
+    hordeling_tags = scene.cm.get(
+        Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+    )
     assert len(hordeling_tags) == 1
     coords = scene.cm.get_one(Coordinates, entity=hordeling_tags[0].entity)
     assert (coords.x, coords.y) == (7, 11)

@@ -7,7 +7,7 @@ from ..components import Attributes
 from ..components.abilities.thwack_ability import ThwackAbility
 from ..components.brains.dizzy_brain import DizzyBrain
 from ..components.population import Population
-from ..components.tags.hordeling_tag import HordelingTag
+from ..components.tags.tag import Tag, TagType
 from ..constants import PLAYER_ID
 
 
@@ -70,7 +70,11 @@ class HordelingBar(Bar):
     mg_color: tuple = palettes.BLOOD
 
     def update(self, scene, dt_ms: int):
-        hordelings = len(scene.cm.get(HordelingTag))
+        hordelings = len(
+            scene.cm.get(
+                Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+            )
+        )
         self.value = hordelings
         self.max_value = hordelings
 

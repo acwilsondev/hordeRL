@@ -25,7 +25,7 @@ from horderl.components.season_reset_listeners.save_on_season import (
     SaveOnSeasonReset,
 )
 from horderl.components.serialization.save_game import SaveGame
-from horderl.components.tags.peasant_tag import PeasantTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.tags.town_center_flag import TownCenterFlag
 
 
@@ -53,7 +53,9 @@ def run(scene: GameScene) -> None:
 
 
 def _move_peasants_out(scene: GameScene) -> None:
-    peasants = scene.cm.get(PeasantTag)
+    peasants = scene.cm.get(
+        Tag, query=lambda tag: tag.tag_type == TagType.PEASANT
+    )
     for peasant in peasants:
         farm_plots = scene.cm.get(
             FarmedBy,

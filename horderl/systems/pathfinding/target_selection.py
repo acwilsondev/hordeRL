@@ -23,7 +23,7 @@ from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluatorType,
 )
 from horderl.components.tags.crop_info import CropInfo
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.tags.water_tag import WaterTag
 from horderl.components.target_value import TargetValue
 
@@ -177,7 +177,7 @@ def get_target_values(
     Components Consumed:
         - TargetValue for base target scores.
         - CropInfo for crop multipliers.
-        - HordelingTag for ally targeting.
+        - Tag data for ally targeting.
 
     Side Effects:
         None.
@@ -189,8 +189,13 @@ def get_target_values(
             _get_crop_evaluation(scene, tv.entity, tv.value)
             for tv in scene.cm.get(TargetValue)
         ]
-    if evaluator.evaluator_type is TargetEvaluatorType.ALLY:
-        return [(tv.entity, 1) for tv in scene.cm.get(HordelingTag)]
+    if isinstance(evaluator, AllyTargetEvaluator):
+        return [
+            (tv.entity, 1)
+            for tv in scene.cm.get(
+                Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+            )
+        ]
     raise ValueError(
         f"Unsupported target evaluator: {type(evaluator).__name__}"
     )

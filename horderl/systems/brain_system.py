@@ -62,7 +62,7 @@ from horderl.components.pathfinding.target_evaluation.target_evaluator import (
 )
 from horderl.components.sellable import Sellable
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.content.attacks import stab
 from horderl.content.states import confused_animation, sleep_animation
 from horderl.content.terrain import roads
@@ -112,6 +112,14 @@ def run(scene) -> None:
     """
     for brain in get_active_brains(scene):
         run_brain(scene, brain)
+
+
+def _entity_has_tag(scene, entity: int, tag_type: TagType) -> bool:
+    # Assumes entities may have zero or multiple tag components.
+    return any(
+        tag.tag_type == tag_type
+        for tag in scene.cm.get_all(Tag, entity=entity)
+    )
 
 
 def get_active_brains(scene) -> List[Brain]:
@@ -216,7 +224,7 @@ def run_stationary_attack_actor(scene, brain: StationaryAttackActor) -> None:
     coords = scene.cm.get_one(Coordinates, entity=brain.entity)
     targets = scene.cm.get(
         Coordinates,
-        query=lambda c: scene.cm.get_one(HordelingTag, entity=c.entity)
+        query=lambda c: _entity_has_tag(scene, c.entity, TagType.HORDELING)
         and c.distance_from(coords) <= 2,
         project=lambda c: c.entity,
     )
@@ -1122,8 +1130,17 @@ def _next_enemy(scene, brain: RangedAttackActor) -> None:
 
 def _get_next_enemy(scene, brain: RangedAttackActor) -> int:
     """# Enemy cycling is based on visible hordeling IDs."""
-    current_target = scene.cm.get_one(HordelingTag, entity=brain.target)
-    all_enemies = scene.cm.get(HordelingTag)
+    current_target = next(
+        (
+            tag
+            for tag in scene.cm.get_all(Tag, entity=brain.target)
+            if tag.tag_type == TagType.HORDELING
+        ),
+        None,
+    )
+    all_enemies = scene.cm.get(
+        Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+    )
     visible_enemies = [
         e
         for e in all_enemies

@@ -57,7 +57,7 @@ from horderl.components.brains.ability_actors.sell_thing_actor import (
     SellThingActor,
 )
 from horderl.components.brains.fast_forward_actor import FastForwardBrain
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.wants_to_show_debug import WantsToShowDebug
 from horderl.content.attacks import thwack_animation, thwack_dizzy_animation
 from horderl.content.cursor import make_cursor
@@ -198,11 +198,11 @@ def _apply_null(scene, _dispatcher_id: int, _ability: NullAbility) -> None:
 
 def _apply_shoot(scene, dispatcher_id: int, ability: ShootAbility) -> None:
     hordelings = [
-        entity
-        for entity in scene.cm.get(HordelingTag)
-        if is_visible(
-            scene, scene.cm.get_one(Coordinates, entity=entity.entity)
+        tag
+        for tag in scene.cm.get(
+            Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
         )
+        if is_visible(scene, scene.cm.get_one(Coordinates, entity=tag.entity))
     ]
     if not hordelings:
         _handle_confused(scene, ability)
@@ -212,7 +212,7 @@ def _apply_shoot(scene, dispatcher_id: int, ability: ShootAbility) -> None:
 
 def _handle_shoot(
     scene,
-    hordelings: list[HordelingTag],
+    hordelings: list[Tag],
     dispatcher_id: int,
     ability: ShootAbility,
 ) -> None:
