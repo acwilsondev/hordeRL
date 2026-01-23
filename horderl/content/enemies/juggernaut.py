@@ -21,8 +21,9 @@ from horderl.components.pathfinding.cost_mapper import (
     CostMapper,
     CostMapperType,
 )
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
@@ -54,7 +55,10 @@ def make_juggernaut(x, y):
         Move(entity=entity_id, energy_cost=EnergyActor.VERY_SLOW),
         KnockbackAttack(entity=entity_id),
         PathfinderCost(entity=entity_id, cost=5),
-        HordelingTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.HORDELING,
+        ),
         Stomach(entity=entity_id),
     ]
 

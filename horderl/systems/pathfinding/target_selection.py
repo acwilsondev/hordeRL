@@ -18,17 +18,9 @@ from horderl.components.pathfinding.cost_mapper import (
     CostMapper,
     CostMapperType,
 )
-from horderl.components.pathfinding.target_evaluation.ally_target_evaluator import (
-    AllyTargetEvaluator,
-)
-from horderl.components.pathfinding.target_evaluation.high_crop_target_evaluator import (
-    HighCropTargetEvaluator,
-)
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
-)
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.tags.crop_info import CropInfo
 from horderl.components.tags.hordeling_tag import HordelingTag
@@ -190,14 +182,14 @@ def get_target_values(
     Side Effects:
         None.
     """
-    if isinstance(evaluator, HordelingTargetEvaluator):
+    if evaluator.evaluator_type is TargetEvaluatorType.HORDELING:
         return [(tv.entity, tv.value) for tv in scene.cm.get(TargetValue)]
-    if isinstance(evaluator, HighCropTargetEvaluator):
+    if evaluator.evaluator_type is TargetEvaluatorType.HIGH_CROP:
         return [
             _get_crop_evaluation(scene, tv.entity, tv.value)
             for tv in scene.cm.get(TargetValue)
         ]
-    if isinstance(evaluator, AllyTargetEvaluator):
+    if evaluator.evaluator_type is TargetEvaluatorType.ALLY:
         return [(tv.entity, 1) for tv in scene.cm.get(HordelingTag)]
     raise ValueError(
         f"Unsupported target evaluator: {type(evaluator).__name__}"

@@ -19,8 +19,9 @@ from horderl.components.pathfinding.cost_mapper import (
     CostMapper,
     CostMapperType,
 )
-from horderl.components.pathfinding.target_evaluation.high_crop_target_evaluator import (
-    HighCropTargetEvaluator,
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
@@ -49,7 +50,10 @@ def make_pirhana(x, y):
         Move(entity=entity_id, energy_cost=EnergyActor.FAST),
         PathfinderCost(entity=entity_id, cost=5),
         Stomach(entity=entity_id),
-        HighCropTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.HIGH_CROP,
+        ),
     ]
 
     if random.randint(1, 10) == 10:
