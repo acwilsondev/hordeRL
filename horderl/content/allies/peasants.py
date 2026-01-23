@@ -19,8 +19,9 @@ from horderl.components.events.peasant_events import PeasantAdded
 from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.movement.move import Move
-from horderl.components.pathfinding.peasant_cost_mapper import (
-    PeasantCostMapper,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
 from horderl.components.relationships.residence import Residence
 from horderl.components.tags.peasant_tag import PeasantTag
@@ -61,6 +62,6 @@ def make_peasant(house_id, x, y) -> Entity:
         PeasantActor(entity=entity_id),
         PeasantAdded(entity=entity_id),
         OnDieEmitPeasantDied(entity=entity_id),
-        PeasantCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.PEASANT),
     ]
     return entity_id, components

@@ -14,7 +14,10 @@ from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
+)
 from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
     HordelingTargetEvaluator,
 )
@@ -31,7 +34,7 @@ def make_juvenile(x, y):
         Faction(entity=entity_id, faction=Faction.Options.MONSTER),
         Corpse(entity=entity_id),
         DefaultActiveActor(entity=entity_id),
-        NormalCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.NORMAL),
         Appearance(
             entity=entity_id,
             symbol="h",
