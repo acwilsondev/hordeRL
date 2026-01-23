@@ -91,6 +91,7 @@ from horderl.content.terrain.roads import connect_point_to_road_network
 from horderl.content.terrain.saplings import make_sapling
 from horderl.i18n import t
 from horderl.systems.brain_system import is_buildable
+from horderl.systems.house_structure_system import get_house_structure_tiles
 
 
 def run(scene: GameScene) -> None:
@@ -442,7 +443,7 @@ def _upgrade_houses(scene: GameScene) -> None:
     house_structure = choice(house_structures)
     upgrade = [palettes.WOOD, palettes.STONE][house_structure.upgrade_level]
 
-    walls = house_structure.get_all()
+    walls = get_house_structure_tiles(house_structure)
     for wall in walls:
         attributes = scene.cm.get_one(Attributes, entity=wall)
         attributes.hp = attributes.max_hp = attributes.max_hp + 20
