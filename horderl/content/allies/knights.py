@@ -13,8 +13,9 @@ from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.target_evaluation.ally_target_evaluator import (
-    AllyTargetEvaluator,
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.sellable import Sellable
 from horderl.components.tax_value import TaxValue
@@ -41,7 +42,10 @@ def make_knight(x, y):
         Material(entity=entity_id, blocks=False, blocks_sight=False),
         PathfinderCost(entity=entity_id, cost=40),
         Sellable(entity=entity_id, value=0),
-        AllyTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.ALLY,
+        ),
         TaxValue(entity=entity_id, value=TaxValue.KNIGHT),
     ]
 

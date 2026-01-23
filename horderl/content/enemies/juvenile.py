@@ -15,8 +15,9 @@ from horderl.components.material import Material
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
 from horderl.components.tags.hordeling_tag import HordelingTag
@@ -45,7 +46,10 @@ def make_juvenile(x, y):
         Move(entity=entity_id),
         PathfinderCost(entity=entity_id, cost=5),
         Stomach(entity=entity_id),
-        HordelingTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.HORDELING,
+        ),
     ]
 
     if random.randint(1, 10) == 10:

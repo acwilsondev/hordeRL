@@ -56,11 +56,9 @@ from horderl.components.events.quit_game_events import QuitGame
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
 from horderl.components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from horderl.components.pathfinding.cost_mapper import CostMapper
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
-)
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.sellable import Sellable
 from horderl.components.stomach import Stomach
@@ -174,7 +172,9 @@ def run_default_active_actor(scene, brain: DefaultActiveActor) -> None:
     target_evaluator = scene.cm.get_one(TargetEvaluator, entity=brain.entity)
     if not target_evaluator:
         brain._log_warning("missing target evaluator")
-        target_evaluator = HordelingTargetEvaluator()
+        target_evaluator = TargetEvaluator(
+            evaluator_type=TargetEvaluatorType.HORDELING
+        )
 
     entity_values = get_target_values(scene, target_evaluator)
 
