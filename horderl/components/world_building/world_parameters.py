@@ -47,7 +47,3 @@ class WorldParameters(Component):
     world_seed: int | str = field(default_factory=time.time_ns)
 
     flower_color = None
-
-    def get_file_name(self) -> str:
-        """Return a file-friendly world name derived from the title."""
-        return self.world_name.replace(" ", "-")

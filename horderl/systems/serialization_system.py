@@ -8,6 +8,7 @@ from horderl.components.serialization.load_game import LoadGame
 from horderl.components.serialization.save_game import SaveGame
 from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.i18n import t
+from horderl.systems.world_building import format_world_filename
 
 
 def run(scene: GameScene) -> None:
@@ -90,7 +91,7 @@ def save_game(scene: GameScene, request: SaveGame) -> None:
     params = scene.cm.get_one(WorldParameters, entity=core.get_id("world"))
     scene.save_game(
         scene.cm.get_serial_form(),
-        f"./{params.get_file_name()}.world",
+        f"./{format_world_filename(params.world_name)}.world",
         request.extra,
     )
     logger.info("save complete")
