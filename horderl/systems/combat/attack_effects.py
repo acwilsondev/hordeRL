@@ -3,6 +3,9 @@ from __future__ import annotations
 from typing import Callable, Dict
 
 from engine.components import Coordinates
+from horderl.components.attacks.attack_effects.attack_effect import (
+    AttackEffectType,
+)
 from horderl.components.attacks.attack_effects.attack_effect_resolution import (
     AttackEffectResolution,
 )
@@ -27,8 +30,8 @@ def run(scene) -> None:
         - Adds combat animation components.
         - Deletes processed effect resolution components.
     """
-    handlers: Dict[str, EffectHandler] = {
-        "knockback": _apply_knockback,
+    handlers: Dict[AttackEffectType, EffectHandler] = {
+        AttackEffectType.KNOCKBACK: _apply_knockback,
     }
 
     for effect in list(scene.cm.get(AttackEffectResolution)):
@@ -37,7 +40,8 @@ def run(scene) -> None:
             handler(scene, effect)
         else:
             effect._log_warning(
-                f"unknown attack effect type '{effect.effect_type}'"
+                "unknown attack effect type "
+                f"'{getattr(effect.effect_type, 'value', effect.effect_type)}'"
             )
         scene.cm.delete_component(effect)
 
