@@ -16,7 +16,7 @@ from horderl.components.events.attack_started_events import AttackStarted
 from horderl.components.events.die_events import Die
 from horderl.components.events.new_day_event import DayBegan
 from horderl.components.season_reset_listeners.reset_season import ResetSeason
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.world_beauty import WorldBeauty
 from horderl.content.explosion import make_explosion
 from horderl.content.spawners.hordeling_spawner_spawner import (
@@ -204,7 +204,9 @@ def still_under_attack(scene) -> bool:
     return (
         scene.cm.get(HordelingSpawner)
         or scene.cm.get(HordelingSpawner)
-        or [tag for tag in scene.cm.get(HordelingTag)]
+        or scene.cm.get(
+            Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+        )
     )
 
 

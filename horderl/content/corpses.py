@@ -8,7 +8,7 @@ from engine.constants import PRIORITY_LOW
 from .. import palettes
 from ..components import Appearance
 from ..components.events.delete_event import Delete
-from ..components.tags.corpse_tag import CorpseTag
+from ..components.tags.tag import Tag, TagType
 
 
 def make_corpse(
@@ -22,7 +22,7 @@ def make_corpse(
             Appearance(
                 entity=entity_id, symbol=symbol, color=color, bg_color=bg_color
             ),
-            CorpseTag(entity=entity_id),
+            Tag(entity=entity_id, tag_type=TagType.CORPSE),
             Coordinates(
                 entity=entity_id,
                 x=x,
@@ -47,7 +47,7 @@ def make_blood_pool(x, y, color):
                 color=color,
                 bg_color=palettes.BACKGROUND,
             ),
-            CorpseTag(entity=entity_id),
+            Tag(entity=entity_id, tag_type=TagType.CORPSE),
             Coordinates(
                 entity=entity_id,
                 x=x,

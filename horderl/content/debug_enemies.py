@@ -10,7 +10,7 @@ from ..components.death_listeners.drop_gold import DropGold
 from ..components.death_listeners.npc_corpse import Corpse
 from ..components.faction import Faction
 from ..components.material import Material
-from ..components.tags.hordeling_tag import HordelingTag
+from ..components.tags.tag import Tag, TagType
 
 
 def make_debug_hordeling(x, y):
@@ -30,7 +30,7 @@ def make_debug_hordeling(x, y):
         Attributes(entity=entity_id, hp=1, max_hp=1),
         Attack(entity=entity_id, damage=1),
         Material(entity=entity_id, blocks=True, blocks_sight=False),
-        HordelingTag(entity=entity_id),
+        Tag(entity=entity_id, tag_type=TagType.HORDELING),
         DropGold(entity=entity_id),
     ]
 

@@ -14,33 +14,16 @@ from horderl.components import Attributes
 from horderl.components.material import Material
 from horderl.components.movement.drain_on_enter import DrainOnEnter
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.cost_mapper import CostMapper
-from horderl.components.pathfinding.juggernaut_cost_mapper import (
-    StraightLineCostMapper,
-)
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.peasant_cost_mapper import (
-    PeasantCostMapper,
-)
-from horderl.components.pathfinding.road_cost_mapper import RoadCostMapper
-from horderl.components.pathfinding.simplex_cost_mapper import (
-    SimplexCostMapper,
-)
-from horderl.components.pathfinding.stealthy_cost_map import StealthyCostMapper
-from horderl.components.pathfinding.target_evaluation.ally_target_evaluator import (
-    AllyTargetEvaluator,
-)
-from horderl.components.pathfinding.target_evaluation.high_crop_target_evaluator import (
-    HighCropTargetEvaluator,
-)
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.tags.crop_info import CropInfo
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.tags.water_tag import WaterTag
 from horderl.components.target_value import TargetValue
 
@@ -57,33 +40,33 @@ def get_cost_map(scene, cost_mapper: CostMapper | None) -> np.ndarray:
         numpy.ndarray: Cost grid for pathfinding decisions.
 
     Components Consumed:
-        - CostMapper subclasses such as NormalCostMapper or RoadCostMapper.
+        - CostMapper configured with a CostMapperType.
         - Coordinates, PathfinderCost, DrainOnEnter, Attributes, WaterTag,
           Material, Entity (depending on mapper type).
 
     Side Effects:
         None.
     """
-    mapper = cost_mapper or NormalCostMapper()
+    mapper = cost_mapper or CostMapper(mapper_type=CostMapperType.NORMAL)
     return _build_cost_map(scene, mapper)
 
 
 def _build_cost_map(scene, cost_mapper: CostMapper) -> np.ndarray:
     # Assumes the mapper instance indicates the mapping strategy.
-    if isinstance(cost_mapper, NormalCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.NORMAL:
         return _build_normal_cost_map(scene)
-    if isinstance(cost_mapper, StealthyCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.STEALTHY:
         return _build_stealthy_cost_map(scene)
-    if isinstance(cost_mapper, PeasantCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.PEASANT:
         return _build_peasant_cost_map(scene)
-    if isinstance(cost_mapper, RoadCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.ROAD:
         return _build_road_cost_map(scene)
-    if isinstance(cost_mapper, SimplexCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.SIMPLEX:
         return _build_simplex_cost_map(scene)
-    if isinstance(cost_mapper, StraightLineCostMapper):
+    if cost_mapper.mapper_type == CostMapperType.STRAIGHT_LINE:
         return _build_straight_line_cost_map(scene)
     raise ValueError(
-        f"Unsupported cost mapper type: {type(cost_mapper).__name__}"
+        f"Unsupported cost mapper type: {cost_mapper.mapper_type}"
     )
 
 
@@ -194,20 +177,25 @@ def get_target_values(
     Components Consumed:
         - TargetValue for base target scores.
         - CropInfo for crop multipliers.
-        - HordelingTag for ally targeting.
+        - Tag data for ally targeting.
 
     Side Effects:
         None.
     """
-    if isinstance(evaluator, HordelingTargetEvaluator):
+    if evaluator.evaluator_type is TargetEvaluatorType.HORDELING:
         return [(tv.entity, tv.value) for tv in scene.cm.get(TargetValue)]
-    if isinstance(evaluator, HighCropTargetEvaluator):
+    if evaluator.evaluator_type is TargetEvaluatorType.HIGH_CROP:
         return [
             _get_crop_evaluation(scene, tv.entity, tv.value)
             for tv in scene.cm.get(TargetValue)
         ]
     if isinstance(evaluator, AllyTargetEvaluator):
-        return [(tv.entity, 1) for tv in scene.cm.get(HordelingTag)]
+        return [
+            (tv.entity, 1)
+            for tv in scene.cm.get(
+                Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+            )
+        ]
     raise ValueError(
         f"Unsupported target evaluator: {type(evaluator).__name__}"
     )

@@ -56,15 +56,13 @@ from horderl.components.events.quit_game_events import QuitGame
 from horderl.components.events.show_help_dialogue import ShowHelpDialogue
 from horderl.components.pathfinding.breadcrumb_tracker import BreadcrumbTracker
 from horderl.components.pathfinding.cost_mapper import CostMapper
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
-)
 from horderl.components.pathfinding.target_evaluation.target_evaluator import (
     TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.sellable import Sellable
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.content.attacks import stab
 from horderl.content.states import confused_animation, sleep_animation
 from horderl.content.terrain import roads
@@ -114,6 +112,14 @@ def run(scene) -> None:
     """
     for brain in get_active_brains(scene):
         run_brain(scene, brain)
+
+
+def _entity_has_tag(scene, entity: int, tag_type: TagType) -> bool:
+    # Assumes entities may have zero or multiple tag components.
+    return any(
+        tag.tag_type == tag_type
+        for tag in scene.cm.get_all(Tag, entity=entity)
+    )
 
 
 def get_active_brains(scene) -> List[Brain]:
@@ -174,7 +180,9 @@ def run_default_active_actor(scene, brain: DefaultActiveActor) -> None:
     target_evaluator = scene.cm.get_one(TargetEvaluator, entity=brain.entity)
     if not target_evaluator:
         brain._log_warning("missing target evaluator")
-        target_evaluator = HordelingTargetEvaluator()
+        target_evaluator = TargetEvaluator(
+            evaluator_type=TargetEvaluatorType.HORDELING
+        )
 
     entity_values = get_target_values(scene, target_evaluator)
 
@@ -216,7 +224,7 @@ def run_stationary_attack_actor(scene, brain: StationaryAttackActor) -> None:
     coords = scene.cm.get_one(Coordinates, entity=brain.entity)
     targets = scene.cm.get(
         Coordinates,
-        query=lambda c: scene.cm.get_one(HordelingTag, entity=c.entity)
+        query=lambda c: _entity_has_tag(scene, c.entity, TagType.HORDELING)
         and c.distance_from(coords) <= 2,
         project=lambda c: c.entity,
     )
@@ -1122,8 +1130,17 @@ def _next_enemy(scene, brain: RangedAttackActor) -> None:
 
 def _get_next_enemy(scene, brain: RangedAttackActor) -> int:
     """# Enemy cycling is based on visible hordeling IDs."""
-    current_target = scene.cm.get_one(HordelingTag, entity=brain.target)
-    all_enemies = scene.cm.get(HordelingTag)
+    current_target = next(
+        (
+            tag
+            for tag in scene.cm.get_all(Tag, entity=brain.target)
+            if tag.tag_type == TagType.HORDELING
+        ),
+        None,
+    )
+    all_enemies = scene.cm.get(
+        Tag, query=lambda tag: tag.tag_type == TagType.HORDELING
+    )
     visible_enemies = [
         e
         for e in all_enemies
