@@ -9,7 +9,7 @@ from horderl.components.actions.eat_action import EatAction
 from horderl.components.actions.tunnel_to_point import TunnelToPoint
 from horderl.components.events.attack_events import AttackFinished
 from horderl.components.stomach import Stomach
-from horderl.components.tags.peasant_tag import PeasantTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.systems.attack_action_system import run as run_attack_actions
 from horderl.systems.eat_action_system import run as run_eat_actions
 from horderl.systems.tunnel_to_point_system import run as run_tunnel_actions
@@ -52,7 +52,7 @@ def test_eat_action_system_stashes_peasant_and_sets_stomach():
     scene.cm.add(
         Entity(entity=eater_id, name="eater"),
         Entity(entity=target_id, name="peasant"),
-        PeasantTag(entity=target_id),
+        Tag(entity=target_id, tag_type=TagType.PEASANT),
         stomach,
         EatAction(entity=eater_id, target=target_id),
     )

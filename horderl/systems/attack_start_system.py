@@ -35,7 +35,7 @@ from horderl.components.season_reset_listeners.move_player_to_town_center import
     MovePlayerToTownCenter,
 )
 from horderl.components.tags.crop_info import CropInfo
-from horderl.components.tags.peasant_tag import PeasantTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.tags.town_center_flag import TownCenterFlag
 from horderl.components.weather.freeze_water import FreezeWater
 from horderl.content.farmsteads.crops import make_crops
@@ -125,12 +125,14 @@ def _reset_heal_counter(healer: HealOnDally) -> None:
 
 def _move_peasants_in(scene: GameScene, mover: MovePeasantsIn) -> None:
     mover._log_info("moving peasants into homes")
-    peasants = scene.cm.get(PeasantTag)
+    peasants = scene.cm.get(
+        Tag, query=lambda tag: tag.tag_type == TagType.PEASANT
+    )
     for peasant in peasants:
         _move_peasant_home(scene, peasant)
 
 
-def _move_peasant_home(scene: GameScene, peasant: PeasantTag) -> None:
+def _move_peasant_home(scene: GameScene, peasant: Tag) -> None:
     home_address = scene.cm.get_one(Residence, entity=peasant.entity)
     possible_homes = scene.cm.get(HouseStructure)
     correct_home = next(

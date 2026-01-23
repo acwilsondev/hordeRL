@@ -24,7 +24,7 @@ from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator
     HordelingTargetEvaluator,
 )
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 
 
 def make_juggernaut(x, y):
@@ -46,7 +46,7 @@ def make_juggernaut(x, y):
         Attributes(entity=entity_id, hp=3, max_hp=3),
         SiegeAttack(entity=entity_id, damage=2),
         Material(entity=entity_id, blocks=True, blocks_sight=False),
-        HordelingTag(entity=entity_id),
+        Tag(entity=entity_id, tag_type=TagType.HORDELING),
         Move(entity=entity_id, energy_cost=EnergyActor.VERY_SLOW),
         KnockbackAttack(entity=entity_id),
         PathfinderCost(entity=entity_id, cost=5),

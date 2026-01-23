@@ -23,7 +23,7 @@ from horderl.components.pathfinding.peasant_cost_mapper import (
     PeasantCostMapper,
 )
 from horderl.components.relationships.residence import Residence
-from horderl.components.tags.peasant_tag import PeasantTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.target_value import PEASANT, TargetValue
 
 peasant_description = (
@@ -43,7 +43,7 @@ def make_peasant(house_id, x, y) -> Entity:
         ),
         Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_MEDIUM),
         Faction(entity=entity_id, faction=Faction.Options.PEASANT),
-        PeasantTag(entity=entity_id),
+        Tag(entity=entity_id, tag_type=TagType.PEASANT),
         Appearance(
             entity=entity_id,
             symbol="p",

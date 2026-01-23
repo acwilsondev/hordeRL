@@ -4,7 +4,7 @@ from engine.components.entity import Entity
 from horderl.components.actors.hordeling_spawner import HordelingSpawner
 from horderl.components.events.die_events import Die
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.wrath_effect import WrathEffect
 from horderl.systems.stomach_system import clear_stomach, dump_stomach
 from horderl.systems.wrath_system import run as run_wrath_system
@@ -22,7 +22,7 @@ def test_wrath_system_purges_spawners_and_hordelings():
     hordeling_entity = 20
     scene.cm.add(
         HordelingSpawner(entity=spawner_entity),
-        HordelingTag(entity=hordeling_entity),
+        Tag(entity=hordeling_entity, tag_type=TagType.HORDELING),
         WrathEffect(entity=1),
     )
 
