@@ -1,22 +1,14 @@
-from calendar import Calendar
 from dataclasses import dataclass
 
-from engine import core
 from engine.components import EnergyActor
-from engine.core import log_debug
-from horderl.components.actors.calendar_actor import Calendar
-from horderl.components.events.new_day_event import DayBegan
 
 
 @dataclass
 class FastForward(EnergyActor):
-    energy_cost: int = EnergyActor.INSTANT
+    """
+    Event actor that advances the calendar to a fixed day.
 
-    @log_debug(__name__)
-    def act(self, scene):
-        calendar = scene.cm.get_one(Calendar, entity=core.get_id("calendar"))
-        if calendar:
-            calendar.day = 30
-            calendar.energy = 0
-            scene.cm.add(DayBegan(entity=core.get_id("calendar"), day=30))
-        scene.cm.delete_component(self)
+    This component fast-forwards the game calendar and triggers a new day event.
+    """
+
+    energy_cost: int = EnergyActor.INSTANT

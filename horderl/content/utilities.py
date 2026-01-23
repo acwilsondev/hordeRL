@@ -17,6 +17,7 @@ from ..components.season_reset_listeners.upgrade_houses import UpgradeHouse
 from ..components.weather.freeze_water import FreezeWater
 from ..components.weather.snow_fall import SnowFall
 from ..components.weather.weather import Weather
+from ..i18n import t
 
 
 def make_calendar():
@@ -26,7 +27,7 @@ def make_calendar():
         [
             Entity(id=entity_id, entity=entity_id, name="calendar"),
             AnnounceGameStart(entity=entity_id),
-            Calendar(entity=entity_id),
+            Calendar(entity=entity_id, status=t("status.peacetime")),
             ResetHealth(entity=entity_id),
             UpgradeHouse(entity=entity_id),
             AddFarmstead(entity=entity_id),

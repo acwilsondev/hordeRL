@@ -10,9 +10,7 @@ from horderl.components.serialization.load_game import LoadGame
 from horderl.components.sound.battle_music import BattleMusic
 from horderl.components.sound.start_music import StartMusic
 from horderl.components.world_beauty import WorldBeauty
-from horderl.components.world_building.set_worldbuilder_params import (
-    SelectBiome,
-)
+from horderl.components.worldbuilding_control import WorldbuildingControl
 from horderl.constants import PLAYER_ID
 from horderl.content.physics_controller import make_physics_controller
 from horderl.content.tax_handler import make_tax_handler
@@ -40,7 +38,30 @@ from horderl.gui.labels import (
 from horderl.gui.message_box import MessageBox
 from horderl.gui.play_window import PlayWindow
 from horderl.gui.popup_message import PopupMessage
-from horderl.systems import act, control_turns, move
+from horderl.systems import act, control_turns, move, update_senses_system
+from horderl.systems.animation_controller_system import (
+    run as run_animation_controllers,
+)
+from horderl.systems.attack_start_system import run as run_attack_start_system
+from horderl.systems.audio_system import run as run_audio_system
+from horderl.systems.build_world_system import build_world_system
+from horderl.systems.death_listener_system import run as run_death_listeners
+from horderl.systems.die_on_attack_finished_system import (
+    run as run_die_on_attack_finished_system,
+)
+from horderl.systems.event_system import run as run_event_system
+from horderl.systems.flood_holes_system import run as run_flood_holes
+from horderl.systems.movement_event_system import (
+    run as run_movement_event_system,
+)
+from horderl.systems.population_system import run as run_population_system
+from horderl.systems.season_reset_system import run as run_season_reset_system
+from horderl.systems.serialization_system import (
+    run as run_serialization_system,
+)
+from horderl.systems.start_game_system import run as run_start_game_system
+from horderl.systems.weather_system import run as run_weather_system
+from horderl.systems.world_beauty_system import run as run_world_beauty_system
 
 
 class DefendScene(GameScene):
@@ -158,7 +179,7 @@ class DefendScene(GameScene):
             self.cm.add(LoadGame(entity=self.player, file_name=self.from_file))
             self.cm.add(StartGame(entity=self.player))
         else:
-            self.cm.add(SelectBiome(entity=core.get_id("world")))
+            self.cm.add(WorldbuildingControl(entity=core.get_id("world")))
             self.cm.add(*make_tax_handler()[1])
             self.cm.add(*make_calendar()[1])
             self.cm.add(*make_physics_controller()[1])
@@ -208,13 +229,37 @@ class DefendScene(GameScene):
         # as an Updeatable object that performs all initialization it needs to, which is a typical
         # game engine pattern.
         self.logger.debug("==== Beginning DefendScene update at dt=%s", dt_ms)
+        run_serialization_system(self)
+        build_world_system.run(self)  # only runs once due to component gates
+
+        world_building_control = self.cm.get_one(
+            WorldbuildingControl, entity=core.get_id("world")
+        )
+        if world_building_control:
+            # still building the world, nothing else to do
+            return
+
         for updateable in self.cm.get(Updateable):
             self.logger.debug("Updating Updateable: %s", updateable)
             updateable.update(self, dt_ms)
 
         # legacy systems
+        run_animation_controllers(self, dt_ms)
+        run_flood_holes(self)
+        run_audio_system(self)
+        run_weather_system(self)
+        run_death_listeners(self)
+        run_start_game_system(self)
+        run_season_reset_system(self)
+        run_attack_start_system(self)
+        run_population_system(self)
+        run_world_beauty_system(self)
+        run_die_on_attack_finished_system(self)
+        run_event_system(self)
+        run_movement_event_system(self)
         act.run(self)
         move.run(self)
+        update_senses_system.run(self)
         control_turns.run(self)
         self.logger.debug("==== Completed DefendScene update at dt=%s", dt_ms)
 

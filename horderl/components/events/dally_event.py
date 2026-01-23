@@ -1,24 +1,16 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from engine.components.component import Component
-from engine.components.events import Event
 
 
 @dataclass
-class DallyEvent(Event):
-    def notify(self, scene, listener):
-        listener.on_dally(scene)
-
-    def listener_type(self):
-        return DallyListener
-
-
-class DallyListener(Component, ABC):
+class DallyEvent(Component):
     """
-    Trigger when the owning entity takes a step.
+    Emitted when the owning entity dallies.
     """
 
-    @abstractmethod
-    def on_dally(self, scene):
-        raise NotImplementedError()
+
+class DallyListener(Component):
+    """
+    Marker component for entities that react to dally events.
+    """

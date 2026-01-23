@@ -14,6 +14,7 @@ from horderl.engine_adapter import (
 
 from .. import palettes
 from ..components import Appearance
+from ..systems.rendering.appearance_helpers import appearance_to_tile
 
 
 class PlayWindow(GuiElement):
@@ -76,7 +77,7 @@ class PlayWindow(GuiElement):
         for coord in coordinates:
             appearance = self.cm.get_one(Appearance, entity=coord.entity)
             if appearance:
-                appearance_tile = appearance.to_tile()
+                appearance_tile = appearance_to_tile(appearance)
                 if appearance.render_mode == Appearance.RenderMode.NORMAL:
                     hidden_tile = (
                         appearance_tile[0],

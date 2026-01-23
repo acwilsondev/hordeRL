@@ -27,7 +27,6 @@ from ..components.material import Material
 from ..components.movement.heal_on_dally import HealOnDally
 from ..components.movement.move import Move
 from ..components.movement.pickup_gold import PickupGoldOnStep
-from ..components.movement.update_senses_on_move import UpdateSenses
 from ..components.options import Options
 from ..components.season_reset_listeners.move_player_to_town_center import (
     MovePlayerToTownCenter,
@@ -68,7 +67,6 @@ def make_player(x, y, config):
             Move(entity=entity_id),
             Options(entity=entity_id),
             MovePlayerToTownCenter(entity=entity_id),
-            UpdateSenses(entity=entity_id),
             # Abilities
             AbilityTracker(entity=entity_id),
             ThwackAbility(entity=entity_id, count=3, max=3),

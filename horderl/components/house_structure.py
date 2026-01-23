@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import List
 
 from engine.components.component import Component
 from engine.types import EntityId
@@ -7,6 +6,8 @@ from engine.types import EntityId
 
 @dataclass
 class HouseStructure(Component):
+    """Track the entity tiles that make up a house structure."""
+
     house_id: EntityId = 0
     upgrade_level: int = 0
     is_destroyed: bool = False
@@ -18,15 +19,3 @@ class HouseStructure(Component):
     bottom_left: EntityId = 0
     bottom_middle: EntityId = 0
     bottom_right: EntityId = 0
-
-    def get_all(self) -> List[EntityId]:
-        return [
-            self.upper_left,
-            self.upper_middle,
-            self.upper_right,
-            self.middle_left,
-            self.middle_right,
-            self.bottom_left,
-            self.bottom_middle,
-            self.bottom_right,
-        ]

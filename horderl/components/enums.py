@@ -20,7 +20,7 @@ class Intention(str, Enum):
     STEP_NORTH_EAST = "step_north_east"
     STEP_NORTH_WEST = "step_north_west"
     DALLY = "dally"
-    SHOW_DEBUG_SCREEN = "show_debug"
+    SHOW_DEBUG_SCREEN = "wants_to_show_debug"
     SHOW_HELP = "show_help"
 
 

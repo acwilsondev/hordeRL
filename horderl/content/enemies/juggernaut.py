@@ -6,8 +6,9 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_MEDIUM
 from horderl import palettes
 from horderl.components import Appearance, Attributes
-from horderl.components.attacks.attack_effects.knockback_attack import (
-    KnockbackAttack,
+from horderl.components.attacks.attack_effects.attack_effect import (
+    AttackEffect,
+    AttackEffectType,
 )
 from horderl.components.attacks.siege_attack import SiegeAttack
 from horderl.components.brains.default_active_actor import DefaultActiveActor
@@ -17,14 +18,16 @@ from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.juggernaut_cost_mapper import (
-    StraightLineCostMapper,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
 )
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 
 
 def make_juggernaut(x, y):
@@ -36,7 +39,10 @@ def make_juggernaut(x, y):
         Faction(entity=entity_id, faction=Faction.Options.MONSTER),
         Corpse(entity=entity_id),
         DefaultActiveActor(entity=entity_id),
-        StraightLineCostMapper(entity=entity_id),
+        CostMapper(
+            entity=entity_id,
+            mapper_type=CostMapperType.STRAIGHT_LINE,
+        ),
         Appearance(
             entity=entity_id,
             symbol="H",
@@ -46,11 +52,18 @@ def make_juggernaut(x, y):
         Attributes(entity=entity_id, hp=3, max_hp=3),
         SiegeAttack(entity=entity_id, damage=2),
         Material(entity=entity_id, blocks=True, blocks_sight=False),
-        HordelingTag(entity=entity_id),
+        Tag(entity=entity_id, tag_type=TagType.HORDELING),
         Move(entity=entity_id, energy_cost=EnergyActor.VERY_SLOW),
-        KnockbackAttack(entity=entity_id),
+        AttackEffect(
+            entity=entity_id,
+            effect_type=AttackEffectType.KNOCKBACK,
+            parameters={"distance": 1},
+        ),
         PathfinderCost(entity=entity_id, cost=5),
-        HordelingTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.HORDELING,
+        ),
         Stomach(entity=entity_id),
     ]
 

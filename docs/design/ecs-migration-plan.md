@@ -7,7 +7,7 @@
 - Evaluate and optionally adopt `esper` with minimal disruption.
 - Preserve save/load integrity throughout the migration.
 
-## Phase 0: Baseline audit and constraints
+## DONE Phase 0: Baseline audit and constraints
 
 **Purpose:** Establish a shared understanding of current ECS usage and risk areas.
 
@@ -31,6 +31,8 @@
 - Component inventory document exists and is reviewed.
 - High-risk flows are identified with owners.
 
+Done: [doc](./ecs-phase0-audit.md)
+
 ## Phase 1: Flat component contract + boundaries
 
 **Purpose:** Create a stable, data-only component contract without changing behavior.
@@ -39,6 +41,7 @@
 
 - Define the component contract as plain `@dataclass` records:
   - Identity and serialization metadata (dataclass <-> dict stays intact).
+  - Reference: [ECS component contract](./ecs-component-contract.md).
 - Document ID stability rules (creation, reassignment, and load semantics).
 - Write guidance for data-only component design (dataclasses preferred).
 - Confirm ownership boundaries:

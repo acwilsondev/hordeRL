@@ -1,6 +1,12 @@
-from ..events.attack_started_events import AttackStartListener
+from dataclasses import dataclass
+
+from engine.components.component import Component
 
 
-class BattleMusic(AttackStartListener):
-    def on_attack_start(self, scene):
-        scene.sound.play("battle")
+@dataclass
+class BattleMusic(Component):
+    """
+    Configure the music track to play when a battle begins.
+    """
+
+    track_id: str = "battle"

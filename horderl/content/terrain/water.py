@@ -6,15 +6,18 @@ from engine.components.entity import Entity
 from engine.constants import PRIORITY_LOWEST
 from horderl import palettes
 from horderl.components import Appearance
-from horderl.components.animation_controllers.randomized_blinker_animation_controller import (
-    RandomizedBlinkerAnimationController,
+from horderl.components.animation_definitions.randomized_blinker_animation_definition import (
+    RandomizedBlinkerAnimationDefinition,
 )
 from horderl.components.diggable import Diggable
 from horderl.components.flooder import Flooder
 from horderl.components.material import Material
 from horderl.components.movement.drain_on_enter import DrainOnEnter
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.states.move_cost_affectors import DifficultTerrain
+from horderl.components.states.move_cost_affectors import (
+    MoveCostAffector,
+    MoveCostAffectorType,
+)
 from horderl.components.tags.ice_tag import IceTag
 from horderl.components.tags.water_tag import WaterTag
 
@@ -34,11 +37,14 @@ def make_water(x, y, rapidness=5000):
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
             Material(entity=entity_id, blocks=False, blocks_sight=False),
-            DifficultTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.DIFFICULT_TERRAIN,
+            ),
             Diggable(entity=entity_id),
             Flooder(entity=entity_id),
             PathfinderCost(entity=entity_id, cost=10),
-            RandomizedBlinkerAnimationController(
+            RandomizedBlinkerAnimationDefinition(
                 entity=entity_id,
                 new_symbol="~",
                 new_color=palettes.WATER,
@@ -72,11 +78,14 @@ def make_swampy_water(x, y, rapidness):
             ),
             Coordinates(entity=entity_id, x=x, y=y, priority=PRIORITY_LOWEST),
             Material(entity=entity_id, blocks=False, blocks_sight=False),
-            DifficultTerrain(entity=entity_id),
+            MoveCostAffector(
+                entity=entity_id,
+                affector_type=MoveCostAffectorType.DIFFICULT_TERRAIN,
+            ),
             Diggable(entity=entity_id),
             Flooder(entity=entity_id),
             PathfinderCost(entity=entity_id, cost=10),
-            RandomizedBlinkerAnimationController(
+            RandomizedBlinkerAnimationDefinition(
                 entity=entity_id,
                 new_symbol="~",
                 new_color=palettes.GRASS,
@@ -109,9 +118,9 @@ def freeze(scene, eid):
     for component_type in [
         WaterTag,
         Flooder,
-        DifficultTerrain,
+        MoveCostAffector,
         PathfinderCost,
-        RandomizedBlinkerAnimationController,
+        RandomizedBlinkerAnimationDefinition,
         DrainOnEnter,
     ]:
         component = scene.cm.get_one(component_type, entity=eid)

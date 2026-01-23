@@ -1,10 +1,23 @@
-from engine.components import Actor
+from .ability_system import run as run_ability_system
+from .actor_system import run as run_actor_system
+from .attack_action_system import run as run_attack_actions
+from .brain_system import run as run_brain_system
+from .combat.attack_effects import run as run_attack_effects
+from .debug_menu import run as run_debug_menu
+from .eat_action_system import run as run_eat_actions
+from .pathfinding.breadcrumb_system import run as run_breadcrumb_system
+from .tunnel_to_point_system import run as run_tunnel_actions
+from .wrath_system import run as run_wrath_system
 
 
 def run(scene) -> None:
-    for actor in get_actors(scene):
-        actor.act(scene)
-
-
-def get_actors(scene):
-    return [actor for actor in scene.cm.get(Actor) if actor.can_act()]
+    run_attack_actions(scene)
+    run_attack_effects(scene)
+    run_ability_system(scene)
+    run_eat_actions(scene)
+    run_tunnel_actions(scene)
+    run_debug_menu(scene)
+    run_brain_system(scene)
+    run_breadcrumb_system(scene)
+    run_wrath_system(scene)
+    run_actor_system(scene)

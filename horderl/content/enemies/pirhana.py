@@ -15,12 +15,16 @@ from horderl.components.material import Material
 from horderl.components.movement.drain_on_enter import DrainOnEnter
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.target_evaluation.high_crop_target_evaluator import (
-    HighCropTargetEvaluator,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
+)
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 
 
 def make_pirhana(x, y):
@@ -32,7 +36,7 @@ def make_pirhana(x, y):
         Faction(entity=entity_id, faction=Faction.Options.MONSTER),
         Corpse(entity=entity_id),
         DefaultActiveActor(entity=entity_id),
-        NormalCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.NORMAL),
         Appearance(
             entity=entity_id,
             symbol="v",
@@ -42,11 +46,14 @@ def make_pirhana(x, y):
         Attributes(entity=entity_id, hp=1, max_hp=1),
         StandardAttack(entity=entity_id, damage=1),
         Material(entity=entity_id, blocks=True, blocks_sight=False),
-        HordelingTag(entity=entity_id),
+        Tag(entity=entity_id, tag_type=TagType.HORDELING),
         Move(entity=entity_id, energy_cost=EnergyActor.FAST),
         PathfinderCost(entity=entity_id, cost=5),
         Stomach(entity=entity_id),
-        HighCropTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.HIGH_CROP,
+        ),
     ]
 
     if random.randint(1, 10) == 10:

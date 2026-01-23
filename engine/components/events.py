@@ -2,28 +2,38 @@ from abc import abstractmethod
 from dataclasses import dataclass
 
 from engine import GameScene
-from engine.components import EnergyActor
-from engine.core import log_debug
+from engine.components.component import Component
+from engine.logging import get_logger
 
 
 @dataclass
-class Event(EnergyActor):
+class Event(Component):
     """
     Define an event that notifies listeners.
     """
 
-    energy_cost: int = EnergyActor.INSTANT
-
-    @log_debug(__name__)
     def act(self, scene: GameScene) -> None:
-        self._log_info("event")
-        self._before_notify(scene)
-        listeners = scene.cm.get(self.listener_type())
-        for listener in listeners:
-            self.notify(scene, listener)
-        self._after_notify(scene)
-        scene.cm.delete_component(self)
-        self._after_remove(scene)
+        """
+        Dispatch the event to its listeners.
+
+        Args:
+            scene (GameScene): Active scene providing access to the component manager.
+
+        Side Effects:
+            - Notifies all matching listeners.
+            - Deletes the event component from the component manager.
+            - Executes before/after hooks on the event.
+
+        """
+        logger = get_logger(__name__)
+        logger.debug(
+            "Dispatching event",
+            extra={
+                "event_type": type(self).__name__,
+                "entity": self.entity,
+            },
+        )
+        dispatch_event(scene, self)
 
     @abstractmethod
     def listener_type(self):
@@ -52,3 +62,28 @@ class Event(EnergyActor):
 
     def _after_remove(self, scene: GameScene) -> None:
         pass
+
+
+def dispatch_event(scene: GameScene, event: Event) -> None:
+    """
+    Dispatch an event to matching listeners and remove it from the scene.
+
+    Args:
+        scene (GameScene): Scene containing the component manager used for dispatch.
+        event (Event): Event instance to dispatch.
+
+    Side Effects:
+        - Logs the dispatch for the event instance.
+        - Notifies all listeners returned by event.listener_type().
+        - Deletes the event component from the component manager.
+        - Runs before/after notification hooks on the event.
+
+    """
+    event._log_info("event")
+    event._before_notify(scene)
+    listeners = scene.cm.get(event.listener_type())
+    for listener in listeners:
+        event.notify(scene, listener)
+    event._after_notify(scene)
+    scene.cm.delete_component(event)
+    event._after_remove(scene)

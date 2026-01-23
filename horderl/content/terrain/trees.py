@@ -21,7 +21,7 @@ from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
 from horderl.components.sellable import Sellable
-from horderl.components.tags.tree_tag import TreeTag
+from horderl.components.tags.tag import Tag, TagType
 from horderl.components.tree_cut_on_die import TreeCutOnDeath
 
 wall_tree_description = (
@@ -93,7 +93,7 @@ def make_tree(x, y):
         tuple: A tuple containing (entity_id, component_list) where:
             - entity_id (int): The unique identifier for this tree entity
             - component_list (list): A list of components that define the tree's behavior,
-              including Attributes for health, TreeTag for identification, and components
+              including Attributes for health, Tag for identification, and components
               for handling what happens when the tree is cut down
 
     """
@@ -119,7 +119,7 @@ def make_tree(x, y):
                 bg_color=palettes.BACKGROUND,
             ),
             Material(entity=entity_id, blocks=True, blocks_sight=True),
-            TreeTag(entity=entity_id),
+            Tag(entity=entity_id, tag_type=TagType.TREE),
             TerrainChangedOnDeath(entity=entity_id),
             Sellable(entity=entity_id, value=2),
             PathfinderCost(entity=entity_id, cost=20),

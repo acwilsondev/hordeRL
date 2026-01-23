@@ -1,76 +1,26 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from enum import Enum
 
-import tcod
-
-from engine import constants, core
-from engine.components import Coordinates, EnergyActor
+from engine import constants
+from engine.components import EnergyActor
 from horderl.components.brains.brain import Brain
-from horderl.components.enums import Intention
+
+
+class PainterTool(Enum):
+    """
+    Supported debug painter tool selections.
+    """
+
+    GOLD = "gold"
+    HORDELING = "hordeling"
 
 
 @dataclass
-class PainterBrain(Brain, ABC):
+class PainterBrain(Brain):
     """
     Provide a base class for debug object placing controllers.
     """
 
     energy_cost: int = EnergyActor.INSTANT
     cursor: int = constants.INVALID
-
-    def act(self, scene) -> None:
-        key_event = core.get_key_event()
-        if key_event:
-            key_event = key_event.sym
-            intention = KEY_ACTION_MAP.get(key_event, None)
-            if intention in {
-                Intention.STEP_NORTH,
-                Intention.STEP_EAST,
-                Intention.STEP_WEST,
-                Intention.STEP_SOUTH,
-            }:
-                self._move_cursor(scene, intention)
-            if intention is Intention.USE_ABILITY:
-                self._paint(scene)
-            elif intention is Intention.BACK:
-                scene.cm.delete(self.cursor)
-                self.back_out(scene)
-
-    def _paint(self, scene):
-        coords = scene.cm.get_one(Coordinates, entity=self.cursor)
-        scene.cm.add(*self.paint_one(scene, coords.position))
-
-    @abstractmethod
-    def paint_one(self, scene, position):
-        pass
-
-    def _move_cursor(self, scene, intention):
-        cursor_coords = scene.cm.get_one(Coordinates, entity=self.cursor)
-        direction = STEP_VECTORS[intention]
-        cursor_coords.x += direction[0]
-        cursor_coords.y += direction[1]
-        if 0 > cursor_coords.x or cursor_coords.x >= scene.config.map_width:
-            cursor_coords.x -= direction[0]
-        if 0 > cursor_coords.y or cursor_coords.y >= scene.config.map_height:
-            cursor_coords.y -= direction[1]
-
-
-KEY_ACTION_MAP = {
-    tcod.event.KeySym.UP: Intention.STEP_NORTH,
-    tcod.event.KeySym.DOWN: Intention.STEP_SOUTH,
-    tcod.event.KeySym.RIGHT: Intention.STEP_EAST,
-    tcod.event.KeySym.LEFT: Intention.STEP_WEST,
-    tcod.event.KeySym.ESCAPE: Intention.BACK,
-    tcod.event.KeySym.SPACE: Intention.USE_ABILITY,
-}
-
-STEP_VECTORS = {
-    Intention.STEP_NORTH: (0, -1),
-    Intention.STEP_SOUTH: (0, 1),
-    Intention.STEP_EAST: (1, 0),
-    Intention.STEP_WEST: (-1, 0),
-    Intention.STEP_NORTH_EAST: (1, -1),
-    Intention.STEP_NORTH_WEST: (-1, -1),
-    Intention.STEP_SOUTH_EAST: (1, 1),
-    Intention.STEP_SOUTH_WEST: (-1, 1),
-}
+    tool_type: PainterTool = PainterTool.GOLD

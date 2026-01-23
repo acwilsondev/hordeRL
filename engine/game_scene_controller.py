@@ -5,7 +5,6 @@ from tcod import libtcodpy as tcd
 
 from engine import GameScene
 from engine.component_manager import ComponentManager
-from engine.core import log_debug
 from engine.logging import get_logger
 from engine.sound.default_sound_controller import DefaultSoundController
 from engine.ui_context import UiContext
@@ -30,7 +29,6 @@ class GameSceneController:
 
     """
 
-    @log_debug(__name__)
     def __init__(
         self,
         title: str,
@@ -74,7 +72,6 @@ class GameSceneController:
             "GameSceneController instantiated", extra={"title": self.title}
         )
 
-    @log_debug(__name__)
     def push_scene(self, scene: GameScene):
         """
         Add a new scene to the top of the scene stack and make it active.
@@ -105,7 +102,6 @@ class GameSceneController:
             },
         )
 
-    @log_debug(__name__)
     def pop_scene(self):
         """
         Remove and return the top scene from the scene stack.
@@ -136,7 +132,6 @@ class GameSceneController:
         )
         return scene
 
-    @log_debug(__name__)
     def clear_scenes(self):
         """
         Remove all scenes from the scene stack.
@@ -158,7 +153,6 @@ class GameSceneController:
             extra={"previous_size": stack_size, "action": "clear_scenes"},
         )
 
-    @log_debug(__name__)
     def start(self):
         """
         Invoke the FSM execution and run the main game loop.

@@ -5,9 +5,24 @@ from engine.constants import PRIORITY_HIGH
 
 from .. import palettes
 from ..components import Appearance
+from ..components.pathfinding.breadcrumb import Breadcrumb
 
 
-def make_breadcrumb(x, y):
+def make_breadcrumb(owner: int, x: int, y: int):
+    """
+    Build a breadcrumb entity and its components.
+
+    Args:
+        owner (int): Entity ID that owns the breadcrumb.
+        x (int): X coordinate for the breadcrumb.
+        y (int): Y coordinate for the breadcrumb.
+
+    Returns:
+        tuple[int, list]: Tuple of the new entity ID and its components.
+
+    Side Effects:
+        None.
+    """
     entity_id = core.get_id()
     return (
         entity_id,
@@ -27,5 +42,6 @@ def make_breadcrumb(x, y):
                 bg_color=palettes.BACKGROUND,
                 render_mode=Appearance.RenderMode.HIGH_VEE,
             ),
+            Breadcrumb(entity=entity_id, owner=owner),
         ],
     )

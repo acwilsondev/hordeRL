@@ -14,12 +14,16 @@ from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.movement.move import Move
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.stealthy_cost_map import StealthyCostMapper
-from horderl.components.pathfinding.target_evaluation.hordeling_target_evaluator import (
-    HordelingTargetEvaluator,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
+)
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.stomach import Stomach
-from horderl.components.tags.hordeling_tag import HordelingTag
+from horderl.components.tags.tag import Tag, TagType
 
 description = "This shadowy creature lurks just out of sight."
 
@@ -43,12 +47,15 @@ def make_sneaker(x, y):
         Attributes(entity=entity_id, hp=1, max_hp=1),
         StandardAttack(entity=entity_id, damage=1),
         Material(entity=entity_id, blocks=True, blocks_sight=False),
-        HordelingTag(entity=entity_id),
+        Tag(entity=entity_id, tag_type=TagType.HORDELING),
         Move(entity=entity_id),
         PathfinderCost(entity=entity_id, cost=5),
-        StealthyCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.STEALTHY),
         Stomach(entity=entity_id),
-        HordelingTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.HORDELING,
+        ),
     ]
 
     if random.randint(1, 10) == 10:
