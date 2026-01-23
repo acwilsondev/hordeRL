@@ -12,9 +12,13 @@ from horderl.components.death_listeners.npc_corpse import Corpse
 from horderl.components.faction import Faction
 from horderl.components.material import Material
 from horderl.components.pathfinder_cost import PathfinderCost
-from horderl.components.pathfinding.normal_cost_mapper import NormalCostMapper
-from horderl.components.pathfinding.target_evaluation.ally_target_evaluator import (
-    AllyTargetEvaluator,
+from horderl.components.pathfinding.cost_mapper import (
+    CostMapper,
+    CostMapperType,
+)
+from horderl.components.pathfinding.target_evaluation.target_evaluator import (
+    TargetEvaluator,
+    TargetEvaluatorType,
 )
 from horderl.components.sellable import Sellable
 from horderl.components.tax_value import TaxValue
@@ -29,7 +33,7 @@ def make_knight(x, y):
         Faction(entity=entity_id, faction=Faction.Options.PEASANT),
         Corpse(entity=entity_id),
         StationaryAttackActor(entity=entity_id, root_x=x, root_y=y),
-        NormalCostMapper(entity=entity_id),
+        CostMapper(entity=entity_id, mapper_type=CostMapperType.NORMAL),
         Appearance(
             entity=entity_id,
             symbol="K",
@@ -41,7 +45,10 @@ def make_knight(x, y):
         Material(entity=entity_id, blocks=False, blocks_sight=False),
         PathfinderCost(entity=entity_id, cost=40),
         Sellable(entity=entity_id, value=0),
-        AllyTargetEvaluator(entity=entity_id),
+        TargetEvaluator(
+            entity=entity_id,
+            evaluator_type=TargetEvaluatorType.ALLY,
+        ),
         TaxValue(entity=entity_id, value=TaxValue.KNIGHT),
     ]
 
