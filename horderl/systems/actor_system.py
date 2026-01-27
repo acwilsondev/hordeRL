@@ -24,7 +24,11 @@ from horderl.content.spawners.hordeling_spawner_spawner import (
 )
 from horderl.content.states import character_animation
 from horderl.i18n import t
-from horderl.systems.utilities import get_current_turn
+from horderl.systems.utilities import (
+    can_actor_act,
+    get_current_turn,
+    pass_actor_turn,
+)
 
 ACTOR_HANDLERS = (
     (BombActor, "run_bomb_actor"),
@@ -63,7 +67,7 @@ def get_active_actors(scene) -> List[EnergyActor]:
     return [
         actor
         for actor in scene.cm.get(EnergyActor)
-        if not isinstance(actor, Brain) and actor.can_act(current_turn)
+        if not isinstance(actor, Brain) and can_actor_act(actor, current_turn)
     ]
 
 
@@ -99,17 +103,17 @@ def run_bomb_actor(scene, actor: BombActor) -> None:
 
     Side Effects:
         - Adds attack actions, explosions, and die events.
-        - Consumes time via pass_turn().
+        - Consumes time via pass_actor_turn().
     """
     coords = scene.cm.get_one(Coordinates, entity=actor.entity)
     current_turn = get_current_turn(scene)
     if actor.turns <= 0:
         _explode(scene, actor)
-        actor.pass_turn(current_turn)
+        pass_actor_turn(actor, current_turn)
         return
     scene.cm.add(*character_animation(coords.x, coords.y, f"{actor.turns}")[1])
     actor.turns -= 1
-    actor.pass_turn(current_turn)
+    pass_actor_turn(actor, current_turn)
 
 
 def run_calendar(scene, actor: Calendar) -> None:
@@ -152,7 +156,8 @@ def run_hordeling_spawner(scene, actor: HordelingSpawner) -> None:
         - Consumes time and deletes the spawner when done.
     """
     spawn_hordeling(scene)
-    actor.pass_turn(
+    pass_actor_turn(
+        actor,
         get_current_turn(scene),
         random.randint(EnergyActor.QUARTER_HOUR, EnergyActor.HOURLY * 20),
     )
@@ -248,7 +253,7 @@ def _increment_calendar(calendar: Calendar, current_turn: int) -> None:
     if calendar.season > MAX_SEASON:
         calendar.year += 1
         calendar.season = 1
-    calendar.pass_turn(current_turn)
+    pass_actor_turn(calendar, current_turn)
 
 
 def _start_attack(scene, calendar: Calendar) -> None:

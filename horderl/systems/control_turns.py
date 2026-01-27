@@ -2,6 +2,7 @@ from engine import core
 from horderl.components.world_turns import WorldTurns
 
 from ..components.brains.brain import Brain
+from .utilities import can_actor_act
 
 
 def run(scene):
@@ -9,7 +10,7 @@ def run(scene):
     if not world_turns:
         return
     player_actor = scene.cm.get_one(Brain, entity=scene.player)
-    if player_actor and player_actor.can_act(world_turns):
+    if player_actor and can_actor_act(player_actor, world_turns):
         return
     else:
         world_turns.current_turn += 1
