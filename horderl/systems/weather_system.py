@@ -17,6 +17,7 @@ from horderl.components.weather.snow_fall import SnowFall
 from horderl.components.weather.weather import Weather
 from horderl.components.world_building.world_parameters import WorldParameters
 from horderl.content.terrain.water import freeze, thaw
+from horderl.systems.utilities import consume_energy, is_energy_ready
 
 
 def run(scene: GameScene) -> None:
@@ -36,7 +37,7 @@ def run(scene: GameScene) -> None:
         - Updates the Weather component's seasonal norm and temperature.
         - Sends a message if the temperature crosses freezing.
         - Mutates terrain tiles (freeze/thaw) and updates the play window.
-        - Consumes energy for weather actors via pass_turn().
+        - Consumes energy for weather actors via consume_energy().
 
     """
     weather = _get_weather(scene)
@@ -104,7 +105,7 @@ def _run_freeze_water(scene: GameScene, weather: Weather) -> None:
     # Uses weather temperature to freeze/thaw terrain tiles.
     logger = get_logger(__name__)
     for freeze_water in scene.cm.get(FreezeWater):
-        if not freeze_water.can_act():
+        if not is_energy_ready(freeze_water):
             continue
         if weather.temperature < 0:
             count = max(weather.temperature * -1, 5)
@@ -114,7 +115,7 @@ def _run_freeze_water(scene: GameScene, weather: Weather) -> None:
             count = max(weather.temperature, 5)
             logger.debug("thawing %s tiles", count)
             _thaw_tiles(scene, count)
-        freeze_water.pass_turn()
+        consume_energy(freeze_water)
 
 
 def _freeze_tiles(scene: GameScene, count: int) -> None:
@@ -142,7 +143,7 @@ def _thaw_tiles(scene: GameScene, count: int) -> None:
 def _run_snow_fall(scene: GameScene, weather: Weather) -> None:
     # Adds snow or grass based on the current temperature.
     for snow_fall in scene.cm.get(SnowFall):
-        if not snow_fall.can_act():
+        if not is_energy_ready(snow_fall):
             continue
         if weather.temperature < 5:
             for _ in range(10 - weather.temperature):
@@ -150,4 +151,4 @@ def _run_snow_fall(scene: GameScene, weather: Weather) -> None:
         else:
             for _ in range(weather.temperature):
                 scene.play_window.add_grass()
-        snow_fall.pass_turn()
+        consume_energy(snow_fall)

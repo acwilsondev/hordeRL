@@ -22,6 +22,7 @@ from horderl.content.attacks import stab
 from horderl.content.states import help_animation
 from horderl.i18n import t
 from horderl.systems.house_structure_system import get_house_structure_tiles
+from horderl.systems.utilities import is_energy_ready
 
 
 def run(scene) -> None:
@@ -42,7 +43,7 @@ def run(scene) -> None:
         - Removes AttackAction components after execution.
     """
     for action in scene.cm.get(AttackAction):
-        if action.can_act():
+        if is_energy_ready(action):
             execute(scene, action)
 
 

@@ -8,6 +8,7 @@ from horderl.components.actors.hordeling_spawner import HordelingSpawner
 from horderl.components.events.die_events import Die
 from horderl.components.tags.tag import Tag, TagType
 from horderl.components.wrath_effect import WrathEffect
+from horderl.systems.utilities import is_energy_ready
 
 
 def _trigger_wrath(scene: GameScene, effect: WrathEffect) -> None:
@@ -45,6 +46,6 @@ def run(scene: GameScene) -> None:
 
     """
     for effect in list(scene.cm.get(WrathEffect)):
-        if not effect.can_act():
+        if not is_energy_ready(effect):
             continue
         _trigger_wrath(scene, effect)

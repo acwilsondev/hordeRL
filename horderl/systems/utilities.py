@@ -1,7 +1,8 @@
 import random
+from typing import Optional
 
 from engine.component_manager import ComponentManager
-from engine.components import Actor, Coordinates
+from engine.components import Actor, Coordinates, EnergyActor
 from engine.logging import get_logger
 
 from ..components.events.turn_event import TurnEvent
@@ -33,6 +34,39 @@ def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:
 
     blocking_material = next(materials_at_coords, None)
     return blocking_material.entity if blocking_material else None
+
+
+def is_energy_ready(actor: EnergyActor) -> bool:
+    """
+    Return whether an energy-based actor is ready to act.
+
+    Args:
+        actor (EnergyActor): Actor component with energy scheduling state.
+
+    Returns:
+        bool: True when the current turn has reached or exceeded the next
+            scheduled turn; otherwise False.
+    """
+    # Use >= so actors can act the moment they reach their scheduled turn.
+    return actor.current_turn >= actor.next_turn_to_act
+
+
+def consume_energy(actor: EnergyActor, time: Optional[int] = None) -> None:
+    """
+    Advance the actor's schedule by consuming a turn cost.
+
+    Args:
+        actor (EnergyActor): Actor component with energy scheduling state.
+        time (int | None): Optional override for the number of turns to wait
+            before the next action. Defaults to ``actor.energy_cost``.
+
+    Side Effects:
+        - Updates ``next_turn_to_act`` and ``energy`` for readiness checks.
+    """
+    if time is None:
+        time = actor.energy_cost
+    actor.next_turn_to_act = actor.current_turn + time
+    actor.energy = actor.current_turn - actor.next_turn_to_act
 
 
 def retract_turn(scene, entity: int):

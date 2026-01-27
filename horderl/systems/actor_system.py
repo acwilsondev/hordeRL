@@ -24,6 +24,7 @@ from horderl.content.spawners.hordeling_spawner_spawner import (
 )
 from horderl.content.states import character_animation
 from horderl.i18n import t
+from horderl.systems.utilities import consume_energy, is_energy_ready
 
 ACTOR_HANDLERS = (
     (BombActor, "run_bomb_actor"),
@@ -61,7 +62,7 @@ def get_active_actors(scene) -> List[EnergyActor]:
     return [
         actor
         for actor in scene.cm.get(EnergyActor)
-        if not isinstance(actor, Brain) and actor.can_act()
+        if not isinstance(actor, Brain) and is_energy_ready(actor)
     ]
 
 
@@ -97,16 +98,16 @@ def run_bomb_actor(scene, actor: BombActor) -> None:
 
     Side Effects:
         - Adds attack actions, explosions, and die events.
-        - Consumes energy via pass_turn().
+        - Consumes energy via consume_energy().
     """
     coords = scene.cm.get_one(Coordinates, entity=actor.entity)
     if actor.turns <= 0:
         _explode(scene, actor)
-        actor.pass_turn()
+        consume_energy(actor)
         return
     scene.cm.add(*character_animation(coords.x, coords.y, f"{actor.turns}")[1])
     actor.turns -= 1
-    actor.pass_turn()
+    consume_energy(actor)
 
 
 def run_calendar(scene, actor: Calendar) -> None:
@@ -149,8 +150,9 @@ def run_hordeling_spawner(scene, actor: HordelingSpawner) -> None:
         - Consumes energy and deletes the spawner when done.
     """
     spawn_hordeling(scene)
-    actor.pass_turn(
-        random.randint(EnergyActor.QUARTER_HOUR, EnergyActor.HOURLY * 20)
+    consume_energy(
+        actor,
+        random.randint(EnergyActor.QUARTER_HOUR, EnergyActor.HOURLY * 20),
     )
 
     actor.waves -= 1
@@ -244,7 +246,7 @@ def _increment_calendar(calendar: Calendar) -> None:
     if calendar.season > MAX_SEASON:
         calendar.year += 1
         calendar.season = 1
-    calendar.pass_turn()
+    consume_energy(calendar)
 
 
 def _start_attack(scene, calendar: Calendar) -> None:

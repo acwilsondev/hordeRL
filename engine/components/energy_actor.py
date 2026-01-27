@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Optional
 
 from engine.components.actor import Actor
 from engine.constants import PRIORITY_MEDIUM
@@ -32,30 +31,3 @@ class EnergyActor(Actor):
             return
         if self.energy != 0:
             self.next_turn_to_act = self.current_turn - self.energy
-
-    def can_act(self) -> bool:
-        """
-        Return whether the actor is ready to act based on turn tracking.
-
-        Returns:
-            True when the current turn has reached or exceeded the scheduled
-            turn to act; otherwise False.
-        """
-        # Use >= so actors can act the moment they reach their scheduled turn.
-        return self.current_turn >= self.next_turn_to_act
-
-    def pass_turn(self, time: Optional[int] = None) -> None:
-        """
-        Advance the actor's schedule by consuming a turn cost.
-
-        Args:
-            time: Optional override for the number of turns to wait before the
-                next action. Defaults to ``energy_cost``.
-
-        Side Effects:
-            - Updates ``next_turn_to_act`` and ``energy`` for readiness checks.
-        """
-        if time is None:
-            time = self.energy_cost
-        self.next_turn_to_act = self.current_turn + time
-        self.energy = self.current_turn - self.next_turn_to_act

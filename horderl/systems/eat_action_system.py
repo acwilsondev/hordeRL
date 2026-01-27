@@ -3,6 +3,7 @@ from horderl.components.actions.eat_action import EatAction
 from horderl.components.events.die_events import Die
 from horderl.components.stomach import Stomach
 from horderl.components.tags.tag import Tag, TagType
+from horderl.systems.utilities import is_energy_ready
 
 
 def run(scene) -> None:
@@ -18,7 +19,7 @@ def run(scene) -> None:
         - Deletes EatAction components.
     """
     for action in scene.cm.get(EatAction):
-        if action.can_act():
+        if is_energy_ready(action):
             execute(scene, action)
 
 

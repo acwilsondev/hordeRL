@@ -80,6 +80,7 @@ from horderl.systems.pathfinding.target_selection import (
     get_target_values,
 )
 from horderl.systems.stomach_system import clear_stomach
+from horderl.systems.utilities import consume_energy, is_energy_ready
 
 BRAIN_HANDLERS = (
     (LookCursorController, "run_look_cursor_controller"),
@@ -132,7 +133,7 @@ def get_active_brains(scene) -> List[Brain]:
     Returns:
         List[Brain]: Active brain components that can act.
     """
-    return [brain for brain in scene.cm.get(Brain) if brain.can_act()]
+    return [brain for brain in scene.cm.get(Brain) if is_energy_ready(brain)]
 
 
 def run_brain(scene, brain: Brain) -> None:
@@ -168,7 +169,7 @@ def run_default_active_actor(scene, brain: DefaultActiveActor) -> None:
     Side Effects:
         - Updates target selection and intention.
         - Adds attack/eat/tunnel actions or death events.
-        - Consumes energy via pass_turn().
+        - Consumes energy via consume_energy().
     """
     logger = get_logger(__name__)
     logger.debug(
@@ -187,7 +188,7 @@ def run_default_active_actor(scene, brain: DefaultActiveActor) -> None:
     entity_values = get_target_values(scene, target_evaluator)
 
     if not entity_values:
-        brain.pass_turn()
+        consume_energy(brain)
         return
 
     coords = scene.cm.get_one(Coordinates, entity=brain.entity)
@@ -214,7 +215,7 @@ def run_stationary_attack_actor(scene, brain: StationaryAttackActor) -> None:
 
     Side Effects:
         - Selects a nearby target and attacks.
-        - Consumes energy via pass_turn().
+        - Consumes energy via consume_energy().
     """
     logger = get_logger(__name__)
     logger.debug(
@@ -229,7 +230,7 @@ def run_stationary_attack_actor(scene, brain: StationaryAttackActor) -> None:
         project=lambda c: c.entity,
     )
     if not targets:
-        brain.pass_turn()
+        consume_energy(brain)
         return
     brain.target = targets.pop()
     _attack_stationary_target(scene, brain)
@@ -244,7 +245,7 @@ def run_peasant_actor(scene, brain: PeasantActor) -> None:
         brain: PeasantActor component for the entity.
 
     Side Effects:
-        - Updates intention or consumes energy via pass_turn().
+        - Updates intention or consumes energy via consume_energy().
     """
     logger = get_logger(__name__)
     logger.debug(
@@ -256,7 +257,7 @@ def run_peasant_actor(scene, brain: PeasantActor) -> None:
     elif brain.state is PeasantActor.State.WANDERING:
         _wander(scene, brain)
     else:
-        brain.pass_turn()
+        consume_energy(brain)
 
 
 def run_player_brain(scene, brain: PlayerBrain) -> None:
@@ -312,7 +313,7 @@ def run_sleeping_brain(scene, brain: SleepingBrain) -> None:
 
     Side Effects:
         - Adds sleep animations.
-        - Consumes energy via pass_turn().
+        - Consumes energy via consume_energy().
         - Pops brain stack when finished.
     """
     logger = get_logger(__name__)
@@ -323,7 +324,7 @@ def run_sleeping_brain(scene, brain: SleepingBrain) -> None:
     brain._log_debug("sleeping one turn")
     coords = scene.cm.get_one(Coordinates, entity=brain.entity)
     scene.cm.add(*sleep_animation(coords.x, coords.y)[1])
-    brain.pass_turn()
+    consume_energy(brain)
     if brain.turns <= 0:
         from horderl.systems import brain_stack
 
@@ -418,7 +419,7 @@ def run_place_thing_actor(scene, brain: PlaceThingActor) -> None:
 
     Side Effects:
         - Places a buildable object and spends gold.
-        - Consumes energy via pass_turn() after placement.
+        - Consumes energy via consume_energy() after placement.
     """
     key_event = core.get_key_event()
     if key_event:
@@ -447,7 +448,7 @@ def run_dig_hole_actor(scene, brain: DigHoleActor) -> None:
 
     Side Effects:
         - Creates holes or removes diggable entities.
-        - Updates gold and consumes energy via pass_turn().
+        - Updates gold and consumes energy via consume_energy().
     """
     key_event = core.get_key_event()
     if key_event:
@@ -505,7 +506,7 @@ def run_sell_thing_actor(scene, brain: SellThingActor) -> None:
 
     Side Effects:
         - Sells a sellable entity and updates gold.
-        - Consumes energy via pass_turn().
+        - Consumes energy via consume_energy().
     """
     key_event = core.get_key_event()
     if key_event:
@@ -612,7 +613,7 @@ def _move_towards_target(scene, brain: DefaultActiveActor) -> None:
         else:
             brain._log_warning("can't find a safe place to tunnel to")
             scene.cm.add(Die(entity=brain.entity))
-        brain.pass_turn()
+        consume_energy(brain)
     else:
         next_step = (
             next_step_node[0] - coords.x,
@@ -636,7 +637,7 @@ def _eat_target(scene, brain: DefaultActiveActor) -> None:
     edible = scene.cm.get_one(Edible, entity=brain.target)
 
     _sleep(scene, brain, edible.sleep_for)
-    brain.pass_turn()
+    consume_energy(brain)
 
 
 def _attack_target(scene, brain: DefaultActiveActor) -> None:
@@ -655,7 +656,7 @@ def _attack_target(scene, brain: DefaultActiveActor) -> None:
     scene.cm.add(
         *stab(brain.entity, coords.x + facing[0], coords.y + facing[1])[1]
     )
-    brain.pass_turn()
+    consume_energy(brain)
 
 
 def _is_target_in_range(scene, brain: DefaultActiveActor) -> bool:
@@ -733,7 +734,7 @@ def _attack_stationary_target(scene, brain: StationaryAttackActor) -> None:
     scene.cm.add(
         *stab(brain.entity, coords.x + facing[0], coords.y + facing[1])[1]
     )
-    brain.pass_turn()
+    consume_energy(brain)
 
 
 def _teleport_to_root(scene, brain: StationaryAttackActor) -> None:
@@ -745,7 +746,7 @@ def _teleport_to_root(scene, brain: StationaryAttackActor) -> None:
 
 def _farm(scene, brain: PeasantActor) -> None:
     """# Farming currently just consumes a turn."""
-    brain.pass_turn()
+    consume_energy(brain)
 
 
 def _wander(scene, brain: PeasantActor) -> None:
@@ -764,7 +765,7 @@ def _wander(scene, brain: PeasantActor) -> None:
         brain._log_debug(f"evaluated steps {step_costs}")
         brain.intention = step_costs[0][0]
     else:
-        brain.pass_turn()
+        consume_energy(brain)
 
 
 def _get_possible_steps(scene, brain: PeasantActor):
@@ -976,7 +977,7 @@ def _place_thing(scene, brain: PlaceThingActor, direction: Intention) -> None:
         from horderl.systems import brain_stack
 
         old_actor = brain_stack.back_out(scene, brain)
-        old_actor.pass_turn()
+        consume_energy(old_actor)
     else:
         from horderl.systems import brain_stack
 
@@ -1040,7 +1041,7 @@ def _dig_hole(scene, brain: DigHoleActor, direction: Intention) -> None:
             from horderl.systems import brain_stack
 
             old_actor = brain_stack.back_out(scene, brain)
-            old_actor.pass_turn()
+            consume_energy(old_actor)
         else:
             from horderl.systems import brain_stack
 
@@ -1058,7 +1059,7 @@ def _apply_dig_hole(
     from horderl.systems import brain_stack
 
     old_actor = brain_stack.back_out(scene, brain)
-    old_actor.pass_turn()
+    consume_energy(old_actor)
 
 
 def _in_bounds(x: int, y: int, config) -> bool:
@@ -1181,7 +1182,7 @@ def _sell_thing(scene, brain: SellThingActor, direction: Intention) -> None:
         from horderl.systems import brain_stack
 
         old_actor = brain_stack.back_out(scene, brain)
-        old_actor.pass_turn()
+        consume_energy(old_actor)
     else:
         from horderl.systems import brain_stack
 

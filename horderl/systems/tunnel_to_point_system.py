@@ -1,6 +1,7 @@
 from engine.components import Coordinates
 from horderl.components.actions.tunnel_to_point import TunnelToPoint
 from horderl.content.terrain.hole import make_hole
+from horderl.systems.utilities import is_energy_ready
 
 
 def run(scene) -> None:
@@ -16,7 +17,7 @@ def run(scene) -> None:
         - Deletes TunnelToPoint components.
     """
     for action in scene.cm.get(TunnelToPoint):
-        if action.can_act():
+        if is_energy_ready(action):
             execute(scene, action)
 
 
