@@ -20,7 +20,11 @@ from ..components.states.move_cost_affectors import (
 )
 from ..i18n import t
 from ..systems.attack_action_system import apply_attack
-from ..systems.utilities import get_blocking_object, get_current_turn
+from ..systems.utilities import (
+    get_blocking_object,
+    get_current_turn,
+    pass_actor_turn,
+)
 
 
 def get_hostile(scene, entity, step_direction):
@@ -53,7 +57,7 @@ def run(scene):
         if actor.intention == Intention.DALLY:
             scene.cm.add(DallyEvent(entity=entity))
             actor.intention = Intention.NONE
-            actor.pass_turn(current_turn)
+            pass_actor_turn(actor, current_turn)
             return
 
         step_direction = STEP_VECTORS[actor.intention]
@@ -68,17 +72,17 @@ def run(scene):
                 energy = move_component.energy_cost // 2
             else:
                 energy = move_component.energy_cost
-            actor.pass_turn(current_turn, energy)
+            pass_actor_turn(actor, current_turn, energy)
             actor.intention = Intention.NONE
         elif get_hostile(scene, entity, step_direction):
             entity_attack: Attack = scene.cm.get_one(Attack, entity=entity)
             if entity_attack:
                 hostile: int = get_hostile(scene, entity, step_direction)
                 apply_attack(scene, entity_attack, hostile)
-            actor.pass_turn(current_turn)
+            pass_actor_turn(actor, current_turn)
             actor.intention = Intention.NONE
         else:
-            actor.pass_turn(current_turn)
+            pass_actor_turn(actor, current_turn)
             actor.intention = Intention.NONE
 
 

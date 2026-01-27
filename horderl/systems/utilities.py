@@ -1,8 +1,9 @@
 import random
+from typing import Optional, Union
 
 from engine import core
 from engine.component_manager import ComponentManager
-from engine.components import Actor, Coordinates
+from engine.components import Actor, Coordinates, EnergyActor
 from engine.logging import get_logger
 
 from ..components.events.turn_event import TurnEvent
@@ -52,6 +53,63 @@ def get_current_turn(scene) -> int:
     """
     world_turns = scene.cm.get_one(WorldTurns, entity=core.get_id("world"))
     return world_turns.current_turn if world_turns else 0
+
+
+def resolve_current_turn(current_turn: Union[int, object]) -> int:
+    """
+    Normalize a world turn value to an integer.
+
+    Args:
+        current_turn: Current world turn value, or an object with a
+            ``current_turn`` attribute.
+
+    Returns:
+        int: Current turn as an integer.
+    """
+    # Accept world turn objects without importing higher-level modules.
+    if hasattr(current_turn, "current_turn"):
+        return int(getattr(current_turn, "current_turn"))
+    return int(current_turn)
+
+
+def can_actor_act(
+    actor: EnergyActor, current_turn: Union[int, object]
+) -> bool:
+    """
+    Return whether an energy-tracked actor is ready to act.
+
+    Args:
+        actor: Energy-tracked actor component to evaluate.
+        current_turn: Current world turn value, or an object with a
+            ``current_turn`` attribute.
+
+    Returns:
+        bool: True when the actor is ready to act; otherwise False.
+    """
+    return resolve_current_turn(current_turn) >= actor.next_turn_to_act
+
+
+def pass_actor_turn(
+    actor: EnergyActor,
+    current_turn: Union[int, object],
+    time: Optional[int] = None,
+) -> None:
+    """
+    Consume energy for an actor by advancing its next scheduled turn.
+
+    Args:
+        actor: Energy-tracked actor component to update.
+        current_turn: Current world turn value, or an object with a
+            ``current_turn`` attribute.
+        time: Optional override for the number of turns to wait before the
+            next action. Defaults to ``actor.energy_cost``.
+
+    Side Effects:
+        - Updates ``actor.next_turn_to_act`` for readiness checks.
+    """
+    if time is None:
+        time = actor.energy_cost
+    actor.next_turn_to_act = resolve_current_turn(current_turn) + time
 
 
 def retract_turn(scene, entity: int):
