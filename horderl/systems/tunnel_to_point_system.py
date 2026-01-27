@@ -1,6 +1,7 @@
 from engine.components import Coordinates
 from horderl.components.actions.tunnel_to_point import TunnelToPoint
 from horderl.content.terrain.hole import make_hole
+from horderl.systems.utilities import get_current_turn
 
 
 def run(scene) -> None:
@@ -15,8 +16,9 @@ def run(scene) -> None:
         - Spawns holes.
         - Deletes TunnelToPoint components.
     """
+    current_turn = get_current_turn(scene)
     for action in scene.cm.get(TunnelToPoint):
-        if action.can_act():
+        if action.can_act(current_turn):
             execute(scene, action)
 
 

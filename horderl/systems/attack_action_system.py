@@ -22,6 +22,7 @@ from horderl.content.attacks import stab
 from horderl.content.states import help_animation
 from horderl.i18n import t
 from horderl.systems.house_structure_system import get_house_structure_tiles
+from horderl.systems.utilities import get_current_turn
 
 
 def run(scene) -> None:
@@ -41,8 +42,9 @@ def run(scene) -> None:
         - Emits AttackFinished events.
         - Removes AttackAction components after execution.
     """
+    current_turn = get_current_turn(scene)
     for action in scene.cm.get(AttackAction):
-        if action.can_act():
+        if action.can_act(current_turn):
             execute(scene, action)
 
 

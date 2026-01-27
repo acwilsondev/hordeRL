@@ -3,6 +3,7 @@ from horderl.components.actions.eat_action import EatAction
 from horderl.components.events.die_events import Die
 from horderl.components.stomach import Stomach
 from horderl.components.tags.tag import Tag, TagType
+from horderl.systems.utilities import get_current_turn
 
 
 def run(scene) -> None:
@@ -17,8 +18,9 @@ def run(scene) -> None:
         - Updates stomach contents.
         - Deletes EatAction components.
     """
+    current_turn = get_current_turn(scene)
     for action in scene.cm.get(EatAction):
-        if action.can_act():
+        if action.can_act(current_turn):
             execute(scene, action)
 
 

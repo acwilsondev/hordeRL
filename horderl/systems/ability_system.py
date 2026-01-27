@@ -64,7 +64,7 @@ from horderl.content.cursor import make_cursor
 from horderl.content.states import confused_animation, no_money_animation
 from horderl.i18n import t
 from horderl.systems import brain_stack
-from horderl.systems.utilities import get_enemies_in_range
+from horderl.systems.utilities import get_current_turn, get_enemies_in_range
 
 AbilityHandler = Callable[[object, int, Ability], None]
 
@@ -236,6 +236,7 @@ def _handle_confused(scene, ability: Ability) -> None:
 
 
 def _apply_thwack(scene, dispatcher_id: int, ability: ThwackAbility) -> None:
+    current_turn = get_current_turn(scene)
     if ability.count > 0:
         ability.is_recharging = True
         ability.count -= 1
@@ -267,8 +268,8 @@ def _apply_thwack(scene, dispatcher_id: int, ability: ThwackAbility) -> None:
 
     brain = scene.cm.get_component_by_id(dispatcher_id)
     if brain:
-        brain.pass_turn()
-    ability.pass_turn()
+        brain.pass_turn(current_turn)
+    ability.pass_turn(current_turn)
 
     if ability.count <= 0:
         _apply_dizzy(scene, ability)
@@ -288,12 +289,13 @@ def _apply_dizzy(scene, ability: ThwackAbility) -> None:
 
 
 def _recharge_thwack(scene) -> None:
+    current_turn = get_current_turn(scene)
     for ability in scene.cm.get(ThwackAbility):
-        if ability.can_act():
+        if ability.can_act(current_turn):
             ability._log_debug("recovering from thwack")
             ability.count = min(ability.max, ability.count + 1)
             ability.is_recharging = ability.count < ability.max
-            ability.pass_turn()
+            ability.pass_turn(current_turn)
 
 
 _ABILITY_HANDLERS.update(

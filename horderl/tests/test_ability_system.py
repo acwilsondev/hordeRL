@@ -58,7 +58,7 @@ def test_run_recharges_thwack_ability() -> None:
         entity=3,
         count=1,
         max=3,
-        energy=0,
+        next_turn_to_act=0,
         is_recharging=True,
     )
     scene.cm.add(ability)
@@ -67,7 +67,7 @@ def test_run_recharges_thwack_ability() -> None:
 
     assert ability.count == 2
     assert ability.is_recharging is True
-    assert ability.energy < 0
+    assert ability.next_turn_to_act > 0
 
 
 def test_control_mode_ability_serializes(tmp_path) -> None:

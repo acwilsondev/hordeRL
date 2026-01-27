@@ -1,5 +1,6 @@
 import random
 
+from engine import core
 from engine.component_manager import ComponentManager
 from engine.components import Actor, Coordinates
 from engine.logging import get_logger
@@ -8,6 +9,7 @@ from ..components.events.turn_event import TurnEvent
 from ..components.faction import Faction
 from ..components.material import Material
 from ..components.season_reset_listeners.grow_in_spring import GrowIntoTree
+from ..components.world_turns import WorldTurns
 
 
 def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:
@@ -33,6 +35,23 @@ def get_blocking_object(cm: ComponentManager, x: int, y: int) -> int:
 
     blocking_material = next(materials_at_coords, None)
     return blocking_material.entity if blocking_material else None
+
+
+def get_current_turn(scene) -> int:
+    """
+    Return the current world turn count.
+
+    Args:
+        scene: Active scene containing the component manager.
+
+    Returns:
+        int: The current world turn count, or 0 if the component is missing.
+
+    Side Effects:
+        - None.
+    """
+    world_turns = scene.cm.get_one(WorldTurns, entity=core.get_id("world"))
+    return world_turns.current_turn if world_turns else 0
 
 
 def retract_turn(scene, entity: int):
