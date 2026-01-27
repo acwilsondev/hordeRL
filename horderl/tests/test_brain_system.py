@@ -17,10 +17,10 @@ class DummyScene:
         self.warn_messages.append(message)
 
 
-def test_get_active_brains_filters_by_energy():
+def test_get_active_brains_filters_by_turn():
     scene = DummyScene()
-    active_brain = PlayerBrain(entity=1, energy=0)
-    inactive_brain = PlayerBrain(entity=2, energy=-1)
+    active_brain = PlayerBrain(entity=1, next_turn_to_act=0)
+    inactive_brain = PlayerBrain(entity=2, next_turn_to_act=1)
     scene.cm.add(active_brain, inactive_brain)
 
     active = get_active_brains(scene)

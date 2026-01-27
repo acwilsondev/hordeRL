@@ -40,6 +40,7 @@ from horderl.components.season_reset_listeners.grow_in_spring import (
 )
 from horderl.components.serialization.save_game import SaveGame
 from horderl.components.weather.weather import Weather
+from horderl.components.world_turns import WorldTurns
 from horderl.content.terrain.trees import make_tree
 from horderl.gui.help_dialogue import HelpDialogue
 from horderl.i18n import t
@@ -92,8 +93,9 @@ def _handle_fast_forward(scene: GameScene, event: FastForward) -> None:
     calendar = scene.cm.get_one(Calendar, entity=core.get_id("calendar"))
     if calendar:
         calendar.day = 30
-        calendar.next_turn_to_act = calendar.current_turn
-        calendar.energy = calendar.current_turn - calendar.next_turn_to_act
+        world_turns = scene.cm.get_one(WorldTurns, entity=core.get_id("world"))
+        if world_turns:
+            calendar.next_turn_to_act = world_turns.current_turn
         scene.cm.add(DayBegan(entity=core.get_id("calendar"), day=30))
 
 

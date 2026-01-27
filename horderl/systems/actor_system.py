@@ -24,6 +24,7 @@ from horderl.content.spawners.hordeling_spawner_spawner import (
 )
 from horderl.content.states import character_animation
 from horderl.i18n import t
+from horderl.systems.utilities import get_current_turn
 
 ACTOR_HANDLERS = (
     (BombActor, "run_bomb_actor"),
@@ -58,10 +59,11 @@ def get_active_actors(scene) -> List[EnergyActor]:
     """
     from horderl.components.brains.brain import Brain
 
+    current_turn = get_current_turn(scene)
     return [
         actor
         for actor in scene.cm.get(EnergyActor)
-        if not isinstance(actor, Brain) and actor.can_act()
+        if not isinstance(actor, Brain) and actor.can_act(current_turn)
     ]
 
 
@@ -97,16 +99,17 @@ def run_bomb_actor(scene, actor: BombActor) -> None:
 
     Side Effects:
         - Adds attack actions, explosions, and die events.
-        - Consumes energy via pass_turn().
+        - Consumes time via pass_turn().
     """
     coords = scene.cm.get_one(Coordinates, entity=actor.entity)
+    current_turn = get_current_turn(scene)
     if actor.turns <= 0:
         _explode(scene, actor)
-        actor.pass_turn()
+        actor.pass_turn(current_turn)
         return
     scene.cm.add(*character_animation(coords.x, coords.y, f"{actor.turns}")[1])
     actor.turns -= 1
-    actor.pass_turn()
+    actor.pass_turn(current_turn)
 
 
 def run_calendar(scene, actor: Calendar) -> None:
@@ -119,15 +122,15 @@ def run_calendar(scene, actor: Calendar) -> None:
 
     Side Effects:
         - Emits day/season events and spawns hordes.
-        - Updates calendar status and energy.
+        - Updates calendar status and scheduling.
     """
     if actor.day < 25:
         actor.status = t("status.peacetime")
-        _increment_calendar(actor)
+        _increment_calendar(actor, get_current_turn(scene))
         scene.cm.add(DayBegan(entity=actor.entity, day=actor.day))
     elif actor.day < 30:
         actor.status = t("status.horde_approaching")
-        _increment_calendar(actor)
+        _increment_calendar(actor, get_current_turn(scene))
         scene.cm.add(DayBegan(entity=actor.entity, day=actor.day))
     else:
         if actor.status != t("status.under_attack"):
@@ -146,11 +149,12 @@ def run_hordeling_spawner(scene, actor: HordelingSpawner) -> None:
 
     Side Effects:
         - Adds enemy components to the scene.
-        - Consumes energy and deletes the spawner when done.
+        - Consumes time and deletes the spawner when done.
     """
     spawn_hordeling(scene)
     actor.pass_turn(
-        random.randint(EnergyActor.QUARTER_HOUR, EnergyActor.HOURLY * 20)
+        get_current_turn(scene),
+        random.randint(EnergyActor.QUARTER_HOUR, EnergyActor.HOURLY * 20),
     )
 
     actor.waves -= 1
@@ -234,8 +238,8 @@ def spawn_hordeling(scene) -> None:
         scene.cm.add(*make_juvenile(x, y)[1])
 
 
-def _increment_calendar(calendar: Calendar) -> None:
-    """# Updates day, season, year, and consumes energy."""
+def _increment_calendar(calendar: Calendar, current_turn: int) -> None:
+    """# Updates day, season, year, and consumes time."""
     calendar.day += 1
     if calendar.day > MAX_DAY:
         calendar.season += 1
@@ -244,7 +248,7 @@ def _increment_calendar(calendar: Calendar) -> None:
     if calendar.season > MAX_SEASON:
         calendar.year += 1
         calendar.season = 1
-    calendar.pass_turn()
+    calendar.pass_turn(current_turn)
 
 
 def _start_attack(scene, calendar: Calendar) -> None:
@@ -265,7 +269,7 @@ def _end_attack(scene, calendar: Calendar) -> None:
     calendar.status = t("status.peacetime")
     calendar.round += 1
     calendar.is_recharging = True
-    _increment_calendar(calendar)
+    _increment_calendar(calendar, get_current_turn(scene))
     scene.cm.add(DayBegan(entity=calendar.entity))
     scene.cm.add(
         ResetSeason(entity=calendar.entity, season=get_season_string(calendar))

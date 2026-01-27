@@ -8,6 +8,7 @@ from horderl.components.actors.hordeling_spawner import HordelingSpawner
 from horderl.components.events.die_events import Die
 from horderl.components.tags.tag import Tag, TagType
 from horderl.components.wrath_effect import WrathEffect
+from horderl.systems.utilities import get_current_turn
 
 
 def _trigger_wrath(scene: GameScene, effect: WrathEffect) -> None:
@@ -44,7 +45,8 @@ def run(scene: GameScene) -> None:
         - Removes WrathEffect components after firing.
 
     """
+    current_turn = get_current_turn(scene)
     for effect in list(scene.cm.get(WrathEffect)):
-        if not effect.can_act():
+        if not effect.can_act(current_turn):
             continue
         _trigger_wrath(scene, effect)

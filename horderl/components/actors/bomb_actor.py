@@ -12,4 +12,4 @@ class BombActor(EnergyActor):
     """
 
     turns: int = 3
-    energy: int = -1 * EnergyActor.HOURLY
+    next_turn_to_act: int = EnergyActor.HOURLY
