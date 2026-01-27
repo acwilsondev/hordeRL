@@ -1,13 +1,13 @@
-from typing import Dict, List, NewType, Tuple, Type, TypeVar
+from typing import Dict, List, NewType, Tuple, Type, TypeAlias, TypeVar
 
 from engine.components.component import Component
 
 T = TypeVar("T")
 U = TypeVar("U")
 EntityId = NewType("EntityId", int)
-ComponentType = NewType("ComponentType", Type[T])
-ComponentList = NewType("ComponentList", List[ComponentType])
+ComponentType: TypeAlias = Type[Component]
+ComponentList: TypeAlias = List[Component]
 Entity = NewType("Entity", Tuple[EntityId, List[Component]])
-EntityDict = NewType("EntityDict", Dict[ComponentType, List[Component]])
-EntityDictIndex = NewType("EntityIndex", Dict[EntityId, EntityDict])
+EntityDict: TypeAlias = Dict[ComponentType, List[Component]]
+EntityDictIndex: TypeAlias = Dict[EntityId, EntityDict]
 ComplexEntity = NewType("ComplexEntity", Tuple[EntityId, List[Entity]])

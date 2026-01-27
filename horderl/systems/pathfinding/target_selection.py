@@ -189,7 +189,7 @@ def get_target_values(
             _get_crop_evaluation(scene, tv.entity, tv.value)
             for tv in scene.cm.get(TargetValue)
         ]
-    if isinstance(evaluator, AllyTargetEvaluator):
+    if evaluator.evaluator_type is TargetEvaluatorType.ALLY:
         return [
             (tv.entity, 1)
             for tv in scene.cm.get(
