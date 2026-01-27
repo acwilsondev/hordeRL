@@ -1,10 +1,13 @@
-from typing import Any, final
+from typing import TYPE_CHECKING, Any, final
 
 from engine import serialization
 from engine.component_manager import ComponentManager
 from engine.logging import get_logger
 from engine.sound.sound_controller import SoundController
 from engine.ui_context import UiContext
+
+if TYPE_CHECKING:
+    from engine.game_scene_controller import GameSceneController
 
 
 class GameScene:
